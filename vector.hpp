@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/02/15 17:20:22 by laube            ###   ########.fr       */
+/*   Updated: 2022/02/15 17:39:56 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ template<class T, class Allocator = std::allocator<T>>
  * 			1.	vector();
  * 			2.	explicit vector( const Allocator& alloc );
  * 			3.	explicit vector( size_type count, const T& value = T(), const Allocator& alloc = Allocator());
- * 			5.	template< class InputIt >vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
+ * 			5.	template< class InputIt >
+ * 					vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
  * 			6.	vector( const vector& other );
  *
  * 		DESTRUCTORS
@@ -32,7 +33,8 @@ template<class T, class Allocator = std::allocator<T>>
  * 		OTHER MEMBER FUNCTIONS
  * 			1.	vector& operator=( const vector& other );
  * 			1.	void assign( size_type count, const T& value );
- * 			2.	template< class InputIt >void assign( InputIt first, InputIt last );
+ * 			2.	template< class InputIt >
+ * 					void assign( InputIt first, InputIt last );
  * 			1.	allocator_type get_allocator() const;
  *
  * 		ELEMENT ACCESS
@@ -54,3 +56,39 @@ template<class T, class Allocator = std::allocator<T>>
  * 			2.	const_reverse_iterator rbegin() const;
  * 			1.	reverse_iterator rend();
  * 			2.	const_reverse_iterator rend() const;
+ *
+ * 		CAPACITY
+ * 			1.	bool empty() const;
+ * 			1.	size_type size() const;
+ * 			1.	size_type max_size() const;
+ * 			1.	void reserve( size_type new_cap );
+ * 			1.	size_type capacity() const;
+ *
+ * 		MODIFIERS
+ * 			1.	void clear();
+ * 			1.	iterator insert( iterator pos, const T& value );
+ * 			3.	void insert( iterator pos, size_type count, const T& value );
+ * 			4.	template< class InputIt >
+ * 					void insert( iterator pos, InputIt first, InputIt last );
+ * 			1.	iterator erase( iterator pos );
+ * 			2.	iterator erase( iterator first, iterator last );
+ * 			1.	void push_back( const T& value );
+ * 			1.	void pop_back();
+ * 			2.	void resize( size_type count, T value = T() );
+ * 			1.	void swap( vector& other );
+ *
+ * 	NON-MEMBER FUNCTIONS
+ *		1.	template< class T, class Alloc >
+ *				bool operator==( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		2.	template< class T, class Alloc >
+ *				bool operator!=( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		3.	template< class T, class Alloc >
+ *				bool operator<( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		4.	template< class T, class Alloc >
+ *				bool operator<=( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		5.	template< class T, class Alloc >
+ *				bool operator>( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		6.	template< class T, class Alloc >
+ *				bool operator>=( const std::vector<T,Alloc>& lhs, const std::vector<T,Alloc>& rhs );
+ *		1.	template< class T, class Alloc >
+ *				void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
