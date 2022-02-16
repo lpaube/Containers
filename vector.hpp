@@ -6,13 +6,29 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/02/15 17:39:56 by laube            ###   ########.fr       */
+/*   Updated: 2022/02/16 12:51:16 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <memory>
 
 template<class T, class Allocator = std::allocator<T>>
+class vector {
+	public:
+		typedef T 										value_type;
+		typedef Allocator								allocator_type;
+		typedef std::size_t								size_type;
+		typedef std::ptrdiff_t							difference_type;
+		typedef value_type&								reference;
+		typedef const value_type&						const_reference;
+		typedef std::reverse_iterator<iterator>			reverse_iterator;
+		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+
+	public:
+		// CONSTRUCTORS
+		vector();
+		explicit vector(size_type count
+}
 
 
 // https://en.cppreference.com/w/cpp/container/vector
