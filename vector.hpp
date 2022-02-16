@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/02/16 12:51:16 by laube            ###   ########.fr       */
+/*   Updated: 2022/02/16 14:51:55 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,17 @@ class vector {
 		typedef std::reverse_iterator<iterator>			reverse_iterator;
 		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
 
+		allocator_type::pointer M_start;
+		allocator_type::
+
 	public:
 		// CONSTRUCTORS
 		vector();
 		explicit vector(size_type count
 }
 
-
-// https://en.cppreference.com/w/cpp/container/vector
+// SOURCE CODE:		https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
+// DOCUMENTATION:	https://en.cppreference.com/w/cpp/container/vector
 /* LIST 
  *
  * MEMBER FUNCTIONS
