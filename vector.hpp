@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/02/16 14:51:55 by laube            ###   ########.fr       */
+/*   Updated: 2022/02/16 17:36:33 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ class vector {
 }
 
 // SOURCE CODE:		https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
+// VECTOR DETAILS:	https://hadibrais.wordpress.com/2013/11/10/dissecting-the-c-stl-vector-part-1-introduction/
 // DOCUMENTATION:	https://en.cppreference.com/w/cpp/container/vector
 /* LIST 
  *
