@@ -6,35 +6,34 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/02/16 17:36:33 by laube            ###   ########.fr       */
+/*   Updated: 2022/02/21 13:17:07 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <memory>
 
-template<class T, class Allocator = std::allocator<T>>
-class vector {
-	public:
-		typedef T 										value_type;
-		typedef Allocator								allocator_type;
-		typedef std::size_t								size_type;
-		typedef std::ptrdiff_t							difference_type;
-		typedef value_type&								reference;
-		typedef const value_type&						const_reference;
-		typedef std::reverse_iterator<iterator>			reverse_iterator;
-		typedef std::reverse_iterator<const_iterator>	const_reverse_iterator;
+template <class T, class Allocator = std::allocator<T>> class vector
+{
+  public:
+    typedef T value_type;
+    typedef Allocator allocator_type;
+    typedef std::size_t size_type;
+    typedef std::ptrdiff_t difference_type;
+    typedef value_type &reference;
+    typedef const value_type &const_reference;
+    typedef std::reverse_iterator<iterator> reverse_iterator;
+    typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-		allocator_type::pointer M_start;
-		allocator_type::
-
-	public:
-		// CONSTRUCTORS
-		vector();
-		explicit vector(size_type count
+  public:
+    // CONSTRUCTORS
+    vector();
+    explicit vector(const Allocator &alloc);
 }
 
-// SOURCE CODE:		https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
-// VECTOR DETAILS:	https://hadibrais.wordpress.com/2013/11/10/dissecting-the-c-stl-vector-part-1-introduction/
+// SOURCE CODE:
+// https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
+// VECTOR DETAILS:
+// https://hadibrais.wordpress.com/2013/11/10/dissecting-the-c-stl-vector-part-1-introduction/
 // DOCUMENTATION:	https://en.cppreference.com/w/cpp/container/vector
 /* LIST 
  *
