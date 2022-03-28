@@ -6,66 +6,107 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/03/27 21:46:31 by laube            ###   ########.fr       */
+/*   Updated: 2022/03/28 15:14:11 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <memory>
+#include <iostream>
 
-template <typename T, typename Allocator = std::allocator<T>> class vector
+namespace ft
 {
-    
+  template <typename T, typename Allocator = std::allocator<T> >
+  class vector
+  {
+
     // size_type m_size;       // Current size of the vector
     // size_type m_capacity;   // Maximum size of vector (this is dynamic in nature)
     // pointer   m_data;  // Pointer to the start of data type container
     // allocator_type m_allocator;
-    
+
   public:
     // Member Types
-    typedef T                                     value_type;
-    typedef Allocator                             allocator_type;
-    typedef std::size_t                           size_type;
-    typedef std::ptrdiff_t                        difference_type;
-    typedef value_type&                           reference;
-    typedef const value_type&                     const_reference;
-    typedef T*                                    pointer;
-    typedef const T*                              const_pointer;
+    typedef T value_type;
+    typedef Allocator allocator_type;
+    typedef std::size_t size_type;
+    typedef std::ptrdiff_t difference_type;
+    typedef value_type& reference;
+    typedef const value_type& const_reference;
+    typedef T *pointer;
+    typedef const T *const_pointer;
     // typedef normal_iterator<value_type>           iterator;
     // typedef normal_iterator<const value_type>     const_iterator;
     // typedef reverse_iterator<iterator>       reverse_iterator;
     // typedef reverse_iterator<const_iterator> const_reverse_iterator;
-    
+
+    bool empty() const;
+    size_type size() const;
+    size_type max_size() const {
+      return (get_allocator().max_size());
+    }
+    void reserve(size_type new_cap);
+    size_type capacity() const;
+
   private:
-    pointer         m_start;
-    pointer         m_finish;
-    pointer         m_end_of_storage;
+    pointer m_start;
+    pointer m_finish;
+    pointer m_end_of_storage;
+    allocator_type m_alloc;
+
+    pointer _allocate(allocator_type& alloc, size_type count) {
+      return alloc.allocate(count);
+    }
+
+    void _vallocate(size_type count)
+    {
+      if (count > max_size())
+        std::cout << "error......." << std::endl;
+        // this->throw_length_error();
+      this->m_start = _allocate(this->m_alloc, count);
+      this->m_finish = this->m_start;
+    }
+
+    void  _construct_at_end(size_type count, const_reference value) {
+      for (int i = 0; i < count; i++)
+      this->m_alloc.construct(this->m_start + i, value);
+    }
 
   public:
     // MEMBER FUNCTIONS--
     // Constructors
-    vector(const allocator_type& alloc = allocator_type()) : m_start(), m_finish(), m_end_of_storage(), m_allocator(alloc) {} // What happens when you leave the args empty?
-    explicit vector( const Allocator& alloc ) : m_start(nullptr), m_finish(nullptr), m_end_of_storage(nullptr), m_allocator(alloc) {}
-    
-    explicit vector( size_type count, const T& value = T(), const Allocator& alloc = Allocator());
-    template< class InputIt >
-    vector( InputIt first, InputIt last, const Allocator& alloc = Allocator() );
-    vector( const vector& other );
+    vector() : m_start(nullptr), m_finish(nullptr), m_end_of_storage(nullptr), m_alloc() {}
+    explicit vector(const Allocator &alloc) : m_start(nullptr), m_finish(nullptr), m_end_of_storage(nullptr), m_alloc(alloc) {}
+    explicit vector(size_type count, const T &value = T(), const Allocator &alloc = Allocator()) : m_alloc(alloc)
+    {
+      if (count > 0)
+      {
+        _vallocate(count);
+        _construct_at_end(count, value);
+      }
+    }
+    template <class InputIt>
+    vector(InputIt first, InputIt last, const Allocator &alloc = Allocator());
+    vector(const vector &other);
 
     // Destructors
-    ~vector();
+    ~vector() {}
 
     // Other member functions
-    vector& operator=( const vector& other );
-    void assign( size_type count, const T& value );
-    template< class InputIt > void assign( InputIt first, InputIt last );
-    allocator_type get_allocator() const;
-
+    vector &operator=(const vector &other);
+    void assign(size_type count, const T &value);
+    template <class InputIt>
+    void assign(InputIt first, InputIt last) {}
+    allocator_type get_allocator() const {
+      return (allocator_type(this->m_alloc));
+    }
+  };
+}
 // SOURCE CODE:
 // https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
 // VECTOR DETAILS:
 // https://hadibrais.wordpress.com/2013/11/10/dissecting-the-c-stl-vector-part-1-introduction/
 // DOCUMENTATION:	https://en.cppreference.com/w/cpp/container/vector
-//  LIST 
+//  LIST
 //  *
 //  * MEMBER FUNCTIONS
 //  * 		CONSTRUCTORS
