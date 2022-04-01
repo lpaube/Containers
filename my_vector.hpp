@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/03/28 15:14:11 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/01 15:42:00 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ namespace ft
     typedef std::ptrdiff_t difference_type;
     typedef value_type& reference;
     typedef const value_type& const_reference;
-    typedef T *pointer;
-    typedef const T *const_pointer;
+    typedef T* pointer;
+    typedef const T* const_pointer;
     // typedef normal_iterator<value_type>           iterator;
     // typedef normal_iterator<const value_type>     const_iterator;
     // typedef reverse_iterator<iterator>       reverse_iterator;
@@ -63,19 +63,24 @@ namespace ft
         std::cout << "error......." << std::endl;
         // this->throw_length_error();
       this->m_start = _allocate(this->m_alloc, count);
-      this->m_finish = this->m_start;
+      this->m_finish = this->m_start + count;
     }
 
     void  _construct_at_end(size_type count, const_reference value) {
       for (int i = 0; i < count; i++)
       this->m_alloc.construct(this->m_start + i, value);
     }
+    
+    template <typename InputIt>
+    void _construct_at_end(InputIt firstIt, InputIt lastIt, size_type count) {
+      
+    }
 
   public:
     // MEMBER FUNCTIONS--
     // Constructors
-    vector() : m_start(nullptr), m_finish(nullptr), m_end_of_storage(nullptr), m_alloc() {}
-    explicit vector(const Allocator &alloc) : m_start(nullptr), m_finish(nullptr), m_end_of_storage(nullptr), m_alloc(alloc) {}
+    vector() : m_start(), m_finish(), m_end_of_storage(), m_alloc() {}
+    explicit vector(const Allocator &alloc) : m_start(), m_finish(), m_end_of_storage(), m_alloc(alloc) {}
     explicit vector(size_type count, const T &value = T(), const Allocator &alloc = Allocator()) : m_alloc(alloc)
     {
       if (count > 0)
@@ -84,8 +89,11 @@ namespace ft
         _construct_at_end(count, value);
       }
     }
-    template <class InputIt>
-    vector(InputIt first, InputIt last, const Allocator &alloc = Allocator());
+    template <typename InputIt>
+    vector(InputIt first, InputIt last, const Allocator &alloc = Allocator()) {
+      size_type count = last - first;
+    }
+    
     vector(const vector &other);
 
     // Destructors
@@ -93,9 +101,13 @@ namespace ft
 
     // Other member functions
     vector &operator=(const vector &other);
+    
     void assign(size_type count, const T &value);
+
     template <class InputIt>
-    void assign(InputIt first, InputIt last) {}
+    void assign(InputIt first, InputIt last) {
+      
+    }
     allocator_type get_allocator() const {
       return (allocator_type(this->m_alloc));
     }
