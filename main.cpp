@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:08:44 by laube             #+#    #+#             */
-/*   Updated: 2022/03/28 15:53:15 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/02 15:30:11 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(void)
 	// My vector
 	ft::vector<int> mv1(5);
 
+	mv1[2] = 3;
 	for (int i = 0; i < 5; i++) {
 		std::cout << "i: " << i << " | my vec: " << mv1[i] << std::endl;
 	}

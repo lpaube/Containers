@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/04/01 15:42:00 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/02 15:29:59 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ namespace ft
     }
 
     void  _construct_at_end(size_type count, const_reference value) {
-      for (int i = 0; i < count; i++)
+      for (size_type i = 0; i < count; i++)
       this->m_alloc.construct(this->m_start + i, value);
     }
     
@@ -111,10 +111,15 @@ namespace ft
     allocator_type get_allocator() const {
       return (allocator_type(this->m_alloc));
     }
+    
+    reference operator[]( size_type pos ) {
+      return *(this->m_start + pos);
+    }
+    
   };
 }
 // SOURCE CODE:
-// https://gcc.gnu.org/onlinedocs/gcc-4.6.2/libstdc++/api/a01069_source.html
+// https://code.woboq.org/gcc/libstdc++-v3/include/debug/vector.html
 // VECTOR DETAILS:
 // https://hadibrais.wordpress.com/2013/11/10/dissecting-the-c-stl-vector-part-1-introduction/
 // DOCUMENTATION:	https://en.cppreference.com/w/cpp/container/vector
