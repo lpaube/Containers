@@ -52,6 +52,22 @@
 		"__config": "cpp",
 		"__functional_base": "cpp",
 		"__locale": "cpp",
-		"locale": "cpp"
+		"locale": "cpp",
+		"__bit_reference": "cpp",
+		"__debug": "cpp",
+		"__errc": "cpp",
+		"__mutex_base": "cpp",
+		"__nullptr": "cpp",
+		"__string": "cpp",
+		"__threading_support": "cpp",
+		"__tuple": "cpp",
+		"bitset": "cpp",
+		"chrono": "cpp",
+		"complex": "cpp",
+		"cstring": "cpp",
+		"ctime": "cpp",
+		"ios": "cpp",
+		"mutex": "cpp",
+		"ratio": "cpp"
 	}
 }
