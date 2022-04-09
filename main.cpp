@@ -31,16 +31,16 @@ int	main(void)
 		std::cout << *i << " ";
 	}
 	std::cout << "\nOutput of cbegin and cend: ";
-    for (std::vector<int>::const_iterator i = v1.cbegin(); i != v1.cend(); ++i)
-        std::cout << *i << " ";
-  
-    std::cout << "\nOutput of rbegin and rend: ";
-    for (std::vector<int>::reverse_iterator ir = v1.rbegin(); ir != v1.rend(); ++ir)
-        std::cout << *ir << " ";
-  
-    std::cout << "\nOutput of crbegin and crend : ";
-    for (std::vector<int>::const_reverse_iterator ir = v1.crbegin(); ir != v1.crend(); ++ir)
-        std::cout << *ir << " ";
+	for (std::vector<int>::const_iterator i = v1.cbegin(); i != v1.cend(); ++i)
+		std::cout << *i << " ";
+
+	std::cout << "\nOutput of rbegin and rend: ";
+	for (std::vector<int>::reverse_iterator ir = v1.rbegin(); ir != v1.rend(); ++ir)
+		std::cout << *ir << " ";
+
+	std::cout << "\nOutput of crbegin and crend : ";
+	for (std::vector<int>::const_reverse_iterator ir = v1.crbegin(); ir != v1.crend(); ++ir)
+		std::cout << *ir << " ";
 	std::cout << "\n\n" << "--------MY VECTOR---------" << std::endl;
 
 	// My vector
