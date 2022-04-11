@@ -15,25 +15,26 @@
 
 namespace ft
 {
-  template <typename Iter, bool>
-  struct iterator_traits {};
 
-  template <typename Iter>
-  struct iterator_traits : iterator_traits<Iter, has_iterator_typedefs<Iter>::value> {
-  }
+  template<typename Iterator>
+    struct iterator_traits
+    {
+      typedef typename 
+    }
 
-  template <typename Iter>
-  class wrap_iter
-  {
-    public:
-      typedef Iter  iterator_type;
-      typedef typename iterator_traits<iterator_type>::iterator_category  iterator_category;
-      typedef typename iterator_traits<iterator_type>::value_type         value_type;
-      typedef typename iterator_traits<iterator_type>::difference_type    difference_type;
-      typedef typename iterator_traits<iterator_type>::pointer            pointer;
-      typedef typename iterator_traits<iterator_type>::reference          reference
 
-  }
+  //template <typename Iter>
+  //class wrap_iter
+  //{
+  //  public:
+  //    typedef Iter  iterator_type;
+  //    typedef typename iterator_traits<iterator_type>::iterator_category  iterator_category;
+  //    typedef typename iterator_traits<iterator_type>::value_type         value_type;
+  //    typedef typename iterator_traits<iterator_type>::difference_type    difference_type;
+  //    typedef typename iterator_traits<iterator_type>::pointer            pointer;
+  //    typedef typename iterator_traits<iterator_type>::reference          reference
+
+  //}
 
   template <typename T, typename Allocator = std::allocator<T> >
   class vector
