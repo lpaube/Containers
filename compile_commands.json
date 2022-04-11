@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-c",
+      "-o",
+      "containers",
+      "main.cpp"
+    ],
+    "directory": "/Users/laube/Desktop/code/Containers",
+    "file": "/Users/laube/Desktop/code/Containers/main.cpp",
+    "output": "/Users/laube/Desktop/code/Containers/containers"
+  }
+]

@@ -12,38 +12,60 @@
 
 #include <memory>
 #include <iostream>
+#include <iterator>
+#include <cstddef>
 
 namespace ft
 {
-
   template<typename Iterator>
     struct iterator_traits
     {
-      typedef typename 
-    }
+      typedef typename Iterator::iterator_category  iterator_category;
+      typedef typename Iterator::value_type         value_type;
+      typedef typename Iterator::difference_type    difference_type;
+      typedef typename Iterator::pointer            pointer;
+      typedef typename Iterator::reference          reference;
+    };
 
+  template<typename Tp>
+    struct iterator_traits<Tp*>
+    {
+      typedef std::random_access_iterator_tag  iterator_category;
+      typedef Tp                               value_type;
+      typedef std::ptrdiff_t                   difference_type;
+      typedef Tp*                              pointer;
+      typedef Tp&                              reference;
+    };
 
-  //template <typename Iter>
-  //class wrap_iter
-  //{
-  //  public:
-  //    typedef Iter  iterator_type;
-  //    typedef typename iterator_traits<iterator_type>::iterator_category  iterator_category;
-  //    typedef typename iterator_traits<iterator_type>::value_type         value_type;
-  //    typedef typename iterator_traits<iterator_type>::difference_type    difference_type;
-  //    typedef typename iterator_traits<iterator_type>::pointer            pointer;
-  //    typedef typename iterator_traits<iterator_type>::reference          reference
+  // What's the point of having this specialization if it's the same as the prev one?
+  template<typename Tp>
+    struct iterator_traits<const Tp*>
+    {
+      typedef std::random_access_iterator_tag  iterator_category;
+      typedef Tp                               value_type;
+      typedef std::ptrdiff_t                   difference_type;
+      typedef Tp*                              pointer;
+      typedef Tp&                              reference;
+    };
 
-  //}
+  template<typename Iterator>
+    class normal_iterator
+    {
+    protected:
+      typedef iterator_traits<Iterator>  traits_type;
+
+    public:
+      typedef typename traits_type::iterator_category iterator_category;
+      typedef typename traits_type::value_type        value_type;
+      typedef typename traits_type::difference_type   difference_type;
+      typedef typename traits_type::reference         reference;
+      typedef typename traits_type::pointer           pointer;
+    };
+  
 
   template <typename T, typename Allocator = std::allocator<T> >
   class vector
   {
-
-    // size_type m_size;       // Current size of the vector
-    // size_type m_capacity;   // Maximum size of vector (this is dynamic in nature)
-    // pointer   m_data;  // Pointer to the start of data type container
-    // allocator_type m_allocator;
 
   public:
     // Member Types
@@ -55,8 +77,8 @@ namespace ft
     typedef const value_type&                     const_reference;
     typedef T*                                    pointer;
     typedef const T*                              const_pointer;
-    //typedef normal_iterator<value_type>           iterator;
-    //typedef normal_iterator<const value_type>     const_iterator;
+    typedef normal_iterator<value_type>           iterator;
+    typedef normal_iterator<const value_type>     const_iterator;
     // typedef reverse_iterator<iterator>       reverse_iterator;
     // typedef reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -74,26 +96,29 @@ namespace ft
     pointer m_end_of_storage;
     allocator_type m_alloc;
 
-    pointer _allocate(allocator_type& alloc, size_type count) {
+    // Allocates memory of size count using the allocator, then 
+    // sets m_start and m_finish
+    pointer allocate(allocator_type& alloc, size_type count) {
       return alloc.allocate(count);
     }
 
-    void _vallocate(size_type count)
+    void vallocate(size_type count)
     {
       if (count > max_size())
         std::cout << "error......." << std::endl;
         // this->throw_length_error();
-      this->m_start = _allocate(this->m_alloc, count);
+      this->m_start = allocate(this->m_alloc, count);
       this->m_finish = this->m_start + count;
     }
 
-    void  _construct_at_end(size_type count, const_reference value) {
+    // Constructs the elements in the memory allocated and initialize it with value
+    void  construct_at_end(size_type count, const_reference value) {
       for (size_type i = 0; i < count; i++)
       this->m_alloc.construct(this->m_start + i, value);
     }
     
     template <typename InputIt>
-    void _construct_at_end(InputIt firstIt, InputIt lastIt, size_type count) {
+    void construct_at_end(InputIt firstIt, InputIt lastIt, size_type count) {
       
     }
 
@@ -106,8 +131,8 @@ namespace ft
     {
       if (count > 0)
       {
-        _vallocate(count);
-        _construct_at_end(count, value);
+        vallocate(count);
+        construct_at_end(count, value);
       }
     }
     template <typename InputIt>
