@@ -50,4 +50,12 @@ int	main(void)
 	for (int i = 0; i < 5; i++) {
 		std::cout << "i: " << i << " | my vec: " << mv1[i] << std::endl;
 	}
+    std::vector<int>::iterator beg = v1.begin();
+    std::cout << "begin iterator address: " << (void *)&(*beg) << std::endl;
+    std::cout << "begin + 1 iterator address: " << (void *)&(*(beg + 1)) << std::endl;
+
+    std::vector<int>::iterator mid1 = v1.begin() + 1;
+    std::vector<int>::iterator mid2 = v1.begin() + 2;
+
+    std::cout << "ite 2 - ite 1: " << mid1 - beg << std::endl;
 }

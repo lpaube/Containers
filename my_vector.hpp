@@ -52,6 +52,8 @@ namespace ft
     class normal_iterator
     {
     protected:
+      Iterator m_current;
+
       typedef iterator_traits<Iterator>  traits_type;
 
     public:
@@ -60,6 +62,22 @@ namespace ft
       typedef typename traits_type::difference_type   difference_type;
       typedef typename traits_type::reference         reference;
       typedef typename traits_type::pointer           pointer;
+
+      normal_iterator() : m_current(Iterator()) {}
+      normal_iterator(const Iterator& i) : m_current(i) {}
+      
+      // normal_iterator overloads
+      reference operator*() const
+      {
+        return *m_current;
+      }
+
+      pointer operator->() const
+      {
+        return m_current;
+      }
+
+      //std::ptrdiff_t operator-(
     };
   
 
@@ -138,6 +156,7 @@ namespace ft
     template <typename InputIt>
     vector(InputIt first, InputIt last, const Allocator &alloc = Allocator()) {
       size_type count = last - first;
+
     }
     
     vector(const vector &other);
