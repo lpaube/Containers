@@ -48,13 +48,13 @@ namespace ft
       typedef Tp&                              reference;
     };
 
-  template<typename Iterator>
+  template<typename Iterator_type>
     class normal_iterator
     {
     protected:
-      Iterator m_current;
+      Iterator_type m_current;
 
-      typedef iterator_traits<Iterator>  traits_type;
+      typedef iterator_traits<Iterator_type>  traits_type;
 
     public:
       typedef typename traits_type::iterator_category iterator_category;
@@ -63,10 +63,10 @@ namespace ft
       typedef typename traits_type::reference         reference;
       typedef typename traits_type::pointer           pointer;
 
-      normal_iterator() : m_current(Iterator()) {}
-      normal_iterator(const Iterator& i) : m_current(i) {}
+      normal_iterator() : m_current(Iterator_type()) {}
+      normal_iterator(const Iterator_type& i) : m_current(i) {}
       
-      // normal_iterator overloads
+      // Forward iterator overloads
       reference operator*() const
       {
         return *m_current;
@@ -77,7 +77,30 @@ namespace ft
         return m_current;
       }
 
-      //std::ptrdiff_t operator-(
+      normal_iterator& operator++()
+      {
+        ++m_current;
+        return *this;
+      }
+
+      normal_iterator operator++(int)
+      {
+          return normal_iterator(m_current++);
+      }
+
+      // Bidirectional iterator overloads
+      // How can it create an Iterator when returns integer?(iter1 - iter2 = 2)
+      normal_iterator operator-(difference_type elem)
+      {
+        return normal_iterator(m_current - elem);
+      }
+
+      normal_iterator operator+(difference_type elem)
+      {
+        return normal_iterator(m_current + elem);
+      }
+
+      
     };
   
 
