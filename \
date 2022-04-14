@@ -90,19 +90,18 @@ class normal_iterator {
     return normal_iterator(m_current - elem);
   }
 
+  template<typename Iterator, typename Container>
+      inline typename normal_iterator<Iterator, Container>::difference_type
+      operator-(const normal_iterator<Iterator, Container> &lhs,
+              const normal_iterator<Iterator, Container> &rhs)
+      {
+        return lhs.base() - rhs.base();
+      }
 
   normal_iterator operator+(difference_type elem) {
     return normal_iterator(m_current + elem);
   }
 };
-
-template<typename Iterator, typename Container>
-    inline typename normal_iterator<Iterator>::difference_type
-operator-(const normal_iterator<Iterator>& lhs,
-        const normal_iterator<Iterator>& rhs)
-{
-    return lhs.base() - rhs.base();
-}
 
 template <typename T, typename Allocator = std::allocator<T> >
 class vector {
