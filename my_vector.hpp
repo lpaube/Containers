@@ -86,14 +86,35 @@ class normal_iterator {
   }
 
   // Random access iterator overloads
-  normal_iterator operator-(difference_type elem) {
-    return normal_iterator(m_current - elem);
+  reference operator[](difference_type n) const {
+    return m_current[n];
+  }
+
+  normal_iterator& operator+=(difference_type n) {
+    m_current+=n;
+    return *this;
   }
 
 
   normal_iterator operator+(difference_type elem) {
     return normal_iterator(m_current + elem);
   }
+
+  normal_iterator& operator-=(difference_type n) {
+    m_current-=n;
+    return *this;
+  }
+
+  normal_iterator operator-(difference_type elem) {
+    return normal_iterator(m_current - elem);
+  }
+
+  // This base function is a getter since m_current is protected
+  const Iterator_type& base() const
+  {
+    return m_current;
+  }
+
 };
 
 template<typename Iterator, typename Container>
@@ -102,6 +123,12 @@ operator-(const normal_iterator<Iterator>& lhs,
         const normal_iterator<Iterator>& rhs)
 {
     return lhs.base() - rhs.base();
+}
+// Why are parameters "const"?
+template<typename IteratorL, typename IteratorR>
+inline bool operator==(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() == rhs.base();
 }
 
 template <typename T, typename Allocator = std::allocator<T> >
