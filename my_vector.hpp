@@ -198,11 +198,14 @@ class vector {
   pointer m_end_of_storage;
   allocator_type m_alloc;
 
-
   void m_create_storage(size_t count)
   {
     this->m_start = this->m_alloc.allocate(count);
+    this->m_finish = this->m_start;
+    this->m_end_of_storage = this->m_start + count;
   }
+
+  void
 
  public:
   // MEMBER FUNCTIONS
@@ -216,6 +219,7 @@ class vector {
       : m_alloc(alloc)
   {
     m_create_storage(count);
+    m_construct_storage(value);
   }
 
   template <typename InputIt>
