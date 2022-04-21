@@ -41,6 +41,19 @@ int	main(void)
 	std::cout << "\nOutput of crbegin and crend : ";
 	for (std::vector<int>::const_reverse_iterator ir = v1.crbegin(); ir != v1.crend(); ++ir)
 		std::cout << *ir << " ";
+
+	std::cout << "\n\n" << "--------REAL VECTOR: ITERATORS ADDRESSES---------" << std::endl;
+    std::vector<int>::iterator beg = v1.begin();
+    std::cout << "begin iterator address: " << (void *)&(*beg) << std::endl;
+    std::cout << "begin + 1 iterator address: " << (void *)&(*(beg + 1)) << std::endl;
+
+    std::vector<int>::iterator mid1 = v1.begin() + 1;
+    std::vector<int>::iterator mid2 = v1.begin() + 2;
+
+    std::cout << "ite 2 - ite 1: " << mid1 - beg << std::endl;
+    std::cout << "compare equals: " << (mid1 == mid2 - 1) << std::endl;
+    std::cout << "compare larger true: " << (mid2 > mid1) << std::endl;
+
 	std::cout << "\n\n" << "--------MY VECTOR---------" << std::endl;
 
 	// My vector
@@ -50,12 +63,17 @@ int	main(void)
 	for (int i = 0; i < 5; i++) {
 		std::cout << "i: " << i << " | my vec: " << mv1[i] << std::endl;
 	}
-    std::vector<int>::iterator beg = v1.begin();
+
+	std::cout << "\n\n" << "--------MY VECTOR: ITERATORS ADDRESSES---------" << std::endl;
+    ft::vector<int>::iterator begmv1 = mv1.begin();
     std::cout << "begin iterator address: " << (void *)&(*beg) << std::endl;
     std::cout << "begin + 1 iterator address: " << (void *)&(*(beg + 1)) << std::endl;
 
-    std::vector<int>::iterator mid1 = v1.begin() + 1;
-    std::vector<int>::iterator mid2 = v1.begin() + 2;
+    ft::vector<int>::iterator mid1mv1 = mv1.begin() + 1;
+    ft::vector<int>::iterator mid2mv1 = mv1.begin() + 2;
 
     std::cout << "ite 2 - ite 1: " << mid1 - beg << std::endl;
+    std::cout << "compare equals: " << (mid1mv1 == mid2mv1 - 1) << std::endl;
+    std::cout << "compare unequals: " << (mid1mv1 == mid2mv1) << std::endl;
+    std::cout << "compare larger true: " << (mid2mv1 > mid1mv1) << std::endl;
 }

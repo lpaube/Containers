@@ -60,6 +60,7 @@ class normal_iterator {
   typedef typename traits_type::pointer pointer;
 
   normal_iterator() : m_current(Iterator_type()) {}
+
   normal_iterator(const Iterator_type& i) : m_current(i) {}
 
   // Forward iterator overloads
@@ -75,7 +76,6 @@ class normal_iterator {
   normal_iterator operator++(int) { return normal_iterator(m_current++); }
 
   // Bidirectional iterator overloads
-
   normal_iterator operator--() {
     --m_current;
     return *this;
@@ -95,7 +95,6 @@ class normal_iterator {
     return *this;
   }
 
-
   normal_iterator operator+(difference_type elem) {
     return normal_iterator(m_current + elem);
   }
@@ -114,37 +113,76 @@ class normal_iterator {
   {
     return m_current;
   }
-
 };
 
-template<typename Iterator, typename Container>
-    inline typename normal_iterator<Iterator>::difference_type
-operator-(const normal_iterator<Iterator>& lhs,
-        const normal_iterator<Iterator>& rhs)
+// Non-member overloads
+// Forward iterator non-member overloads
+template<typename IteratorL, typename IteratorR>
+bool operator==(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() == rhs.base();
+}
+
+template<typename IteratorL, typename IteratorR>
+bool operator!=(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() != rhs.base();
+}
+
+// Random access iterator non-member overloads
+template<typename IteratorL, typename IteratorR>
+bool operator>(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() > rhs.base();
+}
+
+template<typename IteratorL, typename IteratorR>
+bool operator<(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() < rhs.base();
+}
+
+template<typename IteratorL, typename IteratorR>
+bool operator>=(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() <= rhs.base();
+}
+
+template<typename IteratorL, typename IteratorR>
+bool operator<=(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+{
+    return lhs.base() <= rhs.base();
+}
+
+template<typename Iterator>
+typename normal_iterator<Iterator>::difference_type
+    operator-(const normal_iterator<Iterator>& lhs, const normal_iterator<Iterator>& rhs)
 {
     return lhs.base() - rhs.base();
 }
-// Why are parameters "const"?
-template<typename IteratorL, typename IteratorR>
-inline bool operator==(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
+
+template<typename Iterator>
+typename normal_iterator<Iterator>::difference_type
+    operator+(typename normal_iterator<Iterator>::difference_type lhs,
+        const normal_iterator<Iterator>& rhs)
 {
-    return lhs.base() == rhs.base();
+    return normal_iterator<Iterator>(rhs.base() + lhs);
 }
 
 template <typename T, typename Allocator = std::allocator<T> >
 class vector {
  public:
   // Member Types
-  typedef T value_type;
-  typedef Allocator allocator_type;
-  typedef std::size_t size_type;
-  typedef std::ptrdiff_t difference_type;
-  typedef value_type& reference;
-  typedef const value_type& const_reference;
-  typedef T* pointer;
-  typedef const T* const_pointer;
-  typedef normal_iterator<value_type> iterator;
-  typedef normal_iterator<const value_type> const_iterator;
+  typedef T                                   value_type;
+  typedef Allocator                           allocator_type;
+  typedef std::size_t                         size_type;
+  typedef std::ptrdiff_t                      difference_type;
+  typedef value_type&                         reference;
+  typedef const value_type&                   const_reference;
+  typedef T*                                  pointer;
+  typedef const T*                            const_pointer;
+  typedef normal_iterator<pointer>            iterator;
+  typedef normal_iterator<const pointer>      const_iterator;
   // typedef reverse_iterator<iterator>       reverse_iterator;
   // typedef reverse_iterator<const_iterator> const_reverse_iterator;
 
@@ -160,46 +198,29 @@ class vector {
   pointer m_end_of_storage;
   allocator_type m_alloc;
 
-  // Allocates memory of size count using the allocator, then
-  // sets m_start and m_finish
-  pointer allocate(allocator_type& alloc, size_type count) {
-    return alloc.allocate(count);
-  }
 
-  void vallocate(size_type count) {
-    if (count > max_size()) std::cout << "error......." << std::endl;
-    // this->throw_length_error();
-    this->m_start = allocate(this->m_alloc, count);
-    this->m_finish = this->m_start + count;
+  void m_create_storage(size_t count)
+  {
+    this->m_start = this->m_alloc.allocate(count);
   }
-
-  // Constructs the elements in the memory allocated and initialize it with
-  // value
-  void construct_at_end(size_type count, const_reference value) {
-    for (size_type i = 0; i < count; i++)
-      this->m_alloc.construct(this->m_start + i, value);
-  }
-
-  template <typename InputIt>
-  void construct_at_end(InputIt firstIt, InputIt lastIt, size_type count) {}
 
  public:
-  // MEMBER FUNCTIONS--
+  // MEMBER FUNCTIONS
   // Constructors
   vector() : m_start(), m_finish(), m_end_of_storage(), m_alloc() {}
+
   explicit vector(const Allocator& alloc)
       : m_start(), m_finish(), m_end_of_storage(), m_alloc(alloc) {}
-  explicit vector(size_type count, const T& value = T(),
-                  const Allocator& alloc = Allocator())
-      : m_alloc(alloc) {
-    if (count > 0) {
-      vallocate(count);
-      construct_at_end(count, value);
-    }
+
+  explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator())
+      : m_alloc(alloc)
+  {
+    m_create_storage(count);
   }
+
   template <typename InputIt>
   vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()) {
-    size_type count = last - first;
+
   }
 
   vector(const vector& other);
@@ -214,11 +235,22 @@ class vector {
 
   template <class InputIt>
   void assign(InputIt first, InputIt last) {}
+
   allocator_type get_allocator() const {
     return (allocator_type(this->m_alloc));
   }
 
   reference operator[](size_type pos) { return *(this->m_start + pos); }
+
+  iterator begin()
+  {
+    return iterator(this->m_start);
+  }
+
+  iterator end()
+  {
+    return iterator(this->m_finish);
+  }
 };
 }  // namespace ft
 // SOURCE CODE:
