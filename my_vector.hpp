@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/04/04 12:19:03 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/21 20:21:17 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <iterator>
 #include <memory>
+#include <limits>
 
 namespace ft {
 template <typename Iterator>
@@ -188,7 +189,10 @@ class vector {
 
   bool empty() const;
   size_type size() const;
+
+  // The fuck is this?
   size_type max_size() const { return (get_allocator().max_size()); }
+
   void reserve(size_type new_cap);
   size_type capacity() const;
 
@@ -200,12 +204,20 @@ class vector {
 
   void m_create_storage(size_t count)
   {
-    this->m_start = this->m_alloc.allocate(count);
-    this->m_finish = this->m_start;
-    this->m_end_of_storage = this->m_start + count;
+    // ADD ERROR IF COUNT IS NEGATIVE
+    m_start = m_alloc.allocate(count);
+    m_finish = m_start;
+    m_end_of_storage = m_start + count;
   }
 
-  void
+  void m_construct_storage(const T& value)
+  {
+    for (int i = 0; m_start + i != m_end_of_storage; i++)
+    {
+        m_alloc.construct(m_start + i, value);
+    }
+    m_finish = m_end_of_storage;
+  }
 
  public:
   // MEMBER FUNCTIONS
@@ -215,8 +227,7 @@ class vector {
   explicit vector(const Allocator& alloc)
       : m_start(), m_finish(), m_end_of_storage(), m_alloc(alloc) {}
 
-  explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator())
-      : m_alloc(alloc)
+  explicit vector(size_type count, const T& value = T(), const Allocator& alloc = Allocator()) : m_alloc(alloc)
   {
     m_create_storage(count);
     m_construct_storage(value);
@@ -224,7 +235,19 @@ class vector {
 
   template <typename InputIt>
   vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()) {
-
+    if (std::numeric_limits<InputIt>::is_integer)
+    {
+        m_create_storage(first);
+        m_construct_storage(last);
+    }
+    else
+    {
+        m_create_storage(last - first);
+        for (int i = 0; first != last; ++first, ++i)
+        {
+            *(m_start + i) = *first;
+        }
+    }
   }
 
   vector(const vector& other);
