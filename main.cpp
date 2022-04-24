@@ -31,6 +31,13 @@ int	main(void)
         std::cout << *ite << std::endl;
     }
 
+    std::cout << "--------REAL VECTOR: CONSTRUCTOR BY COPY---------" << std::endl;
+    std::vector<int> v3 = std::vector<int>(v2);
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+
     std::cout << "---------MY VECTOR: COUNT AND VALUE CONSTRUCTOR---------" << std::endl;
     ft::vector<int> mv1 = ft::vector<int>(4, 5);
     for (ft::vector<int>::iterator ite = mv1.begin(); ite < mv1.end(); ite++)
@@ -41,6 +48,12 @@ int	main(void)
     std::array<double, 5> ma1{1.2, 1.6, 3.6, 88.88, 9};
     ft::vector<int> mv2 = ft::vector<int>(ma1.begin() + 1, ma1.end());
     for (ft::vector<int>::iterator ite = mv2.begin(); ite < mv2.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << "--------MY VECTOR: CONSTRUCTOR BY COPY---------" << std::endl;
+    ft::vector<int> mv3 = ft::vector<int>(mv2);
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
     {
         std::cout << *ite << std::endl;
     }
