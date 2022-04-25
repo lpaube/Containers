@@ -45,6 +45,87 @@ struct iterator_traits<const Tp*> {
   typedef Tp& reference;
 };
 
+template<typename Iterator_type>
+class reverse_iterator : std::iterator<
+                            typename iterator_traits<Iterator_type>::iterator_category,
+                            typename iterator_traits<Iterator_type>::value_type,
+                            typename iterator_traits<Iterator_type>::difference_type,
+                            typename iterator_traits<Iterator_type>::pointer,
+                            typename iterator_traits<Iterator_type>::reference
+                         >
+{
+    protected:
+        Iterator_type m_current;
+
+        typedef iterator_traits<Iterator_type> traits_type;
+
+    public:
+        typedef Iterator_type                           Iter;
+        typedef typename traits_type::iterator_category iterator_category;
+        typedef typename traits_type::value_type        value_type;
+        typedef typename traits_type::difference_type   difference_type;
+        typedef typename traits_type::pointer           pointer;
+        typedef typename traits_type::reference         reference;
+        // MEMBER FUNCTIONS
+        reverse_iterator() : m_current() {}
+
+        explicit reverse_iterator(Iterator_type x) : m_current(x) {}
+
+        template<typename U>
+        reverse_iterator(const reverse_iterator<U>& other) : m_current(other.m_current) {}
+
+        template<typename U>
+        reverse_iterator& operator=(const reverse_iterator<U>& other) {
+            m_current = other.m_current;
+        }
+
+        Iterator_type base() const {
+            return m_current;
+        }
+
+        reference operator*() const {
+            return *m_current;
+        }
+
+        pointer operator->() const {
+            return m_current;
+        }
+
+        Iterator_type operator[](difference_type n) const {
+            return *(m_current - n - 1);
+        }
+
+        reverse_iterator& operator++() {
+            --m_current;
+            return *this;
+        }
+
+        reverse_iterator& operator--() {
+            ++m_current;
+            return *this;
+        }
+
+        reverse_iterator& operator++(int) {
+            return reverse_iterator(m_current--);
+        }
+
+        reverse_iterator& operator--(int) {
+            return reverse_iterator(m_current++);
+        }
+
+        reverse_iterator operator+(difference_type n) const {
+            return reverse_iterator(m_current - n);
+        }
+
+        reverse_iterator operator-(difference_type n) const {
+            return reverse_iterator(m_current + n);
+        }
+
+        reverse_iterator& operator+=(difference_type n) {
+            
+        }
+};
+                                            
 template <typename Iterator_type>
 class normal_iterator {
  protected:
@@ -82,7 +163,7 @@ class normal_iterator {
   }
 
   normal_iterator operator--(int) {
-    return normal_iterator(m_current++);
+    return normal_iterator(m_current--);
   }
 
   // Random access iterator overloads
@@ -113,7 +194,6 @@ class normal_iterator {
   {
     return m_current;
   }
-
 };
 
 // Why are parameters "const"?
