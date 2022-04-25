@@ -327,14 +327,8 @@ class vector {
   typedef ft::reverse_iterator<iterator>         reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>   const_reverse_iterator;
 
-  bool empty() const;
-  size_type size() const;
-
   // The fuck is this?
-  size_type max_size() const { return (get_allocator().max_size()); }
-
-  void reserve(size_type new_cap);
-  size_type capacity() const;
+  //size_type max_size() const { return (get_allocator().max_size()); }
 
  private:
   pointer m_start;
@@ -486,6 +480,35 @@ class vector {
   {
     return const_reverse_iterator(this->m_finish);
   }
+
+  reverse_iterator rend() {
+    return reverse_iterator(this->m_start);
+  }
+
+  const_reverse_iterator rend() const
+  {
+    return const_reverse_iterator(this->m_start);
+  }
+
+  bool empty() const {
+    return begin() == end();
+  }
+
+  size_type size() const {
+    return std::distance(begin(), end());
+  }
+
+  size_type max_size() const {
+    return std::numeric_limits<difference_type>::max();
+  }
+
+  void reserve(size_type new_cap) {
+    if (new_cap <= capacity())
+        return;
+    if (new_cap > max_size())
+        throw std::length_error("Can't reserve vector size: bigger than max_size()");
+
+  }
 };
 }  // namespace ft
 // SOURCE CODE:
@@ -530,10 +553,10 @@ class vector {
 //  *     - [x] 2.  const_iterator begin() const;
 //  *     - [x] 1.  iterator end();
 //  *     - [x] 2.  const_iterator end() const;
-//  *     - [ ] 1.  reverse_iterator rbegin();
-//  *     - [ ] 2.  const_reverse_iterator rbegin() const;
-//  *     - [ ] 1.  reverse_iterator rend();
-//  *     - [ ] 2.  const_reverse_iterator rend() const;
+//  *     - [x] 1.  reverse_iterator rbegin();
+//  *     - [x] 2.  const_reverse_iterator rbegin() const;
+//  *     - [x] 1.  reverse_iterator rend();
+//  *     - [x] 2.  const_reverse_iterator rend() const;
 //  *
 //  *   CAPACITY
 //  *     - [ ] 1.  bool empty() const;
