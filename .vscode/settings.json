@@ -68,6 +68,9 @@
 		"ctime": "cpp",
 		"ios": "cpp",
 		"mutex": "cpp",
-		"ratio": "cpp"
+		"ratio": "cpp",
+		"compare": "cpp",
+		"concepts": "cpp",
+		"ranges": "cpp"
 	}
 }

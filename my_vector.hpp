@@ -6,13 +6,14 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/04/04 12:19:03 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/21 20:21:17 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cstddef>
 #include <iostream>
 #include <iterator>
+#include <limits>
 #include <memory>
 
 namespace ft {
@@ -141,6 +142,7 @@ class normal_iterator {
   typedef typename traits_type::pointer pointer;
 
   normal_iterator() : m_current(Iterator_type()) {}
+
   normal_iterator(const Iterator_type& i) : m_current(i) {}
 
   // Forward iterator overloads
@@ -156,7 +158,6 @@ class normal_iterator {
   normal_iterator operator++(int) { return normal_iterator(m_current++); }
 
   // Bidirectional iterator overloads
-
   normal_iterator operator--() {
     --m_current;
     return *this;
@@ -167,12 +168,10 @@ class normal_iterator {
   }
 
   // Random access iterator overloads
-  reference operator[](difference_type n) const {
-    return m_current[n];
-  }
+  reference operator[](difference_type n) const { return m_current[n]; }
 
   normal_iterator& operator+=(difference_type n) {
-    m_current+=n;
+    m_current += n;
     return *this;
   }
 
@@ -181,7 +180,7 @@ class normal_iterator {
   }
 
   normal_iterator& operator-=(difference_type n) {
-    m_current-=n;
+    m_current -= n;
     return *this;
   }
 
@@ -190,17 +189,60 @@ class normal_iterator {
   }
 
   // This base function is a getter since m_current is protected
-  const Iterator_type& base() const
-  {
-    return m_current;
-  }
+  const Iterator_type& base() const { return m_current; }
 };
 
-// Why are parameters "const"?
-template<typename IteratorL, typename IteratorR>
-inline bool operator==(const normal_iterator<IteratorL>& lhs, const normal_iterator<IteratorR>& rhs)
-{
-    return lhs.base() == rhs.base();
+// Non-member overloads
+// Forward iterator non-member overloads
+template <typename IteratorL, typename IteratorR>
+bool operator==(const normal_iterator<IteratorL>& lhs,
+                const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() == rhs.base();
+}
+
+template <typename IteratorL, typename IteratorR>
+bool operator!=(const normal_iterator<IteratorL>& lhs,
+                const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() != rhs.base();
+}
+
+// Random access iterator non-member overloads
+template <typename IteratorL, typename IteratorR>
+bool operator>(const normal_iterator<IteratorL>& lhs,
+               const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() > rhs.base();
+}
+
+template <typename IteratorL, typename IteratorR>
+bool operator<(const normal_iterator<IteratorL>& lhs,
+               const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() < rhs.base();
+}
+
+template <typename IteratorL, typename IteratorR>
+bool operator>=(const normal_iterator<IteratorL>& lhs,
+                const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() <= rhs.base();
+}
+
+template <typename IteratorL, typename IteratorR>
+bool operator<=(const normal_iterator<IteratorL>& lhs,
+                const normal_iterator<IteratorR>& rhs) {
+  return lhs.base() <= rhs.base();
+}
+
+template <typename Iterator>
+typename normal_iterator<Iterator>::difference_type operator-(
+    const normal_iterator<Iterator>& lhs,
+    const normal_iterator<Iterator>& rhs) {
+  return lhs.base() - rhs.base();
+}
+
+template <typename Iterator>
+typename normal_iterator<Iterator>::difference_type operator+(
+    typename normal_iterator<Iterator>::difference_type lhs,
+    const normal_iterator<Iterator>& rhs) {
+  return normal_iterator<Iterator>(rhs.base() + lhs);
 }
 
 template <typename T, typename Allocator = std::allocator<T> >
@@ -215,14 +257,17 @@ class vector {
   typedef const value_type& const_reference;
   typedef T* pointer;
   typedef const T* const_pointer;
-  typedef normal_iterator<value_type> iterator;
-  typedef normal_iterator<const value_type> const_iterator;
+  typedef normal_iterator<pointer> iterator;
+  typedef normal_iterator<const pointer> const_iterator;
   // typedef reverse_iterator<iterator>       reverse_iterator;
   // typedef reverse_iterator<const_iterator> const_reverse_iterator;
 
   bool empty() const;
   size_type size() const;
+
+  // The fuck is this?
   size_type max_size() const { return (get_allocator().max_size()); }
+
   void reserve(size_type new_cap);
   size_type capacity() const;
 
@@ -232,65 +277,141 @@ class vector {
   pointer m_end_of_storage;
   allocator_type m_alloc;
 
-  // Allocates memory of size count using the allocator, then
-  // sets m_start and m_finish
-  pointer allocate(allocator_type& alloc, size_type count) {
-    return alloc.allocate(count);
+  void m_create_storage(size_t count) {
+    // ADD ERROR IF COUNT IS NEGATIVE
+    m_start = m_alloc.allocate(count);
+    m_finish = m_start;
+    m_end_of_storage = m_start + count;
   }
 
-  void vallocate(size_type count) {
-    if (count > max_size()) std::cout << "error......." << std::endl;
-    // this->throw_length_error();
-    this->m_start = allocate(this->m_alloc, count);
-    this->m_finish = this->m_start + count;
+  void m_construct_storage(const T& value) {
+    for (int i = 0; m_start + i != m_end_of_storage; i++) {
+      m_alloc.construct(m_start + i, value);
+    }
+    m_finish = m_end_of_storage;
   }
-
-  // Constructs the elements in the memory allocated and initialize it with
-  // value
-  void construct_at_end(size_type count, const_reference value) {
-    for (size_type i = 0; i < count; i++)
-      this->m_alloc.construct(this->m_start + i, value);
-  }
-
-  template <typename InputIt>
-  void construct_at_end(InputIt firstIt, InputIt lastIt, size_type count) {}
 
  public:
-  // MEMBER FUNCTIONS--
+  // MEMBER FUNCTIONS
   // Constructors
   vector() : m_start(), m_finish(), m_end_of_storage(), m_alloc() {}
+
   explicit vector(const Allocator& alloc)
       : m_start(), m_finish(), m_end_of_storage(), m_alloc(alloc) {}
+
   explicit vector(size_type count, const T& value = T(),
                   const Allocator& alloc = Allocator())
       : m_alloc(alloc) {
-    if (count > 0) {
-      vallocate(count);
-      construct_at_end(count, value);
-    }
+    m_create_storage(count);
+    m_construct_storage(value);
   }
+
   template <typename InputIt>
-  vector(InputIt first, InputIt last, const Allocator& alloc = Allocator()) {
-    size_type count = last - first;
+  vector(typename std::enable_if<!(std::is_integral<InputIt>::value),
+                                 InputIt>::type first,
+         InputIt last, const Allocator& alloc = Allocator())
+      : m_alloc(alloc) {
+    m_create_storage(last - first);
+    for (int i = 0; first != last; ++first, ++i) {
+      *(m_start + i) = *first;
+    }
+    m_finish = m_end_of_storage;
   }
 
-  vector(const vector& other);
-
+  vector(const vector& other) {
+    m_create_storage(other.end() - other.begin());
+    for (size_type i = 0; other.begin() + i != other.end(); ++i) {
+      *(m_start + i) = *(other.begin() + i);
+    }
+    m_finish = m_end_of_storage;
+    m_alloc = other.get_allocator();
+  }
   // Destructors
-  ~vector() {}
+  ~vector() {
+    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+    m_start = nullptr;
+    m_finish = nullptr;
+    m_end_of_storage = nullptr;
+  }
 
   // Other member functions
-  vector& operator=(const vector& other);
+  vector& operator=(const vector& other) {
+    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+    m_create_storage(other.end() - other.begin());
+    for (size_type i = 0; other.begin() + i != other.end(); ++i) {
+      *(m_start + i) = *(other.begin() + i);
+    }
+    m_finish = m_end_of_storage;
+  }
 
-  void assign(size_type count, const T& value);
+  void assign(size_type count, const T& value) {
+    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+    m_create_storage(count);
+    m_construct_storage(value);
+  }
 
   template <class InputIt>
-  void assign(InputIt first, InputIt last) {}
-  allocator_type get_allocator() const {
-    return (allocator_type(this->m_alloc));
+  void assign(typename std::enable_if<!std::is_integral<InputIt>::value,
+                                      InputIt>::type first,
+              InputIt last) {
+    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+    m_create_storage(last - first);
+    for (size_type i = 0; first + i != last; ++i) {
+      *(m_start + i) = *(first + i);
+    }
+    m_finish = m_end_of_storage;
+  }
+
+  allocator_type get_allocator() const { return (this->m_alloc); }
+
+  // Element accesses
+  reference at(size_type pos) {
+    if (pos >= size()) {
+      throw std::out_of_range("at(): position is greater or equal to size");
+    }
+    return *(m_start + pos);
+  }
+
+  const_reference at(size_type pos) const {
+    if (pos >= size()) {
+      throw std::out_of_range("at(): position is greater or equal to size");
+    }
+    return *(m_start + pos);
+  }
+
+  reference front() {
+    return *begin();
+  }
+
+  const_reference front() const {
+    return *begin();
+  }
+
+  reference back() {
+    return *end();
+  }
+
+  const_reference back() const {
+    return *end();
+  }
+
+  T* data() {
+    return m_start;
+  }
+
+  const T* data() const {
+    return m_start;
   }
 
   reference operator[](size_type pos) { return *(this->m_start + pos); }
+
+  iterator begin() { return iterator(this->m_start); }
+
+  const_iterator begin() const { return iterator(this->m_start); }
+
+  iterator end() { return iterator(this->m_finish); }
+
+  const_iterator end() const { return iterator(this->m_finish); }
 };
 }  // namespace ft
 // SOURCE CODE:
@@ -305,36 +426,36 @@ class vector {
 //  *     - [x] 2.  explicit vector( const Allocator& alloc );
 //  *     - [x] 3.  explicit vector( size_type count, const T& value = T(),
 //  const Allocator& alloc = Allocator());
-//  *     - [ ] 5.  template< class InputIt >
+//  *     - [x] 5.  template< class InputIt >
 //  *         vector( InputIt first, InputIt last, const Allocator& alloc =
 //  Allocator() );
-//  *     - [ ] 6.  vector( const vector& other );
+//  *     - [x] 6.  vector( const vector& other );
 //  *
 //  *   DESTRUCTORS
-//  *     - [ ] 1.  ~vector();
+//  *     - [x] 1.  ~vector();
 //  *
 //  *   OTHER MEMBER FUNCTIONS
-//  *     - [ ] 1.  vector& operator=( const vector& other );
-//  *     - [ ] 1.  void assign( size_type count, const T& value );
-//  *     - [ ] 2.  template< class InputIt > void assign( InputIt first,
+//  *     - [x] 1.  vector& operator=( const vector& other );
+//  *     - [x] 1.  void assign( size_type count, const T& value );
+//  *     - [x] 2.  template< class InputIt > void assign( InputIt first,
 //  InputIt last );
-//  *     - [ ] 1.  allocator_type get_allocator() const;
+//  *     - [x] 1.  allocator_type get_allocator() const;
 //  *
 //  *   ELEMENT ACCESS
-//  *     - [ ] 1.  reference at( size_type pos );
-//  *     - [ ] 2.  const_reference at( size_type pos ) const;
-//  *     - [ ] 1.  reference front();
-//  *     - [ ] 2.  const_reference front() const;
-//  *     - [ ] 1.  reference back();
-//  *     - [ ] 2.  const_reference back() const;
-//  *     - [ ] 1.  T* data();
-//  *     - [ ] 2.  const T* data() const;
+//  *     - [x] 1.  reference at( size_type pos );
+//  *     - [x] 2.  const_reference at( size_type pos ) const;
+//  *     - [x] 1.  reference front();
+//  *     - [x] 2.  const_reference front() const;
+//  *     - [x] 1.  reference back();
+//  *     - [x] 2.  const_reference back() const;
+//  *     - [x] 1.  T* data();
+//  *     - [x] 2.  const T* data() const;
 //  *
 //  *   ITERATORS
-//  *     - [ ] 1.  iterator begin();
-//  *     - [ ] 2.  const_iterator begin() const;
-//  *     - [ ] 1.  iterator end();
-//  *     - [ ] 2.  const_iterator end() const;
+//  *     - [x] 1.  iterator begin();
+//  *     - [x] 2.  const_iterator begin() const;
+//  *     - [x] 1.  iterator end();
+//  *     - [x] 2.  const_iterator end() const;
 //  *     - [ ] 1.  reverse_iterator rbegin();
 //  *     - [ ] 2.  const_reverse_iterator rbegin() const;
 //  *     - [ ] 1.  reverse_iterator rend();
