@@ -33,6 +33,7 @@ struct iterator_traits<Tp*> {
   typedef std::ptrdiff_t difference_type;
   typedef Tp* pointer;
   typedef Tp& reference;
+  
 };
 
 // What's the point of having this specialization if it's the same as the prev
@@ -67,6 +68,7 @@ class reverse_iterator : std::iterator<
         typedef typename traits_type::difference_type   difference_type;
         typedef typename traits_type::pointer           pointer;
         typedef typename traits_type::reference         reference;
+
         // MEMBER FUNCTIONS
         reverse_iterator() : m_current() {}
 
@@ -123,10 +125,71 @@ class reverse_iterator : std::iterator<
         }
 
         reverse_iterator& operator+=(difference_type n) {
-            
+            m_current -= n;
+            return *this;
+        }
+
+        reverse_iterator& operator-=(difference_type n) {
+            m_current += n;
+            return *this;
         }
 };
+
+// REVERSE ITERATOR NON-MEMBER FUNCTIONS
+    template<typename Iterator1, typename Iterator2>
+bool operator==(const reverse_iterator<Iterator1>& lhs,
+        const reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() == rhs.base();
+}
+
+template<typename Iterator1, typename Iterator2>
+bool operator!=(const reverse_iterator<Iterator1>& lhs,
+                const reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() != rhs.base();
+}
+
+template<typename Iterator1, typename Iterator2>
+bool operator<(reverse_iterator<Iterator1>& lhs,
+                reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() < rhs.base();
+}
+
+template<typename Iterator1, typename Iterator2>
+bool operator<=(reverse_iterator<Iterator1>& lhs,
+                reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() <= rhs.base();
+}
                                             
+template<typename Iterator1, typename Iterator2>
+bool operator>(reverse_iterator<Iterator1>& lhs,
+                reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() > rhs.base();
+}
+
+template<typename Iterator1, typename Iterator2>
+bool operator>=(reverse_iterator<Iterator1>& lhs,
+                reverse_iterator<Iterator2>& rhs)
+{
+    return lhs.base() >= rhs.base();
+}
+
+template<class Iter>
+reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
+{
+    return it.base() - n;
+}
+
+template<class Iter>
+reverse_iterator<Iter> operator-(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
+{
+    return it.base() + n;
+}
+
 template <typename Iterator_type>
 class normal_iterator {
  protected:
@@ -146,7 +209,9 @@ class normal_iterator {
   normal_iterator(const Iterator_type& i) : m_current(i) {}
 
   // Forward iterator overloads
-  reference operator*() const { return *m_current; }
+  reference operator*() const {
+      return *m_current;
+  }
 
   pointer operator->() const { return m_current; }
 
@@ -249,18 +314,18 @@ template <typename T, typename Allocator = std::allocator<T> >
 class vector {
  public:
   // Member Types
-  typedef T value_type;
-  typedef Allocator allocator_type;
-  typedef std::size_t size_type;
-  typedef std::ptrdiff_t difference_type;
-  typedef value_type& reference;
-  typedef const value_type& const_reference;
-  typedef T* pointer;
-  typedef const T* const_pointer;
-  typedef normal_iterator<pointer> iterator;
-  typedef normal_iterator<const pointer> const_iterator;
-  // typedef reverse_iterator<iterator>       reverse_iterator;
-  // typedef reverse_iterator<const_iterator> const_reverse_iterator;
+  typedef T                                      value_type;
+  typedef Allocator                              allocator_type;
+  typedef std::size_t                            size_type;
+  typedef std::ptrdiff_t                         difference_type;
+  typedef value_type&                            reference;
+  typedef const value_type&                      const_reference;
+  typedef T*                                     pointer;
+  typedef const T*                               const_pointer;
+  typedef normal_iterator<pointer>               iterator;
+  typedef normal_iterator<const_pointer>         const_iterator;
+  typedef ft::reverse_iterator<iterator>         reverse_iterator;
+  typedef ft::reverse_iterator<const_iterator>   const_reverse_iterator;
 
   bool empty() const;
   size_type size() const;
@@ -407,11 +472,20 @@ class vector {
 
   iterator begin() { return iterator(this->m_start); }
 
-  const_iterator begin() const { return iterator(this->m_start); }
+  const_iterator begin() const { return const_iterator(this->m_start); }
 
   iterator end() { return iterator(this->m_finish); }
 
-  const_iterator end() const { return iterator(this->m_finish); }
+  const_iterator end() const { return const_iterator(this->m_finish); }
+
+  reverse_iterator rbegin() {
+    return reverse_iterator(this->m_finish);
+  }
+
+  const_reverse_iterator rbegin() const
+  {
+    return const_reverse_iterator(this->m_finish);
+  }
 };
 }  // namespace ft
 // SOURCE CODE:

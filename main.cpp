@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 //#include "my_vector.hpp"
+#include <array>
 #include <vector>
 #include <iostream>
 #include "my_vector.hpp"

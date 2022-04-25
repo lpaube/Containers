@@ -1,5 +1,5 @@
 containers: main.cpp my_vector.hpp
-	clang++ -g main.cpp -o containers
+	clang++ -std=c++11 -g main.cpp -o containers
 
 clean:
 	rm -rf containers
