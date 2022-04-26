@@ -6,7 +6,7 @@
 /*   By: laube <louis-philippe.aube@hotmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 17:11:36 by laube             #+#    #+#             */
-/*   Updated: 2022/04/21 20:21:17 by laube            ###   ########.fr       */
+/*   Updated: 2022/04/26 15:33:26 by laube            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ struct iterator_traits<Tp*> {
   
 };
 
-// What's the point of having this specialization if it's the same as the prev
-// one?
 template <typename Tp>
 struct iterator_traits<const Tp*> {
   typedef std::random_access_iterator_tag iterator_category;
   typedef Tp value_type;
   typedef std::ptrdiff_t difference_type;
-  typedef Tp* pointer;
-  typedef Tp& reference;
+  typedef const Tp* pointer;
+  typedef const Tp& reference;
 };
+
 
 template<typename Iterator_type>
 class reverse_iterator : std::iterator<
@@ -500,6 +499,9 @@ class vector {
 
   size_type max_size() const {
     return std::numeric_limits<difference_type>::max();
+  }
+  size_type capacity() const {
+    return m_end_of_storage - m_start;
   }
 
   void reserve(size_type new_cap) {
