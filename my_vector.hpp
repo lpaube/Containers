@@ -509,7 +509,6 @@ class vector {
         return;
     if (new_cap > max_size())
         throw std::length_error("Can't reserve vector size: bigger than max_size()");
-
   }
 };
 }  // namespace ft
