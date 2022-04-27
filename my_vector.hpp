@@ -15,6 +15,7 @@
 #include <iterator>
 #include <limits>
 #include <memory>
+#include <algorithm>
 
 namespace ft {
 template <typename Iterator>
@@ -368,6 +369,14 @@ class vector {
     }
   }
 
+  void grow_capacity(size_type new_cap)
+  {
+    while (m_end_of_storage - m_start < new_cap)
+    {
+        reserve((m_end_of_storage - m_start) * 2);
+    }
+  }
+
  public:
   // MEMBER FUNCTIONS
   // Constructors
@@ -540,8 +549,111 @@ class vector {
     m_finish = new_m_finish;
     m_end_of_storage = m_start + new_cap;
   }
+
+  void clear()
+  {
+    destroy_storage(m_start, m_finish);
+    m_finish = m_start;
+  }
+
+  iterator insert(iterator pos, const T& value)
+  {
+    grow_capacity(m_end_of_storage - m_finish + 1);
+    for (iterator ite = end(); ite != begin() && ite != pos; --ite)
+        *ite = *(ite - 1);
+    *pos = value;
+    m_finish++;
+    return pos;
+  }
+
+  void insert(iterator pos, size_type count, const T& value)
+  {
+    grow_capacity(m_end_of_storage - m_finish + count);
+    for (iterator ite = end() + count - 1; ite != pos + count - 1; --ite)
+        *ite = *(ite - count);
+    for (int i = 0; i < count; ++i)
+        *(pos + i) = value;
+    m_finish += count;
+  }
+
+  template <typename InputIt>
+    void insert(iterator pos, typename std::enable_if<!(std::is_integral<InputIt>::value), InputIt>::type first, InputIt last)
+    {
+    grow_capacity(m_end_of_storage - m_finish + (last - first));
+    for (iterator ite = end() + (last - first) - 1; ite != pos + (last - first) - 1; --ite)
+        *ite = *(ite - (last - first));
+    for (int i = 0; i < (last - first); ++i)
+        *(pos + i) = (last - first);
+    m_finish += (last - first);
+    }
+
+  iterator erase(iterator pos)
+  {
+    destroy_storage(pos, pos);
+    for (iterator ite = pos; ite != end(); ++ite)
+    {
+      *ite = *(ite + 1);
+    }
+    m_finish--;
+    return pos;
+  }
+
+  iterator erase(iterator first, iterator last)
+  {
+    destroy_storage(first, last);
+    for (iterator ite = first; ite != end(); ++ite)
+    {
+      *ite = *(ite + (last - first));
+    }
+    m_finish -= (last - first);
+    return first;
+  }
+
+  void push_back(const T& value)
+  {
+    grow_capacity(size() + 1);
+    *m_finish = value;
+    m_finish++;
+  }
+
+  void pop_back()
+  {
+    erase(end() - 1);
+  }
+
+  void resize(size_type count, T value = T())
+  {
+    if (count > size())
+    {
+      grow_capacity(count);
+      for (iterator ite = end(); ite - begin() <= count; ++ite)
+      {
+        *ite = value;
+      }
+      m_finish = begin() + count;
+    }
+    else if (count < size())
+    {
+      destroy_storage(begin() + count, end());
+      m_finish = begin() + count;
+    }
+  }
+  
+  void swap(vector& other)
+  {
+    std::swap(m_start, other.m_start);
+    std::swap(m_finish, other.m_finish);
+    std::swap(m_end_of_storage, other.m_end_of_storage);
+  }
 };
-}  // namespace ft
+
+  template <typename T, typename Alloc>
+bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  
+}
+
+}
 // SOURCE CODE:
 // https://code.woboq.org/gcc/libstdc++-v3/include/bits/stl_vector.h.html
 // DOCUMENTATION:
@@ -597,18 +709,17 @@ class vector {
 //  *     - [x] 1.  size_type capacity() const;
 //  *
 //  *   MODIFIERS
-//  *     - [ ] 1.  void clear();
-//  *     - [ ] 1.  iterator insert( iterator pos, const T& value );
-//  *     - [ ] 3.  void insert( iterator pos, size_type count, const T& value
-//  );
-//  *     - [ ] 4.  template< class InputIt >
-//  *         void insert( iterator pos, InputIt first, InputIt last );
-//  *     - [ ] 1.  iterator erase( iterator pos );
-//  *     - [ ] 2.  iterator erase( iterator first, iterator last );
-//  *     - [ ] 1.  void push_back( const T& value );
-//  *     - [ ] 1.  void pop_back();
-//  *     - [ ] 2.  void resize( size_type count, T value = T() );
-//  *     - [ ] 1.  void swap( vector& other );
+//  *     - [x] 1.  void clear();
+//  *     - [x] 1.  iterator insert( iterator pos, const T& value );
+//  *     - [x] 3.  void insert( iterator pos, size_type count, const T& value);
+//  *     - [x] 4.  template< class InputIt >
+//  *                   void insert( iterator pos, InputIt first, InputIt last );
+//  *     - [x] 1.  iterator erase( iterator pos );
+//  *     - [x] 2.  iterator erase( iterator first, iterator last );
+//  *     - [x] 1.  void push_back( const T& value );
+//  *     - [x] 1.  void pop_back();
+//  *     - [x] 2.  void resize( size_type count, T value = T() );
+//  *     - [x] 1.  void swap( vector& other );
 //  *
 //  * NON-MEMBER FUNCTIONS
 //  *   - [ ] 1.  template< class T, class Alloc >

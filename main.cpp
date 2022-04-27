@@ -56,6 +56,37 @@ int	main(void)
     }
     std::cout << std::endl;
 
+    std::cout << "--------REAL VECTOR: INSERT POS 1, VALUE 36---------" << std::endl;
+    v3.insert(v3.begin() + 1, 36);
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------REAL VECTOR: INSERT POS 1, 5 OF VALUE 99---------" << std::endl;
+    v3.insert(v3.begin() + 1, 5, 99);
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------REAL VECTOR: ERASE POS 0---------" << std::endl;
+    v3.erase(v3.begin());
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+    std::cout << "--------REAL VECTOR: SWAP V2 AND V3---------" << std::endl;
+    v3.swap(v2);
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
 
     // MY VECTOR
     std::cout << "---------MY VECTOR: COUNT AND VALUE CONSTRUCTOR---------" << std::endl;
@@ -87,6 +118,38 @@ int	main(void)
     mv3.reserve(10);
     std::cout << "mv3.capacity(): " << mv3.capacity() << std::endl;
     std::cout << "mv3.size(): " << mv3.size() << std::endl;
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------MY VECTOR: INSERT POS 1, VALUE 36---------" << std::endl;
+    mv3.insert(mv3.begin() + 1, 36);
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------MY VECTOR: INSERT POS 1, 5 OF VALUE 99---------" << std::endl;
+    mv3.insert(mv3.begin() + 1, 5, 99);
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------MY VECTOR: ERASE POS 0---------" << std::endl;
+    mv3.erase(mv3.begin());
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "--------MY VECTOR: SWAP MV2 AND MV3---------" << std::endl;
+    mv3.swap(mv2);
     for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
     {
         std::cout << *ite << std::endl;
