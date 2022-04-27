@@ -342,11 +342,30 @@ class vector {
     m_end_of_storage = m_start + count;
   }
 
-  void m_construct_storage(const T& value) {
+  iterator m_construct_storage(const T& value) {
     for (int i = 0; m_start + i != m_end_of_storage; i++) {
       m_alloc.construct(m_start + i, value);
     }
     m_finish = m_end_of_storage;
+    return m_finish;
+  }
+
+  pointer m_construct_storage(pointer dst, iterator ite1, iterator ite2)
+  {
+      int i = 0;
+      for (; ite1 + i != ite2; ++i)
+      {
+          *(dst + i) = *(ite1 + i);
+      }
+      return dst + i;
+  }
+
+  void destroy_storage(iterator ite1, iterator ite2)
+  {
+    for (; ite1 != ite2; ++ite1)
+    {
+        m_alloc.destroy(ite1.base());
+    }
   }
 
  public:
@@ -509,6 +528,17 @@ class vector {
         return;
     if (new_cap > max_size())
         throw std::length_error("Can't reserve vector size: bigger than max_size()");
+
+    pointer new_m_start;
+    pointer new_m_finish;
+
+    new_m_start = m_alloc.allocate(new_cap);
+    new_m_finish = m_construct_storage(new_m_start, m_start, m_finish);
+    destroy_storage(m_start, m_finish);
+    m_alloc.deallocate(m_start, capacity());
+    m_start = new_m_start;
+    m_finish = new_m_finish;
+    m_end_of_storage = m_start + new_cap;
   }
 };
 }  // namespace ft
@@ -560,11 +590,11 @@ class vector {
 //  *     - [x] 2.  const_reverse_iterator rend() const;
 //  *
 //  *   CAPACITY
-//  *     - [ ] 1.  bool empty() const;
-//  *     - [ ] 1.  size_type size() const;
-//  *     - [ ] 1.  size_type max_size() const;
-//  *     - [ ] 1.  void reserve( size_type new_cap );
-//  *     - [ ] 1.  size_type capacity() const;
+//  *     - [x] 1.  bool empty() const;
+//  *     - [x] 1.  size_type size() const;
+//  *     - [x] 1.  size_type max_size() const;
+//  *     - [x] 1.  void reserve( size_type new_cap );
+//  *     - [x] 1.  size_type capacity() const;
 //  *
 //  *   MODIFIERS
 //  *     - [ ] 1.  void clear();

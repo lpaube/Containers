@@ -39,6 +39,25 @@ int	main(void)
         std::cout << *ite << std::endl;
     }
 
+    std::cout << "--------REAL VECTOR: CAPACITY & SIZE---------" << std::endl;
+    std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
+    std::cout << "v3.size(): " << v3.size() << std::endl;
+    std::cout << "v3.max_size(): " << v3.max_size() << std::endl;
+    std::cout << "v2.max_size(): " << v2.max_size() << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "--------REAL VECTOR: RESERVE 10---------" << std::endl;
+    v3.reserve(10);
+    std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
+    std::cout << "v3.size(): " << v3.size() << std::endl;
+    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
+
+
+    // MY VECTOR
     std::cout << "---------MY VECTOR: COUNT AND VALUE CONSTRUCTOR---------" << std::endl;
     ft::vector<int> mv1(4, 5);
     for (ft::vector<int>::iterator ite = mv1.begin(); ite < mv1.end(); ite++)
@@ -58,4 +77,19 @@ int	main(void)
     {
         std::cout << *ite << std::endl;
     }
+    std::cout << "--------MY VECTOR: CAPACITY & SIZE---------" << std::endl;
+    std::cout << "mv3.capacity(): " << mv3.capacity() << std::endl;
+    std::cout << "mv3.size(): " << mv3.size() << std::endl;
+    std::cout << "mv3.max_size(): " << mv3.max_size() << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "--------MY VECTOR: RESERVE 10---------" << std::endl;
+    mv3.reserve(10);
+    std::cout << "mv3.capacity(): " << mv3.capacity() << std::endl;
+    std::cout << "mv3.size(): " << mv3.size() << std::endl;
+    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
+    {
+        std::cout << *ite << std::endl;
+    }
+    std::cout << std::endl;
 }
