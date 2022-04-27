@@ -650,7 +650,97 @@ class vector {
   template <typename T, typename Alloc>
 bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 {
-  
+  typename vector<T, Alloc>::size_type i = 0;
+  for (; lhs.begin() + i != lhs.end(); ++i)
+  {
+    if (lhs.begin() + i != rhs.begin() + i)
+      return 0;
+  }
+  if (rhs.begin() + i != rhs.end())
+    return 0;
+  return 1;
+}
+
+  template <typename T, typename Alloc>
+bool operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  if (!(lhs == rhs))
+    return 1;
+  return 0;
+}
+
+  template <typename T, typename Alloc>
+bool operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+    return 0;
+  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+    return 1;
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  {
+    if (lhs.begin() + i < rhs.begin() + i)
+      return 1;
+    if (lhs.begin() + i > rhs.begin() + i)
+      return 0;
+  }
+  return 0;
+}
+
+  template <typename T, typename Alloc>
+bool operator<=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+    return 0;
+  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+    return 1;
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  {
+    if (lhs.begin() + i < rhs.begin() + i)
+      return 1;
+    if (lhs.begin() + i > rhs.begin() + i)
+      return 0;
+  }
+  return 1;
+}
+
+  template <typename T, typename Alloc>
+bool operator>(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+    return 0;
+  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+    return 1;
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  {
+    if (lhs.begin() + i > rhs.begin() + i)
+      return 1;
+    if (lhs.begin() + i < rhs.begin() + i)
+      return 0;
+  }
+  return 0;
+}
+
+  template <typename T, typename Alloc>
+bool operator>=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
+{
+  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+    return 0;
+  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+    return 1;
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  {
+    if (lhs.begin() + i > rhs.begin() + i)
+      return 1;
+    if (lhs.begin() + i < rhs.begin() + i)
+      return 0;
+  }
+  return 1;
+}
+
+  template <typename T, typename Alloc>
+void swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)
+{
+  lhs.swap(rhs);
 }
 
 }
@@ -722,23 +812,23 @@ bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs
 //  *     - [x] 1.  void swap( vector& other );
 //  *
 //  * NON-MEMBER FUNCTIONS
-//  *   - [ ] 1.  template< class T, class Alloc >
+//  *   - [x] 1.  template< class T, class Alloc >
 //  *       bool operator==( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 2.  template< class T, class Alloc >
+//  *   - [x] 2.  template< class T, class Alloc >
 //  *       bool operator!=( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 3.  template< class T, class Alloc >
+//  *   - [x] 3.  template< class T, class Alloc >
 //  *       bool operator<( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 4.  template< class T, class Alloc >
+//  *   - [x] 4.  template< class T, class Alloc >
 //  *       bool operator<=( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 5.  template< class T, class Alloc >
+//  *   - [x] 5.  template< class T, class Alloc >
 //  *       bool operator>( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 6.  template< class T, class Alloc >
+//  *   - [x] 6.  template< class T, class Alloc >
 //  *       bool operator>=( const std::vector<T,Alloc>& lhs, const
 //  std::vector<T,Alloc>& rhs );
-//  *   - [ ] 1.  template< class T, class Alloc >
+//  *   - [x] 1.  template< class T, class Alloc >
 //  *       void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );
