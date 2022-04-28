@@ -1,4 +1,4 @@
-containers: main.cpp my_vector.hpp
+containers: main.cpp vector.hpp
 	clang++ -std=c++11 -g main.cpp -o containers
 
 clean:

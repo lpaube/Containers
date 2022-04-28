@@ -13,8 +13,9 @@
 //#include "my_vector.hpp"
 #include <array>
 #include <vector>
+#include <map>
 #include <iostream>
-#include "my_vector.hpp"
+#include "vector.hpp"
 
 int	main(void)
 {
@@ -154,5 +155,19 @@ int	main(void)
     {
         std::cout << *ite << std::endl;
     }
+    std::cout << std::endl;
+
+
+    // REAL MAP
+    std::cout << "----PLAYING WITH MAP------" << std::endl;
+    std::map<std::string, std::string> dict;
+
+    dict["sea"]="The blue mother of the earth";
+
+    std::cout << dict["sea"] << std::endl;
+    std::cout << "\"" << dict["seal"] << "\"" << std::endl;
+
+
+
     std::cout << std::endl;
 }
