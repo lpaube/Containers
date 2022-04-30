@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include <cstddef>
 #include <iostream>
 #include <iterator>

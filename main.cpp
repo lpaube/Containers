@@ -16,6 +16,7 @@
 #include <map>
 #include <iostream>
 #include "vector.hpp"
+#include "map.hpp"
 
 int	main(void)
 {
@@ -159,15 +160,9 @@ int	main(void)
 
 
     // REAL MAP
-    std::cout << "----PLAYING WITH MAP------" << std::endl;
-    std::map<std::string, std::string> dict;
+    std::cout << "----PLAYING WITH BINARY SEARCH TREE------" << std::endl;
 
-    dict["sea"]="The blue mother of the earth";
-
-    std::cout << dict["sea"] << std::endl;
-    std::cout << "\"" << dict["seal"] << "\"" << std::endl;
+    ft::bst<int, std::string> bst1;
 
 
-
-    std::cout << std::endl;
 }
