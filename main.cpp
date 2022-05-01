@@ -160,5 +160,6 @@ int	main(void)
 
 
     // REAL MAP
-    std::cout << "----PLAYING WITH BINARY SEARCH TREE------" << std::endl;
+    std::cout << "----PLAYING WITH MY MAP------" << std::endl;
+    ft::map<int, std::string> map;
 }
