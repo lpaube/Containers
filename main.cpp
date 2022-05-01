@@ -161,8 +161,4 @@ int	main(void)
 
     // REAL MAP
     std::cout << "----PLAYING WITH BINARY SEARCH TREE------" << std::endl;
-
-    ft::bst<int, std::string> bst1;
-
-
 }

@@ -3,3 +3,5 @@ containers: main.cpp vector.hpp
 
 clean:
 	rm -rf containers
+
+re: clean containers
