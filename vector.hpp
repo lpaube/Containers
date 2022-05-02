@@ -213,21 +213,25 @@ class vector {
   const_iterator end() const { return const_iterator(this->m_finish); }
 
   reverse_iterator rbegin() {
-    return reverse_iterator(this->m_finish);
+    if (empty())
+      return reverse_iterator(this->m_finish);
+    return reverse_iterator(this->m_finish - 1);
   }
 
   const_reverse_iterator rbegin() const
   {
-    return const_reverse_iterator(this->m_finish);
+    if (empty())
+      return reverse_iterator(this->m_finish);
+    return const_reverse_iterator(this->m_finish - 1);
   }
 
   reverse_iterator rend() {
-    return reverse_iterator(this->m_start);
+    return reverse_iterator(this->m_start - 1);
   }
 
   const_reverse_iterator rend() const
   {
-    return const_reverse_iterator(this->m_start);
+    return const_reverse_iterator(this->m_start - 1);
   }
 
   bool empty() const {
@@ -246,6 +250,8 @@ class vector {
   }
 
   void reserve(size_type new_cap) {
+    if (new_cap == 0)
+      new_cap = 1;
     if (new_cap <= capacity())
         return;
     if (new_cap > max_size())

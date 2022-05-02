@@ -18,165 +18,84 @@
 #include "vector.hpp"
 #include "map.hpp"
 
+template <typename T>
+void print_vector(ft::vector<T> vec)
+{
+  for (typename ft::vector<T>::iterator ite = vec.begin(); ite != vec.end(); ++ite)
+  {
+    std::cout << "vec elem: " << *ite << std::endl;
+  }
+}
+
+template <typename T>
+void print_vector(std::vector<T> vec)
+{
+  for (typename std::vector<T>::iterator ite = vec.begin(); ite != vec.end(); ++ite)
+  {
+    std::cout << "vec elem: " << *ite << std::endl;
+  }
+}
+
+void test_real_vector()
+{
+  std::cout << "\033[1;40;32m=====REAL VECTOR=====\033[0m" << std::endl;
+  std::cout << std::endl;
+  std::cout << "=====CREATING VECTOR AND INSERTING VALUES: ======" << std::endl;
+  std::vector<int> vec1;
+  for (int i = 0; i < 10; ++i)
+  {
+    vec1.push_back(i * 11);
+  }
+  print_vector(vec1);
+  
+  std::cout << std::endl;
+
+  std::cout << "=====REVERSE ITERATOR: =====" << std::endl;
+  std::vector<int>::reverse_iterator r_ite = vec1.rbegin();
+  for (int i = 0; r_ite + i != vec1.rend(); ++i)
+  {
+    std::cout << "vec elem (rev ite): " << *(r_ite + i) << std::endl;
+  }
+  std::cout << std::endl;
+
+  std::cout << "=====EMPTY VECTOR: =====" << std::endl;
+  std::vector<int> vec2;
+  std::cout << "Is empty? (should be 1): " << vec2.empty() << std::endl;
+  std::cout << "Is empty? (should be 0): " << vec1.empty() << std::endl;
+  std::cout << std::endl;
+}
+
+void test_my_vector()
+{
+  std::cout << "\033[1;40;32m=====MY VECTOR=====\033[0m" << std::endl;
+  std::cout << std::endl;
+  std::cout << "=====CREATING VECTOR AND INSERTING VALUES: ======" << std::endl;
+  ft::vector<int> vec1;
+  for (int i = 0; i < 10; ++i)
+  {
+    vec1.push_back(i * 11);
+  }
+  print_vector(vec1);
+  
+  std::cout << std::endl;
+
+  std::cout << "=====REVERSE ITERATOR: =====" << std::endl;
+  ft::vector<int>::reverse_iterator r_ite = vec1.rbegin();
+  for (int i = 0; r_ite + i != vec1.rend(); ++i)
+  {
+    std::cout << "vec elem (rev ite): " << *(r_ite + i) << std::endl;
+  }
+  std::cout << std::endl;
+
+  std::cout << "=====EMPTY VECTOR: =====" << std::endl;
+  std::vector<int> vec2;
+  std::cout << "Is empty? (should be 1): " << vec2.empty() << std::endl;
+  std::cout << "Is empty? (should be 0): " << vec1.empty() << std::endl;
+  std::cout << std::endl;
+}
+
 int	main(void)
 {
-    std::cout << "--------REAL VECTOR: COUNT AND VALUE CONSTRUCTOR---------" << std::endl;
-    std::vector<int> v1(5, 1);
-    for (std::vector<int>::iterator ite = v1.begin(); ite < v1.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << "--------REAL VECTOR: CONSTRUCTOR BY ITERATORS---------" << std::endl;
-    std::array<double, 5> a1{1.2, 1.6, 3.6, 88.88, 9};
-    std::vector<int> v2(a1.begin() + 1, a1.end());
-    for (std::vector<int>::iterator ite = v2.begin(); ite < v2.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-
-    std::cout << "--------REAL VECTOR: CONSTRUCTOR BY COPY---------" << std::endl;
-    std::vector<int> v3(v2);
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-
-    std::cout << "--------REAL VECTOR: CAPACITY & SIZE---------" << std::endl;
-    std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
-    std::cout << "v3.size(): " << v3.size() << std::endl;
-    std::cout << "v3.max_size(): " << v3.max_size() << std::endl;
-    std::cout << "v2.max_size(): " << v2.max_size() << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "--------REAL VECTOR: RESERVE 10---------" << std::endl;
-    v3.reserve(10);
-    std::cout << "v3.capacity(): " << v3.capacity() << std::endl;
-    std::cout << "v3.size(): " << v3.size() << std::endl;
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------REAL VECTOR: INSERT POS 1, VALUE 36---------" << std::endl;
-    v3.insert(v3.begin() + 1, 36);
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------REAL VECTOR: INSERT POS 1, 5 OF VALUE 99---------" << std::endl;
-    v3.insert(v3.begin() + 1, 5, 99);
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------REAL VECTOR: ERASE POS 0---------" << std::endl;
-    v3.erase(v3.begin());
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-    std::cout << "--------REAL VECTOR: SWAP V2 AND V3---------" << std::endl;
-    v3.swap(v2);
-    for (std::vector<int>::iterator ite = v3.begin(); ite < v3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-
-    // MY VECTOR
-    std::cout << "---------MY VECTOR: COUNT AND VALUE CONSTRUCTOR---------" << std::endl;
-    ft::vector<int> mv1(4, 5);
-    for (ft::vector<int>::iterator ite = mv1.begin(); ite < mv1.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << "---------MY VECTOR: CONSTRUCTOR BY ITERATORS---------" << std::endl;
-    std::array<double, 5> ma1{1.2, 1.6, 3.6, 88.88, 9};
-    ft::vector<int> mv2(ma1.begin() + 1, ma1.end());
-    for (ft::vector<int>::iterator ite = mv2.begin(); ite < mv2.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << "--------MY VECTOR: CONSTRUCTOR BY COPY---------" << std::endl;
-    ft::vector<int> mv3(mv2);
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << "--------MY VECTOR: CAPACITY & SIZE---------" << std::endl;
-    std::cout << "mv3.capacity(): " << mv3.capacity() << std::endl;
-    std::cout << "mv3.size(): " << mv3.size() << std::endl;
-    std::cout << "mv3.max_size(): " << mv3.max_size() << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "--------MY VECTOR: RESERVE 10---------" << std::endl;
-    mv3.reserve(10);
-    std::cout << "mv3.capacity(): " << mv3.capacity() << std::endl;
-    std::cout << "mv3.size(): " << mv3.size() << std::endl;
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------MY VECTOR: INSERT POS 1, VALUE 36---------" << std::endl;
-    mv3.insert(mv3.begin() + 1, 36);
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------MY VECTOR: INSERT POS 1, 5 OF VALUE 99---------" << std::endl;
-    mv3.insert(mv3.begin() + 1, 5, 99);
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------MY VECTOR: ERASE POS 0---------" << std::endl;
-    mv3.erase(mv3.begin());
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--------MY VECTOR: SWAP MV2 AND MV3---------" << std::endl;
-    mv3.swap(mv2);
-    for (ft::vector<int>::iterator ite = mv3.begin(); ite < mv3.end(); ite++)
-    {
-        std::cout << *ite << std::endl;
-    }
-    std::cout << std::endl;
-
-
-    // REAL MAP
-    std::cout << "----PLAYING WITH MY MAP------" << std::endl;
-    ft::map<int, std::string> my_map;
-
-    my_map.insert(std::pair<int, std::string>(2, "test2"));
-    my_map.insert(std::pair<int, std::string>(4, "test4"));
-    my_map.insert(std::pair<int, std::string>(7, "test7"));
-
-    ft::map<int, std::string>::iterator my_ite = my_map.begin();
-    std::cout << "*my_ite: " << my_ite->second << std::endl;
-    std::cout << "*my_ite: " << (++my_ite)->second << std::endl;
-    std::cout << std::endl;
-    
-    std::cout << "----PLAYING WITH REAL MAP------" << std::endl;
-    std::map<int, std::string> rmap;
-    rmap[2] = "test2";
-    rmap[3] = "test3";
-    std::map<int, std::string>::iterator ite = rmap.begin();
-    std::cout << "*ite: " << ite->first << std::endl;
-    std::cout << std::endl;
+  test_real_vector();
+  test_my_vector();
 }

@@ -238,7 +238,14 @@ namespace ft {
           return normal_iterator(m_current - elem);
         }
 
-        // This base function is a getter since m_current is protected
+        /*
+         * Is this "const" overload necessary to work with 
+         * reverse iterators?
+         */
+        normal_iterator operator-(difference_type elem) const {
+          return normal_iterator(m_current - elem);
+        }
+
         const Iterator_type& base() const { return m_current; }
     };
 
