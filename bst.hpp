@@ -14,7 +14,12 @@ namespace ft {
              class bst {
                public:
 
-                 // BST NODE
+                 /* BST Node:
+                  * Used to store the pairs stored in the class map.
+                  * Each node contains a pair, and pointers to its sibblings.
+                  * To traverse a bst, the nodes must be traversed
+                  */
+
                  struct bst_node {
                    typedef typename std::pair<Key, T> data_type;
 
@@ -24,7 +29,14 @@ namespace ft {
                    bst_node* right;
                  };
 
-                 // BST ITERATOR
+                 /*
+                  * BST Iterator:
+                  * It is the iterator returned to map.begin().
+                  * It contains a node of the bst, and uses that node
+                  * to return the pair stored in its variable "data".
+                  * It also contains the bst of which the node is a part of.
+                  */
+
                  class bst_iterator {
                    public:
                      typedef std::pair<Key, T>  data_type;
@@ -36,6 +48,7 @@ namespace ft {
 
                    private:
                      bst_node* node;
+                     bst bst_map;
 
                    public:
 
@@ -43,7 +56,7 @@ namespace ft {
                        node = new bst_node;
                      }
 
-                     explicit bst_iterator(bst_node* x) : node(x) {}
+                     explicit bst_iterator(bst_node* x, bst& bst_map) : node(x), bst_map(bst_map) {}
 
                      data_type operator*() const
                      {
@@ -52,15 +65,23 @@ namespace ft {
 
                      pointer operator->() const
                      {
-                      return &(node->data);
+                       return &(node->data);
                      }
 
                      bst_iterator operator++()
                      {
-                      bst_iterator(node->next_inorder());
+                       return bst_iterator(bst_map.next_inorder(node));
                      }
                  };
 
+                 /*
+                  * Binary Search Tree:
+                  * Used as the underlying algorithm to read/write elements
+                  * from the map class. This class along with its nested classes
+                  * are the hidden implementation of the map class
+                  */
+
+               public:
                  bst_node* root;
 
                  bst() : root() {

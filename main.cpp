@@ -161,7 +161,16 @@ int	main(void)
 
     // REAL MAP
     std::cout << "----PLAYING WITH MY MAP------" << std::endl;
-    ft::map<int, std::string> map;
+    ft::map<int, std::string> my_map;
+
+    my_map.insert(std::pair<int, std::string>(2, "test2"));
+    my_map.insert(std::pair<int, std::string>(4, "test4"));
+    my_map.insert(std::pair<int, std::string>(7, "test7"));
+
+    ft::map<int, std::string>::iterator my_ite = my_map.begin();
+    std::cout << "*my_ite: " << my_ite->second << std::endl;
+    std::cout << "*my_ite: " << (++my_ite)->second << std::endl;
+    std::cout << std::endl;
     
     std::cout << "----PLAYING WITH REAL MAP------" << std::endl;
     std::map<int, std::string> rmap;
@@ -169,4 +178,5 @@ int	main(void)
     rmap[3] = "test3";
     std::map<int, std::string>::iterator ite = rmap.begin();
     std::cout << "*ite: " << ite->first << std::endl;
+    std::cout << std::endl;
 }
