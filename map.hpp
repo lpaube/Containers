@@ -23,10 +23,10 @@ class map {
     typedef  const value_type&                              const_reference;         
     typedef  typename Allocator::pointer                    pointer;                 
     typedef  typename Allocator::const_pointer              const_pointer;           
-    typedef  typename ft::bst_iterator<value_type>       iterator;                
-    typedef  typename ft::bst_iterator<const value_type> const_iterator;
-    typedef  typename ft::reverse_iterator<iterator>        reverse_iterator;        
-    typedef  typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;  
+    typedef  typename bst<Key, T>::bst_iterator             iterator;                
+    //typedef  typename bst<Key, T>::bst_iterator           const_iterator;
+    //typedef  typename ft::reverse_iterator<iterator>      reverse_iterator;        
+    //typedef  typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;  
 
     class value_compare
       : public std::binary_function<value_type, value_type, bool> {

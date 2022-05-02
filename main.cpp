@@ -162,4 +162,11 @@ int	main(void)
     // REAL MAP
     std::cout << "----PLAYING WITH MY MAP------" << std::endl;
     ft::map<int, std::string> map;
+    
+    std::cout << "----PLAYING WITH REAL MAP------" << std::endl;
+    std::map<int, std::string> rmap;
+    rmap[2] = "test2";
+    rmap[3] = "test3";
+    std::map<int, std::string>::iterator ite = rmap.begin();
+    std::cout << "*ite: " << ite->first << std::endl;
 }
