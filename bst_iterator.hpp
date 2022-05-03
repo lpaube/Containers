@@ -21,7 +21,7 @@ namespace ft {
       public:
 
         bst_iterator() {
-node = new bst_node;
+          node = new bst_node;
         }
 
         explicit bst_iterator(bst_node* x) : node(x) {}
