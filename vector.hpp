@@ -83,7 +83,9 @@ class vector {
 
   void grow_capacity(size_type new_cap)
   {
-    while (m_end_of_storage - m_start < new_cap)
+    if (new_cap == 0)
+      new_cap = 1;
+    while (m_end_of_storage - m_start < static_cast<long>(new_cap))
     {
         reserve((m_end_of_storage - m_start) * 2);
     }
@@ -280,9 +282,17 @@ class vector {
     grow_capacity(m_end_of_storage - m_finish + 1);
     for (iterator ite = end(); ite != begin() && ite != pos; --ite)
         *ite = *(ite - 1);
-    *pos = value;
     m_finish++;
-    return pos;
+    if (!pos.base())
+    {
+      *begin() = value;
+      return begin();
+    }
+    else
+    {
+      *pos = value;
+      return pos;
+    }
   }
 
   void insert(iterator pos, size_type count, const T& value)
@@ -290,7 +300,7 @@ class vector {
     grow_capacity(m_end_of_storage - m_finish + count);
     for (iterator ite = end() + count - 1; ite != pos + count - 1; --ite)
         *ite = *(ite - count);
-    for (int i = 0; i < count; ++i)
+    for (size_type i = 0; i < count; ++i)
         *(pos + i) = value;
     m_finish += count;
   }
@@ -345,16 +355,16 @@ class vector {
     if (count > size())
     {
       grow_capacity(count);
-      for (iterator ite = end(); ite - begin() <= count; ++ite)
+      for (iterator ite = end(); static_cast<size_type>(ite - begin()) <= count; ++ite)
       {
         *ite = value;
       }
-      m_finish = begin() + count;
+      m_finish = begin().base() + count;
     }
     else if (count < size())
     {
       destroy_storage(begin() + count, end());
-      m_finish = begin() + count;
+      m_finish = begin().base() + count;
     }
   }
   
