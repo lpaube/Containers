@@ -208,12 +208,12 @@ namespace ft {
         normal_iterator operator++(int) { return normal_iterator(m_current++); }
 
         // Bidirectional iterator overloads
-        normal_iterator operator--() {
+        normal_iterator& operator--() {
           --m_current;
           return *this;
         }
 
-        normal_iterator operator--(int) {
+        normal_iterator& operator--(int) {
           return normal_iterator(m_current--);
         }
 

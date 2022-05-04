@@ -129,23 +129,49 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
-int	main(void)
+int main(void)
 {
-	std::list<TESTED_TYPE> lst;
-	std::list<TESTED_TYPE>::iterator lst_it;
-	for (int i = 1; i < 5; ++i)
-		lst.push_back(i * 3);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(5);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin(), ite = vct.end();
 
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
-	printSize(vct);
+	std::cout << "len: " << (ite - it) << std::endl;
+	for (; it != ite; ++it)
+		*it = (ite - it);
+  std::cout << "---------vct: " << std::endl;
+  print_vector(vct);
+  std::cout << "---------end vct: " << std::endl;
 
-	lst_it = lst.begin();
-	for (int i = 1; lst_it != lst.end(); ++i)
-		*lst_it++ = i * 5;
-	vct.assign(lst.begin(), lst.end());
-	printSize(vct);
+	it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
+	for (int i = 0; it != ite; ++it)
+		*it = ++i * 5;
 
-	vct.insert(vct.end(), lst.rbegin(), lst.rend());
+  std::cout << "---------vct: " << std::endl;
+  print_vector(vct);
+  std::cout << "---------end vct: " << std::endl;
+
+	it = vct.begin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_copy(vct);
+	for (int i = 0; it != ite; ++it)
+		*it = ++i * 7;
+	vct_copy.push_back(42);
+	vct_copy.push_back(21);
+
+	std::cout << "\t-- PART ONE --" << std::endl;
+  std::cout << "---------vct: " << std::endl;
+  print_vector(vct);
+  std::cout << "---------end vct: " << std::endl;
 	printSize(vct);
+	printSize(vct_range);
+	printSize(vct_copy);
+
+	vct = vct_copy;
+	vct_copy = vct_range;
+	vct_range.clear();
+
+	std::cout << "\t-- PART TWO --" << std::endl;
+	printSize(vct);
+	printSize(vct_range);
+	printSize(vct_copy);
 	return (0);
 }

@@ -163,6 +163,7 @@ class vector {
       *(m_start + i) = *(other.begin() + i);
     }
     m_finish = m_end_of_storage;
+    return *this;
   }
 
   void assign(size_type count, const T& value) {
