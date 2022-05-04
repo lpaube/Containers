@@ -301,11 +301,13 @@ class vector {
 
   void insert(iterator pos, size_type count, const T& value)
   {
+    difference_type pos_dist = pos - begin();
+    
     grow_capacity(m_end_of_storage - m_start + count);
-    for (iterator ite = end() + count - 1; ite != pos + count - 1; --ite)
+    for (iterator ite = end() + count - 1; ite != begin() + pos_dist + count - 1; --ite)
         *ite = *(ite - count);
     for (size_type i = 0; i < count; ++i)
-        *(pos + i) = value;
+        *(begin() + pos_dist + i) = value;
     m_finish += count;
   }
 

@@ -15,6 +15,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <list>
 #include "vector.hpp"
 //#include "map.hpp"
 #include "containers_test/srcs/vector/common.hpp"
@@ -130,40 +131,21 @@ void test_my_vector()
 
 int	main(void)
 {
-//  ft::vector<int> vec(5, 2);
-//  vec.get_allocator().destroy(vec.begin().base());
-//  vec.get_allocator().deallocate(vec.begin().base(), 5);
-//  vec.get_allocator().deallocate(vec.begin().base(), 5);
-//
-//
-//  std::cout << "here1" << std::endl;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
+	std::list<TESTED_TYPE> lst;
+	std::list<TESTED_TYPE>::iterator lst_it;
+	for (int i = 1; i < 5; ++i)
+		lst.push_back(i * 3);
 
-	for (unsigned long int i = 0; i < vct.size(); ++i)
-		vct[i] = (vct.size() - i) * 3;
-
-  /*
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
 	printSize(vct);
-	vct2.insert(vct2.end(), 42); // 1
-	vct2.insert(vct2.begin(), 2, 21); // 2
-	printSize(vct2);
 
-	vct2.insert(vct2.end() - 2, 42); // 1
-	printSize(vct2);
+	lst_it = lst.begin();
+	for (int i = 1; lst_it != lst.end(); ++i)
+		*lst_it++ = i * 5;
+	vct.assign(lst.begin(), lst.end());
+	printSize(vct);
 
-  */
-  vct2.insert(vct2.end(), 2, 84); // 2
-  printSize(vct2);
-
-  vct2.resize(4);
-  printSize(vct2);
-
-  vct2.insert(vct2.begin(), vct.begin(), vct.end()); // 3
-	//vct2.insert(vct2.begin(), vct.begin(), vct.end()); // 3
-	vct.clear();
-	printSize(vct2);
-
+	vct.insert(vct.end(), lst.rbegin(), lst.rend());
 	printSize(vct);
 	return (0);
 }
