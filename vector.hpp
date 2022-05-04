@@ -81,6 +81,10 @@ class vector {
     }
   }
 
+  /*
+   * Allocates twice the current storage until total storage is greater
+   * than new_cap. new_cap represents the total storage elements needed
+   */
   void grow_capacity(size_type new_cap)
   {
     if (new_cap == 0)
@@ -264,7 +268,7 @@ class vector {
 
     new_m_start = m_alloc.allocate(new_cap);
     new_m_finish = m_construct_storage(new_m_start, m_start, m_finish);
-    destroy_storage(m_start, m_finish);
+    //destroy_storage(m_start, m_finish);
     m_alloc.deallocate(m_start, capacity());
     m_start = new_m_start;
     m_finish = new_m_finish;
@@ -297,7 +301,7 @@ class vector {
 
   void insert(iterator pos, size_type count, const T& value)
   {
-    grow_capacity(m_end_of_storage - m_finish + count);
+    grow_capacity(m_end_of_storage - m_start + count);
     for (iterator ite = end() + count - 1; ite != pos + count - 1; --ite)
         *ite = *(ite - count);
     for (size_type i = 0; i < count; ++i)
@@ -310,12 +314,13 @@ class vector {
     {
     vector tmp(first, last, m_alloc);
     difference_type dist = last - first;
+    difference_type pos_dist = pos - begin();
 
-    grow_capacity(m_end_of_storage - m_finish + (last - first));
-    for (iterator ite = end() + dist - 1; ite != pos + dist - 1; --ite)
+    grow_capacity(m_end_of_storage - m_start + (last - first));
+    for (iterator ite = end() + dist - 1; ite != begin() + pos_dist + dist - 1; --ite)
         *ite = *(ite - dist);
     for (size_type i = 0; tmp.begin() + i != tmp.end(); ++i)
-      *(pos + i) = *(tmp.begin() + i);
+      *(begin() + pos_dist + i) = *(tmp.begin() + i);
     m_finish += dist;
     }
 

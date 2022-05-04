@@ -130,27 +130,37 @@ void test_my_vector()
 
 int	main(void)
 {
+//  ft::vector<int> vec(5, 2);
+//  vec.get_allocator().destroy(vec.begin().base());
+//  vec.get_allocator().deallocate(vec.begin().base(), 5);
+//  vec.get_allocator().deallocate(vec.begin().base(), 5);
+//
+//
+//  std::cout << "here1" << std::endl;
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2;
 
 	for (unsigned long int i = 0; i < vct.size(); ++i)
 		vct[i] = (vct.size() - i) * 3;
+
+  /*
 	printSize(vct);
-
-	vct2.insert(vct2.end(), 42);
-	vct2.insert(vct2.begin(), 2, 21);
+	vct2.insert(vct2.end(), 42); // 1
+	vct2.insert(vct2.begin(), 2, 21); // 2
 	printSize(vct2);
 
-	vct2.insert(vct2.end() - 2, 42);
+	vct2.insert(vct2.end() - 2, 42); // 1
 	printSize(vct2);
 
-	vct2.insert(vct2.end(), 2, 84);
-	printSize(vct2);
+  */
+  vct2.insert(vct2.end(), 2, 84); // 2
+  printSize(vct2);
 
-	vct2.resize(4);
-	printSize(vct2);
+  vct2.resize(4);
+  printSize(vct2);
 
-	vct2.insert(vct2.begin() + 2, vct.begin(), vct.end());
+  vct2.insert(vct2.begin(), vct.begin(), vct.end()); // 3
+	//vct2.insert(vct2.begin(), vct.begin(), vct.end()); // 3
 	vct.clear();
 	printSize(vct2);
 
