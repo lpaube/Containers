@@ -55,6 +55,14 @@ class vector {
     m_end_of_storage = m_start + count;
   }
 
+  /*
+  template <typename InputIterator>
+  void create_storage_dispatch(InputIterator first, InputIterator last, std::input_iterator_tag)
+  {
+    for (int i = 0; 
+  }
+  */
+
   iterator m_construct_storage(const T& value) {
     for (int i = 0; m_start + i != m_end_of_storage; i++) {
       m_alloc.construct(m_start + i, value);
@@ -115,11 +123,19 @@ class vector {
                                  InputIt>::type first,
          InputIt last, const Allocator& alloc = Allocator())
       : m_alloc(alloc) {
-    m_create_storage(last - first);
+    int i = 0;
+    InputIt tmp = first;
+    while (tmp != last)
+    {
+      i++;
+      tmp++;
+    }
+    m_create_storage(i);
     for (int i = 0; first != last; ++first, ++i) {
       *(m_start + i) = *first;
     }
     m_finish = m_end_of_storage;
+    //typedef typename ft::iterator_traits<InputIt>::iteartor_category IterCategory;
   }
 
   vector(const vector& other) {
@@ -159,11 +175,18 @@ class vector {
   void assign(typename std::enable_if<!std::is_integral<InputIt>::value,
                                       InputIt>::type first,
               InputIt last) {
-    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
-    m_create_storage(last - first);
-    for (size_type i = 0; first + i != last; ++i) {
-      *(m_start + i) = *(first + i);
+    int i = 0;
+    InputIt tmp = first;
+
+    while (tmp != last)
+    {
+      i++;
+      tmp++;
     }
+    m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+    m_create_storage(i);
+    for (size_type i = 0; first != last; ++first, ++i)
+      *(m_start + i) = *(first);
     m_finish = m_end_of_storage;
   }
 
@@ -315,10 +338,13 @@ class vector {
     void insert(iterator pos, typename std::enable_if<!(std::is_integral<InputIt>::value), InputIt>::type first, InputIt last)
     {
     vector tmp(first, last, m_alloc);
-    difference_type dist = last - first;
+    difference_type dist = 0;
     difference_type pos_dist = pos - begin();
 
-    grow_capacity(m_end_of_storage - m_start + (last - first));
+
+    for (InputIt tmp_ite = first; tmp_ite != last; ++tmp_ite)
+      ++dist;
+    grow_capacity(m_end_of_storage - m_start + (dist));
     for (iterator ite = end() + dist - 1; ite != begin() + pos_dist + dist - 1; --ite)
         *ite = *(ite - dist);
     for (size_type i = 0; tmp.begin() + i != tmp.end(); ++i)
