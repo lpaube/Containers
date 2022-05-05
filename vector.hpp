@@ -338,19 +338,8 @@ class vector {
   template <typename InputIt>
     void insert(iterator pos, typename std::enable_if<!(std::is_integral<InputIt>::value), InputIt>::type first, InputIt last)
     {
-    vector tmp(first, last, m_alloc);
-    difference_type dist = 0;
-    difference_type pos_dist = pos - begin();
-
-
-    for (InputIt tmp_ite = first; tmp_ite != last; ++tmp_ite)
-      ++dist;
-    grow_capacity(m_end_of_storage - m_start + (dist));
-    for (iterator ite = end() + dist - 1; ite != begin() + pos_dist + dist - 1; --ite)
-        *ite = *(ite - dist);
-    for (size_type i = 0; tmp.begin() + i != tmp.end(); ++i)
-      *(begin() + pos_dist + i) = *(tmp.begin() + i);
-    m_finish += dist;
+      typedef typename iterator_traits::iterator_category;
+      insert_dispatch(pos, first, last, std::iterator_category(first);
     }
 
   iterator erase(iterator pos)

@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 //#include "my_vector.hpp"
+#include <sstream>
+#include <iterator>
 #include <array>
 #include <vector>
 #include <map>
@@ -26,9 +28,11 @@
 template <typename T>
 void print_vector(ft::vector<T> vec)
 {
-  for (typename ft::vector<T>::iterator ite = vec.begin(); ite != vec.end(); ++ite)
+  int i = 0;
+
+  for (typename ft::vector<T>::iterator ite = vec.begin(); ite != vec.end(); ++ite, ++i)
   {
-    std::cout << "vec elem: " << *ite << std::endl;
+    std::cout << "Vec elem " << i << ": " << *ite << std::endl;
   }
 }
 
@@ -131,47 +135,19 @@ void test_my_vector()
 
 int main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(5);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::iterator it = vct.begin(), ite = vct.end();
+  std::cout << std::endl << "========Real test======" << std::endl;
+  std::istringstream str1("1 2 3 4 5 6");
+  std::istreambuf_iterator<char> real_it(str1), real_end;
+  std::vector<char> real_vec1(45, 'A');
+  real_vec1.insert(real_vec1.begin() + 20, real_it, real_end);
+  print_vector(real_vec1);
 
-	std::cout << "len: " << (ite - it) << std::endl;
-	for (; it != ite; ++it)
-		*it = (ite - it);
-  std::cout << "---------vct: " << std::endl;
-  print_vector(vct);
-  std::cout << "---------end vct: " << std::endl;
 
-	it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_range(it, --(--ite));
-	for (int i = 0; it != ite; ++it)
-		*it = ++i * 5;
+  std::cout << std::endl << "======My test=======" << std::endl;
 
-  std::cout << "---------vct: " << std::endl;
-  print_vector(vct);
-  std::cout << "---------end vct: " << std::endl;
-
-	it = vct.begin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_copy(vct);
-	for (int i = 0; it != ite; ++it)
-		*it = ++i * 7;
-	vct_copy.push_back(42);
-	vct_copy.push_back(21);
-
-	std::cout << "\t-- PART ONE --" << std::endl;
-  std::cout << "---------vct: " << std::endl;
-  print_vector(vct);
-  std::cout << "---------end vct: " << std::endl;
-	printSize(vct);
-	printSize(vct_range);
-	printSize(vct_copy);
-
-	vct = vct_copy;
-	vct_copy = vct_range;
-	vct_range.clear();
-
-	std::cout << "\t-- PART TWO --" << std::endl;
-	printSize(vct);
-	printSize(vct_range);
-	printSize(vct_copy);
-	return (0);
+  std::istringstream str2("1 2 3 4 5 6");
+  std::istreambuf_iterator<char> it(str2), end;
+  ft::vector<char> my_vec1(45, 'A');
+  my_vec1.insert(my_vec1.begin() + 20, it, end);
+  print_vector(my_vec1);
 }
