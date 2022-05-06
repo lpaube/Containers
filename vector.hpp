@@ -126,20 +126,6 @@ class vector {
         m_create_storage(1);
         typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
       insert_dispatch(begin(), first, last, Iter_category());
-        /*
-    int i = 0;
-    InputIt tmp = first;
-    while (tmp != last)
-    {
-      i++;
-      tmp++;
-    }
-    m_create_storage(i);
-    for (int i = 0; first != last; ++first, ++i) {
-      *(m_start + i) = *first;
-    }
-    m_finish = m_end_of_storage;
-    */
   }
 
   vector(const vector& other) {
@@ -309,24 +295,6 @@ class vector {
     m_finish = m_start;
   }
 
-  iterator insert(iterator pos, const T& value)
-  {
-    grow_capacity(m_end_of_storage - m_finish + 1);
-    for (iterator ite = end(); ite != begin() && ite != pos; --ite)
-        *ite = *(ite - 1);
-    m_finish++;
-    if (!pos.base())
-    {
-      *begin() = value;
-      return begin();
-    }
-    else
-    {
-      *pos = value;
-      return pos;
-    }
-  }
-
   template <typename InputIt>
   void insert_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
   {
@@ -351,7 +319,7 @@ class vector {
 
     for (InputIt tmp = first; tmp != last; ++tmp)
       ++count;
-    m_create_storage(count);
+    grow_capacity(count + offset);
     for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
         *ite = *(ite - count);
     for (; first != last; ++first, ++offset)
@@ -369,6 +337,24 @@ class vector {
     for (size_type i = 0; i < count; ++i)
         *(begin() + offset + i) = value;
     m_finish += count;
+  }
+
+  iterator insert(iterator pos, const T& value)
+  {
+    grow_capacity(m_end_of_storage - m_finish + 1);
+    for (iterator ite = end(); ite != begin() && ite != pos; --ite)
+        *ite = *(ite - 1);
+    m_finish++;
+    if (!pos.base())
+    {
+      *begin() = value;
+      return begin();
+    }
+    else
+    {
+      *pos = value;
+      return pos;
+    }
   }
 
   template <typename InputIt>

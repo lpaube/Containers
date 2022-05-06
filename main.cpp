@@ -135,30 +135,21 @@ void test_my_vector()
 
 int main(void)
 {
-  std::cout << std::endl << "========Real test======" << std::endl;
-  std::istringstream str1("1 2 3 4 5 6");
-  std::istreambuf_iterator<char> real_it(str1), real_end;
-  std::vector<char> real_vec1(4, 'A');
-  real_vec1.insert(real_vec1.begin() + 2, real_it, real_end);
-  print_vector(real_vec1);
+	std::list<TESTED_TYPE> lst;
+	std::list<TESTED_TYPE>::iterator lst_it;
+	for (int i = 1; i < 5; ++i)
+		lst.push_back(i * 3);
 
-  std::cout << std::endl << "========Real test: Constructor======" << std::endl;
-  std::istringstream realstr2("1 2 3 4 5 6");
-  std::istreambuf_iterator<char> real_ite(realstr2), real_ende;
-  std::vector<char> real_vec2(real_ite, real_ende);
-  print_vector(real_vec2);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(lst.begin(), lst.end());
+	printSize(vct);
 
-  std::cout << std::endl << "======My test=======" << std::endl;
+	lst_it = lst.begin();
+	for (int i = 1; lst_it != lst.end(); ++i)
+		*lst_it++ = i * 5;
+	vct.assign(lst.begin(), lst.end());
+	printSize(vct);
 
-  std::istringstream str2("1 2 3 4 5 6");
-  std::istreambuf_iterator<char> it(str2), end;
-  ft::vector<char> my_vec1(4, 'A');
-  my_vec1.insert(my_vec1.begin() + 2, it, end);
-  print_vector(my_vec1);
-
-  std::cout << std::endl << "========My test: Constructor======" << std::endl;
-  std::istringstream mystr2("1 2 3 4 5 6");
-  std::istreambuf_iterator<char> my_ite(mystr2), my_ende;
-  ft::vector<char> my_vec2(my_ite, my_ende);
-  print_vector(my_vec2);
+	vct.insert(vct.end(), lst.rbegin(), lst.rend());
+	printSize(vct);
+	return (0);
 }
