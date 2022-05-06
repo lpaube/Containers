@@ -138,17 +138,27 @@ int main(void)
   std::cout << std::endl << "========Real test======" << std::endl;
   std::istringstream str1("1 2 3 4 5 6");
   std::istreambuf_iterator<char> real_it(str1), real_end;
-  std::vector<char> real_vec1(45, 'A');
-  real_vec1.insert(real_vec1.begin() + 20, real_it, real_end);
+  std::vector<char> real_vec1(4, 'A');
+  real_vec1.insert(real_vec1.begin() + 2, real_it, real_end);
   print_vector(real_vec1);
 
+  std::cout << std::endl << "========Real test: Constructor======" << std::endl;
+  std::istringstream realstr2("1 2 3 4 5 6");
+  std::istreambuf_iterator<char> real_ite(realstr2), real_ende;
+  std::vector<char> real_vec2(real_ite, real_ende);
+  print_vector(real_vec2);
 
   std::cout << std::endl << "======My test=======" << std::endl;
 
   std::istringstream str2("1 2 3 4 5 6");
   std::istreambuf_iterator<char> it(str2), end;
   ft::vector<char> my_vec1(4, 'A');
-  std::cout << "*my_vec1.begin()" << *(my_vec1.begin()) << std::endl;
-  print_vector(my_vec1);
   my_vec1.insert(my_vec1.begin() + 2, it, end);
+  print_vector(my_vec1);
+
+  std::cout << std::endl << "========My test: Constructor======" << std::endl;
+  std::istringstream mystr2("1 2 3 4 5 6");
+  std::istreambuf_iterator<char> my_ite(mystr2), my_ende;
+  ft::vector<char> my_vec2(my_ite, my_ende);
+  print_vector(my_vec2);
 }

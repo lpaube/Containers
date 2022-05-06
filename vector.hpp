@@ -123,6 +123,7 @@ class vector {
                                  InputIt>::type first,
          InputIt last, const Allocator& alloc = Allocator())
       : m_alloc(alloc) {
+        m_create_storage(1);
         typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
       insert_dispatch(begin(), first, last, Iter_category());
         /*
@@ -350,6 +351,7 @@ class vector {
 
     for (InputIt tmp = first; tmp != last; ++tmp)
       ++count;
+    m_create_storage(count);
     for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
         *ite = *(ite - count);
     for (; first != last; ++first, ++offset)
