@@ -123,6 +123,9 @@ class vector {
                                  InputIt>::type first,
          InputIt last, const Allocator& alloc = Allocator())
       : m_alloc(alloc) {
+        typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+      insert_dispatch(begin(), first, last, Iter_category());
+        /*
     int i = 0;
     InputIt tmp = first;
     while (tmp != last)
@@ -135,7 +138,7 @@ class vector {
       *(m_start + i) = *first;
     }
     m_finish = m_end_of_storage;
-    //typedef typename ft::iterator_traits<InputIt>::iteartor_category IterCategory;
+    */
   }
 
   vector(const vector& other) {
@@ -323,23 +326,54 @@ class vector {
     }
   }
 
+  template <typename InputIt>
+  void insert_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
+  {
+    difference_type offset = pos - begin();
+    vector<value_type> tmp(begin(), end());
+    iterator ite = tmp.begin();
+
+    clear();
+    for (difference_type i = 0; i < offset; ++i, ++ite)
+      push_back(*ite);
+    for (; first != last; ++first)
+      push_back(*first);
+    for (; ite != tmp.end(); ++ite)
+      push_back(*ite);
+  }
+
+  template <typename InputIt>
+  void insert_dispatch(iterator pos, InputIt first, InputIt last, std::forward_iterator_tag)
+  {
+    difference_type offset = pos - begin();
+    difference_type count = 0;
+
+    for (InputIt tmp = first; tmp != last; ++tmp)
+      ++count;
+    for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
+        *ite = *(ite - count);
+    for (; first != last; ++first, ++offset)
+      *(begin() + offset) = *first;
+    m_finish += count;
+  }
+
   void insert(iterator pos, size_type count, const T& value)
   {
-    difference_type pos_dist = pos - begin();
+    difference_type offset = pos - begin();
     
     grow_capacity(m_end_of_storage - m_start + count);
-    for (iterator ite = end() + count - 1; ite != begin() + pos_dist + count - 1; --ite)
+    for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
         *ite = *(ite - count);
     for (size_type i = 0; i < count; ++i)
-        *(begin() + pos_dist + i) = value;
+        *(begin() + offset + i) = value;
     m_finish += count;
   }
 
   template <typename InputIt>
     void insert(iterator pos, typename std::enable_if<!(std::is_integral<InputIt>::value), InputIt>::type first, InputIt last)
     {
-      typedef typename iterator_traits::iterator_category;
-      insert_dispatch(pos, first, last, std::iterator_category(first);
+      typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+      insert_dispatch(pos, first, last, Iter_category());
     }
 
   iterator erase(iterator pos)

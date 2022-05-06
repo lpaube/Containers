@@ -147,7 +147,8 @@ int main(void)
 
   std::istringstream str2("1 2 3 4 5 6");
   std::istreambuf_iterator<char> it(str2), end;
-  ft::vector<char> my_vec1(45, 'A');
-  my_vec1.insert(my_vec1.begin() + 20, it, end);
+  ft::vector<char> my_vec1(4, 'A');
+  std::cout << "*my_vec1.begin()" << *(my_vec1.begin()) << std::endl;
   print_vector(my_vec1);
+  my_vec1.insert(my_vec1.begin() + 2, it, end);
 }
