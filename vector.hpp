@@ -19,6 +19,7 @@
 #include <memory>
 #include <algorithm>
 #include "iterator.hpp"
+#include "utils.hpp"
 
 namespace ft {
 
@@ -38,9 +39,6 @@ class vector {
   typedef normal_iterator<const_pointer>         const_iterator;
   typedef ft::reverse_iterator<iterator>         reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>   const_reverse_iterator;
-
-  // The fuck is this?
-  //size_type max_size() const { return (get_allocator().max_size()); }
 
  private:
   pointer m_start;
