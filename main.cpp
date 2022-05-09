@@ -135,14 +135,6 @@ void test_my_vector()
 
 int		main(void)
 {
-  /*
-  int size = 5;
-  std::vector<int> vec(size);
-  std::vector<int>::reverse_iterator it = vec.rbegin();
-	for (int i = 0; i < size; ++i)
-		it[i] = (size - i) * 5;
-  print_vector(vec);
-  */
 	const int size = 5;
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
 	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();

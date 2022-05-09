@@ -259,10 +259,6 @@ namespace ft {
         return reverse_iterator(m_current + n);
       }
 
-      difference_type operator-(reverse_iterator n) const {
-        return m_current + n;
-      }
-
       reverse_iterator& operator+=(difference_type n) {
         m_current -= n;
         return *this;
@@ -328,4 +324,20 @@ namespace ft {
     {
       return it.base() + n;
     }
+
+  template <typename Iterator>
+    typename reverse_iterator<Iterator>::difference_type
+      operator-(const reverse_iterator<Iterator>& lhs,
+                const reverse_iterator<Iterator>& rhs)
+      {
+        return (rhs.base() - lhs.base());
+      }
+
+  template <typename Iter1, typename Iter2>
+    typename reverse_iterator<Iter1>::difference_type
+      operator-(const reverse_iterator<Iter1>& lhs,
+                const reverse_iterator<Iter2>& rhs)
+      {
+        return (rhs.base() - lhs.base());
+      }
 }
