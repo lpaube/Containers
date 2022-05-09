@@ -117,7 +117,7 @@ class vector {
   }
 
   template <typename InputIt>
-  vector(typename std::enable_if<!(std::is_integral<InputIt>::value),
+  vector(typename enable_if<!(is_integral<InputIt>::value),
                                  InputIt>::type first,
          InputIt last, const Allocator& alloc = Allocator())
       : m_alloc(alloc) {
@@ -161,7 +161,7 @@ class vector {
   }
 
   template <class InputIt>
-  void assign(typename std::enable_if<!std::is_integral<InputIt>::value,
+  void assign(typename enable_if<!is_integral<InputIt>::value,
                                       InputIt>::type first,
               InputIt last) {
     int i = 0;
@@ -356,7 +356,7 @@ class vector {
   }
 
   template <typename InputIt>
-    void insert(iterator pos, typename std::enable_if<!(std::is_integral<InputIt>::value), InputIt>::type first, InputIt last)
+    void insert(iterator pos, typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first, InputIt last)
     {
       typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
       insert_dispatch(pos, first, last, Iter_category());

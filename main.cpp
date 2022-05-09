@@ -23,7 +23,7 @@
 #include "containers_test/srcs/vector/common.hpp"
 
 #define TESTED_NAMESPACE ft
-#define TESTED_TYPE std::string
+#define TESTED_TYPE int
 
 template <typename T>
 void print_vector(ft::vector<T> vec)
@@ -143,31 +143,40 @@ void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
 
 int		main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(10);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
 
 	for (unsigned long int i = 0; i < vct.size(); ++i)
-		vct[i] = std::string((vct.size() - i), i + 65);
+		vct[i] = (vct.size() - i) * 3;
+	for (unsigned long int i = 0; i < vct_two.size(); ++i)
+		vct_two[i] = (vct_two.size() - i) * 5;
 	printSize(vct);
+	printSize(vct_two);
 
-	checkErase(vct, vct.erase(vct.begin() + 2));
+	vct_three.assign(vct.begin(), vct.end());
+	vct.assign(vct_two.begin(), vct_two.end());
+	vct_two.assign(2, 42);
+	vct_four.assign(4, 21);
 
-	checkErase(vct, vct.erase(vct.begin()));
-	checkErase(vct, vct.erase(vct.end() - 1));
+	std::cout << "\t### After assign(): ###" << std::endl;
 
-	checkErase(vct, vct.erase(vct.begin(), vct.begin() + 3));
-	checkErase(vct, vct.erase(vct.end() - 3, vct.end() - 1));
-
-	vct.push_back("Hello");
-	vct.push_back("Hi there");
 	printSize(vct);
-	checkErase(vct, vct.erase(vct.end() - 3, vct.end()));
+	printSize(vct_two);
+	printSize(vct_three);
+	printSize(vct_four);
 
-	vct.push_back("ONE");
-	vct.push_back("TWO");
-	vct.push_back("THREE");
-	vct.push_back("FOUR");
+	vct_four.assign(6, 84);
+	printSize(vct_four);
+
+	std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
+
+	vct.assign(5, 53);
+	vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
+
 	printSize(vct);
-	checkErase(vct, vct.erase(vct.begin(), vct.end()));
+	printSize(vct_two);
 
 	return (0);
 }
