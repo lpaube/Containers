@@ -3,6 +3,10 @@
 #include <iterator>
 
 namespace ft {
+  /*
+   * normal_iterator passes a pointer to type T (type T is passed by vector).
+   * reverse_iterator passes normal_iterator<pointer> (as passed by vector).
+   */
   template <typename Iterator>
     struct iterator_traits {
       typedef typename Iterator::iterator_category iterator_category;
@@ -12,6 +16,9 @@ namespace ft {
       typedef typename Iterator::reference reference;
     };
 
+  /*
+   * normal_iterator passes a pointer to type T (type T is passed by vector).
+   */
   template <typename Tp>
     struct iterator_traits<Tp*> {
       typedef std::random_access_iterator_tag iterator_category;
@@ -19,9 +26,12 @@ namespace ft {
       typedef std::ptrdiff_t difference_type;
       typedef Tp* pointer;
       typedef Tp& reference;
-
     };
 
+  /*
+   * Gets used when a normal_iterator is created with a const_pointer (i.e. cbegin() and cend())
+   * const Tp* is a pointer to a const T passed from vector.
+   */
   template <typename Tp>
     struct iterator_traits<const Tp*> {
       typedef std::random_access_iterator_tag iterator_category;
@@ -31,7 +41,139 @@ namespace ft {
       typedef const Tp& reference;
     };
 
+  /*
+   * Iterator_type is a pointer to the type T passed to vector.
+   */
+  template <typename Iterator_type>
+    class normal_iterator {
+      protected:
+        Iterator_type m_current;
 
+        typedef iterator_traits<Iterator_type> traits_type;
+
+      public:
+        typedef typename traits_type::iterator_category iterator_category;
+        typedef typename traits_type::value_type value_type;
+        typedef typename traits_type::difference_type difference_type;
+        typedef typename traits_type::reference reference;
+        typedef typename traits_type::pointer pointer;
+
+        normal_iterator() : m_current(Iterator_type()) {}
+
+        normal_iterator(const Iterator_type& i) : m_current(i) {}
+
+        // Forward iterator overloads
+        reference operator*() const {
+          return *m_current;
+        }
+
+        pointer operator->() const { return m_current; }
+
+        normal_iterator& operator++() {
+          ++m_current;
+          return *this;
+        }
+
+        normal_iterator operator++(int) { return normal_iterator(m_current++); }
+
+        // Bidirectional iterator overloads
+        normal_iterator& operator--() {
+          --m_current;
+          return *this;
+        }
+
+        normal_iterator& operator--(int) {
+          return normal_iterator(m_current--);
+        }
+
+        // Random access iterator overloads
+        reference operator[](difference_type n) const { return m_current[n]; }
+
+        normal_iterator& operator+=(difference_type n) {
+          m_current += n;
+          return *this;
+        }
+
+        normal_iterator operator+(difference_type elem) {
+          return normal_iterator(m_current + elem);
+        }
+
+        normal_iterator& operator-=(difference_type n) {
+          m_current -= n;
+          return *this;
+        }
+
+        normal_iterator operator-(difference_type elem) {
+          return normal_iterator(m_current - elem);
+        }
+
+        /*
+         * Is this "const" overload necessary to work with 
+         * reverse iterators?
+         */
+        normal_iterator operator-(difference_type elem) const {
+          return normal_iterator(m_current - elem);
+        }
+
+        const Iterator_type& base() const { return m_current; }
+    };
+
+  // Non-member overloads
+  // Forward iterator non-member overloads
+  template <typename IteratorL, typename IteratorR>
+    bool operator==(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() == rhs.base();
+    }
+
+  template <typename IteratorL, typename IteratorR>
+    bool operator!=(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() != rhs.base();
+    }
+
+  // Random access iterator non-member overloads
+  template <typename IteratorL, typename IteratorR>
+    bool operator>(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() > rhs.base();
+    }
+
+  template <typename IteratorL, typename IteratorR>
+    bool operator<(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() < rhs.base();
+    }
+
+  template <typename IteratorL, typename IteratorR>
+    bool operator>=(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() <= rhs.base();
+    }
+
+  template <typename IteratorL, typename IteratorR>
+    bool operator<=(const normal_iterator<IteratorL>& lhs,
+        const normal_iterator<IteratorR>& rhs) {
+      return lhs.base() <= rhs.base();
+    }
+
+  template <typename Iterator>
+    typename normal_iterator<Iterator>::difference_type operator-(
+        const normal_iterator<Iterator>& lhs,
+        const normal_iterator<Iterator>& rhs) {
+      return lhs.base() - rhs.base();
+    }
+
+  template <typename Iterator>
+    typename normal_iterator<Iterator>::difference_type operator+(
+        typename normal_iterator<Iterator>::difference_type lhs,
+        const normal_iterator<Iterator>& rhs) {
+      return normal_iterator<Iterator>(rhs.base() + lhs);
+    }
+
+  /*
+   * Iterator_type is normal_iterator<pointer> passed by vector
+   */
   template<typename Iterator_type>
     class reverse_iterator : std::iterator<
                              typename iterator_traits<Iterator_type>::iterator_category,
@@ -173,132 +315,5 @@ namespace ft {
     reverse_iterator<Iter> operator-(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
     {
       return it.base() + n;
-    }
-
-  template <typename Iterator_type>
-    class normal_iterator {
-      protected:
-        Iterator_type m_current;
-
-        typedef iterator_traits<Iterator_type> traits_type;
-
-      public:
-        typedef typename traits_type::iterator_category iterator_category;
-        typedef typename traits_type::value_type value_type;
-        typedef typename traits_type::difference_type difference_type;
-        typedef typename traits_type::reference reference;
-        typedef typename traits_type::pointer pointer;
-
-        normal_iterator() : m_current(Iterator_type()) {}
-
-        normal_iterator(const Iterator_type& i) : m_current(i) {}
-
-        // Forward iterator overloads
-        reference operator*() const {
-          return *m_current;
-        }
-
-        pointer operator->() const { return m_current; }
-
-        normal_iterator& operator++() {
-          ++m_current;
-          return *this;
-        }
-
-        normal_iterator operator++(int) { return normal_iterator(m_current++); }
-
-        // Bidirectional iterator overloads
-        normal_iterator& operator--() {
-          --m_current;
-          return *this;
-        }
-
-        normal_iterator& operator--(int) {
-          return normal_iterator(m_current--);
-        }
-
-        // Random access iterator overloads
-        reference operator[](difference_type n) const { return m_current[n]; }
-
-        normal_iterator& operator+=(difference_type n) {
-          m_current += n;
-          return *this;
-        }
-
-        normal_iterator operator+(difference_type elem) {
-          return normal_iterator(m_current + elem);
-        }
-
-        normal_iterator& operator-=(difference_type n) {
-          m_current -= n;
-          return *this;
-        }
-
-        normal_iterator operator-(difference_type elem) {
-          return normal_iterator(m_current - elem);
-        }
-
-        /*
-         * Is this "const" overload necessary to work with 
-         * reverse iterators?
-         */
-        normal_iterator operator-(difference_type elem) const {
-          return normal_iterator(m_current - elem);
-        }
-
-        const Iterator_type& base() const { return m_current; }
-    };
-
-  // Non-member overloads
-  // Forward iterator non-member overloads
-  template <typename IteratorL, typename IteratorR>
-    bool operator==(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() == rhs.base();
-    }
-
-  template <typename IteratorL, typename IteratorR>
-    bool operator!=(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() != rhs.base();
-    }
-
-  // Random access iterator non-member overloads
-  template <typename IteratorL, typename IteratorR>
-    bool operator>(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() > rhs.base();
-    }
-
-  template <typename IteratorL, typename IteratorR>
-    bool operator<(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() < rhs.base();
-    }
-
-  template <typename IteratorL, typename IteratorR>
-    bool operator>=(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() <= rhs.base();
-    }
-
-  template <typename IteratorL, typename IteratorR>
-    bool operator<=(const normal_iterator<IteratorL>& lhs,
-        const normal_iterator<IteratorR>& rhs) {
-      return lhs.base() <= rhs.base();
-    }
-
-  template <typename Iterator>
-    typename normal_iterator<Iterator>::difference_type operator-(
-        const normal_iterator<Iterator>& lhs,
-        const normal_iterator<Iterator>& rhs) {
-      return lhs.base() - rhs.base();
-    }
-
-  template <typename Iterator>
-    typename normal_iterator<Iterator>::difference_type operator+(
-        typename normal_iterator<Iterator>::difference_type lhs,
-        const normal_iterator<Iterator>& rhs) {
-      return normal_iterator<Iterator>(rhs.base() + lhs);
     }
 }

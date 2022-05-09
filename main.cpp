@@ -23,7 +23,7 @@
 #include "containers_test/srcs/vector/common.hpp"
 
 #define TESTED_NAMESPACE ft
-#define TESTED_TYPE int
+#define TESTED_TYPE std::string
 
 template <typename T>
 void print_vector(ft::vector<T> vec)
@@ -133,50 +133,13 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
-void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,
-					TESTED_NAMESPACE::vector<TESTED_TYPE>::const_iterator const &it)
-{
-	static int i = 0;
-	std::cout << "[" << i++ << "] " << "erase: " << it - vct.begin() << std::endl;
-	printSize(vct);
-}
-
 int		main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(7);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_two(4);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_three;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct_four;
+  std::vector<int> real_vec(4, 2);
+  std::vector<int>::const_iterator real_ite = real_vec.begin();
+  (void)real_ite;
 
-	for (unsigned long int i = 0; i < vct.size(); ++i)
-		vct[i] = (vct.size() - i) * 3;
-	for (unsigned long int i = 0; i < vct_two.size(); ++i)
-		vct_two[i] = (vct_two.size() - i) * 5;
-	printSize(vct);
-	printSize(vct_two);
-
-	vct_three.assign(vct.begin(), vct.end());
-	vct.assign(vct_two.begin(), vct_two.end());
-	vct_two.assign(2, 42);
-	vct_four.assign(4, 21);
-
-	std::cout << "\t### After assign(): ###" << std::endl;
-
-	printSize(vct);
-	printSize(vct_two);
-	printSize(vct_three);
-	printSize(vct_four);
-
-	vct_four.assign(6, 84);
-	printSize(vct_four);
-
-	std::cout << "\t### assign() on enough capacity and low size: ###" << std::endl;
-
-	vct.assign(5, 53);
-	vct_two.assign(vct_three.begin(), vct_three.begin() + 3);
-
-	printSize(vct);
-	printSize(vct_two);
-
-	return (0);
+  ft::vector<int> vec(4, 2);
+  ft::vector<int>::iterator ite = vec.begin();
+  (void)ite;
 }
