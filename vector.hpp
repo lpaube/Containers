@@ -35,8 +35,8 @@ class vector {
   typedef const value_type&                      const_reference;
   typedef T*                                     pointer;
   typedef const T*                               const_pointer;
-  typedef normal_iterator<pointer>               iterator;
-  typedef normal_iterator<const_pointer>         const_iterator;
+  typedef normal_iterator<pointer, vector>       iterator;
+  typedef normal_iterator<const_pointer, vector> const_iterator;
   typedef ft::reverse_iterator<iterator>         reverse_iterator;
   typedef ft::reverse_iterator<const_iterator>   const_reverse_iterator;
 

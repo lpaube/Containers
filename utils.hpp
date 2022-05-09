@@ -1,3 +1,5 @@
+#pragma once
+
 namespace ft {
   // Implementation of enable-if
   template <bool, typename T = void>
