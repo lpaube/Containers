@@ -23,7 +23,7 @@
 #include "containers_test/srcs/vector/common.hpp"
 
 #define TESTED_NAMESPACE ft
-#define TESTED_TYPE std::string
+#define TESTED_TYPE int
 
 template <typename T>
 void print_vector(ft::vector<T> vec)
@@ -135,11 +135,37 @@ void test_my_vector()
 
 int		main(void)
 {
-  std::vector<int> real_vec(4, 2);
-  std::vector<int>::const_iterator real_ite = real_vec.begin();
-  (void)real_ite;
+  /*
+  int size = 5;
+  std::vector<int> vec(size);
+  std::vector<int>::reverse_iterator it = vec.rbegin();
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
+  print_vector(vec);
+  */
+	const int size = 5;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
 
-  ft::vector<int> vec(4, 2);
-  ft::vector<int>::iterator ite = vec.begin();
-  (void)ite;
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
+
+	it = it + 5;
+	it = 1 + it;
+	it = it - 4;
+	std::cout << *(it += 2) << std::endl;
+	std::cout << *(it -= 1) << std::endl;
+
+	*(it -= 2) = 42;
+	*(it += 2) = 21;
+
+	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+
+	std::cout << "(it == const_it): " << (ite == it) << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+
+	printSize(vct, true);
+	return (0);
 }

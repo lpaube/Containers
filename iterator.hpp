@@ -80,6 +80,12 @@ namespace ft {
           return *this;
         }
 
+        normal_iterator& operator=(const normal_iterator& other)
+        {
+          m_current = other.m_current;
+          return *this;
+        }
+
         normal_iterator operator++(int) { return normal_iterator(m_current++); }
 
         // Bidirectional iterator overloads
@@ -88,7 +94,7 @@ namespace ft {
           return *this;
         }
 
-        normal_iterator& operator--(int) {
+        normal_iterator operator--(int) {
           return normal_iterator(m_current--);
         }
 
@@ -100,7 +106,7 @@ namespace ft {
           return *this;
         }
 
-        normal_iterator operator+(difference_type elem) {
+        normal_iterator operator+(difference_type elem) const {
           return normal_iterator(m_current + elem);
         }
 
@@ -109,14 +115,6 @@ namespace ft {
           return *this;
         }
 
-        normal_iterator operator-(difference_type elem) {
-          return normal_iterator(m_current - elem);
-        }
-
-        /*
-         * Is this "const" overload necessary to work with 
-         * reverse iterators?
-         */
         normal_iterator operator-(difference_type elem) const {
           return normal_iterator(m_current - elem);
         }
@@ -163,15 +161,15 @@ namespace ft {
       return lhs.base() <= rhs.base();
     }
 
-  template <typename Iterator, typename Container>
-    typename normal_iterator<Iterator, Container>::difference_type operator-(
-        const normal_iterator<Iterator, Container>& lhs,
-        const normal_iterator<Iterator, Container>& rhs) {
+  template <typename Iter1, typename Iter2, typename Container>
+    typename normal_iterator<Iter1, Container>::difference_type operator-(
+        const normal_iterator<Iter1, Container>& lhs,
+        const normal_iterator<Iter2, Container>& rhs) {
       return lhs.base() - rhs.base();
     }
 
   template <typename Iterator, typename Container>
-    typename normal_iterator<Iterator, Container>::difference_type operator+(
+    normal_iterator<Iterator, Container> operator+(
         typename normal_iterator<Iterator, Container>::difference_type lhs,
         const normal_iterator<Iterator, Container>& rhs) {
       return normal_iterator<Iterator, Container>(rhs.base() + lhs);
@@ -189,7 +187,7 @@ namespace ft {
                              typename iterator_traits<Iterator_type>::reference
                              >
   {
-    protected:
+    public:
       Iterator_type m_current;
 
       typedef iterator_traits<Iterator_type> traits_type;
@@ -227,7 +225,7 @@ namespace ft {
         return m_current;
       }
 
-      Iterator_type operator[](difference_type n) const {
+      reference operator[](difference_type n) const {
         return *(m_current - n - 1);
       }
 
@@ -253,8 +251,16 @@ namespace ft {
         return reverse_iterator(m_current - n);
       }
 
+      difference_type operator+(reverse_iterator n) const {
+        return m_current - n;
+      }
+
       reverse_iterator operator-(difference_type n) const {
         return reverse_iterator(m_current + n);
+      }
+
+      difference_type operator-(reverse_iterator n) const {
+        return m_current + n;
       }
 
       reverse_iterator& operator+=(difference_type n) {
@@ -314,7 +320,7 @@ namespace ft {
   template<class Iter>
     reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)
     {
-      return it.base() - n;
+      return reverse_iterator<Iter>(it.base() - n);
     }
 
   template<class Iter>

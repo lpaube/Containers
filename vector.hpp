@@ -447,11 +447,11 @@ bool operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs
   template <typename T, typename Alloc>
 bool operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 {
-  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() > rhs.end() - rhs.begin())
     return 0;
-  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() < rhs.end() - rhs.begin())
     return 1;
-  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin() + i != lhs.end(); ++i)
   {
     if (lhs.begin() + i < rhs.begin() + i)
       return 1;
@@ -464,11 +464,11 @@ bool operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
   template <typename T, typename Alloc>
 bool operator<=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 {
-  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() > rhs.end() - rhs.begin())
     return 0;
-  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() < rhs.end() - rhs.begin())
     return 1;
-  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin() + i != lhs.end(); ++i)
   {
     if (lhs.begin() + i < rhs.begin() + i)
       return 1;
@@ -481,11 +481,11 @@ bool operator<=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs
   template <typename T, typename Alloc>
 bool operator>(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 {
-  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() < rhs.end() - rhs.begin())
     return 0;
-  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() > rhs.end() - rhs.begin())
     return 1;
-  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin() + i != lhs.end(); ++i)
   {
     if (lhs.begin() + i > rhs.begin() + i)
       return 1;
@@ -498,11 +498,11 @@ bool operator>(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
   template <typename T, typename Alloc>
 bool operator>=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
 {
-  if (lhs.last() - lhs.begin() < rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() < rhs.end() - rhs.begin())
     return 0;
-  if (lhs.last() - lhs.begin() > rhs.last() - rhs.begin())
+  if (lhs.end() - lhs.begin() > rhs.end() - rhs.begin())
     return 1;
-  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin + i != lhs.end(); ++i)
+  for (typename vector<T, Alloc>::size_type i = 0; lhs.begin() + i != lhs.end(); ++i)
   {
     if (lhs.begin() + i > rhs.begin() + i)
       return 1;
