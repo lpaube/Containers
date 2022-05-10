@@ -1,0 +1,13 @@
+--- logs/vector/erase_ft.log.txt	2022-05-10 15:10:34.000000000 -0400
++++ logs/vector/erase_std.log.txt	2022-05-10 15:10:35.000000000 -0400
+@@ -17,8 +17,8 @@
+ Size: 61 (file: tests/vector/erase.cpp, line: 54)
+ Capacity: 64 (file: tests/vector/erase.cpp, line: 54)
+ ====================================
+-Number of alive objects: 64
++Number of alive objects: 61
+ ====================================
+ ====================================
+-Number of alive objects: 3
++Every object destroyed
+ ====================================

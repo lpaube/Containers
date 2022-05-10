@@ -1,0 +1,3 @@
+Empty v (file: tests/vector/empty.cpp, line: 20)
+Empty v1 (file: tests/vector/empty.cpp, line: 26)
+Empty v2 a (file: tests/vector/empty.cpp, line: 36)

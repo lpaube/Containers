@@ -1,0 +1,60 @@
+====================================
+Every object destroyed
+====================================
+Size: 0 (file: tests/vector/clear.cpp, line: 23)
+Capacity: 0 (file: tests/vector/clear.cpp, line: 23)
+====================================
+Every object destroyed
+====================================
+Size: 0 (file: tests/vector/clear.cpp, line: 28)
+Capacity: 0 (file: tests/vector/clear.cpp, line: 28)
+====================================
+Every object destroyed
+====================================
+====================================
+Number of alive objects: 1
+====================================
+Size: 1 (file: tests/vector/clear.cpp, line: 37)
+Capacity: 1 (file: tests/vector/clear.cpp, line: 37)
+====================================
+Every object destroyed
+====================================
+Size: 0 (file: tests/vector/clear.cpp, line: 42)
+Capacity: 1 (file: tests/vector/clear.cpp, line: 42)
+====================================
+Every object destroyed
+====================================
+====================================
+Number of alive objects: 512
+====================================
+Size: 512 (file: tests/vector/clear.cpp, line: 51)
+Capacity: 512 (file: tests/vector/clear.cpp, line: 51)
+====================================
+Every object destroyed
+====================================
+Size: 0 (file: tests/vector/clear.cpp, line: 56)
+Capacity: 512 (file: tests/vector/clear.cpp, line: 56)
+====================================
+Every object destroyed
+====================================
+Size: 1 (file: tests/vector/clear.cpp, line: 64)
+Capacity: 1 (file: tests/vector/clear.cpp, line: 64)
+0 
+Size: 0 (file: tests/vector/clear.cpp, line: 68)
+Capacity: 1 (file: tests/vector/clear.cpp, line: 68)
+
+Size: 0 (file: tests/vector/clear.cpp, line: 72)
+Capacity: 1 (file: tests/vector/clear.cpp, line: 72)
+
+Size: 512 (file: tests/vector/clear.cpp, line: 79)
+Capacity: 512 (file: tests/vector/clear.cpp, line: 79)
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+Size: 0 (file: tests/vector/clear.cpp, line: 83)
+Capacity: 512 (file: tests/vector/clear.cpp, line: 83)
+
+Size: 0 (file: tests/vector/clear.cpp, line: 87)
+Capacity: 512 (file: tests/vector/clear.cpp, line: 87)
+
+====================================
+Every object destroyed
+====================================

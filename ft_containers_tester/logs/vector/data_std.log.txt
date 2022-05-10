@@ -1,0 +1,2 @@
+Value at data: 543 (file: tests/vector/data.cpp, line: 20)
+Value at data: 543 (file: tests/vector/data.cpp, line: 29)

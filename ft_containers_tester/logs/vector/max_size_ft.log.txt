@@ -1,0 +1,7 @@
+Unsigned Char max size: 18446744073709551615 (file: tests/vector/max_size.cpp, line: 22)
+Char max size: 18446744073709551615 (file: tests/vector/max_size.cpp, line: 23)
+Int max size: 4611686018427387903 (file: tests/vector/max_size.cpp, line: 24)
+Long max size: 2305843009213693951 (file: tests/vector/max_size.cpp, line: 25)
+Short max size: 9223372036854775807 (file: tests/vector/max_size.cpp, line: 26)
+Abc max size: 4494820680728448 (file: tests/vector/max_size.cpp, line: 27)
+Float max size: 4611686018427387903 (file: tests/vector/max_size.cpp, line: 28)

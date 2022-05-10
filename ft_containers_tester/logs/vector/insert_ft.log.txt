@@ -1,0 +1,48 @@
+It: 64 (file: tests/vector/insert.cpp, line: 24)
+Size: 1 (file: tests/vector/insert.cpp, line: 25)
+Capacity: 1 (file: tests/vector/insert.cpp, line: 25)
+It: 45 (file: tests/vector/insert.cpp, line: 32)
+Size: 5 (file: tests/vector/insert.cpp, line: 33)
+Capacity: 8 (file: tests/vector/insert.cpp, line: 33)
+It: 64 (file: tests/vector/insert.cpp, line: 42)
+Size: 1 (file: tests/vector/insert.cpp, line: 43)
+Capacity: 1 (file: tests/vector/insert.cpp, line: 43)
+64 
+It: 63 (file: tests/vector/insert.cpp, line: 47)
+Size: 2 (file: tests/vector/insert.cpp, line: 48)
+Capacity: 2 (file: tests/vector/insert.cpp, line: 48)
+64 63 
+It: 62 (file: tests/vector/insert.cpp, line: 52)
+Size: 3 (file: tests/vector/insert.cpp, line: 53)
+Capacity: 4 (file: tests/vector/insert.cpp, line: 53)
+64 63 62 
+Size: 128 (file: tests/vector/insert.cpp, line: 60)
+Capacity: 128 (file: tests/vector/insert.cpp, line: 60)
+It: 64 (file: tests/vector/insert.cpp, line: 64)
+Size: 129 (file: tests/vector/insert.cpp, line: 65)
+Capacity: 256 (file: tests/vector/insert.cpp, line: 65)
+-5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 64 
+It: -64 (file: tests/vector/insert.cpp, line: 69)
+Size: 130 (file: tests/vector/insert.cpp, line: 70)
+Capacity: 256 (file: tests/vector/insert.cpp, line: 70)
+-5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 64 -64 
+====================================
+Number of alive objects: 1
+====================================
+====================================
+Every object destroyed
+====================================
+====================================
+Number of alive objects: 62
+====================================
+Size: 64 (file: tests/vector/insert.cpp, line: 100)
+Capacity: 64 (file: tests/vector/insert.cpp, line: 100)
+====================================
+Number of alive objects: 63
+====================================
+====================================
+Number of alive objects: 63
+====================================
+====================================
+Number of alive objects: 18446744073709551612
+====================================
