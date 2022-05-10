@@ -161,4 +161,31 @@ namespace ft {
       }
     };
 
+  /*
+   * lexicographical_compare and equal
+   */
+  template <typename InputIterator1, typename InputIterator2>
+    bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
+                                 InputIterator2 first2, InputIterator2 last2)
+    {
+      for (; first1 != last1 && first2 != last2; ++first1, ++first2)
+      {
+        if (*first1 < *first2)
+          return 1;
+      }
+      if (first2 != last2)
+        return 1;
+      return 0;
+    }
+
+  template <typename InputIterator1, typename InputIterator2>
+    bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
+  {
+    for (; first1 != last1; ++first1, ++first2)
+    {
+      if (*first1 != *first2)
+        return 0;
+    }
+    return 1;
+  }
 }
