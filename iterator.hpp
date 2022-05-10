@@ -219,15 +219,18 @@ namespace ft {
       }
 
       reference operator*() const {
-        return *(m_current - 1);
+        Iter tmp = m_current;
+        return *--tmp;
+        //return *(m_current - 1);
       }
 
       pointer operator->() const {
-        return m_current.base() - 1;
+        return std::addressof(operator*());
+        //return m_current.base() - 1;
       }
 
       reference operator[](difference_type n) const {
-        return *(m_current - n - 1);
+        return base()[-n-1];
       }
 
       reverse_iterator& operator++() {

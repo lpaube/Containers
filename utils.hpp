@@ -172,6 +172,8 @@ namespace ft {
       {
         if (*first1 < *first2)
           return 1;
+        else if (*first1 > *first2)
+          return 0;
       }
       if (first2 != last2)
         return 1;

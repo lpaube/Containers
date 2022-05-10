@@ -133,39 +133,52 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
-template <class T, class Alloc>
-void	cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::vector<T, Alloc> &rhs)
-{
-	static int i = 0;
-
-	std::cout << "############### [" << i++ << "] ###############"  << std::endl;
-	std::cout << "eq: " << (lhs == rhs) << " | ne: " << (lhs != rhs) << std::endl;
-	std::cout << "lt: " << (lhs <  rhs) << " | le: " << (lhs <= rhs) << std::endl;
-	std::cout << "gt: " << (lhs >  rhs) << " | ge: " << (lhs >= rhs) << std::endl;
-}
-
 int		main(void)
 {
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(4);
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct2(4);
+	const int size = 5;
 
-	cmp(vct, vct);  // 0
-	cmp(vct, vct2); // 1
+  ft::vector<int> my_vec(size);
+  ft::vector<int>::reverse_iterator my_it = my_vec.rbegin();
+  my_it[0] = 5;
+  print_vector(my_vec);
 
-	vct2.resize(10);
 
-	cmp(vct, vct2); // 2
-	cmp(vct2, vct); // 3
+  std::vector<int> real_vec(size);
+  std::vector<int>::reverse_iterator real_it = real_vec.rbegin();
+  real_it[0] = 5;
+  print_vector(real_vec);
+  /*
+	const int size = 5;
+	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
 
-	vct[2] = 42;
+	for (int i = 0; i < size; ++i)
+		it[i] = (size - i) * 5;
 
-	cmp(vct, vct2); // 4
-	cmp(vct2, vct); // 5
+   std::cout << "------printing vector1------" << std::endl;
+  print_vector(vct);
 
-	swap(vct, vct2);
+	it = it + 5;
+	it = 1 + it;
+	it = it - 4;
+	std::cout << *(it += 2) << std::endl;
+	std::cout << *(it -= 1) << std::endl;
+   std::cout << "------printing vector2------" << std::endl;
+  print_vector(vct);
 
-	cmp(vct, vct2); // 6
-	cmp(vct2, vct); // 7
+	*(it -= 2) = 42;
+	*(it += 2) = 21;
+   std::cout << "------printing vector3------" << std::endl;
+  print_vector(vct);
 
+	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
+
+	std::cout << "(it == const_it): " << (ite == it) << std::endl;
+	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
+	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
+
+	printSize(vct, true);
 	return (0);
+  */
 }
