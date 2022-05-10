@@ -213,10 +213,14 @@ namespace ft {
         }
 
         T* data() {
+          if (empty())
+            return nullptr;
           return m_start;
         }
 
         const T* data() const {
+          if (empty())
+            return nullptr;
           return m_start;
         }
 

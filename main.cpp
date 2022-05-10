@@ -21,6 +21,7 @@
 #include "vector.hpp"
 //#include "map.hpp"
 #include "containers_test/srcs/vector/common.hpp"
+#include "ft_containers_tester/tests/prelude.hpp"
 
 #define TESTED_NAMESPACE ft
 #define TESTED_TYPE foo<int>
@@ -133,58 +134,54 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
-template <typename Ite_1, typename Ite_2>
-void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+void vec_test_ctor_copy()
 {
-	std::cout << (first < second) << std::endl;
-	std::cout << (first <= second) << std::endl;
-	std::cout << (first > second) << std::endl;
-	std::cout << (first >= second) << std::endl;
-	if (redo)
-		ft_eq_ope(second, first, 0);
+    {
+        ft::vector<double, leak_allocator<double> > v(128, -345783);
+        ft::vector<double, leak_allocator<double> > v_copy(v);
+
+        PRINT_ALL(v_copy);
+
+        if (v.data() == v_copy.data()) {
+            std::cout << "Copy ctor doesn't do a deep copy!";
+            PRINT_FILE_LINE();
+        }
+
+        if (!std::equal(v.begin(), v.end(), v_copy.begin())) {
+            std::cout << "Copy ctor error";
+            PRINT_FILE_LINE();
+        }
+
+        ft::vector<double, leak_allocator<double> > v1;
+        ft::vector<double, leak_allocator<double> > v_copy1(v1);
+
+        PRINT_ALL(v_copy1);
+
+        if (v1.data() != v_copy1.data()) {
+            std::cout << "Non-null pointer in vector of size 0";
+            PRINT_FILE_LINE();
+        }
+
+        if (!std::equal(v1.begin(), v1.end(), v_copy1.begin())) {
+            std::cout << "Copy ctor error.";
+            PRINT_FILE_LINE();
+        }
+    }
+    {
+        ft::vector<ctor_dtor_checker<int>, leak_allocator<ctor_dtor_checker<int> > > v1(512);
+        ft::vector<ctor_dtor_checker<int>, leak_allocator<ctor_dtor_checker<int> > > v2(v1);
+
+        PRINT_SIZE_CAP(v1);
+        PRINT_SIZE_CAP(v2);
+
+        CHECK_DTOR(int);
+    }
 }
 
-int		main(void)
+int main()
 {
-	const int size = 5;
-	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_mid;
-
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
-
-	for (int i = size; it_0 != it_1; --i)
-		*it_0++ = i;
-	printSize(vct, 1);
-	it_0 = vct.rbegin();
-	cit_1 = vct.rend();
-	it_mid = it_0 + 3;
-	cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
-
-	std::cout << std::boolalpha;
-	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
-
-	std::cout << "\t\tft_eq_ope:" << std::endl;
-	// regular it
-	ft_eq_ope(it_0 + 3, it_mid);
-	ft_eq_ope(it_0, it_1);
-  std::cout << "----priting vector-----" << std::endl;
-  print_vector(vct);
-	ft_eq_ope(it_1 - 3, it_mid); //This one first one
-	// const it
-	ft_eq_ope(cit_0 + 3, cit_mid);
-	ft_eq_ope(cit_0, cit_1);
-	ft_eq_ope(cit_1 - 3, cit_mid);
-	// both it
-	ft_eq_ope(it_0 + 3, cit_mid);
-	ft_eq_ope(it_mid, cit_0 + 3);
-	ft_eq_ope(it_0, cit_1);
-	ft_eq_ope(it_1, cit_0);
-	ft_eq_ope(it_1 - 3, cit_mid);
-	ft_eq_ope(it_mid, cit_1 - 3);
-
-	return (0);
+    vec_test_ctor_copy();
+    CHECK_LEAKS(double);
+    CHECK_LEAKS(ctor_dtor_checker<int>);
+    CHECK_DTOR(int);
 }
