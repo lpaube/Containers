@@ -19,12 +19,16 @@
 #include <iostream>
 #include <list>
 #include "vector.hpp"
+#include "stack.hpp"
 //#include "map.hpp"
 #include "containers_test/srcs/vector/common.hpp"
-#include "ft_containers_tester/tests/prelude.hpp"
+#include "containers_test/srcs/stack/common.hpp"
+//#include "ft_containers_tester/tests/prelude.hpp"
 
 #define TESTED_NAMESPACE ft
+#define t_stack_ TESTED_NAMESPACE::stack<TESTED_TYPE>
 #define TESTED_TYPE foo<int>
+typedef t_stack_::container_type container_type;
 
 template <typename T>
 void print_vector(ft::vector<T> vec)
@@ -134,54 +138,21 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
-void vec_test_ctor_copy()
+int		main(void)
 {
-    {
-        ft::vector<double, leak_allocator<double> > v(128, -345783);
-        ft::vector<double, leak_allocator<double> > v_copy(v);
+	TESTED_NAMESPACE::stack<TESTED_TYPE> stck;
 
-        PRINT_ALL(v_copy);
+	std::cout << "empty: " << stck.empty() << std::endl;
+	std::cout << "size: " << stck.size() << std::endl;
 
-        if (v.data() == v_copy.data()) {
-            std::cout << "Copy ctor doesn't do a deep copy!";
-            PRINT_FILE_LINE();
-        }
+	stck.push(41);
+	stck.push(29);
+	stck.push(10);
+	stck.push(42);
+	std::cout << "Added some elements" << std::endl;
 
-        if (!std::equal(v.begin(), v.end(), v_copy.begin())) {
-            std::cout << "Copy ctor error";
-            PRINT_FILE_LINE();
-        }
+	std::cout << "empty: " << stck.empty() << std::endl;
+	printSize(stck);
 
-        ft::vector<double, leak_allocator<double> > v1;
-        ft::vector<double, leak_allocator<double> > v_copy1(v1);
-
-        PRINT_ALL(v_copy1);
-
-        if (v1.data() != v_copy1.data()) {
-            std::cout << "Non-null pointer in vector of size 0";
-            PRINT_FILE_LINE();
-        }
-
-        if (!std::equal(v1.begin(), v1.end(), v_copy1.begin())) {
-            std::cout << "Copy ctor error.";
-            PRINT_FILE_LINE();
-        }
-    }
-    {
-        ft::vector<ctor_dtor_checker<int>, leak_allocator<ctor_dtor_checker<int> > > v1(512);
-        ft::vector<ctor_dtor_checker<int>, leak_allocator<ctor_dtor_checker<int> > > v2(v1);
-
-        PRINT_SIZE_CAP(v1);
-        PRINT_SIZE_CAP(v2);
-
-        CHECK_DTOR(int);
-    }
-}
-
-int main()
-{
-    vec_test_ctor_copy();
-    CHECK_LEAKS(double);
-    CHECK_LEAKS(ctor_dtor_checker<int>);
-    CHECK_DTOR(int);
+	return (0);
 }
