@@ -244,12 +244,12 @@ namespace ft {
         }
 
         reverse_iterator rend() {
-          return reverse_iterator(this->m_start - 1);
+          return reverse_iterator(this->m_start);
         }
 
         const_reverse_iterator rend() const
         {
-          return const_reverse_iterator(this->m_start - 1);
+          return const_reverse_iterator(this->m_start);
         }
 
         bool empty() const {

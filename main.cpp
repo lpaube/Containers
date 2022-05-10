@@ -23,7 +23,7 @@
 #include "containers_test/srcs/vector/common.hpp"
 
 #define TESTED_NAMESPACE ft
-#define TESTED_TYPE int
+#define TESTED_TYPE foo<int>
 
 template <typename T>
 void print_vector(ft::vector<T> vec)
@@ -133,52 +133,58 @@ void test_my_vector()
   std::cout << std::endl;
 }
 
+template <typename Ite_1, typename Ite_2>
+void ft_eq_ope(const Ite_1 &first, const Ite_2 &second, const bool redo = 1)
+{
+	std::cout << (first < second) << std::endl;
+	std::cout << (first <= second) << std::endl;
+	std::cout << (first > second) << std::endl;
+	std::cout << (first >= second) << std::endl;
+	if (redo)
+		ft_eq_ope(second, first, 0);
+}
+
 int		main(void)
 {
 	const int size = 5;
-
-  ft::vector<int> my_vec(size);
-  ft::vector<int>::reverse_iterator my_it = my_vec.rbegin();
-  my_it[0] = 5;
-  print_vector(my_vec);
-
-
-  std::vector<int> real_vec(size);
-  std::vector<int>::reverse_iterator real_it = real_vec.rbegin();
-  real_it[0] = 5;
-  print_vector(real_vec);
-  /*
-	const int size = 5;
 	TESTED_NAMESPACE::vector<TESTED_TYPE> vct(size);
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it = vct.rbegin();
-	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator ite = vct.rbegin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_0(vct.rbegin());
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_1(vct.rend());
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::reverse_iterator it_mid;
 
-	for (int i = 0; i < size; ++i)
-		it[i] = (size - i) * 5;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_0 = vct.rbegin();
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_1;
+	TESTED_NAMESPACE::vector<TESTED_TYPE>::const_reverse_iterator cit_mid;
 
-   std::cout << "------printing vector1------" << std::endl;
+	for (int i = size; it_0 != it_1; --i)
+		*it_0++ = i;
+	printSize(vct, 1);
+	it_0 = vct.rbegin();
+	cit_1 = vct.rend();
+	it_mid = it_0 + 3;
+	cit_mid = it_0 + 3; cit_mid = cit_0 + 3; cit_mid = it_mid;
+
+	std::cout << std::boolalpha;
+	std::cout << ((it_0 + 3 == cit_0 + 3) && (cit_0 + 3 == it_mid)) << std::endl;
+
+	std::cout << "\t\tft_eq_ope:" << std::endl;
+	// regular it
+	ft_eq_ope(it_0 + 3, it_mid);
+	ft_eq_ope(it_0, it_1);
+  std::cout << "----priting vector-----" << std::endl;
   print_vector(vct);
+	ft_eq_ope(it_1 - 3, it_mid); //This one first one
+	// const it
+	ft_eq_ope(cit_0 + 3, cit_mid);
+	ft_eq_ope(cit_0, cit_1);
+	ft_eq_ope(cit_1 - 3, cit_mid);
+	// both it
+	ft_eq_ope(it_0 + 3, cit_mid);
+	ft_eq_ope(it_mid, cit_0 + 3);
+	ft_eq_ope(it_0, cit_1);
+	ft_eq_ope(it_1, cit_0);
+	ft_eq_ope(it_1 - 3, cit_mid);
+	ft_eq_ope(it_mid, cit_1 - 3);
 
-	it = it + 5;
-	it = 1 + it;
-	it = it - 4;
-	std::cout << *(it += 2) << std::endl;
-	std::cout << *(it -= 1) << std::endl;
-   std::cout << "------printing vector2------" << std::endl;
-  print_vector(vct);
-
-	*(it -= 2) = 42;
-	*(it += 2) = 21;
-   std::cout << "------printing vector3------" << std::endl;
-  print_vector(vct);
-
-	std::cout << "const_ite +=/-=: " << *(ite += 2) << " | " << *(ite -= 2) << std::endl;
-
-	std::cout << "(it == const_it): " << (ite == it) << std::endl;
-	std::cout << "(const_ite - it): " << (ite - it) << std::endl;
-	std::cout << "(ite + 3 == it): " << (ite + 3 == it) << std::endl;
-
-	printSize(vct, true);
 	return (0);
-  */
 }

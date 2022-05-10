@@ -221,12 +221,10 @@ namespace ft {
       reference operator*() const {
         Iter tmp = m_current;
         return *--tmp;
-        //return *(m_current - 1);
       }
 
       pointer operator->() const {
         return std::addressof(operator*());
-        //return m_current.base() - 1;
       }
 
       reference operator[](difference_type n) const {
