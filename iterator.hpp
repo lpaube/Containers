@@ -152,7 +152,7 @@ namespace ft {
   template <typename IteratorL, typename IteratorR, typename Container>
     bool operator>=(const normal_iterator<IteratorL, Container>& lhs,
         const normal_iterator<IteratorR, Container>& rhs) {
-      return lhs.base() <= rhs.base();
+      return lhs.base() >= rhs.base();
     }
 
   template <typename IteratorL, typename IteratorR, typename Container>

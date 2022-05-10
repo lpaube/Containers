@@ -317,7 +317,7 @@ class vector {
 
     for (InputIt tmp = first; tmp != last; ++tmp)
       ++count;
-    grow_capacity(count + offset);
+    grow_capacity(count + size());
     for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
         *ite = *(ite - count);
     for (; first != last; ++first, ++offset)
@@ -329,7 +329,7 @@ class vector {
   {
     difference_type offset = pos - begin();
     
-    grow_capacity(m_end_of_storage - m_start + count);
+    grow_capacity(size() + count);
     for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
         *ite = *(ite - count);
     for (size_type i = 0; i < count; ++i)
@@ -339,10 +339,15 @@ class vector {
 
   iterator insert(iterator pos, const T& value)
   {
-    grow_capacity(m_end_of_storage - m_finish + 1);
-    for (iterator ite = end(); ite != begin() && ite != pos; --ite)
+    difference_type offset = pos - begin();
+
+    grow_capacity(size() + 1);
+    for (iterator ite = end(); ite != begin() && ite != begin() + offset; --ite)
         *ite = *(ite - 1);
+    *(begin() + offset) = value;
     m_finish++;
+    return begin() + offset;
+    /*
     if (!pos.base())
     {
       *begin() = value;
@@ -353,6 +358,7 @@ class vector {
       *pos = value;
       return pos;
     }
+    */
   }
 
   template <typename InputIt>
