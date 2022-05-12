@@ -28,7 +28,7 @@ namespace ft {
       typedef  typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;  
 
       private:
-        rb_tree tree;
+      ft::rb_tree tree;
         Allocator alloc;
 
       /*
@@ -60,7 +60,7 @@ namespace ft {
        * Map constructors
        */
 
-      std::map<int, int> test(4, 6);
+      std::map<int, int> test();
 
     };
 }
