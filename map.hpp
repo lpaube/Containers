@@ -36,7 +36,7 @@ namespace ft {
       typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
       private:
-      ft::rb_tree<value_type> tree;
+      ft::rb_tree<value_type, allocator_type> tree;
       Allocator alloc;
       Compare compare;
 
@@ -74,7 +74,7 @@ namespace ft {
 
       explicit map(const Compare& comp,
                    const Allocator& alloc = Allocator())
-                   : compare(comp)
+                   : tree(), compare(comp)
       {
       }
 
@@ -82,9 +82,42 @@ namespace ft {
         map(InputIt first, InputIt last,
             const Compare& comp = Compare(),
             const Allocator& alloc = Allocator())
-            : compare(comp), alloc(alloc)
+            : tree(), compare(comp), alloc(alloc)
         {
-          tree(first, last, comp, alloc);
+          tree.insert(first, last);
         }
+
+        map(const map& other) : tree(other.tree)
+        {
+        }
+
+        /*
+         * Map destructor
+         */
+        ~map()
+        {
+          tree.destroy();
+        }
+
+        /*
+         * Map copy assignment operator
+         */
+        map& operator=(const map& other)
+        {
+          tree = other.tree;
+          return *this;
+        }
+
+        /*
+         * Returns the allocator associated with the container
+         */
+        allocator_type get_allocator() const
+        {
+          return alloc;
+        }
+
+        /*
+         * Element access
+         */
     };
 }

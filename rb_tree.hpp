@@ -22,11 +22,11 @@ namespace ft {
         };
 
       private:
-
-      public:
         tree_node*  root_node;
         Allocator   alloc;
         std::allocator<tree_node> node_alloc;
+
+      public:
 
         rb_tree() : root_node()
       {
@@ -114,6 +114,13 @@ namespace ft {
             }
           }
           return root_node = create_node(pair);
+        }
+
+        template <typename InputIt>
+        void insert(InputIt first, InputIt last)
+        {
+          for (; first != last; ++first)
+            insert(*first);
         }
 
         void print_tree(tree_node* node, int x)
