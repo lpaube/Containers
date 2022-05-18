@@ -6,12 +6,11 @@ namespace ft {
    * This is the implementation of a red-black tree.
    * The template paramenter Tp is a pair<key, value>.
    */
-  template <typename Tp>
+  template <typename Tp, typename Allocator>
     class rb_tree
     {
       public:
         typedef Tp value_type;
-        //typedef rb_tree_iterator<value_type> iterator;
 
         struct tree_node 
         {
@@ -23,9 +22,11 @@ namespace ft {
         };
 
       private:
-        tree_node*  root_node;
 
       public:
+        tree_node*  root_node;
+        Allocator   alloc;
+        std::allocator<tree_node> node_alloc;
 
         rb_tree() : root_node()
       {
@@ -82,7 +83,7 @@ namespace ft {
         {
           tree_node* new_node;
 
-          new_node = std::allocator<tree_node>::allocate(1);
+          new_node = node_alloc.allocate(1);
           new_node->value = pair;
           new_node->parent = nullptr;
           new_node->left = nullptr;
@@ -112,16 +113,16 @@ namespace ft {
               tmp = tmp->right;
             }
           }
-          return tmp = create_node(pair);
+          return root_node = create_node(pair);
         }
 
-        void print_tree(tree_node* node, int& x)
+        void print_tree(tree_node* node, int x)
         {
           if (node == nullptr)
             return ;
           x++;
-          print_tree(node->left);
-          print_tree(node->right);
+          print_tree(node->left, x);
+          print_tree(node->right, x);
           std::cout << "Level: " << x << " | "
                     << "Key: " << (node->value).first << std::endl;
         }

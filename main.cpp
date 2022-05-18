@@ -141,9 +141,12 @@ void test_my_vector()
 
 int		main(void)
 {
-  ft::rb_tree<ft::pair<int, std::string> > tree;
+  ft::rb_tree<ft::pair<int, std::string>, std::allocator<std::pair<int, std::string> > > tree;
 
   tree.insert(ft::pair<int, std::string>(3, "hi"));
   tree.insert(ft::pair<int, std::string>(5, "hello"));
+  tree.insert(ft::pair<int, std::string>(8, "hello"));
+  tree.insert(ft::pair<int, std::string>(-1, "hello"));
+  tree.insert(ft::pair<int, std::string>(0, "hello"));
   tree.print_tree();
 }
