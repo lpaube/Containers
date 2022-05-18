@@ -4,15 +4,9 @@
 #include <map>
 #include "iterator.hpp"
 #include "rb_tree.hpp"
-//#include "tree_iterator.hpp"
+#include "tree_iterator.hpp"
 
 namespace ft {
-  template <typename Tp>
-    class map_iterator
-    {
-      typedef Tp value_type;
-    };
-
 
   template <typename Key, typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<std::pair<const Key, T> > >
     class map
@@ -33,13 +27,13 @@ namespace ft {
       typedef  const value_type&                                         const_reference;         
       typedef  typename Allocator::pointer                               pointer;                 
       typedef  typename Allocator::const_pointer                         const_pointer;           
-      typedef  typename tree_iterator<value_type>::bst_iterator          iterator;                
-      typedef  typename tree_iterator<const value_type>::bst_iterator    const_iterator;
+      typedef  tree_iterator<value_type>                                 iterator;                
+      typedef  tree_iterator<const value_type>                           const_iterator;
       typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
       typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
       private:
-      ft::rb_tree<value_type, allocator_type> tree;
+      rb_tree<value_type, allocator_type> tree;
       Allocator alloc;
       Compare compare;
 
@@ -68,6 +62,7 @@ namespace ft {
           }
       };
 
+      public:
       /*
        * Map constructors
        */
@@ -76,8 +71,8 @@ namespace ft {
       }
 
       explicit map(const Compare& comp,
-                   const Allocator& alloc = Allocator())
-                   : tree(), compare(comp)
+          const Allocator& alloc = Allocator())
+        : tree(), compare(comp), alloc(alloc)
       {
       }
 
@@ -85,54 +80,78 @@ namespace ft {
         map(InputIt first, InputIt last,
             const Compare& comp = Compare(),
             const Allocator& alloc = Allocator())
-            : tree(), compare(comp), alloc(alloc)
+        : tree(), compare(comp), alloc(alloc)
         {
           tree.insert(first, last);
         }
 
-        map(const map& other) : tree(other.tree)
-        {
-        }
+      map(const map& other) : tree(other.tree)
+      {
+      }
 
-        /*
-         * Map destructor
-         */
-        ~map()
-        {
-          tree.destroy();
-        }
+      /*
+       * Map destructor
+       */
+      ~map()
+      {
+        tree.destroy();
+      }
 
-        /*
-         * Map copy assignment operator
-         */
-        map& operator=(const map& other)
-        {
-          tree = other.tree;
-          return *this;
-        }
+      /*
+       * Map copy assignment operator
+       */
+      map& operator=(const map& other)
+      {
+        tree = other.tree;
+        return *this;
+      }
 
-        /*
-         * Returns the allocator associated with the container
-         */
-        allocator_type get_allocator() const
-        {
-          return alloc;
-        }
+      /*
+       * Returns the allocator associated with the container
+       */
+      allocator_type get_allocator() const
+      {
+        return alloc;
+      }
 
-        /*
-         * Element access
-         */
-        T& at(const Key& key)
-        {
-        }
+      /*
+       * Element access
+       */
+      T& at(const Key& key)
+      {
+        // Need to do error checking here (std::out_of_range)
+        iterator ite = find(key);
+        return (*ite).second;
+      }
 
-        iterator find(const Key& key)
-        {
-          return tree.find(key);
-        }
+      /*
+       * Modifiers
+       */
+      void insert(value_type value)
+      {
+        tree.insert(value);
+      }
 
-        const_iterator find(const Key& key) const
-        {
-        }
+      /*
+       * Lookup
+       */
+      iterator find(const Key& key)
+      {
+        return tree.find(key);
+      }
+
+      const_iterator find(const Key& key) const
+      {
+        return tree.find(key);
+      }
+
+
+      /*
+       * Testing purposes
+       */
+      void print_map()
+      {
+        tree.print_tree();
+      }
     };
 }

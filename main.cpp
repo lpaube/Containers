@@ -21,7 +21,7 @@
 #include "vector.hpp"
 #include "stack.hpp"
 #include "rb_tree.hpp"
-//#include "map.hpp"
+#include "map.hpp"
 #include "containers_test/srcs/vector/common.hpp"
 #include "containers_test/srcs/stack/common.hpp"
 //#include "ft_containers_tester/tests/prelude.hpp"
@@ -142,11 +142,11 @@ void test_my_vector()
 int		main(void)
 {
   ft::rb_tree<ft::pair<int, std::string>, std::allocator<std::pair<int, std::string> > > tree;
+  ft::map<int, std::string> map;
 
-  tree.insert(ft::pair<int, std::string>(3, "hi"));
-  tree.insert(ft::pair<int, std::string>(5, "hello"));
-  tree.insert(ft::pair<int, std::string>(8, "hello"));
-  tree.insert(ft::pair<int, std::string>(-1, "hello"));
-  tree.insert(ft::pair<int, std::string>(0, "hello"));
-  tree.print_tree();
+  map.insert(ft::pair<int, std::string>(3, "hi"));
+  map.insert(ft::pair<int, std::string>(5, "hello"));
+  map.insert(ft::pair<int, std::string>(8, "hello"));
+  map.insert(ft::pair<int, std::string>(-1, "hello"));
+  map.insert(ft::pair<int, std::string>(0, "hello"));
 }

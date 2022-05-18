@@ -1,9 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "map.hpp"
 #include "tree_iterator.hpp"
-
 
 namespace ft {
 
@@ -132,7 +130,21 @@ namespace ft {
         template <typename Key>
         iterator find(const Key& key)
         {
-          
+          tree_node* tmp = root_node;
+
+          while (tmp != NULL)
+          {
+            if (key < tmp->value.first)
+            {
+              tmp = tmp->left;
+            }
+            else if (key > tmp->value.first)
+            {
+              tmp = tmp->right;
+            }
+            else
+              return tree_iterator<value_type>(tmp);
+          }
         }
 
         void print_tree(tree_node* node, int x)
@@ -143,7 +155,9 @@ namespace ft {
           print_tree(node->left, x);
           print_tree(node->right, x);
           std::cout << "Level: " << x << " | "
-                    << "Key: " << (node->value).first << std::endl;
+                    << "Key: " << (node->value).first << " | "
+                    << "Value: " << (node->value).second
+                    << std::endl;
         }
 
         void print_tree()
