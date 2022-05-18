@@ -20,6 +20,7 @@
 #include <list>
 #include "vector.hpp"
 #include "stack.hpp"
+#include "rb_tree.hpp"
 //#include "map.hpp"
 #include "containers_test/srcs/vector/common.hpp"
 #include "containers_test/srcs/stack/common.hpp"
@@ -140,5 +141,9 @@ void test_my_vector()
 
 int		main(void)
 {
-  std::map<int, std::string> my_map;
+  ft::rb_tree<ft::pair<int, std::string> > tree;
+
+  tree.insert(ft::pair<int, std::string>(3, "hi"));
+  tree.insert(ft::pair<int, std::string>(5, "hello"));
+  tree.print_tree();
 }

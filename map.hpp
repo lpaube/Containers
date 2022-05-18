@@ -1,8 +1,16 @@
 #include <iostream>
 #include <map>
+#include "iterator.hpp"
 #include "rb_tree.hpp"
 
 namespace ft {
+  template <typename Tp>
+    class map_iterator
+    {
+      typedef Tp value_type;
+    };
+
+
   template <typename Key, typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<std::pair<const Key, T> > >
     class map
     {    
@@ -11,25 +19,26 @@ namespace ft {
       /*
        * Member types
        */
-      typedef  Key                                            key_type;                                                      
-      typedef  T                                              mapped_type;                                                   
-      typedef  std::pair<const Key, T>                        value_type;
-      typedef  std::size_t                                    size_type;                                                     
-      typedef  std::ptrdiff_t                                 difference_type;                                               
-      typedef  Compare                                        key_compare;                                                   
-      typedef  Allocator                                      allocator_type;                                                
-      typedef  value_type&                                    reference;                                                     
-      typedef  const value_type&                              const_reference;         
-      typedef  typename Allocator::pointer                    pointer;                 
-      typedef  typename Allocator::const_pointer              const_pointer;           
-      typedef  typename bst<Key, T>::bst_iterator             iterator;                
-      typedef  typename bst<Key, T>::bst_iterator           const_iterator;
-      typedef  typename ft::reverse_iterator<iterator>      reverse_iterator;        
-      typedef  typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;  
+      typedef  Key                                                       key_type;                                                      
+      typedef  T                                                         mapped_type;                                                   
+      typedef  std::pair<const Key, T>                                   value_type;
+      typedef  std::size_t                                               size_type;                                                     
+      typedef  std::ptrdiff_t                                            difference_type;                                               
+      typedef  Compare                                                   key_compare;                                                   
+      typedef  Allocator                                                 allocator_type;                                                
+      typedef  value_type&                                               reference;                                                     
+      typedef  const value_type&                                         const_reference;         
+      typedef  typename Allocator::pointer                               pointer;                 
+      typedef  typename Allocator::const_pointer                         const_pointer;           
+      typedef  typename map_iterator<value_type>::bst_iterator           iterator;                
+      typedef  typename map_iterator<const value_type>::bst_iterator     const_iterator;
+      typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
+      typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
       private:
-      ft::rb_tree tree;
-        Allocator alloc;
+      ft::rb_tree<value_type> tree;
+      Allocator alloc;
+      Compare compare;
 
       /*
        * std::map::value_compare is a function object that compares objects 
@@ -59,8 +68,23 @@ namespace ft {
       /*
        * Map constructors
        */
+      map() : tree()
+      {
+      }
 
-      std::map<int, int> test();
+      explicit map(const Compare& comp,
+                   const Allocator& alloc = Allocator())
+                   : compare(comp)
+      {
+      }
 
+      template<typename InputIt>
+        map(InputIt first, InputIt last,
+            const Compare& comp = Compare(),
+            const Allocator& alloc = Allocator())
+            : compare(comp), alloc(alloc)
+        {
+          tree(first, last, comp, alloc);
+        }
     };
 }
