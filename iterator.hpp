@@ -48,7 +48,7 @@ namespace ft {
   template <typename Iterator_type, typename Container>
     class normal_iterator {
       protected:
-        Iterator_type m_current;
+        Iterator_type current;
 
         typedef iterator_traits<Iterator_type> traits_type;
 
@@ -59,67 +59,67 @@ namespace ft {
         typedef typename traits_type::reference reference;
         typedef typename traits_type::pointer pointer;
 
-        normal_iterator() : m_current(Iterator_type()) {}
+        normal_iterator() : current(Iterator_type()) {}
 
-        normal_iterator(const Iterator_type& i) : m_current(i) {}
+        normal_iterator(const Iterator_type& i) : current(i) {}
 
         template <typename Iter>
           normal_iterator(const normal_iterator<Iter, typename enable_if<(is_same<Iter, typename Container::pointer>::value),
               Container>::type>& i)
-          : m_current(i.base()) {}
+          : current(i.base()) {}
 
         // Forward iterator overloads
         reference operator*() const {
-          return *m_current;
+          return *current;
         }
 
-        pointer operator->() const { return m_current; }
+        pointer operator->() const { return current; }
 
         normal_iterator& operator++() {
-          ++m_current;
+          ++current;
           return *this;
         }
 
         normal_iterator& operator=(const normal_iterator& other)
         {
-          m_current = other.m_current;
+          current = other.current;
           return *this;
         }
 
-        normal_iterator operator++(int) { return normal_iterator(m_current++); }
+        normal_iterator operator++(int) { return normal_iterator(current++); }
 
         // Bidirectional iterator overloads
         normal_iterator& operator--() {
-          --m_current;
+          --current;
           return *this;
         }
 
         normal_iterator operator--(int) {
-          return normal_iterator(m_current--);
+          return normal_iterator(current--);
         }
 
         // Random access iterator overloads
-        reference operator[](difference_type n) const { return m_current[n]; }
+        reference operator[](difference_type n) const { return current[n]; }
 
         normal_iterator& operator+=(difference_type n) {
-          m_current += n;
+          current += n;
           return *this;
         }
 
         normal_iterator operator+(difference_type elem) const {
-          return normal_iterator(m_current + elem);
+          return normal_iterator(current + elem);
         }
 
         normal_iterator& operator-=(difference_type n) {
-          m_current -= n;
+          current -= n;
           return *this;
         }
 
         normal_iterator operator-(difference_type elem) const {
-          return normal_iterator(m_current - elem);
+          return normal_iterator(current - elem);
         }
 
-        const Iterator_type& base() const { return m_current; }
+        const Iterator_type& base() const { return current; }
     };
 
   // Non-member overloads
@@ -188,7 +188,7 @@ namespace ft {
                              >
   {
     public:
-      Iterator_type m_current;
+      Iterator_type current;
 
       typedef iterator_traits<Iterator_type> traits_type;
 
@@ -201,25 +201,25 @@ namespace ft {
       typedef typename traits_type::reference         reference;
 
       // MEMBER FUNCTIONS
-      reverse_iterator() : m_current() {}
+      reverse_iterator() : current() {}
 
-      explicit reverse_iterator(Iterator_type x) : m_current(x) {}
+      explicit reverse_iterator(Iterator_type x) : current(x) {}
 
       template<typename U>
-        reverse_iterator(const reverse_iterator<U>& other) : m_current(other.m_current) {}
+        reverse_iterator(const reverse_iterator<U>& other) : current(other.current) {}
 
       template<typename U>
         reverse_iterator& operator=(const reverse_iterator<U>& other) {
-          m_current = other.m_current;
+          current = other.current;
           return *this;
         }
 
       Iterator_type base() const {
-        return m_current;
+        return current;
       }
 
       reference operator*() const {
-        Iter tmp = m_current;
+        Iter tmp = current;
         return *--tmp;
       }
 
@@ -232,42 +232,42 @@ namespace ft {
       }
 
       reverse_iterator& operator++() {
-        --m_current;
+        --current;
         return *this;
       }
 
       reverse_iterator& operator--() {
-        ++m_current;
+        ++current;
         return *this;
       }
 
       reverse_iterator operator++(int) {
-        return reverse_iterator(m_current--);
+        return reverse_iterator(current--);
       }
 
       reverse_iterator operator--(int) {
-        return reverse_iterator(m_current++);
+        return reverse_iterator(current++);
       }
 
       reverse_iterator operator+(difference_type n) const {
-        return reverse_iterator(m_current - n);
+        return reverse_iterator(current - n);
       }
 
       difference_type operator+(reverse_iterator n) const {
-        return m_current - n;
+        return current - n;
       }
 
       reverse_iterator operator-(difference_type n) const {
-        return reverse_iterator(m_current + n);
+        return reverse_iterator(current + n);
       }
 
       reverse_iterator& operator+=(difference_type n) {
-        m_current -= n;
+        current -= n;
         return *this;
       }
 
       reverse_iterator& operator-=(difference_type n) {
-        m_current += n;
+        current += n;
         return *this;
       }
   };

@@ -1,7 +1,10 @@
+#pragma once
+
 #include <iostream>
 #include <map>
 #include "iterator.hpp"
 #include "rb_tree.hpp"
+//#include "tree_iterator.hpp"
 
 namespace ft {
   template <typename Tp>
@@ -30,8 +33,8 @@ namespace ft {
       typedef  const value_type&                                         const_reference;         
       typedef  typename Allocator::pointer                               pointer;                 
       typedef  typename Allocator::const_pointer                         const_pointer;           
-      typedef  typename map_iterator<value_type>::bst_iterator           iterator;                
-      typedef  typename map_iterator<const value_type>::bst_iterator     const_iterator;
+      typedef  typename tree_iterator<value_type>::bst_iterator          iterator;                
+      typedef  typename tree_iterator<const value_type>::bst_iterator    const_iterator;
       typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
       typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
@@ -119,5 +122,17 @@ namespace ft {
         /*
          * Element access
          */
+        T& at(const Key& key)
+        {
+        }
+
+        iterator find(const Key& key)
+        {
+          return tree.find(key);
+        }
+
+        const_iterator find(const Key& key) const
+        {
+        }
     };
 }

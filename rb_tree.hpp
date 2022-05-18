@@ -1,7 +1,12 @@
+#pragma once
+
 #include <iostream>
+#include "map.hpp"
+#include "tree_iterator.hpp"
 
 
 namespace ft {
+
   /*
    * This is the implementation of a red-black tree.
    * The template paramenter Tp is a pair<key, value>.
@@ -11,19 +16,20 @@ namespace ft {
     {
       public:
         typedef Tp value_type;
+        typedef tree_iterator<Tp> iterator;
 
         struct tree_node 
         {
           tree_node* parent;
           tree_node* left;
           tree_node* right;
-          Tp value;
-          bool  is_black;
+          Tp        value;
+          bool      is_black;
         };
 
       private:
-        tree_node*  root_node;
-        Allocator   alloc;
+        tree_node*                root_node;
+        Allocator                 alloc;
         std::allocator<tree_node> node_alloc;
 
       public:
@@ -121,6 +127,12 @@ namespace ft {
         {
           for (; first != last; ++first)
             insert(*first);
+        }
+
+        template <typename Key>
+        iterator find(const Key& key)
+        {
+          
         }
 
         void print_tree(tree_node* node, int x)
