@@ -34,7 +34,7 @@ namespace ft {
 
         rb_tree() : root_node()
       {
-
+        
       }
 
         tree_node* root()
@@ -89,9 +89,9 @@ namespace ft {
 
           new_node = node_alloc.allocate(1);
           new_node->value = pair;
-          new_node->parent = nullptr;
-          new_node->left = nullptr;
-          new_node->right = nullptr;
+          new_node->parent = NULL;
+          new_node->left = NULL;
+          new_node->right = NULL;
 
           // Will need to change this to a real red/black checker!
           new_node->is_black = 1;
@@ -102,17 +102,17 @@ namespace ft {
         {
           tree_node* tmp = root_node;
 
-          while (tmp != nullptr)
+          while (tmp != NULL)
           {
             if (pair.first < tmp->value.first)
             {
-              if (tmp->left == nullptr)
+              if (tmp->left == NULL)
                 return tmp->left = create_node(pair);
               tmp = tmp->left;
             }
             else if (pair.first > tmp->value.first)
             {
-              if (tmp->right == nullptr)
+              if (tmp->right == NULL)
                 return tmp->right = create_node(pair);
               tmp = tmp->right;
             }
@@ -149,7 +149,7 @@ namespace ft {
 
         void print_tree(tree_node* node, int x)
         {
-          if (node == nullptr)
+          if (node == NULL)
             return ;
           x++;
           print_tree(node->left, x);

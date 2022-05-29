@@ -224,7 +224,8 @@ namespace ft {
       }
 
       pointer operator->() const {
-        return std::addressof(operator*());
+        //return std::addressof(operator*());
+        return current;
       }
 
       reference operator[](difference_type n) const {

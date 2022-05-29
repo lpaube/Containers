@@ -138,9 +138,9 @@ namespace ft {
         ~vector() {
           clear();
           m_alloc.deallocate(m_start, m_end_of_storage - m_start);
-          m_start = nullptr;
-          m_finish = nullptr;
-          m_end_of_storage = nullptr;
+          m_start = NULL;
+          m_finish = NULL;
+          m_end_of_storage = NULL;
         }
 
         // Other member functions
@@ -214,13 +214,13 @@ namespace ft {
 
         T* data() {
           if (empty())
-            return nullptr;
+            return NULL;
           return m_start;
         }
 
         const T* data() const {
           if (empty())
-            return nullptr;
+            return NULL;
           return m_start;
         }
 
@@ -235,8 +235,6 @@ namespace ft {
         const_iterator end() const { return const_iterator(this->m_finish); }
 
         reverse_iterator rbegin() {
-          if (empty())
-            return reverse_iterator(this->m_finish);
           return reverse_iterator(this->m_finish);
         }
 

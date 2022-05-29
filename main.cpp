@@ -22,14 +22,16 @@
 #include "stack.hpp"
 #include "rb_tree.hpp"
 #include "map.hpp"
-#include "containers_test/srcs/vector/common.hpp"
-#include "containers_test/srcs/stack/common.hpp"
+//#include "containers_test/srcs/vector/common.hpp"
+//#include "containers_test/srcs/stack/common.hpp"
 //#include "ft_containers_tester/tests/prelude.hpp"
 
+/*
 #define TESTED_NAMESPACE ft
 #define t_stack_ TESTED_NAMESPACE::stack<TESTED_TYPE>
 #define TESTED_TYPE foo<int>
 typedef t_stack_::container_type container_type;
+*/
 
 template <typename T>
 void print_vector(ft::vector<T> vec)

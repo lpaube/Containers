@@ -77,6 +77,7 @@ namespace ft {
       }
     };
 
+  /*
   template <>
     struct is_integral<char16_t>
     {
@@ -88,7 +89,9 @@ namespace ft {
         return value;
       }
     };
+    */
 
+  /*
   template <>
     struct is_integral<char32_t>
     {
@@ -100,6 +103,7 @@ namespace ft {
         return value;
       }
     };
+    */
 
   template <>
     struct is_integral<wchar_t>
