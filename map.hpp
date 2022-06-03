@@ -18,7 +18,7 @@ namespace ft {
        */
       typedef  Key                                                       key_type;                                                      
       typedef  T                                                         mapped_type;                                                   
-      typedef  std::pair<const Key, T>                                   value_type;
+      typedef  ft::pair<const Key, T>                                    value_type;
       typedef  std::size_t                                               size_type;                                                     
       typedef  std::ptrdiff_t                                            difference_type;                                               
       typedef  Compare                                                   key_compare;                                                   
@@ -94,7 +94,6 @@ namespace ft {
        */
       ~map()
       {
-        tree.destroy();
       }
 
       /*
@@ -133,8 +132,10 @@ namespace ft {
       /*
        * Modifiers
        */
+
       void insert(value_type value)
       {
+        std::cout << "map insert here" << std::endl;
         tree.insert(value);
       }
 

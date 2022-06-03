@@ -3,170 +3,169 @@
 !_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
-!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-BASE_HPP	containers_test/srcs/base.hpp	2;"	d
-BUFFER_SIZE	ft_containers_tester/tests/provided.cpp	17;"	d	file:
+!_TAG_PROGRAM_VERSION	5.8	//
+BASE_HPP	containers_test/srcs/base.hpp	/^# define BASE_HPP$/;"	d
+BUFFER_SIZE	ft_containers_tester/tests/provided.cpp	/^#define BUFFER_SIZE /;"	d	file:
 Buffer	ft_containers_tester/tests/provided.cpp	/^struct Buffer {$/;"	s	file:
-CATCH_UNHANDLED_EX	ft_containers_tester/tests/print.hpp	29;"	d
-CHECK_DTOR	ft_containers_tester/tests/prelude.hpp	113;"	d
-CHECK_LEAKS	ft_containers_tester/tests/leak_alloc.hpp	109;"	d
-CHECK_LEAKS	ft_containers_tester/tests/leak_alloc.hpp	114;"	d
-CHECK_TYPE	ft_containers_tester/tests/stack/types.cpp	18;"	d	file:
-CHECK_TYPE	ft_containers_tester/tests/vector/types.cpp	18;"	d	file:
-CHECK_TYPEDEF	ft_containers_tester/tests/stack/typedefs.cpp	15;"	d	file:
-CHECK_TYPEDEF	ft_containers_tester/tests/vector/typedefs.cpp	15;"	d	file:
-CHECK_TYPE_CONST	ft_containers_tester/tests/stack/types.cpp	25;"	d	file:
-CHECK_TYPE_CONST	ft_containers_tester/tests/vector/types.cpp	25;"	d	file:
-COUNT	ft_containers_tester/tests/provided.cpp	24;"	d	file:
+CATCH_UNHANDLED_EX	ft_containers_tester/tests/print.hpp	/^#define CATCH_UNHANDLED_EX(/;"	d
+CHECK_DTOR	ft_containers_tester/tests/prelude.hpp	/^#define CHECK_DTOR(/;"	d
+CHECK_LEAKS	ft_containers_tester/tests/leak_alloc.hpp	/^#define CHECK_LEAKS(/;"	d
+CHECK_TYPE	ft_containers_tester/tests/stack/types.cpp	/^#define CHECK_TYPE(/;"	d	file:
+CHECK_TYPE	ft_containers_tester/tests/vector/types.cpp	/^#define CHECK_TYPE(/;"	d	file:
+CHECK_TYPEDEF	ft_containers_tester/tests/stack/typedefs.cpp	/^#define CHECK_TYPEDEF(/;"	d	file:
+CHECK_TYPEDEF	ft_containers_tester/tests/vector/typedefs.cpp	/^#define CHECK_TYPEDEF(/;"	d	file:
+CHECK_TYPE_CONST	ft_containers_tester/tests/stack/types.cpp	/^#define CHECK_TYPE_CONST(/;"	d	file:
+CHECK_TYPE_CONST	ft_containers_tester/tests/vector/types.cpp	/^#define CHECK_TYPE_CONST(/;"	d	file:
+COUNT	ft_containers_tester/tests/provided.cpp	/^#define COUNT /;"	d	file:
 CXX	ft_containers_tester/Makefile	/^CXX			=	clang++$/;"	m
 CXXFLAGS	ft_containers_tester/Makefile	/^CXXFLAGS	=	-Wall -Wextra -Wpedantic -Wfloat-conversion -Wsign-conversion -Wshadow -std=c++98 -I.$/;"	m
 DEBUG_FLAGS	ft_containers_tester/Makefile	/^DEBUG_FLAGS	=	-fno-limit-debug-info -g$/;"	m
 INCS	ft_containers_tester/Makefile	/^INCS		=	vector.hpp iterator.hpp type_traits.hpp$/;"	m
 Iter	iterator.hpp	/^      typedef Iterator_type                           Iter;$/;"	t	class:ft::reverse_iterator
-MAX_RAM	ft_containers_tester/tests/provided.cpp	16;"	d	file:
+MAX_RAM	ft_containers_tester/tests/provided.cpp	/^#define MAX_RAM /;"	d	file:
 MutantStack	ft_containers_tester/tests/provided.cpp	/^    MutantStack()$/;"	f	class:MutantStack
 MutantStack	ft_containers_tester/tests/provided.cpp	/^    MutantStack(const MutantStack<T>& src)$/;"	f	class:MutantStack
 MutantStack	ft_containers_tester/tests/provided.cpp	/^class MutantStack : public ft::stack<T>$/;"	c	file:
 NAME	ft_containers_tester/Makefile	/^NAME		=	ft_containers$/;"	m
 OBJS	ft_containers_tester/Makefile	/^OBJS		=	$(SRCS:.cpp=.o)$/;"	m
-PRINT_ALL	ft_containers_tester/tests/print.hpp	62;"	d
-PRINT_FILE_LINE	ft_containers_tester/tests/print.hpp	18;"	d
-PRINT_LINE	ft_containers_tester/tests/print.hpp	23;"	d
-PRINT_MSG	ft_containers_tester/tests/print.hpp	36;"	d
-PRINT_SIZE_CAP	ft_containers_tester/tests/print.hpp	56;"	d
-PRINT_VEC	ft_containers_tester/tests/print.hpp	51;"	d
+PRINT_ALL	ft_containers_tester/tests/print.hpp	/^#define PRINT_ALL(/;"	d
+PRINT_FILE_LINE	ft_containers_tester/tests/print.hpp	/^#define PRINT_FILE_LINE(/;"	d
+PRINT_LINE	ft_containers_tester/tests/print.hpp	/^#define PRINT_LINE(/;"	d
+PRINT_MSG	ft_containers_tester/tests/print.hpp	/^#define PRINT_MSG(/;"	d
+PRINT_SIZE_CAP	ft_containers_tester/tests/print.hpp	/^#define PRINT_SIZE_CAP(/;"	d
+PRINT_VEC	ft_containers_tester/tests/print.hpp	/^#define PRINT_VEC(/;"	d
 RELEASE	ft_containers_tester/Makefile	/^RELEASE		?=	0$/;"	m
 SRCS	ft_containers_tester/Makefile	/^SRCS		=	main2.cpp$/;"	m
-T1	containers_test/srcs/map/bounds.cpp	4;"	d	file:
-T1	containers_test/srcs/map/comp.cpp	3;"	d	file:
-T1	containers_test/srcs/map/copy_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/map/empty.cpp	4;"	d	file:
-T1	containers_test/srcs/map/erase.cpp	4;"	d	file:
-T1	containers_test/srcs/map/erase2.cpp	4;"	d	file:
-T1	containers_test/srcs/map/find_count.cpp	3;"	d	file:
-T1	containers_test/srcs/map/insert.cpp	3;"	d	file:
-T1	containers_test/srcs/map/insert2.cpp	4;"	d	file:
-T1	containers_test/srcs/map/ite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/map/ite_n0.cpp	3;"	d	file:
-T1	containers_test/srcs/map/ite_n1.cpp	3;"	d	file:
-T1	containers_test/srcs/map/more.cpp	3;"	d	file:
-T1	containers_test/srcs/map/op_sqbr.cpp	3;"	d	file:
-T1	containers_test/srcs/map/relational_ope.cpp	3;"	d	file:
-T1	containers_test/srcs/map/rev_ite_construct.cpp	3;"	d	file:
-T1	containers_test/srcs/map/rite.cpp	4;"	d	file:
-T1	containers_test/srcs/map/rite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/map/swap.cpp	4;"	d	file:
-T1	containers_test/srcs/map/tricky_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/map/tricky_erase.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/bounds.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/comp.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/copy_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/empty.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/erase.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/erase2.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/find_count.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/insert.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/insert2.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/ite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/ite_n0.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/ite_n1.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/more.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/op_sqbr.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/relational_ope.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/rev_ite_construct.cpp	3;"	d	file:
-T1	containers_test/srcs/multimap/rite.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/rite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/swap.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/tricky_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/multimap/tricky_erase.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/bounds.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/comp.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/copy_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/empty.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/erase.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/erase2.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/find_count.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/insert.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/insert2.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/ite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/ite_n0a.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/ite_n0b.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/ite_n1.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/more.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/op_sqbr.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/relational_ope.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/rev_ite_construct.cpp	3;"	d	file:
-T1	containers_test/srcs/multiset/rite.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/rite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/swap.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/tricky_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/multiset/tricky_erase.cpp	3;"	d	file:
-T1	containers_test/srcs/set/bounds.cpp	4;"	d	file:
-T1	containers_test/srcs/set/comp.cpp	3;"	d	file:
-T1	containers_test/srcs/set/copy_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/set/empty.cpp	4;"	d	file:
-T1	containers_test/srcs/set/erase.cpp	4;"	d	file:
-T1	containers_test/srcs/set/erase2.cpp	4;"	d	file:
-T1	containers_test/srcs/set/find_count.cpp	3;"	d	file:
-T1	containers_test/srcs/set/insert.cpp	3;"	d	file:
-T1	containers_test/srcs/set/insert2.cpp	4;"	d	file:
-T1	containers_test/srcs/set/ite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/set/ite_n0a.cpp	3;"	d	file:
-T1	containers_test/srcs/set/ite_n0b.cpp	3;"	d	file:
-T1	containers_test/srcs/set/ite_n1.cpp	3;"	d	file:
-T1	containers_test/srcs/set/more.cpp	3;"	d	file:
-T1	containers_test/srcs/set/op_sqbr.cpp	3;"	d	file:
-T1	containers_test/srcs/set/relational_ope.cpp	3;"	d	file:
-T1	containers_test/srcs/set/rev_ite_construct.cpp	3;"	d	file:
-T1	containers_test/srcs/set/rite.cpp	4;"	d	file:
-T1	containers_test/srcs/set/rite_arrow.cpp	4;"	d	file:
-T1	containers_test/srcs/set/swap.cpp	4;"	d	file:
-T1	containers_test/srcs/set/tricky_construct.cpp	4;"	d	file:
-T1	containers_test/srcs/set/tricky_erase.cpp	3;"	d	file:
-T2	containers_test/srcs/map/bounds.cpp	5;"	d	file:
-T2	containers_test/srcs/map/comp.cpp	4;"	d	file:
-T2	containers_test/srcs/map/copy_construct.cpp	5;"	d	file:
-T2	containers_test/srcs/map/empty.cpp	5;"	d	file:
-T2	containers_test/srcs/map/erase.cpp	5;"	d	file:
-T2	containers_test/srcs/map/erase2.cpp	5;"	d	file:
-T2	containers_test/srcs/map/find_count.cpp	4;"	d	file:
-T2	containers_test/srcs/map/insert.cpp	4;"	d	file:
-T2	containers_test/srcs/map/insert2.cpp	5;"	d	file:
-T2	containers_test/srcs/map/ite_arrow.cpp	5;"	d	file:
-T2	containers_test/srcs/map/ite_n0.cpp	4;"	d	file:
-T2	containers_test/srcs/map/ite_n1.cpp	4;"	d	file:
-T2	containers_test/srcs/map/more.cpp	4;"	d	file:
-T2	containers_test/srcs/map/op_sqbr.cpp	4;"	d	file:
-T2	containers_test/srcs/map/relational_ope.cpp	4;"	d	file:
-T2	containers_test/srcs/map/rev_ite_construct.cpp	4;"	d	file:
-T2	containers_test/srcs/map/rite.cpp	5;"	d	file:
-T2	containers_test/srcs/map/rite_arrow.cpp	5;"	d	file:
-T2	containers_test/srcs/map/swap.cpp	5;"	d	file:
-T2	containers_test/srcs/map/tricky_construct.cpp	5;"	d	file:
-T2	containers_test/srcs/map/tricky_erase.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/bounds.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/comp.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/copy_construct.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/empty.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/erase.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/erase2.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/find_count.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/insert.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/insert2.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/ite_arrow.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/ite_n0.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/ite_n1.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/more.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/op_sqbr.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/relational_ope.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/rev_ite_construct.cpp	4;"	d	file:
-T2	containers_test/srcs/multimap/rite.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/rite_arrow.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/swap.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/tricky_construct.cpp	5;"	d	file:
-T2	containers_test/srcs/multimap/tricky_erase.cpp	4;"	d	file:
-T2	containers_test/srcs/multiset/op_sqbr.cpp	4;"	d	file:
-T2	containers_test/srcs/set/op_sqbr.cpp	4;"	d	file:
+T1	containers_test/srcs/map/bounds.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/comp.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/copy_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/empty.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/erase2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/find_count.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/insert.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/insert2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/ite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/ite_n0.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/ite_n1.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/more.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/op_sqbr.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/relational_ope.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/rev_ite_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/rite.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/rite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/swap.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/tricky_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/map/tricky_erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/bounds.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/comp.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/copy_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/empty.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/erase2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/find_count.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/insert.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/insert2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/ite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/ite_n0.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/ite_n1.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/more.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/op_sqbr.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/relational_ope.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/rev_ite_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/rite.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/rite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/swap.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/tricky_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multimap/tricky_erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/bounds.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/comp.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/copy_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/empty.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/erase2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/find_count.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/insert.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/insert2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/ite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/ite_n0a.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/ite_n0b.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/ite_n1.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/more.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/op_sqbr.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/relational_ope.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/rev_ite_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/rite.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/rite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/swap.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/tricky_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/multiset/tricky_erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/bounds.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/comp.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/copy_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/empty.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/erase.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/erase2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/find_count.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/insert.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/insert2.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/ite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/ite_n0a.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/ite_n0b.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/ite_n1.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/more.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/op_sqbr.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/relational_ope.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/rev_ite_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/rite.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/rite_arrow.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/swap.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/tricky_construct.cpp	/^#define T1 /;"	d	file:
+T1	containers_test/srcs/set/tricky_erase.cpp	/^#define T1 /;"	d	file:
+T2	containers_test/srcs/map/bounds.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/comp.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/copy_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/empty.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/erase.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/erase2.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/find_count.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/insert.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/insert2.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/ite_arrow.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/ite_n0.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/ite_n1.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/more.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/op_sqbr.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/relational_ope.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/rev_ite_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/rite.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/rite_arrow.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/swap.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/tricky_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/map/tricky_erase.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/bounds.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/comp.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/copy_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/empty.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/erase.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/erase2.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/find_count.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/insert.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/insert2.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/ite_arrow.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/ite_n0.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/ite_n1.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/more.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/op_sqbr.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/relational_ope.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/rev_ite_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/rite.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/rite_arrow.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/swap.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/tricky_construct.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multimap/tricky_erase.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/multiset/op_sqbr.cpp	/^#define T2 /;"	d	file:
+T2	containers_test/srcs/set/op_sqbr.cpp	/^#define T2 /;"	d	file:
 T3	containers_test/srcs/map/bounds.cpp	/^typedef TESTED_NAMESPACE::map<T1, T2>::value_type T3;$/;"	t	file:
 T3	containers_test/srcs/map/copy_construct.cpp	/^typedef _pair<const T1, T2> T3;$/;"	t	file:
 T3	containers_test/srcs/map/empty.cpp	/^typedef _pair<const T1, T2> T3;$/;"	t	file:
@@ -195,105 +194,102 @@ T3	containers_test/srcs/multimap/rite_arrow.cpp	/^typedef _pair<const T1, T2> T3
 T3	containers_test/srcs/multimap/swap.cpp	/^typedef _pair<const T1, T2> T3;$/;"	t	file:
 T3	containers_test/srcs/multimap/tricky_construct.cpp	/^typedef TESTED_NAMESPACE::multimap<T1, T2>::value_type T3;$/;"	t	file:
 T3	containers_test/srcs/multimap/tricky_erase.cpp	/^typedef TESTED_NAMESPACE::multimap<T1, T2>::value_type T3;$/;"	t	file:
-TESTED_NAMESPACE	containers_test/srcs/base.hpp	5;"	d
-TESTED_NAMESPACE	containers_test/srcs/base.hpp	7;"	d
-TESTED_NAMESPACE	main.cpp	28;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/assign.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/at.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/at_const.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/bidirect_it.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/copy_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/erase.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/insert.cpp	15;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/insert2.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite_eq_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite_n0.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite_n00.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/ite_n1.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/push_pop_back.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/push_pop_front.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/relational_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/rev_ite_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/rite.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/rite2.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/rite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/rite_eq_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/size.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/deque/swap.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/assign.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/copy_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/erase.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/front_back.cpp	3;"	d	file:
+TESTED_NAMESPACE	containers_test/srcs/base.hpp	/^#  define TESTED_NAMESPACE /;"	d
+TESTED_TYPE	containers_test/srcs/deque/assign.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/at.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/at_const.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/bidirect_it.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/copy_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/erase.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/insert.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/insert2.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite_eq_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite_n0.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite_n00.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/ite_n1.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/push_pop_back.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/push_pop_front.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/relational_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/rev_ite_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/rite.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/rite2.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/rite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/rite_eq_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/size.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/deque/swap.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/assign.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/copy_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/erase.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/front_back.cpp	/^#define TESTED_TYPE /;"	d	file:
 TESTED_TYPE	containers_test/srcs/list/huge_sort.cpp	/^typedef foo<UNDER_TYPE> TESTED_TYPE;$/;"	t	file:
-TESTED_TYPE	containers_test/srcs/list/insert.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/insert2.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/ite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/ite_n0.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/ite_n1.cpp	3;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/insert.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/insert2.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/ite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/ite_n0.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/ite_n1.cpp	/^#define TESTED_TYPE /;"	d	file:
 TESTED_TYPE	containers_test/srcs/list/merge.cpp	/^typedef foo<UNDER_TYPE> TESTED_TYPE;$/;"	t	file:
-TESTED_TYPE	containers_test/srcs/list/push_pop.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/relational_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/remove.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/remove_if.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/rev_ite_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/reverse.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/rite.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/rite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/size.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/sort.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/splice.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/swap.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/list/unique.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/back.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/default.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/default_copy.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/list_copy.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/relational_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/queue/relational_ope_list.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/stack/default.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/stack/default_copy.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/stack/list_copy.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/stack/relational_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/stack/relational_ope_list.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/assign.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/at.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/at_const.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/bidirect_it.cpp	4;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/copy_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/erase.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/insert.cpp	15;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/insert2.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite_eq_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite_n0.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite_n00.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/ite_n1.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/push_pop.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/relational_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/rev_ite_construct.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/rite.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/rite2.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/rite_arrow.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/rite_eq_ope.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/size.cpp	3;"	d	file:
-TESTED_TYPE	containers_test/srcs/vector/swap.cpp	3;"	d	file:
-TESTED_TYPE	main.cpp	30;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/push_pop.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/relational_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/remove.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/remove_if.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/rev_ite_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/reverse.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/rite.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/rite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/size.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/sort.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/splice.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/swap.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/list/unique.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/back.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/default.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/default_copy.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/list_copy.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/relational_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/queue/relational_ope_list.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/stack/default.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/stack/default_copy.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/stack/list_copy.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/stack/relational_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/stack/relational_ope_list.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/assign.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/at.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/at_const.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/bidirect_it.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/copy_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/erase.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/insert.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/insert2.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite_eq_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite_n0.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite_n00.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/ite_n1.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/push_pop.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/relational_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/rev_ite_construct.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/rite.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/rite2.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/rite_arrow.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/rite_eq_ope.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/size.cpp	/^#define TESTED_TYPE /;"	d	file:
+TESTED_TYPE	containers_test/srcs/vector/swap.cpp	/^#define TESTED_TYPE /;"	d	file:
 TEST_OBJS	ft_containers_tester/Makefile	/^TEST_OBJS	=	$(TEST_SRCS:.cpp=.o)$/;"	m
 TEST_SRCS	ft_containers_tester/Makefile	/^TEST_SRCS	=	vector_tests.cpp$/;"	m
-T_SIZE_TYPE	containers_test/srcs/vector/common.hpp	8;"	d
+T_SIZE_TYPE	containers_test/srcs/vector/common.hpp	/^#define T_SIZE_TYPE /;"	d
 UNDER_TYPE	containers_test/srcs/list/huge_sort.cpp	/^typedef int UNDER_TYPE;$/;"	t	file:
 UNDER_TYPE	containers_test/srcs/list/merge.cpp	/^typedef double UNDER_TYPE;$/;"	t	file:
 VPATH	ft_containers_tester/Makefile	/^VPATH		=	tests$/;"	m
 _map	containers_test/srcs/map/comp.cpp	/^typedef TESTED_NAMESPACE::map<T1, T2> _map;$/;"	t	file:
 _multimap	containers_test/srcs/multimap/comp.cpp	/^typedef TESTED_NAMESPACE::multimap<T1, T2> _multimap;$/;"	t	file:
 _multiset	containers_test/srcs/multiset/comp.cpp	/^typedef TESTED_NAMESPACE::multiset<T1> _multiset;$/;"	t	file:
-_pair	containers_test/srcs/map/common.hpp	8;"	d
-_pair	containers_test/srcs/multimap/common.hpp	8;"	d
-_pair	containers_test/srcs/multiset/common.hpp	8;"	d
-_pair	containers_test/srcs/set/common.hpp	8;"	d
+_pair	containers_test/srcs/map/common.hpp	/^#define _pair /;"	d
+_pair	containers_test/srcs/multimap/common.hpp	/^#define _pair /;"	d
+_pair	containers_test/srcs/multiset/common.hpp	/^#define _pair /;"	d
+_pair	containers_test/srcs/set/common.hpp	/^#define _pair /;"	d
 _set	containers_test/srcs/set/comp.cpp	/^typedef TESTED_NAMESPACE::set<T1> _set;$/;"	t	file:
 _verbose	containers_test/srcs/base.hpp	/^		bool		_verbose;$/;"	m	class:foo
 a	ft_containers_tester/tests/vector/ctor_size.cpp	/^    abc a;$/;"	m	struct:big_struct	file:
@@ -312,19 +308,23 @@ abc	ft_containers_tester/tests/vector/reserve.cpp	/^    abc(int d, long n)$/;"	f
 abc	ft_containers_tester/tests/vector/reserve.cpp	/^struct abc {$/;"	s	file:
 add_value	ft_containers_tester/tests/stack/comparisons.cpp	/^void add_value(C& s, typename C::value_type value, std::size_t count)$/;"	f
 add_values	ft_containers_tester/tests/stack/comparisons.cpp	/^void add_values(C& s, typename C::value_type value, std::size_t count)$/;"	f
+alloc	map.hpp	/^      Allocator alloc;$/;"	m	class:ft::map
+alloc	rb_tree.hpp	/^        Allocator                 alloc;$/;"	m	class:ft::rb_tree
 allocate	ft_containers_tester/tests/leak_alloc.hpp	/^    T* allocate(std::size_t n, const void* hint = 0)$/;"	f	class:leak_allocator
 allocations	ft_containers_tester/tests/leak_alloc.hpp	/^    static std::map<void*, std::size_t> allocations;$/;"	m	class:leak_allocator
 allocations	ft_containers_tester/tests/leak_alloc.hpp	/^std::map<void*, std::size_t> leak_allocator<T>::allocations = std::map<void*, std::size_t>();$/;"	m	class:leak_allocator
-allocator_type	map.hpp	/^      typedef  Allocator                                      allocator_type;                                                $/;"	t	class:ft::map
+allocator_type	map.hpp	/^      typedef  Allocator                                                 allocator_type;                                                $/;"	t	class:ft::map
 allocator_type	vector.hpp	/^        typedef Allocator                              allocator_type;$/;"	t	class:ft::vector
 assign	vector.hpp	/^          void assign(typename enable_if<!is_integral<InputIt>::value,$/;"	f	class:ft::vector
 assign	vector.hpp	/^        void assign(size_type count, const T& value) {$/;"	f	class:ft::vector
+at	map.hpp	/^      T& at(const Key& key)$/;"	f	class:ft::map
 at	vector.hpp	/^        const_reference at(size_type pos) const {$/;"	f	class:ft::vector
 at	vector.hpp	/^        reference at(size_type pos) {$/;"	f	class:ft::vector
 back	vector.hpp	/^        const_reference back() const {$/;"	f	class:ft::vector
 back	vector.hpp	/^        reference back() {$/;"	f	class:ft::vector
-base	iterator.hpp	/^        const Iterator_type& base() const { return m_current; }$/;"	f	class:ft::normal_iterator
+base	iterator.hpp	/^        const Iterator_type& base() const { return current; }$/;"	f	class:ft::normal_iterator
 base	iterator.hpp	/^      Iterator_type base() const {$/;"	f	class:ft::reverse_iterator
+base	tree_iterator.hpp	/^      const tree_iterator& base() const { return current; }$/;"	f	class:ft::tree_iterator
 begin	ft_containers_tester/tests/provided.cpp	/^    iterator begin()$/;"	f	class:MutantStack
 begin	vector.hpp	/^        const_iterator begin() const { return const_iterator(this->m_start); }$/;"	f	class:ft::vector
 begin	vector.hpp	/^        iterator begin() { return iterator(this->m_start); }$/;"	f	class:ft::vector
@@ -333,6 +333,7 @@ buff	ft_containers_tester/tests/provided.cpp	/^    char buff[BUFFER_SIZE];$/;"	m
 c	stack.hpp	/^        container_type c;$/;"	m	class:ft::stack
 capacity	vector.hpp	/^        size_type capacity() const {$/;"	f	class:ft::vector
 case_insensitive	containers_test/srcs/list/sort.cpp	/^struct case_insensitive {$/;"	s	file:
+category	tree_iterator.hpp	/^      typedef std::bidirectional_iterator_tag category;$/;"	t	class:ft::tree_iterator
 checkErase	containers_test/srcs/deque/erase.cpp	/^void	checkErase(TESTED_NAMESPACE::deque<TESTED_TYPE> const &deq,$/;"	f
 checkErase	containers_test/srcs/list/erase.cpp	/^void	checkErase(TESTED_NAMESPACE::list<TESTED_TYPE> const &lst,$/;"	f
 checkErase	containers_test/srcs/vector/erase.cpp	/^void	checkErase(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct,$/;"	f
@@ -351,22 +352,23 @@ cmp	containers_test/srcs/stack/relational_ope_list.cpp	/^void	cmp(const T_STACK 
 cmp	containers_test/srcs/vector/relational_ope.cpp	/^void	cmp(const TESTED_NAMESPACE::vector<T, Alloc> &lhs, const TESTED_NAMESPACE::vector<T, Alloc> &rhs)$/;"	f
 cmp_one	containers_test/fct.sh	/^cmp_one () {$/;"	f
 comp	map.hpp	/^          Compare comp;$/;"	m	class:ft::map::value_compare
+compare	map.hpp	/^      Compare compare;$/;"	m	class:ft::map
 compare_output	containers_test/fct.sh	/^compare_output () {$/;"	f
 compile	containers_test/fct.sh	/^compile () {$/;"	f
 const_it	containers_test/srcs/map/comp.cpp	/^typedef _map::const_iterator const_it;$/;"	t	file:
 const_it	containers_test/srcs/multimap/comp.cpp	/^typedef _multimap::const_iterator const_it;$/;"	t	file:
 const_it	containers_test/srcs/multiset/comp.cpp	/^typedef _multiset::const_iterator const_it;$/;"	t	file:
 const_it	containers_test/srcs/set/comp.cpp	/^typedef _set::const_iterator const_it;$/;"	t	file:
-const_iterator	map.hpp	/^      typedef  typename bst<Key, T>::bst_iterator           const_iterator;$/;"	t	class:ft::map
+const_iterator	map.hpp	/^      typedef  tree_iterator<const value_type>                           const_iterator;$/;"	t	class:ft::map
 const_iterator	vector.hpp	/^        typedef normal_iterator<const_pointer, vector> const_iterator;$/;"	t	class:ft::vector
 const_pointer	ft_containers_tester/tests/leak_alloc.hpp	/^    typedef const T* const_pointer;$/;"	t	class:leak_allocator
-const_pointer	map.hpp	/^      typedef  typename Allocator::const_pointer              const_pointer;           $/;"	t	class:ft::map
+const_pointer	map.hpp	/^      typedef  typename Allocator::const_pointer                         const_pointer;           $/;"	t	class:ft::map
 const_pointer	vector.hpp	/^        typedef const T*                               const_pointer;$/;"	t	class:ft::vector
 const_reference	ft_containers_tester/tests/leak_alloc.hpp	/^    typedef const T& const_reference;$/;"	t	class:leak_allocator
-const_reference	map.hpp	/^      typedef  const value_type&                              const_reference;         $/;"	t	class:ft::map
+const_reference	map.hpp	/^      typedef  const value_type&                                         const_reference;         $/;"	t	class:ft::map
 const_reference	stack.hpp	/^        typedef typename Container::const_reference const_reference;$/;"	t	class:ft::stack
 const_reference	vector.hpp	/^        typedef const value_type&                      const_reference;$/;"	t	class:ft::vector
-const_reverse_iterator	map.hpp	/^      typedef  typename ft::reverse_iterator<const_iterator>  const_reverse_iterator;  $/;"	t	class:ft::map
+const_reverse_iterator	map.hpp	/^      typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  $/;"	t	class:ft::map
 const_reverse_iterator	vector.hpp	/^        typedef ft::reverse_iterator<const_iterator>   const_reverse_iterator;$/;"	t	class:ft::vector
 construct	ft_containers_tester/tests/leak_alloc.hpp	/^    void construct(pointer p, const_reference val)$/;"	f	class:leak_allocator
 container_type	containers_test/srcs/queue/back.cpp	/^typedef t_queue_<TESTED_TYPE>::container_type container_type;$/;"	t	file:
@@ -380,16 +382,19 @@ container_type	containers_test/srcs/stack/default_copy.cpp	/^typedef t_stack_::c
 container_type	containers_test/srcs/stack/list_copy.cpp	/^typedef std::list<TESTED_TYPE> container_type;$/;"	t	file:
 container_type	containers_test/srcs/stack/relational_ope.cpp	/^typedef t_stack_::container_type container_type;$/;"	t	file:
 container_type	containers_test/srcs/stack/relational_ope_list.cpp	/^typedef std::list<TESTED_TYPE> container_type;$/;"	t	file:
-container_type	main.cpp	/^typedef t_stack_::container_type container_type;$/;"	t	file:
 container_type	stack.hpp	/^        typedef Container container_type;$/;"	t	class:ft::stack
 count	ft_containers_tester/tests/prelude.hpp	/^    static std::size_t count;$/;"	m	class:ctor_dtor_checker
 count	ft_containers_tester/tests/prelude.hpp	/^std::size_t ctor_dtor_checker<T>::count = 0;$/;"	m	class:ctor_dtor_checker
+create_node	rb_tree.hpp	/^        tree_node* create_node(value_type pair)$/;"	f	class:ft::rb_tree
 cst	containers_test/srcs/multiset/relational_ope.cpp	/^void	cst(const SET &lhs, const SET &rhs)$/;"	f
 cst	containers_test/srcs/set/relational_ope.cpp	/^void	cst(const SET &lhs, const SET &rhs)$/;"	f
 ctor_dtor_checker	ft_containers_tester/tests/prelude.hpp	/^    ctor_dtor_checker()$/;"	f	class:ctor_dtor_checker
 ctor_dtor_checker	ft_containers_tester/tests/prelude.hpp	/^    ctor_dtor_checker(const ctor_dtor_checker& other)$/;"	f	class:ctor_dtor_checker
 ctor_dtor_checker	ft_containers_tester/tests/prelude.hpp	/^    explicit ctor_dtor_checker(const T& v)$/;"	f	class:ctor_dtor_checker
 ctor_dtor_checker	ft_containers_tester/tests/prelude.hpp	/^class ctor_dtor_checker$/;"	c
+current	iterator.hpp	/^        Iterator_type current;$/;"	m	class:ft::normal_iterator
+current	iterator.hpp	/^      Iterator_type current;$/;"	m	class:ft::reverse_iterator
+current	tree_iterator.hpp	/^      pointer current;$/;"	m	class:ft::tree_iterator
 data	ft_containers_tester/tests/vector/ctor_size.cpp	/^    int data;$/;"	m	struct:abc	file:
 data	ft_containers_tester/tests/vector/insert_range.cpp	/^    int data;$/;"	m	struct:abc	file:
 data	ft_containers_tester/tests/vector/iterator.cpp	/^    int data;$/;"	m	struct:abc	file:
@@ -406,7 +411,8 @@ difference_type	iterator.hpp	/^        typedef typename traits_type::difference_
 difference_type	iterator.hpp	/^      typedef std::ptrdiff_t difference_type;$/;"	t	struct:ft::iterator_traits
 difference_type	iterator.hpp	/^      typedef typename Iterator::difference_type difference_type;$/;"	t	struct:ft::iterator_traits
 difference_type	iterator.hpp	/^      typedef typename traits_type::difference_type   difference_type;$/;"	t	class:ft::reverse_iterator
-difference_type	map.hpp	/^      typedef  std::ptrdiff_t                                 difference_type;                                               $/;"	t	class:ft::map
+difference_type	map.hpp	/^      typedef  std::ptrdiff_t                                            difference_type;                                               $/;"	t	class:ft::map
+difference_type	tree_iterator.hpp	/^      typedef ptrdiff_t                       difference_type;$/;"	t	class:ft::tree_iterator
 difference_type	vector.hpp	/^        typedef std::ptrdiff_t                         difference_type;$/;"	t	class:ft::vector
 do_test	containers_test/fct.sh	/^do_test () {$/;"	f
 empty	stack.hpp	/^        bool empty() const$/;"	f	class:ft::stack
@@ -420,6 +426,10 @@ equal	utils.hpp	/^    bool equal(InputIterator1 first1, InputIterator1 last1, In
 erase	vector.hpp	/^        iterator erase(iterator first, iterator last)$/;"	f	class:ft::vector
 erase	vector.hpp	/^        iterator erase(iterator pos)$/;"	f	class:ft::vector
 false_type	utils.hpp	/^  struct false_type {};$/;"	s	namespace:ft
+find	map.hpp	/^      const_iterator find(const Key& key) const$/;"	f	class:ft::map
+find	map.hpp	/^      iterator find(const Key& key)$/;"	f	class:ft::map
+find	rb_tree.hpp	/^        iterator find(const Key& key)$/;"	f	class:ft::rb_tree
+first	utils.hpp	/^      T1 first;$/;"	m	struct:ft::pair
 first_argument_type	map.hpp	/^          typedef value_type first_argument_type;$/;"	t	class:ft::map::value_compare
 foo	containers_test/srcs/base.hpp	/^		foo(foo const &src, const bool verbose = false) : value(src.value), _verbose(verbose) { };$/;"	f	class:foo
 foo	containers_test/srcs/base.hpp	/^		foo(value_type src, const bool verbose = false) : value(src), _verbose(verbose) { };$/;"	f	class:foo
@@ -431,6 +441,7 @@ ft	iterator.hpp	/^namespace ft {$/;"	n
 ft	map.hpp	/^namespace ft {$/;"	n
 ft	rb_tree.hpp	/^namespace ft {$/;"	n
 ft	stack.hpp	/^namespace ft {$/;"	n
+ft	tree_iterator.hpp	/^namespace ft {$/;"	n
 ft	utils.hpp	/^namespace ft {$/;"	n
 ft	vector.hpp	/^namespace ft {$/;"	n
 ft_bound	containers_test/srcs/map/bounds.cpp	/^void	ft_bound(MAP &mp, const T1 &param)$/;"	f
@@ -524,6 +535,7 @@ ft_unique	containers_test/srcs/list/unique.cpp	/^void	ft_unique(TESTED_NAMESPACE
 getEmoji	containers_test/fct.sh	/^getEmoji () {$/;"	f
 getValue	containers_test/srcs/base.hpp	/^		value_type	getValue(void) const { return this->value; };$/;"	f	class:foo
 getYN	containers_test/fct.sh	/^getYN () {$/;"	f
+get_allocator	map.hpp	/^      allocator_type get_allocator() const$/;"	f	class:ft::map
 get_allocator	vector.hpp	/^        allocator_type get_allocator() const { return (this->m_alloc); }$/;"	f	class:ft::vector
 grow_capacity	vector.hpp	/^        void grow_capacity(size_type new_cap)$/;"	f	class:ft::vector
 i	containers_test/srcs/map/comp.cpp	/^static unsigned int i = 0;$/;"	v	file:
@@ -532,6 +544,9 @@ i	containers_test/srcs/multiset/comp.cpp	/^static unsigned int i = 0;$/;"	v	file
 i	containers_test/srcs/set/comp.cpp	/^static unsigned int i = 0;$/;"	v	file:
 idx	ft_containers_tester/tests/provided.cpp	/^    int idx;$/;"	m	struct:Buffer	file:
 inc	containers_test/srcs/base.hpp	/^T	inc(T it, int n)$/;"	f
+insert	map.hpp	/^      void insert(value_type value)$/;"	f	class:ft::map
+insert	rb_tree.hpp	/^        tree_node* insert(value_type pair)$/;"	f	class:ft::rb_tree
+insert	rb_tree.hpp	/^        void insert(InputIt first, InputIt last)$/;"	f	class:ft::rb_tree
 insert	vector.hpp	/^          void insert(iterator pos, typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first, InputIt last)$/;"	f	class:ft::vector
 insert	vector.hpp	/^        iterator insert(iterator pos, const T& value)$/;"	f	class:ft::vector
 insert	vector.hpp	/^        void insert(iterator pos, size_type count, const T& value)$/;"	f	class:ft::vector
@@ -539,6 +554,7 @@ insert_dispatch	vector.hpp	/^          void insert_dispatch(iterator pos, InputI
 insert_dispatch	vector.hpp	/^          void insert_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)$/;"	f	class:ft::vector
 iota	ft_containers_tester/tests/prelude.hpp	/^void iota(ForwardIt first, ForwardIt last, T value = T())$/;"	f
 isEq	containers_test/fct.sh	/^isEq () {$/;"	f
+is_black	rb_tree.hpp	/^          bool      is_black;$/;"	m	struct:ft::rb_tree::tree_node
 is_empty	containers_test/srcs/deque/size.cpp	/^void	is_empty(TESTED_NAMESPACE::deque<TESTED_TYPE> const &deq)$/;"	f
 is_empty	containers_test/srcs/list/size.cpp	/^void	is_empty(TESTED_NAMESPACE::list<TESTED_TYPE> const &lst)$/;"	f
 is_empty	containers_test/srcs/map/empty.cpp	/^void	is_empty(T const &mp)$/;"	f
@@ -548,8 +564,6 @@ is_empty	containers_test/srcs/set/empty.cpp	/^void	is_empty(T const &st)$/;"	f
 is_empty	containers_test/srcs/vector/size.cpp	/^void	is_empty(TESTED_NAMESPACE::vector<TESTED_TYPE> const &vct)$/;"	f
 is_integral	utils.hpp	/^    struct is_integral$/;"	s	namespace:ft
 is_integral	utils.hpp	/^    struct is_integral<bool>$/;"	s	namespace:ft
-is_integral	utils.hpp	/^    struct is_integral<char16_t>$/;"	s	namespace:ft
-is_integral	utils.hpp	/^    struct is_integral<char32_t>$/;"	s	namespace:ft
 is_integral	utils.hpp	/^    struct is_integral<char>$/;"	s	namespace:ft
 is_integral	utils.hpp	/^    struct is_integral<int>$/;"	s	namespace:ft
 is_integral	utils.hpp	/^    struct is_integral<long long>$/;"	s	namespace:ft
@@ -592,7 +606,8 @@ iterator	containers_test/srcs/multimap/insert.cpp	/^typedef TESTED_NAMESPACE::mu
 iterator	containers_test/srcs/multiset/insert.cpp	/^typedef TESTED_NAMESPACE::multiset<T1>::iterator iterator;$/;"	t	file:
 iterator	containers_test/srcs/set/insert.cpp	/^typedef TESTED_NAMESPACE::set<T1>::iterator iterator;$/;"	t	file:
 iterator	ft_containers_tester/tests/provided.cpp	/^    typedef typename ft::stack<T>::container_type::iterator iterator;$/;"	t	class:MutantStack	file:
-iterator	map.hpp	/^      typedef  typename bst<Key, T>::bst_iterator             iterator;                $/;"	t	class:ft::map
+iterator	map.hpp	/^      typedef  tree_iterator<value_type>                                 iterator;                $/;"	t	class:ft::map
+iterator	rb_tree.hpp	/^        typedef tree_iterator<Tp> iterator;$/;"	t	class:ft::rb_tree
 iterator	vector.hpp	/^        typedef normal_iterator<pointer, vector>       iterator;$/;"	t	class:ft::vector
 iterator_category	iterator.hpp	/^        typedef typename traits_type::iterator_category iterator_category;$/;"	t	class:ft::normal_iterator
 iterator_category	iterator.hpp	/^      typedef std::random_access_iterator_tag iterator_category;$/;"	t	struct:ft::iterator_traits
@@ -601,12 +616,15 @@ iterator_category	iterator.hpp	/^      typedef typename traits_type::iterator_ca
 iterator_traits	iterator.hpp	/^    struct iterator_traits {$/;"	s	namespace:ft
 iterator_traits	iterator.hpp	/^    struct iterator_traits<Tp*> {$/;"	s	namespace:ft
 iterator_traits	iterator.hpp	/^    struct iterator_traits<const Tp*> {$/;"	s	namespace:ft
-key_compare	map.hpp	/^      typedef  Compare                                        key_compare;                                                   $/;"	t	class:ft::map
-key_type	map.hpp	/^      typedef  Key                                            key_type;                                                      $/;"	t	class:ft::map
+key_compare	map.hpp	/^      typedef  Compare                                                   key_compare;                                                   $/;"	t	class:ft::map
+key_type	map.hpp	/^      typedef  Key                                                       key_type;                                                      $/;"	t	class:ft::map
 leak_allocator	ft_containers_tester/tests/leak_alloc.hpp	/^    leak_allocator(){};$/;"	f	class:leak_allocator
 leak_allocator	ft_containers_tester/tests/leak_alloc.hpp	/^    leak_allocator(const leak_allocator&){};$/;"	f	class:leak_allocator
 leak_allocator	ft_containers_tester/tests/leak_alloc.hpp	/^class leak_allocator$/;"	c
-leak_allocator	ft_containers_tester/tests/prelude.hpp	33;"	d
+leak_allocator	ft_containers_tester/tests/prelude.hpp	/^#define leak_allocator /;"	d
+left	rb_tree.hpp	/^          tree_node* left;$/;"	m	struct:ft::rb_tree::tree_node
+leftmost	rb_tree.hpp	/^        tree_node* leftmost()$/;"	f	class:ft::rb_tree
+leftmost	rb_tree.hpp	/^        tree_node* leftmost(tree_node* start)$/;"	f	class:ft::rb_tree
 lexicographical_compare	utils.hpp	/^    bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,$/;"	f	namespace:ft
 m	containers_test/srcs/base.hpp	/^		void m(void) const { std::cout << "foo::m const called [" << this->value << "]" << std::endl; };$/;"	f	class:foo
 m	containers_test/srcs/base.hpp	/^		void m(void) { std::cout << "foo::m called [" << this->value << "]" << std::endl; };$/;"	f	class:foo
@@ -614,8 +632,6 @@ m_alloc	vector.hpp	/^        allocator_type m_alloc;$/;"	m	class:ft::vector
 m_construct_storage	vector.hpp	/^        iterator m_construct_storage(const T& value) {$/;"	f	class:ft::vector
 m_construct_storage	vector.hpp	/^        pointer m_construct_storage(pointer dst, iterator ite1, iterator ite2)$/;"	f	class:ft::vector
 m_create_storage	vector.hpp	/^        void m_create_storage(size_t count) {$/;"	f	class:ft::vector
-m_current	iterator.hpp	/^        Iterator_type m_current;$/;"	m	class:ft::normal_iterator
-m_current	iterator.hpp	/^      Iterator_type m_current;$/;"	m	class:ft::reverse_iterator
 m_end_of_storage	vector.hpp	/^        pointer m_end_of_storage;$/;"	m	class:ft::vector
 m_finish	vector.hpp	/^        pointer m_finish;$/;"	m	class:ft::vector
 m_start	vector.hpp	/^        pointer m_start;$/;"	m	class:ft::vector
@@ -827,8 +843,13 @@ main	ft_containers_tester/tests/vector/resize.cpp	/^int main()$/;"	f
 main	ft_containers_tester/tests/vector/swap.cpp	/^int main()$/;"	f
 main	ft_containers_tester/tests/vector/types.cpp	/^int main()$/;"	f
 main	main.cpp	/^int		main(void)$/;"	f
+make_pair	utils.hpp	/^    ft::pair<T1, T2> make_pair(T1 t, T2 u)$/;"	f	namespace:ft
+map	map.hpp	/^        map(InputIt first, InputIt last,$/;"	f	class:ft::map
+map	map.hpp	/^      explicit map(const Compare& comp,$/;"	f	class:ft::map
+map	map.hpp	/^      map() : tree()$/;"	f	class:ft::map
+map	map.hpp	/^      map(const map& other) : tree(other.tree)$/;"	f	class:ft::map
 map	map.hpp	/^    class map$/;"	c	namespace:ft
-mapped_type	map.hpp	/^      typedef  T                                              mapped_type;                                                   $/;"	t	class:ft::map
+mapped_type	map.hpp	/^      typedef  T                                                         mapped_type;                                                   $/;"	t	class:ft::map
 max_size	ft_containers_tester/tests/leak_alloc.hpp	/^    size_type max_size() const$/;"	f	class:leak_allocator
 max_size	vector.hpp	/^        size_type max_size() const {$/;"	f	class:ft::vector
 mp	containers_test/srcs/map/find_count.cpp	/^TESTED_NAMESPACE::map<T1, T2> mp;$/;"	v
@@ -837,9 +858,10 @@ n	ft_containers_tester/tests/vector/ctor_size.cpp	/^    double n;$/;"	m	struct:b
 n1	ft_containers_tester/tests/vector/ctor_size.cpp	/^    long n1;$/;"	m	struct:big_struct	file:
 n2	ft_containers_tester/tests/vector/ctor_size.cpp	/^    long n2;$/;"	m	struct:big_struct	file:
 n3	ft_containers_tester/tests/vector/ctor_size.cpp	/^    long n3;$/;"	m	struct:big_struct	file:
+node_alloc	rb_tree.hpp	/^        std::allocator<tree_node> node_alloc;$/;"	m	class:ft::rb_tree
 normal_iterator	iterator.hpp	/^          normal_iterator(const normal_iterator<Iter, typename enable_if<(is_same<Iter, typename Container::pointer>::value),$/;"	f	class:ft::normal_iterator
-normal_iterator	iterator.hpp	/^        normal_iterator() : m_current(Iterator_type()) {}$/;"	f	class:ft::normal_iterator
-normal_iterator	iterator.hpp	/^        normal_iterator(const Iterator_type& i) : m_current(i) {}$/;"	f	class:ft::normal_iterator
+normal_iterator	iterator.hpp	/^        normal_iterator() : current(Iterator_type()) {}$/;"	f	class:ft::normal_iterator
+normal_iterator	iterator.hpp	/^        normal_iterator(const Iterator_type& i) : current(i) {}$/;"	f	class:ft::normal_iterator
 normal_iterator	iterator.hpp	/^    class normal_iterator {$/;"	c	namespace:ft
 num	ft_containers_tester/tests/vector/ctor_size.cpp	/^    long num;$/;"	m	struct:abc	file:
 num	ft_containers_tester/tests/vector/insert_range.cpp	/^    long num;$/;"	m	struct:abc	file:
@@ -850,6 +872,8 @@ operator !=	ft_containers_tester/tests/leak_alloc.hpp	/^    bool operator!=(cons
 operator !=	iterator.hpp	/^    bool operator!=(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator !=	iterator.hpp	/^    bool operator!=(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator !=	stack.hpp	/^    bool operator!=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator !=	tree_iterator.hpp	/^    bool operator!=(const tree_iterator<IteratorL>& lhs,$/;"	f	namespace:ft
+operator !=	utils.hpp	/^    bool operator!=(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator !=	vector.hpp	/^    bool operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 operator ()	containers_test/srcs/list/merge.cpp	/^	bool	operator()(const TESTED_TYPE &first, const TESTED_TYPE &second)$/;"	f	struct:t_cmp
 operator ()	containers_test/srcs/list/sort.cpp	/^	bool	operator()(const TESTED_TYPE &first, const TESTED_TYPE &second)$/;"	f	struct:case_insensitive
@@ -861,15 +885,18 @@ operator ()	containers_test/srcs/set/more.cpp	/^	bool	operator()(const T1 &first
 operator ()	map.hpp	/^          bool operator()(const value_type& lhs, const value_type& rhs) const$/;"	f	class:ft::map::value_compare
 operator *	iterator.hpp	/^        reference operator*() const {$/;"	f	class:ft::normal_iterator
 operator *	iterator.hpp	/^      reference operator*() const {$/;"	f	class:ft::reverse_iterator
+operator *	tree_iterator.hpp	/^      reference operator*() const {$/;"	f	class:ft::tree_iterator
 operator +	iterator.hpp	/^        normal_iterator operator+(difference_type elem) const {$/;"	f	class:ft::normal_iterator
 operator +	iterator.hpp	/^      difference_type operator+(reverse_iterator n) const {$/;"	f	class:ft::reverse_iterator
 operator +	iterator.hpp	/^      reverse_iterator operator+(difference_type n) const {$/;"	f	class:ft::reverse_iterator
 operator +	iterator.hpp	/^    normal_iterator<Iterator, Container> operator+($/;"	f	namespace:ft
 operator +	iterator.hpp	/^    reverse_iterator<Iter> operator+(typename reverse_iterator<Iter>::difference_type n, const reverse_iterator<Iter>& it)$/;"	f	namespace:ft
-operator ++	iterator.hpp	/^        normal_iterator operator++(int) { return normal_iterator(m_current++); }$/;"	f	class:ft::normal_iterator
+operator ++	iterator.hpp	/^        normal_iterator operator++(int) { return normal_iterator(current++); }$/;"	f	class:ft::normal_iterator
 operator ++	iterator.hpp	/^        normal_iterator& operator++() {$/;"	f	class:ft::normal_iterator
 operator ++	iterator.hpp	/^      reverse_iterator operator++(int) {$/;"	f	class:ft::reverse_iterator
 operator ++	iterator.hpp	/^      reverse_iterator& operator++() {$/;"	f	class:ft::reverse_iterator
+operator ++	tree_iterator.hpp	/^      tree_iterator operator++(int) { return tree_iterator(current++); }$/;"	f	class:ft::tree_iterator
+operator ++	tree_iterator.hpp	/^      tree_iterator& operator++()$/;"	f	class:ft::tree_iterator
 operator +=	iterator.hpp	/^        normal_iterator& operator+=(difference_type n) {$/;"	f	class:ft::normal_iterator
 operator +=	iterator.hpp	/^      reverse_iterator& operator+=(difference_type n) {$/;"	f	class:ft::reverse_iterator
 operator -	iterator.hpp	/^        normal_iterator operator-(difference_type elem) const {$/;"	f	class:ft::normal_iterator
@@ -882,13 +909,17 @@ operator --	iterator.hpp	/^        normal_iterator operator--(int) {$/;"	f	class
 operator --	iterator.hpp	/^        normal_iterator& operator--() {$/;"	f	class:ft::normal_iterator
 operator --	iterator.hpp	/^      reverse_iterator operator--(int) {$/;"	f	class:ft::reverse_iterator
 operator --	iterator.hpp	/^      reverse_iterator& operator--() {$/;"	f	class:ft::reverse_iterator
+operator --	tree_iterator.hpp	/^        tree_iterator operator--(int) {$/;"	f	class:ft::tree_iterator
+operator --	tree_iterator.hpp	/^        tree_iterator& operator--() {$/;"	f	class:ft::tree_iterator
 operator -=	iterator.hpp	/^        normal_iterator& operator-=(difference_type n) {$/;"	f	class:ft::normal_iterator
 operator -=	iterator.hpp	/^      reverse_iterator& operator-=(difference_type n) {$/;"	f	class:ft::reverse_iterator
-operator ->	iterator.hpp	/^        pointer operator->() const { return m_current; }$/;"	f	class:ft::normal_iterator
+operator ->	iterator.hpp	/^        pointer operator->() const { return current; }$/;"	f	class:ft::normal_iterator
 operator ->	iterator.hpp	/^      pointer operator->() const {$/;"	f	class:ft::reverse_iterator
+operator ->	tree_iterator.hpp	/^      pointer operator->() const { return current; }$/;"	f	class:ft::tree_iterator
 operator <	iterator.hpp	/^    bool operator<(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator <	iterator.hpp	/^    bool operator<(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator <	stack.hpp	/^    bool operator<( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator <	utils.hpp	/^    bool operator<(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator <	vector.hpp	/^    bool operator<(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 operator <<	containers_test/srcs/base.hpp	/^std::ostream	&operator<<(std::ostream &o, foo<T> const &bar) {$/;"	f
 operator <<	ft_containers_tester/tests/prelude.hpp	/^std::ostream& operator<<(std::ostream& os, const ctor_dtor_checker<T>& c)$/;"	f
@@ -896,6 +927,7 @@ operator <<	ft_containers_tester/tests/vector/insert_range.cpp	/^std::ostream& o
 operator <=	iterator.hpp	/^    bool operator<=(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator <=	iterator.hpp	/^    bool operator<=(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator <=	stack.hpp	/^    bool operator<=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator <=	utils.hpp	/^    bool operator<=(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator <=	vector.hpp	/^    bool operator<=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 operator =	containers_test/srcs/base.hpp	/^		foo &operator=(foo const &src) {$/;"	f	class:foo
 operator =	containers_test/srcs/base.hpp	/^		foo &operator=(value_type src) { this->value = src; return *this; };$/;"	f	class:foo
@@ -903,23 +935,30 @@ operator =	ft_containers_tester/tests/leak_alloc.hpp	/^    leak_allocator& opera
 operator =	ft_containers_tester/tests/provided.cpp	/^    MutantStack<T>& operator=(const MutantStack<T>& rhs)$/;"	f	class:MutantStack
 operator =	iterator.hpp	/^        normal_iterator& operator=(const normal_iterator& other)$/;"	f	class:ft::normal_iterator
 operator =	iterator.hpp	/^        reverse_iterator& operator=(const reverse_iterator<U>& other) {$/;"	f	class:ft::reverse_iterator
+operator =	map.hpp	/^      map& operator=(const map& other)$/;"	f	class:ft::map
 operator =	stack.hpp	/^        stack& operator=(const stack& other)$/;"	f	class:ft::stack
+operator =	tree_iterator.hpp	/^      tree_iterator& operator=(const tree_iterator& other)$/;"	f	class:ft::tree_iterator
+operator =	utils.hpp	/^      pair& operator=(const pair& other)$/;"	f	struct:ft::pair
 operator =	vector.hpp	/^        vector& operator=(const vector& other) {$/;"	f	class:ft::vector
 operator ==	ft_containers_tester/tests/leak_alloc.hpp	/^    bool operator==(const leak_allocator&)$/;"	f	class:leak_allocator
 operator ==	ft_containers_tester/tests/prelude.hpp	/^    ctor_dtor_checker& operator==(const ctor_dtor_checker& other)$/;"	f	class:ctor_dtor_checker
 operator ==	iterator.hpp	/^    bool operator==(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator ==	iterator.hpp	/^    bool operator==(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator ==	stack.hpp	/^    bool operator==( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator ==	tree_iterator.hpp	/^    bool operator==(const tree_iterator<IteratorL>& lhs,$/;"	f	namespace:ft
+operator ==	utils.hpp	/^    bool operator==(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator ==	vector.hpp	/^    bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 operator >	iterator.hpp	/^    bool operator>(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator >	iterator.hpp	/^    bool operator>(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator >	stack.hpp	/^    bool operator>( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator >	utils.hpp	/^    bool operator>(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator >	vector.hpp	/^    bool operator>(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 operator >=	iterator.hpp	/^    bool operator>=(const normal_iterator<IteratorL, Container>& lhs,$/;"	f	namespace:ft
 operator >=	iterator.hpp	/^    bool operator>=(const reverse_iterator<Iterator1>& lhs,$/;"	f	namespace:ft
 operator >=	stack.hpp	/^    bool operator>=( const ft::stack<T,Container>& lhs, const ft::stack<T,Container>& rhs )$/;"	f	namespace:ft
+operator >=	utils.hpp	/^    bool operator>=(const pair<T1, T2>& lhs, const pair<T1, T2>& rhs)$/;"	f	namespace:ft
 operator >=	vector.hpp	/^    bool operator>=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
-operator []	iterator.hpp	/^        reference operator[](difference_type n) const { return m_current[n]; }$/;"	f	class:ft::normal_iterator
+operator []	iterator.hpp	/^        reference operator[](difference_type n) const { return current[n]; }$/;"	f	class:ft::normal_iterator
 operator []	iterator.hpp	/^      reference operator[](difference_type n) const {$/;"	f	class:ft::reverse_iterator
 operator []	vector.hpp	/^        reference operator[](size_type pos) { return *(this->m_start + pos); }$/;"	f	class:ft::vector
 operator bool	utils.hpp	/^      operator bool() {$/;"	f	struct:ft::is_integral
@@ -930,6 +969,12 @@ p1	ft_containers_tester/tests/vector/ctor_size.cpp	/^    void* p1;$/;"	m	struct:
 p2	ft_containers_tester/tests/vector/ctor_size.cpp	/^    void* p2;$/;"	m	struct:big_struct	file:
 p3	ft_containers_tester/tests/vector/ctor_size.cpp	/^    void* p3;$/;"	m	struct:big_struct	file:
 p4	ft_containers_tester/tests/vector/ctor_size.cpp	/^    void* p4;$/;"	m	struct:big_struct	file:
+pair	utils.hpp	/^        pair(const pair<U1, U2>& p) : first(p.first), second(p.second)$/;"	f	struct:ft::pair
+pair	utils.hpp	/^      pair() : first(T1()), second(T2())$/;"	f	struct:ft::pair
+pair	utils.hpp	/^      pair(const T1& x, const T2& y) : first(x), second(y)$/;"	f	struct:ft::pair
+pair	utils.hpp	/^      pair(const pair& p) : first(p.first), second(p.second)$/;"	f	struct:ft::pair
+pair	utils.hpp	/^    struct pair$/;"	s	namespace:ft
+parent	rb_tree.hpp	/^          tree_node* parent;$/;"	m	struct:ft::rb_tree::tree_node
 pheader	containers_test/fct.sh	/^function pheader () {$/;"	f
 pointer	ft_containers_tester/tests/leak_alloc.hpp	/^    typedef T* pointer;$/;"	t	class:leak_allocator
 pointer	iterator.hpp	/^        typedef typename traits_type::pointer pointer;$/;"	t	class:ft::normal_iterator
@@ -937,7 +982,8 @@ pointer	iterator.hpp	/^      typedef Tp* pointer;$/;"	t	struct:ft::iterator_trai
 pointer	iterator.hpp	/^      typedef const Tp* pointer;$/;"	t	struct:ft::iterator_traits
 pointer	iterator.hpp	/^      typedef typename Iterator::pointer pointer;$/;"	t	struct:ft::iterator_traits
 pointer	iterator.hpp	/^      typedef typename traits_type::pointer           pointer;$/;"	t	class:ft::reverse_iterator
-pointer	map.hpp	/^      typedef  typename Allocator::pointer                    pointer;                 $/;"	t	class:ft::map
+pointer	map.hpp	/^      typedef  typename Allocator::pointer                               pointer;                 $/;"	t	class:ft::map
+pointer	tree_iterator.hpp	/^      typedef Tp*                             pointer;$/;"	t	class:ft::tree_iterator
 pointer	vector.hpp	/^        typedef T*                                     pointer;$/;"	t	class:ft::vector
 pop	stack.hpp	/^        void pop()$/;"	f	class:ft::stack
 pop_back	vector.hpp	/^        void pop_back()$/;"	f	class:ft::vector
@@ -963,11 +1009,16 @@ printSize	containers_test/srcs/set/common.hpp	/^void	printSize(T_SET const &st, 
 printSize	containers_test/srcs/stack/common.hpp	/^void	printSize(T_STACK &stck, bool print_content = 1)$/;"	f
 printSize	containers_test/srcs/vector/common.hpp	/^void	printSize(TESTED_NAMESPACE::vector<T> const &vct, bool print_content = true)$/;"	f
 print_err	ft_containers_tester/run_tests.sh	/^print_err() {$/;"	f
+print_map	map.hpp	/^      void print_map()$/;"	f	class:ft::map
+print_tree	rb_tree.hpp	/^        void print_tree()$/;"	f	class:ft::rb_tree
+print_tree	rb_tree.hpp	/^        void print_tree(tree_node* node, int x)$/;"	f	class:ft::rb_tree
 print_vector	ft_containers_tester/tests/print.hpp	/^void print_vector(Iter first, Iter last)$/;"	f
 print_vector	main.cpp	/^void print_vector(ft::vector<T> vec)$/;"	f
 print_vector	main.cpp	/^void print_vector(std::vector<T> vec)$/;"	f
 push	stack.hpp	/^        void push(const value_type& value)$/;"	f	class:ft::stack
 push_back	vector.hpp	/^        void push_back(const T& value)$/;"	f	class:ft::vector
+rb_tree	rb_tree.hpp	/^        rb_tree() : root_node()$/;"	f	class:ft::rb_tree
+rb_tree	rb_tree.hpp	/^    class rb_tree$/;"	c	namespace:ft
 rbegin	vector.hpp	/^        const_reverse_iterator rbegin() const$/;"	f	class:ft::vector
 rbegin	vector.hpp	/^        reverse_iterator rbegin() {$/;"	f	class:ft::vector
 rebind	ft_containers_tester/tests/leak_alloc.hpp	/^    struct rebind {$/;"	s	class:leak_allocator
@@ -977,26 +1028,34 @@ reference	iterator.hpp	/^      typedef Tp& reference;$/;"	t	struct:ft::iterator_
 reference	iterator.hpp	/^      typedef const Tp& reference;$/;"	t	struct:ft::iterator_traits
 reference	iterator.hpp	/^      typedef typename Iterator::reference reference;$/;"	t	struct:ft::iterator_traits
 reference	iterator.hpp	/^      typedef typename traits_type::reference         reference;$/;"	t	class:ft::reverse_iterator
-reference	map.hpp	/^      typedef  value_type&                                    reference;                                                     $/;"	t	class:ft::map
+reference	map.hpp	/^      typedef  value_type&                                               reference;                                                     $/;"	t	class:ft::map
 reference	stack.hpp	/^        typedef typename Container::reference   reference;$/;"	t	class:ft::stack
+reference	tree_iterator.hpp	/^      typedef Tp&                             reference;$/;"	t	class:ft::tree_iterator
 reference	vector.hpp	/^        typedef value_type&                            reference;$/;"	t	class:ft::vector
 rend	vector.hpp	/^        const_reverse_iterator rend() const$/;"	f	class:ft::vector
 rend	vector.hpp	/^        reverse_iterator rend() {$/;"	f	class:ft::vector
 reserve	vector.hpp	/^        void reserve(size_type new_cap) {$/;"	f	class:ft::vector
 resize	vector.hpp	/^        void resize(size_type count, T value = T())$/;"	f	class:ft::vector
 result_type	map.hpp	/^          typedef bool result_type;$/;"	t	class:ft::map::value_compare
-reverse_iterator	iterator.hpp	/^        reverse_iterator(const reverse_iterator<U>& other) : m_current(other.m_current) {}$/;"	f	class:ft::reverse_iterator
-reverse_iterator	iterator.hpp	/^      explicit reverse_iterator(Iterator_type x) : m_current(x) {}$/;"	f	class:ft::reverse_iterator
-reverse_iterator	iterator.hpp	/^      reverse_iterator() : m_current() {}$/;"	f	class:ft::reverse_iterator
+reverse_iterator	iterator.hpp	/^        reverse_iterator(const reverse_iterator<U>& other) : current(other.current) {}$/;"	f	class:ft::reverse_iterator
+reverse_iterator	iterator.hpp	/^      explicit reverse_iterator(Iterator_type x) : current(x) {}$/;"	f	class:ft::reverse_iterator
+reverse_iterator	iterator.hpp	/^      reverse_iterator() : current() {}$/;"	f	class:ft::reverse_iterator
 reverse_iterator	iterator.hpp	/^    class reverse_iterator : std::iterator<$/;"	c	namespace:ft
-reverse_iterator	map.hpp	/^      typedef  typename ft::reverse_iterator<iterator>      reverse_iterator;        $/;"	t	class:ft::map
+reverse_iterator	map.hpp	/^      typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        $/;"	t	class:ft::map
 reverse_iterator	vector.hpp	/^        typedef ft::reverse_iterator<iterator>         reverse_iterator;$/;"	t	class:ft::vector
+right	rb_tree.hpp	/^          tree_node* right;$/;"	m	struct:ft::rb_tree::tree_node
+rightmost	rb_tree.hpp	/^        tree_node* rightmost()$/;"	f	class:ft::rb_tree
+rightmost	rb_tree.hpp	/^        tree_node* rightmost(tree_node* start)$/;"	f	class:ft::rb_tree
+root	rb_tree.hpp	/^        tree_node* root() const$/;"	f	class:ft::rb_tree
+root	rb_tree.hpp	/^        tree_node* root()$/;"	f	class:ft::rb_tree
+root_node	rb_tree.hpp	/^        tree_node*                root_node;$/;"	m	class:ft::rb_tree
 same_integral_part	containers_test/srcs/list/unique.cpp	/^bool	same_integral_part(TESTED_TYPE first, TESTED_TYPE second)$/;"	f
+second	utils.hpp	/^      T2 second;$/;"	m	struct:ft::pair
 second_argument_type	map.hpp	/^          typedef value_type second_argument_type;$/;"	t	class:ft::map::value_compare
 size	stack.hpp	/^        size_type size() const$/;"	f	class:ft::stack
 size	vector.hpp	/^        size_type size() const {$/;"	f	class:ft::vector
 size_type	ft_containers_tester/tests/leak_alloc.hpp	/^    typedef std::size_t size_type;$/;"	t	class:leak_allocator
-size_type	map.hpp	/^      typedef  std::size_t                                    size_type;                                                     $/;"	t	class:ft::map
+size_type	map.hpp	/^      typedef  std::size_t                                               size_type;                                                     $/;"	t	class:ft::map
 size_type	stack.hpp	/^        typedef typename Container::size_type   size_type;$/;"	t	class:ft::stack
 size_type	vector.hpp	/^        typedef std::size_t                            size_type;$/;"	t	class:ft::vector
 spliced	containers_test/srcs/list/splice.cpp	/^unsigned int spliced = 0;$/;"	v
@@ -1013,18 +1072,17 @@ swap	vector.hpp	/^        void swap(vector& other)$/;"	f	class:ft::vector
 swap	vector.hpp	/^    void swap(ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)$/;"	f	namespace:ft
 switchVerbose	containers_test/srcs/base.hpp	/^		void		switchVerbose(void) { this->_verbose = !(this->_verbose); };$/;"	f	class:foo
 t_cmp	containers_test/srcs/list/merge.cpp	/^struct t_cmp {$/;"	s	file:
-t_queue_	containers_test/srcs/queue/back.cpp	4;"	d	file:
-t_queue_	containers_test/srcs/queue/default.cpp	4;"	d	file:
-t_queue_	containers_test/srcs/queue/default_copy.cpp	4;"	d	file:
-t_queue_	containers_test/srcs/queue/list_copy.cpp	6;"	d	file:
-t_queue_	containers_test/srcs/queue/relational_ope.cpp	4;"	d	file:
-t_queue_	containers_test/srcs/queue/relational_ope_list.cpp	6;"	d	file:
-t_stack_	containers_test/srcs/stack/default.cpp	4;"	d	file:
-t_stack_	containers_test/srcs/stack/default_copy.cpp	4;"	d	file:
-t_stack_	containers_test/srcs/stack/list_copy.cpp	6;"	d	file:
-t_stack_	containers_test/srcs/stack/relational_ope.cpp	4;"	d	file:
-t_stack_	containers_test/srcs/stack/relational_ope_list.cpp	6;"	d	file:
-t_stack_	main.cpp	29;"	d	file:
+t_queue_	containers_test/srcs/queue/back.cpp	/^#define t_queue_ /;"	d	file:
+t_queue_	containers_test/srcs/queue/default.cpp	/^#define t_queue_ /;"	d	file:
+t_queue_	containers_test/srcs/queue/default_copy.cpp	/^#define t_queue_ /;"	d	file:
+t_queue_	containers_test/srcs/queue/list_copy.cpp	/^#define t_queue_ /;"	d	file:
+t_queue_	containers_test/srcs/queue/relational_ope.cpp	/^#define t_queue_ /;"	d	file:
+t_queue_	containers_test/srcs/queue/relational_ope_list.cpp	/^#define t_queue_ /;"	d	file:
+t_stack_	containers_test/srcs/stack/default.cpp	/^#define t_stack_ /;"	d	file:
+t_stack_	containers_test/srcs/stack/default_copy.cpp	/^#define t_stack_ /;"	d	file:
+t_stack_	containers_test/srcs/stack/list_copy.cpp	/^#define t_stack_ /;"	d	file:
+t_stack_	containers_test/srcs/stack/relational_ope.cpp	/^#define t_stack_ /;"	d	file:
+t_stack_	containers_test/srcs/stack/relational_ope_list.cpp	/^#define t_stack_ /;"	d	file:
 test	ft_containers_tester/tests/provided.cpp	/^int test()$/;"	f
 test_begin	ft_containers_tester/tests/vector/iterator.cpp	/^static void test_begin()$/;"	f	file:
 test_end	ft_containers_tester/tests/vector/iterator.cpp	/^static void test_end()$/;"	f	file:
@@ -1044,7 +1102,11 @@ top	stack.hpp	/^        const_reference top() const$/;"	f	class:ft::stack
 top	stack.hpp	/^        reference top()$/;"	f	class:ft::stack
 traits_type	iterator.hpp	/^        typedef iterator_traits<Iterator_type> traits_type;$/;"	t	class:ft::normal_iterator
 traits_type	iterator.hpp	/^      typedef iterator_traits<Iterator_type> traits_type;$/;"	t	class:ft::reverse_iterator
-tree	map.hpp	/^        rb_tree tree;$/;"	m	class:ft::map
+tree	map.hpp	/^      rb_tree<value_type, allocator_type> tree;$/;"	m	class:ft::map
+tree_iterator	tree_iterator.hpp	/^      tree_iterator() : current(pointer()) {}$/;"	f	class:ft::tree_iterator
+tree_iterator	tree_iterator.hpp	/^      tree_iterator(const pointer& i) : current(i) {}$/;"	f	class:ft::tree_iterator
+tree_iterator	tree_iterator.hpp	/^    class tree_iterator$/;"	c	namespace:ft
+tree_node	rb_tree.hpp	/^        struct tree_node $/;"	s	class:ft::rb_tree
 true_type	utils.hpp	/^  struct true_type {};$/;"	s	namespace:ft
 type	utils.hpp	/^      typedef T type;$/;"	t	struct:ft::enable_if
 type	utils.hpp	/^      typedef false_type type;$/;"	t	struct:ft::is_integral
@@ -1052,6 +1114,7 @@ type	utils.hpp	/^      typedef false_type type;$/;"	t	struct:ft::is_same
 type	utils.hpp	/^      typedef true_type type;$/;"	t	struct:ft::is_integral
 value	containers_test/srcs/base.hpp	/^		value_type	value;$/;"	m	class:foo
 value	ft_containers_tester/tests/prelude.hpp	/^    T value;$/;"	m	class:ctor_dtor_checker
+value	rb_tree.hpp	/^          Tp        value;$/;"	m	struct:ft::rb_tree::tree_node
 value	utils.hpp	/^      static const bool value = false;$/;"	m	struct:ft::is_integral
 value	utils.hpp	/^      static const bool value = false;$/;"	m	struct:ft::is_same
 value	utils.hpp	/^      static const bool value = true;$/;"	m	struct:ft::is_integral
@@ -1064,8 +1127,10 @@ value_type	iterator.hpp	/^        typedef typename traits_type::value_type value
 value_type	iterator.hpp	/^      typedef Tp value_type;$/;"	t	struct:ft::iterator_traits
 value_type	iterator.hpp	/^      typedef typename Iterator::value_type value_type;$/;"	t	struct:ft::iterator_traits
 value_type	iterator.hpp	/^      typedef typename traits_type::value_type        value_type;$/;"	t	class:ft::reverse_iterator
-value_type	map.hpp	/^      typedef  std::pair<const Key,T>                         value_type;$/;"	t	class:ft::map
+value_type	map.hpp	/^      typedef  std::pair<const Key, T>                                   value_type;$/;"	t	class:ft::map
+value_type	rb_tree.hpp	/^        typedef Tp value_type;$/;"	t	class:ft::rb_tree
 value_type	stack.hpp	/^        typedef typename Container::value_type value_type;$/;"	t	class:ft::stack
+value_type	tree_iterator.hpp	/^      typedef Tp                              value_type;$/;"	t	class:ft::tree_iterator
 value_type	utils.hpp	/^      typedef bool value_type;$/;"	t	struct:ft::is_integral
 value_type	utils.hpp	/^      typedef bool value_type;$/;"	t	struct:ft::is_same
 value_type	vector.hpp	/^        typedef T                                      value_type;$/;"	t	class:ft::vector
@@ -1109,5 +1174,6 @@ vector	vector.hpp	/^    class vector {$/;"	c	namespace:ft
 ~MutantStack	ft_containers_tester/tests/provided.cpp	/^    ~MutantStack()$/;"	f	class:MutantStack
 ~ctor_dtor_checker	ft_containers_tester/tests/prelude.hpp	/^    ~ctor_dtor_checker()$/;"	f	class:ctor_dtor_checker
 ~foo	containers_test/srcs/base.hpp	/^		~foo(void) { if (this->_verbose) std::cout << "~foo::foo()" << std::endl; };$/;"	f	class:foo
+~map	map.hpp	/^      ~map()$/;"	f	class:ft::map
 ~stack	stack.hpp	/^        ~stack()$/;"	f	class:ft::stack
 ~vector	vector.hpp	/^        ~vector() {$/;"	f	class:ft::vector

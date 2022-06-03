@@ -77,34 +77,6 @@ namespace ft {
       }
     };
 
-  /*
-  template <>
-    struct is_integral<char16_t>
-    {
-      typedef true_type type;
-      typedef bool value_type;
-
-      static const bool value = true;
-      operator bool() {
-        return value;
-      }
-    };
-    */
-
-  /*
-  template <>
-    struct is_integral<char32_t>
-    {
-      typedef true_type type;
-      typedef bool value_type;
-
-      static const bool value = true;
-      operator bool() {
-        return value;
-      }
-    };
-    */
-
   template <>
     struct is_integral<wchar_t>
     {
@@ -170,7 +142,7 @@ namespace ft {
    */
   template <typename InputIterator1, typename InputIterator2>
     bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
-                                 InputIterator2 first2, InputIterator2 last2)
+        InputIterator2 first2, InputIterator2 last2)
     {
       for (; first1 != last1 && first2 != last2; ++first1, ++first2)
       {
@@ -186,14 +158,14 @@ namespace ft {
 
   template <typename InputIterator1, typename InputIterator2>
     bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2)
-  {
-    for (; first1 != last1; ++first1, ++first2)
     {
-      if (*first1 != *first2)
-        return 0;
+      for (; first1 != last1; ++first1, ++first2)
+      {
+        if (*first1 != *first2)
+          return 0;
+      }
+      return 1;
     }
-    return 1;
-  }
 
   /*
    * Implementation of pair:
@@ -213,10 +185,14 @@ namespace ft {
       {
       }
 
+      pair(T1& x, T2& y) : first(x), second(y)
+      {
+      }
+
       template <typename U1, typename U2>
         pair(const pair<U1, U2>& p) : first(p.first), second(p.second)
-        {
-        }
+      {
+      }
 
       pair(const pair& p) : first(p.first), second(p.second)
       {
@@ -272,5 +248,4 @@ namespace ft {
     {
       return (lhs > rhs || lhs == rhs);
     }
-
 }
