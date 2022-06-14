@@ -8,7 +8,7 @@
 
 namespace ft {
 
-  template <typename Key, typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<std::pair<const Key, T> > >
+  template <typename Key, typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<pair<const Key, T> > >
     class map
     {    
       public:
@@ -18,7 +18,7 @@ namespace ft {
        */
       typedef  Key                                                       key_type;                                                      
       typedef  T                                                         mapped_type;                                                   
-      typedef  ft::pair<const Key, T>                                    value_type;
+      typedef  pair<const Key, T>                                    value_type;
       typedef  std::size_t                                               size_type;                                                     
       typedef  std::ptrdiff_t                                            difference_type;                                               
       typedef  Compare                                                   key_compare;                                                   
