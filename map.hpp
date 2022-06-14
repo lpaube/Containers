@@ -8,17 +8,18 @@
 
 namespace ft {
 
-  template <typename Key, typename T, typename Compare = std::less<Key>, typename Allocator = std::allocator<pair<const Key, T> > >
+  template <typename Key,
+            typename T,
+            typename Compare = std::less<Key>,
+            typename Allocator = std::allocator<ft::pair<const Key, T> > >
     class map
     {    
       public:
 
-      /*
-       * Member types
-       */
+       //* ======================= Member types ===================== *
       typedef  Key                                                       key_type;                                                      
       typedef  T                                                         mapped_type;                                                   
-      typedef  pair<const Key, T>                                    value_type;
+      typedef  pair<const Key, T>                                        value_type;
       typedef  std::size_t                                               size_type;                                                     
       typedef  std::ptrdiff_t                                            difference_type;                                               
       typedef  Compare                                                   key_compare;                                                   
@@ -37,42 +38,16 @@ namespace ft {
       Allocator alloc;
       Compare compare;
 
-      /*
-       * std::map::value_compare is a function object that compares objects 
-       * of type std::map::value_type (key-value pairs) by comparing of the
-       * first components of the pairs.
-       */
-      class value_compare
-      {
-        protected:
-          Compare comp;
-
-        public:
-          typedef bool result_type;
-          typedef value_type first_argument_type;
-          typedef value_type second_argument_type;
-
-        protected:
-          value_compare(Compare c) : comp(c) {}
-
-        public:
-          bool operator()(const value_type& lhs, const value_type& rhs) const
-          {
-            comp(lhs.first, rhs.first);
-          }
-      };
-
       public:
-      /*
-       * Map constructors
-       */
-      map() : tree()
+       //* ======================= Member functions ===================== *
+       
+       // Map constructors 
+      map()
       {
       }
 
       explicit map(const Compare& comp,
           const Allocator& alloc = Allocator())
-        : tree(), compare(comp), alloc(alloc)
       {
       }
 
@@ -80,63 +55,99 @@ namespace ft {
         map(InputIt first, InputIt last,
             const Compare& comp = Compare(),
             const Allocator& alloc = Allocator())
-        : tree(), compare(comp), alloc(alloc)
         {
-          tree.insert(first, last);
         }
 
-      map(const map& other) : tree(other.tree)
+      map(const map& other)
       {
       }
 
-      /*
-       * Map destructor
-       */
+      // Map destructor
       ~map()
       {
       }
 
-      /*
-       * Map copy assignment operator
-       */
-      map& operator=(const map& other) const
+      // Map assignment operator overload
+      map& operator=(const map& other)
       {
-        tree = other.tree;
-        return *this;
       }
 
-      /*
-       * Returns the allocator associated with the container
-       */
+      // Map allocator getter
       allocator_type get_allocator() const
       {
-        return alloc;
       }
 
-      /*
-       * Element access
-       */
+      // Element access
       T& at(const Key& key)
       {
-        // Need to do error checking here (std::out_of_range)
-        iterator ite = find(key);
-        return (*ite).second;
       }
 
-      /*
-       * Iterators
-       */
+      const T& at(const Key& key) const
+      {
+      }
+
+      T& operator[](const Key& key)
+      {
+      }
+
+      // Iterators
+      iterator begin()
+      {
+      }
       
+      const_iterator begin() const
+      {
+      }
 
+      iterator end()
+      {
+      }
 
-      /*
-       * Modifiers
-       */
+      const_iterator end() const
+      {
+      }
 
+      reverse_iterator rbegin()
+      {
+      }
+
+      const_reverse_iterator rbegin() const
+      {
+      }
+
+      reverse_iterator rend()
+      {
+      }
+
+      const_reverse_iterator rend() const
+      {
+      }
+
+      // Capacity
+      bool empty() const
+      {
+      }
+
+      size_type size const
+      {
+      }
+      
+      size_type max_size() const
+      {
+      }
+
+      // Modifiers
+      void clear()
+      {
+      }
+
+      ft::pair
+      
+      
+      
+      
       void insert(const value_type& value)
       {
-        std::cout << "map insert here" << std::endl;
-        tree.insert(value);
       }
 
       /*
