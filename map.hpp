@@ -99,7 +99,7 @@ namespace ft {
       /*
        * Map copy assignment operator
        */
-      map& operator=(const map& other)
+      map& operator=(const map& other) const
       {
         tree = other.tree;
         return *this;
@@ -133,7 +133,7 @@ namespace ft {
        * Modifiers
        */
 
-      void insert(value_type value)
+      void insert(const value_type& value)
       {
         std::cout << "map insert here" << std::endl;
         tree.insert(value);

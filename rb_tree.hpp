@@ -98,7 +98,7 @@ namespace ft {
           return new_node;
         }
 
-        tree_node* insert(value_type pair)
+        tree_node* insert(const value_type& pair)
         {
           tree_node* tmp = root_node;
 
