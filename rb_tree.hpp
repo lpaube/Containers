@@ -50,6 +50,7 @@ namespace ft {
                   new_node->left = NULL;
                   new_node->right = NULL;
                   new_node->is_red = false;
+                  node_alloc_.consturct(new_node, new_value);
                   return new_node;
                 }
 
@@ -62,9 +63,14 @@ namespace ft {
 
                void insert(const value_type& value)
                {
-                
+                  if (root_node_ == NULL)
+                  {
+                    root_node_ = construct_node(value);
+                  }
+                  else
+                  {
+
+                  }
                }
-
-
              };
 }
