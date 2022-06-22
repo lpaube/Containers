@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "my_vector.hpp"
 #include <sstream>
 #include <iterator>
 /*
@@ -30,4 +29,8 @@ int main(void)
 {
   ft::map<int, std::string> map_test;
   map_test.insert(ft::pair<int, std::string>(4, "wowow"));
+  map_test.insert(ft::pair<int, std::string>(6, "this is sicks (6)"));
+  map_test.insert(ft::pair<int, std::string>(1, "this is one"));
+  map_test.insert(ft::pair<int, std::string>(8, "this is eight"));
+  map_test.print_map();
 }
