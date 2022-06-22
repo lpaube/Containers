@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 namespace ft {
   // Implementation of enable-if
   template <bool, typename T = void>
@@ -174,8 +176,11 @@ namespace ft {
   template <typename T1, typename T2>
     struct pair
     {
-      T1 first;
-      T2 second;
+      typedef T1 first_type;
+      typedef T2 second_type;
+
+      first_type first;
+      second_type second;
 
       pair() : first(T1()), second(T2())
       {
@@ -183,10 +188,12 @@ namespace ft {
 
       pair(const T1& x, const T2& y) : first(x), second(y)
       {
+        std::cerr << "pair constructor called: pair(const T1& x, const T2& y)" << std::endl;
       }
 
       pair(T1& x, T2& y) : first(x), second(y)
       {
+        std::cerr << "pair constructor called: pair(T1& x, T2& y)" << std::endl;
       }
 
       template <typename U1, typename U2>

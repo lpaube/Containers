@@ -7,12 +7,12 @@ namespace ft {
 
 
   template <typename value_type>
-    class tree_node
+    class rbt_node
     {
       public:
-        tree_node* parent;
-        tree_node* left;
-        tree_node* right;
+        rbt_node* parent;
+        rbt_node* left;
+        rbt_node* right;
         value_type data;
         bool  is_red;
     };
@@ -22,31 +22,42 @@ namespace ft {
            typename Allocator>
              class rb_tree
              {
-               typedef typename Allocator::template rebind<tree_node<value_type>>::other node_allocator;
-               typedef tree_node<value_type> tree_node;
+               typedef typename Allocator::template rebind<rbt_node<value_type> >::other node_allocator;
+               typedef rbt_node<value_type> tree_node;
+               typedef tree_node*           tree_node_ptr;
 
                private:
-               tree_node  end_node;
-               tree_node  root_node;
-               node_allocator node_alloc;
+               tree_node_ptr  end_node_;
+               tree_node_ptr  root_node_;
+               node_allocator node_alloc_;
                Compare comp;
 
                private:
-                tree_node construct_node()
+                tree_node_ptr construct_node()
                 {
-                  tree_node new_node = node_alloc.allocate(1);
+                  tree_node_ptr new_node = node_alloc_.allocate(1);
                   new_node->parent = NULL;
                   new_node->left = NULL;
                   new_node->right = NULL;
-                  new_node->data = value_type();
                   new_node->is_red = false;
+                  return new_node;
+                }
+
+                tree_node_ptr construct_node(value_type new_value)
+                {
+                  tree_node_ptr new_node = node_alloc_.allocate(1);
+                  new_node->parent = NULL;
+                  new_node->left = NULL;
+                  new_node->right = NULL;
+                  new_node->is_red = false;
+                  return new_node;
                 }
 
                 public:
 
-               rb_tree() : node_alloc(node_allocator())
+               rb_tree() : node_alloc_(node_allocator())
                {
-                  end_node = construct_node();
+                  end_node_ = construct_node();
                }
 
                void insert(const value_type& value)

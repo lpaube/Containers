@@ -1,7 +1,10 @@
-containers: main.cpp vector.hpp
-	clang++ -Wall -Wextra -std=c++98 -g main.cpp -o containers
+
+CFILES = main.cpp map.hpp vector.hpp rb_tree.hpp
+
+ft_containers: $(CFILES)
+	clang++ -Wall -Wextra -std=c++98 -g main.cpp -o ft_containers
 
 clean:
-	rm -rf containers
+	rm -rf ft_containers
 
-re: clean containers
+re: clean ft_containers

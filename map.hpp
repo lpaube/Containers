@@ -19,7 +19,7 @@ namespace ft
                  // ======================= Member types =====================
                  typedef  Key                                                       key_type;                                                      
                  typedef  T                                                         mapped_type;                                                   
-                 typedef  pair<const Key, T>                                        value_type;
+                 typedef  pair<Key, T>                                        value_type;
                  typedef  std::size_t                                               size_type;                                                     
                  typedef  std::ptrdiff_t                                            difference_type;                                               
                  typedef  Compare                                                   key_compare;                                                   
@@ -34,9 +34,9 @@ namespace ft
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
                private:
-                 rb_tree<value_type, Compare, Allocator> _tree;
-                 allocator_type _alloc;
-                 Compare _comp;
+                 rb_tree<value_type, Compare, Allocator> tree_;
+                 allocator_type alloc_;
+                 Compare comp_;
 
 
                public:
@@ -48,9 +48,9 @@ namespace ft
                  typedef value_type  second_argument_type;
 
                  protected:
-                 Compare _comp;
+                 Compare comp_;
 
-                 value_compare(Compare c) : _comp(c)
+                 value_compare(Compare c) : comp_(c)
                  {
                  }
 
@@ -64,12 +64,12 @@ namespace ft
                  // ======================= Member functions =====================
 
                  // Map constructors 
-                 map() : _tree()
+                 map() : tree_()
                  {
                  }
 
                  explicit map(const Compare& comp,
-                     const Allocator& alloc = Allocator()) : _tree(), _comp(comp), _alloc(alloc)
+                     const Allocator& alloc = Allocator()) : tree_(), comp_(comp), alloc_(alloc)
                  {
                  }
 
@@ -165,7 +165,7 @@ namespace ft
 
                  void /*ft::pair<iterator, bool>*/ insert(const value_type& value)
                  {
-                   _tree.insert(value);
+                   tree_.insert(value);
                  }
 
                  iterator insert(iterator hint, const value_type& value)
