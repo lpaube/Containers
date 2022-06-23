@@ -1,10 +1,11 @@
 #pragma once
 
 #include <iostream>
-#include "tree_iterator.hpp"
+#include "rbt_iterator.hpp"
+#include "iterator.hpp"
+#include "utils.hpp"
 
 namespace ft {
-
 
   template <typename value_type>
     class rbt_node
@@ -30,6 +31,10 @@ namespace ft {
                  typedef rbt_node<value_type> tree_node;
                  typedef tree_node*           tree_node_ptr;
                  typedef Allocator            pair_allocator;
+                 typedef  rbt_iterator<tree_node>                                 iterator;                
+                 typedef  rbt_iterator<const tree_node>                           const_iterator;
+                 typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
+                 typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
                  /*
                   * Member variables
@@ -59,6 +64,7 @@ namespace ft {
                    if (root_node_ == NULL)
                    {
                      root_node_ = construct_node(value, end_node_);
+                     end_node_->right = root_node_;
                      return;
                    }
                    tree_node_ptr parent_node = find_parent_pos(value, root_node_);
@@ -74,12 +80,25 @@ namespace ft {
                    }
                  }
 
-                 void print_tree()
+                  iterator begin()
+                  {
+                    return iterator(get_first_node());
+                  }
+
+                 void print_tree() const
                  {
                    inorder(root_node_, &rb_tree::print_node);
                  }
 
                private:
+
+                 tree_node_ptr get_first_node(tree_node_ptr node)
+                 {
+                   if (node->left == NULL)
+                     return node;
+                   return get_first_node(node->left);
+                 }
+
                  tree_node_ptr construct_node()
                  {
                    tree_node_ptr new_node = node_alloc_.allocate(1);
@@ -133,7 +152,7 @@ namespace ft {
                    }
                  }
 
-                 void print_node(const tree_node_ptr node)
+                 static void print_node(const tree_node_ptr node)
                  {
                    std::cout << "Key: " << node->data.first << " | Value: " << node->data.second << std::endl;
                  }

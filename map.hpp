@@ -4,7 +4,7 @@
 #include <map>
 #include "iterator.hpp"
 #include "rb_tree.hpp"
-#include "tree_iterator.hpp"
+#include "rbt_iterator.hpp"
 #include "utils.hpp"
 
 namespace ft
@@ -17,6 +17,7 @@ namespace ft
              class map
              {    
                  // ======================= Member types =====================
+               public:
                  typedef  Key                                                       key_type;                                                      
                  typedef  T                                                         mapped_type;                                                   
                  typedef  pair<const Key, T>                                        value_type;
@@ -28,8 +29,10 @@ namespace ft
                  typedef  const value_type&                                         const_reference;         
                  typedef  typename Allocator::pointer                               pointer;                 
                  typedef  typename Allocator::const_pointer                         const_pointer;           
-                 typedef  tree_iterator<value_type>                                 iterator;                
-                 typedef  tree_iterator<const value_type>                           const_iterator;
+                 //typedef  rbt_iterator<rbt_node<value_type>>                        iterator;
+                 //typedef  rbt_iterator<const rbt_node<value_type>>                  const_iterator;
+                 typedef  typename rb_tree::iterator                              iterator;
+                 typedef  typename rb_tree::const_iterator                        const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
@@ -37,7 +40,6 @@ namespace ft
                  rb_tree<value_type, Compare, Allocator> tree_;
                  allocator_type alloc_;
                  Compare comp_;
-
 
                public:
                  // ======================= Member classes =====================
@@ -97,6 +99,7 @@ namespace ft
                  // Map allocator getter
                  allocator_type get_allocator() const
                  {
+                   return alloc_;
                  }
 
                  // Element access
@@ -115,6 +118,7 @@ namespace ft
                  // Iterators
                  iterator begin()
                  {
+                   return tree_.begin();
                  }
 
                  const_iterator begin() const
