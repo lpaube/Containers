@@ -40,10 +40,7 @@ namespace ft {
           return *this;
         }
 
-        rbt_iterator operator++() {
-          //return tree_increment(current_);
-          if (current_ == NULL)
-            return NULL;
+        rbt_iterator& operator++() {
           if (current_->right != NULL)
           {
             current_ = current_->right;
@@ -51,28 +48,52 @@ namespace ft {
             {
               current_ = current_->left;
             }
-            return rbt_iterator(current_);
+            return *this;
           }
           else
           {
             while (current_->parent != NULL
-                && comp_(current_->data.first < current_->parent->data.first) == 1)
+                && current_->parent->right == current_)
             {
               current_ = current_->parent;
             }
-            return rbt_iterator(current_->parent);
+            current_ = current_->parent;
+            return *this;
           }
         }
 
-        rbt_iterator operator++(int) { return rbt_iterator(current_++); }
+        rbt_iterator operator++(int) {
+          rbt_iterator tmp_it = *this;
+          ++(*this);
+          return tmp_it;
+        }
 
         rbt_iterator& operator--() {
-          --current_;
-          return *this;
+          if (current_->left != NULL)
+          {
+            current_ = current_->left;
+            while (current_->right != NULL)
+            {
+              current_ = current_->right;
+            }
+            return *this;
+          }
+          else
+          {
+            while (current_->parent != NULL
+                && current_->parent->left == current_)
+            {
+              current_ = current_->parent;
+            }
+            current_ = current_->parent;
+            return *this;
+          }
         }
 
         rbt_iterator operator--(int) {
-          return rbt_iterator(current_--);
+          rbt_iterator tmp_it = *this;
+          --(*this);
+          return tmp_it;
         }
 
         const pointer& base() const { return current_; }

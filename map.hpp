@@ -65,13 +65,8 @@ namespace ft
 
                  // ======================= Member functions =====================
 
-                 // Map constructors 
-                 map() : tree_()
-                 {
-                 }
-
                  explicit map(const Compare& comp = Compare(),
-                     const Allocator& alloc = Allocator()) : tree_(), comp_(comp), alloc_(alloc)
+                     const Allocator& alloc = Allocator()) : comp_(comp), alloc_(alloc)
                  {
                  }
 
@@ -127,6 +122,7 @@ namespace ft
 
                  iterator end()
                  {
+                   return tree_.end();
                  }
 
                  const_iterator end() const

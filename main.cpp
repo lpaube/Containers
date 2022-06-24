@@ -32,9 +32,29 @@ int main(void)
   map_test.insert(ft::pair<int, std::string>(6, "this is sicks (6)"));
   map_test.insert(ft::pair<int, std::string>(1, "this is one"));
   map_test.insert(ft::pair<int, std::string>(8, "this is eight"));
+  std::cout << "===== Printing test_map =====" << std::endl;
+  map_test.print_map();
+  std::cout << "===== End of printing test_map =====" << std::endl;
+
+
+  std::cout << "===== Printing begin() iterator ++ =====" << std::endl;
   ft::map<int, std::string>::iterator it = map_test.begin();
   std::cout << "ite begin: " << it->first << std::endl;
   ++it;
   std::cout << "++it begin: " << it->first << std::endl;
-  //map_test.print_map();
+  ++it;
+  std::cout << "++it begin: " << it->first << std::endl;
+  ++it;
+  std::cout << "++it begin: " << it->first << std::endl;
+
+  std::cout << "===== Printing end() iterator -- =====" << std::endl;
+  ft::map<int, std::string>::iterator ite = map_test.end();
+  --ite;
+  std::cout << "ite end --: " << ite->first << std::endl;
+  --ite;
+  std::cout << "--ite begin: " << ite->first << std::endl;
+  --ite;
+  std::cout << "--ite begin: " << ite->first << std::endl;
+  --ite;
+  std::cout << "--ite begin: " << ite->first << std::endl;
 }

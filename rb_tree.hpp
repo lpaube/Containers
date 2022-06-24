@@ -44,10 +44,11 @@ namespace ft {
                   */
                public:
                  // tree constructor
-                 rb_tree(const value_compare& comp)
+                 rb_tree()
                    : root_node_(NULL)
                      , node_alloc_(node_allocator())
                      , pair_alloc_(pair_allocator())
+                     , comp_(Compare())
                {
                  end_node_ = construct_node();
                }
@@ -57,7 +58,7 @@ namespace ft {
                    if (root_node_ == NULL)
                    {
                      root_node_ = construct_node(value, end_node_);
-                     end_node_->right = root_node_;
+                     end_node_->left = root_node_;
                      return;
                    }
                    tree_node_ptr parent_node = find_parent_pos(value, root_node_);
@@ -80,36 +81,12 @@ namespace ft {
 
                  iterator end()
                  {
-                   return NULL;
+                   return end_node_;
                  }
 
                  void print_tree()
                  {
                    inorder(root_node_, &rb_tree::print_node);
-                 }
-
-                 iterator tree_increment(tree_node_ptr node)
-                 {
-                   if (node == NULL)
-                     return NULL;
-                   if (node->right != NULL)
-                   {
-                     node = node->right;
-                     while (node->left != NULL)
-                     {
-                       node = node->left;
-                     }
-                     return iterator(node);
-                   }
-                   else
-                   {
-                     while (node->parent != NULL
-                         && comp_(node->data.first < node->parent.first) == 1)
-                     {
-                       node = node->parent;
-                     }
-                     return (node->parent);
-                   }
                  }
 
                private:

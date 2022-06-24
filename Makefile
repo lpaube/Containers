@@ -1,5 +1,5 @@
 
-CFILES = main.cpp map.hpp vector.hpp rb_tree.hpp
+CFILES = main.cpp
 
 ft_containers: $(CFILES)
 	clang++ -Wall -Wextra -std=c++98 -g main.cpp -o ft_containers
