@@ -31,8 +31,8 @@ namespace ft
                  typedef  typename Allocator::const_pointer                         const_pointer;           
                  //typedef  rbt_iterator<rbt_node<value_type>>                        iterator;
                  //typedef  rbt_iterator<const rbt_node<value_type>>                  const_iterator;
-                 typedef  typename rb_tree::iterator                              iterator;
-                 typedef  typename rb_tree::const_iterator                        const_iterator;
+                 typedef  rbt_iterator<value_type, Compare>            iterator;
+                 typedef  rbt_iterator<const value_type, Compare>      const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
@@ -70,7 +70,7 @@ namespace ft
                  {
                  }
 
-                 explicit map(const Compare& comp,
+                 explicit map(const Compare& comp = Compare(),
                      const Allocator& alloc = Allocator()) : tree_(), comp_(comp), alloc_(alloc)
                  {
                  }

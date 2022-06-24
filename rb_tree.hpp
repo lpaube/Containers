@@ -1,23 +1,13 @@
 #pragma once
 
 #include <iostream>
+#include "rbt_node.hpp"
 #include "rbt_iterator.hpp"
 #include "iterator.hpp"
 #include "utils.hpp"
 
+
 namespace ft {
-
-  template <typename value_type>
-    class rbt_node
-    {
-      public:
-        rbt_node* parent;
-        rbt_node* left;
-        rbt_node* right;
-        value_type data;
-        bool  is_red;
-    };
-
   template <typename value_type,
            typename Compare,
            typename Allocator>
@@ -31,10 +21,13 @@ namespace ft {
                  typedef rbt_node<value_type> tree_node;
                  typedef tree_node*           tree_node_ptr;
                  typedef Allocator            pair_allocator;
-                 typedef  rbt_iterator<tree_node>                                 iterator;                
-                 typedef  rbt_iterator<const tree_node>                           const_iterator;
+                 typedef  rbt_iterator<value_type, Compare>                                 iterator;                
+                 typedef  rbt_iterator<const value_type, Compare>                           const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
+
+                 typedef Compare      value_compare;
+
 
                  /*
                   * Member variables
@@ -44,14 +37,14 @@ namespace ft {
                  tree_node_ptr  root_node_;
                  node_allocator node_alloc_;
                  pair_allocator pair_alloc_;
-                 Compare comp;
+                 Compare comp_;
 
                  /*
                   * Member functions
                   */
                public:
                  // tree constructor
-                 rb_tree()
+                 rb_tree(const value_compare& comp)
                    : root_node_(NULL)
                      , node_alloc_(node_allocator())
                      , pair_alloc_(pair_allocator())
@@ -70,7 +63,7 @@ namespace ft {
                    tree_node_ptr parent_node = find_parent_pos(value, root_node_);
                    if (parent_node == end_node_)
                      return;
-                   if (comp(value.first, parent_node->data.first) == true)
+                   if (comp_(value.first, parent_node->data.first) == true)
                    {
                      parent_node->left = construct_node(value, parent_node);
                    }
@@ -80,23 +73,59 @@ namespace ft {
                    }
                  }
 
-                  iterator begin()
-                  {
-                    return iterator(get_first_node());
-                  }
+                 iterator begin()
+                 {
+                   return iterator(get_first_node(root_node_));
+                 }
 
-                 void print_tree() const
+                 iterator end()
+                 {
+                   return NULL;
+                 }
+
+                 void print_tree()
                  {
                    inorder(root_node_, &rb_tree::print_node);
+                 }
+
+                 iterator tree_increment(tree_node_ptr node)
+                 {
+                   if (node == NULL)
+                     return NULL;
+                   if (node->right != NULL)
+                   {
+                     node = node->right;
+                     while (node->left != NULL)
+                     {
+                       node = node->left;
+                     }
+                     return iterator(node);
+                   }
+                   else
+                   {
+                     while (node->parent != NULL
+                         && comp_(node->data.first < node->parent.first) == 1)
+                     {
+                       node = node->parent;
+                     }
+                     return (node->parent);
+                   }
                  }
 
                private:
 
                  tree_node_ptr get_first_node(tree_node_ptr node)
                  {
-                   if (node->left == NULL)
+                   if (node == NULL || node->left == NULL)
                      return node;
                    return get_first_node(node->left);
+                 }
+
+                 tree_node_ptr get_last_node(tree_node_ptr node)
+                 {
+                   if (node == NULL || node->right == NULL)
+                     return node;
+                   return get_last_node(node->right);
                  }
 
                  tree_node_ptr construct_node()
@@ -136,7 +165,7 @@ namespace ft {
                  {
                    if (value.first == node->data.first)
                      return end_node_;
-                   if (comp(value.first, node->data.first) == true)
+                   if (comp_(value.first, node->data.first) == true)
                    {
                      if (node->left == NULL)
                        return node;

@@ -32,5 +32,9 @@ int main(void)
   map_test.insert(ft::pair<int, std::string>(6, "this is sicks (6)"));
   map_test.insert(ft::pair<int, std::string>(1, "this is one"));
   map_test.insert(ft::pair<int, std::string>(8, "this is eight"));
-  map_test.print_map();
+  ft::map<int, std::string>::iterator it = map_test.begin();
+  std::cout << "ite begin: " << it->first << std::endl;
+  ++it;
+  std::cout << "++it begin: " << it->first << std::endl;
+  //map_test.print_map();
 }
