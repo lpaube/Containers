@@ -84,6 +84,19 @@ namespace ft {
                    return end_node_;
                  }
 
+                template <typename Key>
+                  iterator find(const Key& key)
+                  {
+                    iterator tmp_it = begin();
+                    while (tmp_it != end())
+                    {
+                      if (tmp_it->data.first == key)
+                        return tmp_it;
+                      ++tmp_it;
+                    }
+                    return end();
+                  }
+
                  void print_tree()
                  {
                    inorder(root_node_, &rb_tree::print_node);
@@ -162,6 +175,7 @@ namespace ft {
                  {
                    std::cout << "Key: " << node->data.first << " | Value: " << node->data.second << std::endl;
                  }
+
 
                  void inorder(tree_node_ptr node, void (*f)(tree_node_ptr))
                  {

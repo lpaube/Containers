@@ -200,6 +200,7 @@ namespace ft
 
                  iterator find(const Key& key)
                  {
+                   return tree_.find(key);
                  }
 
                  const_iterator find(const Key& key) const

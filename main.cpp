@@ -57,4 +57,10 @@ int main(void)
   std::cout << "--ite begin: " << ite->first << std::endl;
   --ite;
   std::cout << "--ite begin: " << ite->first << std::endl;
+  std::cout << std::endl;
+
+  std::cout << "This is find key: "
+    << (map_test.find(6))->first
+    << " | this is the value: " << (map_test.find(6))->second
+    << std::endl;
 }

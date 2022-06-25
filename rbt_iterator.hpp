@@ -26,7 +26,7 @@ namespace ft {
 
       public:
 
-        rbt_iterator(const tree_node_ptr node) : current_(node), comp_(Compare()) {}
+        rbt_iterator(const tree_node_ptr node) : current_(node), comp_(Compare()) { }
 
         reference operator*() const {
           return current_->data;
