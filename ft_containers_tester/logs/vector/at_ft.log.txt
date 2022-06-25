@@ -1,6 +1,0 @@
-At: a (file: tests/vector/at.cpp, line: 23)
-out of range exception 10240 (file: tests/vector/at.cpp, line: 42)
-out of range exception 0 (file: tests/vector/at.cpp, line: 57)
-At: a (file: tests/vector/at.cpp, line: 67)
-out of range exception 10240 (file: tests/vector/at.cpp, line: 86)
-out of range exception 0 (file: tests/vector/at.cpp, line: 99)

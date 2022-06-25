@@ -1,9 +1,0 @@
--Wall
--Wextra
--Werror
--Wpedantic
--Wsign-conversion
--stdlib=libc++
--std=c++98
--I../ft_containers
--Itests

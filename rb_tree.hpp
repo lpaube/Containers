@@ -26,6 +26,7 @@ namespace ft {
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
+                 typedef typename node_allocator::size_type size_type;
                  typedef Compare      value_compare;
 
 
@@ -84,18 +85,53 @@ namespace ft {
                    return end_node_;
                  }
 
-                template <typename Key>
-                  iterator find(const Key& key)
-                  {
-                    iterator tmp_it = begin();
-                    while (tmp_it != end())
-                    {
-                      if (tmp_it->first == key)
-                        return tmp_it;
-                      ++tmp_it;
-                    }
-                    return end();
-                  }
+                 template <typename Key>
+                   iterator find(const Key& key)
+                   {
+                     iterator tmp_it = begin();
+                     while (tmp_it != end())
+                     {
+                       if (tmp_it->first == key)
+                         return tmp_it;
+                       ++tmp_it;
+                     }
+                     return end();
+                   }
+
+                 template <typename Key, typename Value>
+                   Value& at(const Key& key)
+                   {
+                     iterator it = find(key);
+
+                     if (it == end())
+                       throw std::out_of_range("Error: at: cannot find element");
+                     return it->second;
+                   }
+
+                 bool empty() const
+                 {
+                   if (end_node_->left == NULL && end_node_->right == NULL)
+                     return true;
+                   return false;
+                 }
+
+                 size_type size() const
+                 {
+                   size_type counter = 0;
+                   iterator it = begin();
+
+                   while (it != end())
+                   {
+                    ++it;
+                    ++counter;
+                   }
+                   return counter;
+                 }
+
+                 size_type max_size() const
+                 {
+                   return node_alloc_.max_size();
+                 }
 
                  void print_tree()
                  {
@@ -103,6 +139,52 @@ namespace ft {
                  }
 
                private:
+
+                 tree_node_ptr get_next_node(tree_node_ptr node)
+                 {
+                   if (node->right != NULL)
+                   {
+                     node = node->right;
+                     while (node->left != NULL)
+                     {
+                       node = node->left;
+                     }
+                     return node;
+                   }
+                   else
+                   {
+                     while (node->parent != NULL
+                         && node->parent->right == node)
+                     {
+                       node = node->parent;
+                     }
+                     node = node->parent;
+                     return node;
+                   }
+                 }
+
+                 tree_node_ptr get_prev_node(tree_node_ptr node)
+                 {
+                   if (node->left != NULL)
+                   {
+                     node = node->left;
+                     while (node->right != NULL)
+                     {
+                       node = node->right;
+                     }
+                     return *this;
+                   }
+                   else
+                   {
+                     while (node->parent != NULL
+                         && node->parent->left == node)
+                     {
+                       node = node->parent;
+                     }
+                     node = node->parent;
+                     return *this;
+                   }
+                 }
 
                  tree_node_ptr get_first_node(tree_node_ptr node)
                  {
@@ -185,6 +267,5 @@ namespace ft {
                    f(node);
                    inorder(node->right, f);
                  }
-
              };
 }

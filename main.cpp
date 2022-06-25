@@ -63,4 +63,8 @@ int main(void)
     << (map_test.find(6))->first
     << " | this is the value: " << (map_test.find(6))->second
     << std::endl;
+  std::cout << std::endl;
+
+  std::cout << "max_size(): " << map_test.max_size() << std::endl;
+  std::cout << "size(): " << map_test.size() << std::endl;
 }

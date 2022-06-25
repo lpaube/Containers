@@ -1,6 +1,0 @@
-Size: 0 (file: tests/vector/ctor.cpp, line: 21)
-Capacity: 0 (file: tests/vector/ctor.cpp, line: 21)
-
-Size: 0 (file: tests/vector/ctor.cpp, line: 28)
-Capacity: 0 (file: tests/vector/ctor.cpp, line: 28)
-

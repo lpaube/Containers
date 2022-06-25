@@ -29,10 +29,8 @@ namespace ft
                  typedef  const value_type&                                         const_reference;         
                  typedef  typename Allocator::pointer                               pointer;                 
                  typedef  typename Allocator::const_pointer                         const_pointer;           
-                 //typedef  rbt_iterator<rbt_node<value_type>>                        iterator;
-                 //typedef  rbt_iterator<const rbt_node<value_type>>                  const_iterator;
                  typedef  rbt_iterator<value_type, Compare>            iterator;
-                 typedef  rbt_iterator<const value_type, Compare>      const_iterator;
+                 typedef  rbt_const_iterator<value_type, Compare>      const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
@@ -100,6 +98,7 @@ namespace ft
                  // Element access
                  T& at(const Key& key)
                  {
+                    return tree_.at(key);
                  }
 
                  const T& at(const Key& key) const
@@ -118,6 +117,7 @@ namespace ft
 
                  const_iterator begin() const
                  {
+                   return tree_.begin();
                  }
 
                  iterator end()
@@ -148,14 +148,17 @@ namespace ft
                  // Capacity
                  bool empty() const
                  {
+                   return tree_.empty();
                  }
 
                  size_type size() const
                  {
+                   return tree_.size();
                  }
 
                  size_type max_size() const
                  {
+                   return tree_.max_size();
                  }
 
                  // Modifiers
