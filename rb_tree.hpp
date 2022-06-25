@@ -90,7 +90,7 @@ namespace ft {
                     iterator tmp_it = begin();
                     while (tmp_it != end())
                     {
-                      if (tmp_it->data.first == key)
+                      if (tmp_it->first == key)
                         return tmp_it;
                       ++tmp_it;
                     }

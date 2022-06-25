@@ -96,7 +96,17 @@ namespace ft {
           return tmp_it;
         }
 
-        const pointer& base() const { return current_; }
+        bool operator==(const rbt_iterator& other)
+        {
+          return current_ == other.base();
+        }
+
+        bool operator!=(const rbt_iterator& other)
+        {
+          return !(*this == other);
+        }
+
+        const tree_node_ptr base() const { return current_; }
 
     };
 }
