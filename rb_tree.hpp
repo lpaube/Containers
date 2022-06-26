@@ -22,7 +22,7 @@ namespace ft {
                  typedef tree_node*           tree_node_ptr;
                  typedef Allocator            pair_allocator;
                  typedef  rbt_iterator<value_type, Compare>                                 iterator;                
-                 typedef  rbt_iterator<const value_type, Compare>                           const_iterator;
+                 typedef  rbt_const_iterator<value_type, Compare>                           const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
 
@@ -80,9 +80,19 @@ namespace ft {
                    return iterator(get_first_node(root_node_));
                  }
 
+                 const_iterator begin() const
+                 {
+                   return const_iterator(get_first_node(root_node_));
+                 }
+
                  iterator end()
                  {
-                   return end_node_;
+                   return iterator(end_node_);
+                 }
+
+                 const_iterator end() const
+                 {
+                   return const_iterator(end_node_);
                  }
 
                  template <typename Key>
@@ -118,7 +128,7 @@ namespace ft {
                  size_type size() const
                  {
                    size_type counter = 0;
-                   iterator it = begin();
+                   const_iterator it = begin();
 
                    while (it != end())
                    {
@@ -186,14 +196,14 @@ namespace ft {
                    }
                  }
 
-                 tree_node_ptr get_first_node(tree_node_ptr node)
+                 tree_node_ptr get_first_node(tree_node_ptr node) const
                  {
                    if (node == NULL || node->left == NULL)
                      return node;
                    return get_first_node(node->left);
                  }
 
-                 tree_node_ptr get_last_node(tree_node_ptr node)
+                 tree_node_ptr get_last_node(tree_node_ptr node) const
                  {
                    if (node == NULL || node->right == NULL)
                      return node;

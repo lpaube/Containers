@@ -140,7 +140,7 @@ namespace ft {
 
         rbt_const_iterator(const tree_node_ptr node) : current_(node), comp_(Compare()) { }
 
-        rbt_const_iterator(rbt_const_iterator it) : current_(it.base()) {}
+        rbt_const_iterator(rbt_iterator it) : current_(it.base()) {}
 
         reference operator*() const {
           return current_->data;
