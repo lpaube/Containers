@@ -33,9 +33,10 @@ namespace ft
                  typedef  rbt_const_iterator<value_type, Compare>      const_iterator;
                  typedef  typename ft::reverse_iterator<iterator>                   reverse_iterator;        
                  typedef  typename ft::reverse_iterator<const_iterator>             const_reverse_iterator;  
+                 typedef  rb_tree<value_type, Compare, Allocator>                   rb_tree;
 
                private:
-                 rb_tree<value_type, Compare, Allocator> tree_;
+                 rb_tree tree_;
                  allocator_type alloc_;
                  Compare comp_;
 
@@ -64,16 +65,22 @@ namespace ft
                  // ======================= Member functions =====================
 
                  explicit map(const Compare& comp = Compare(),
-                     const Allocator& alloc = Allocator()) : comp_(comp), alloc_(alloc)
-                 {
-                 }
+                     const Allocator& alloc = Allocator())
+                   : comp_(comp)
+                     , alloc_(alloc)
+               {
+                 tree_ = rb_tree(comp, alloc);
+               }
 
                  template<typename InputIt>
                    map(InputIt first, InputIt last,
                        const Compare& comp = Compare(),
                        const Allocator& alloc = Allocator())
-                   {
-                   }
+                   : comp_(comp)
+                     , alloc_(alloc)
+               {
+                 tree_ = rb_tree(first, last, comp, alloc);
+               }
 
                  map(const map& other)
                  {
@@ -98,7 +105,7 @@ namespace ft
                  // Element access
                  T& at(const Key& key)
                  {
-                    return tree_.at(key);
+                   return tree_.at(key);
                  }
 
                  const T& at(const Key& key) const
@@ -166,34 +173,40 @@ namespace ft
                  {
                  }
 
-                 void /*ft::pair<iterator, bool>*/ insert(const value_type& value)
+                 pair<iterator, bool> insert(const value_type& value)
                  {
-                   tree_.insert(value);
+                   return tree_.insert(value);
                  }
 
                  iterator insert(iterator hint, const value_type& value)
                  {
+                   return tree_.insert(hint, value);
                  }
 
                  template <typename InputIt>
                    void insert(InputIt first, InputIt last)
                    {
+                      tree_.insert(first, last);
                    }
 
                  void erase(iterator pos)
                  {
+                    tree_.erase(pos);
                  }
 
                  void erase(iterator first, iterator last)
                  {
+                   tree_.erase(first, last);
                  }
 
                  size_type erase(const Key& key)
                  {
+                   tree_.erase(key);
                  }
 
                  void swap(map& other)
                  {
+
                  }
 
                  // Lookup
@@ -242,7 +255,7 @@ namespace ft
 
                  value_compare value_comp() const
                  {
-                    return value_compare(Compare());
+                   return value_compare(Compare());
                  }
 
                  /*
@@ -250,50 +263,50 @@ namespace ft
                   */
                  void print_map()
                  {
-                  tree_.print_tree();
+                   tree_.print_tree();
                  }
              };
 
-                 // ======================= Non-member functions =====================
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  // ======================= Non-member functions =====================
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator!=( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator<( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator<=( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator>( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
-                       const ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    bool operator>=( const ft::map<Key,T,Compare,Alloc>& lhs,
+        const ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 
-                 template<typename Key, typename T, typename Compare, typename Alloc>
-                   void swap( ft::map<Key,T,Compare,Alloc>& lhs,
-                       ft::map<Key,T,Compare,Alloc>& rhs )
-                   {
-                   }
+  template<typename Key, typename T, typename Compare, typename Alloc>
+    void swap( ft::map<Key,T,Compare,Alloc>& lhs,
+        ft::map<Key,T,Compare,Alloc>& rhs )
+    {
+    }
 }

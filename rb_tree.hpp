@@ -45,35 +45,150 @@ namespace ft {
                   */
                public:
                  // tree constructor
-                 rb_tree()
+                 rb_tree(const Compare& comp = Compare(),
+                     const pair_allocator& alloc = pair_allocator())
                    : root_node_(NULL)
+                     , end_node_(construct_node())
+                     , pair_alloc_(alloc)
                      , node_alloc_(node_allocator())
-                     , pair_alloc_(pair_allocator())
-                     , comp_(Compare())
+                     ,comp_(comp)
+               {}
+
+                 template<typename InputIt>
+                   rb_tree(InputIt first, InputIt last,
+                       const Compare& comp = Compare(),
+                       const pair_allocator& alloc = pair_allocator())
+                   : root_node_(NULL)
+                     , end_node_(construct_node())
+                     , pair_alloc_(alloc)
+                     , node_alloc_(node_allocator())
+                     ,comp_(comp)
                {
-                 end_node_ = construct_node();
+                 insert(first, last);
                }
 
-                 void insert(const value_type& value)
+                 pair<iterator, bool> insert(const value_type& value)
                  {
+                   tree_node_ptr node_constructed;
+                   bool can_construct;
+
                    if (root_node_ == NULL)
                    {
                      root_node_ = construct_node(value, end_node_);
                      end_node_->left = root_node_;
-                     return;
+                     node_constructed = root_node_;
+                     can_construct = true;
+                     return pair<iterator, bool>(node_constructed, can_construct);
                    }
-                   tree_node_ptr parent_node = find_parent_pos(value, root_node_);
-                   if (parent_node == end_node_)
-                     return;
-                   if (comp_(value.first, parent_node->data.first) == true)
+
+                   // When a node.first equals value.first, parent_node returns end_node_.
+                   pair<tree_node_ptr, bool> parent_node = find_parent_pos(value, root_node_);
+
+                   if (parent_node.second == false)
                    {
-                     parent_node->left = construct_node(value, parent_node);
+                     node_constructed = parent_node.first;
+                     can_construct = false;
+                   }
+                   else if (comp_(value.first, parent_node.first->data.first) == true)
+                   {
+                     parent_node.first->left = construct_node(value, parent_node.first);
+                     node_constructed = parent_node.first->left;
+                     can_construct = true;
                    }
                    else
                    {
-                     parent_node->right = construct_node(value, parent_node);
+                     parent_node.first->right = construct_node(value, parent_node.first);
+                     node_constructed = parent_node.first->right;
+                     can_construct = true;
                    }
+                   return pair<iterator, bool>(node_constructed, can_construct);
                  }
+
+                 iterator insert(iterator hint, const value_type& value)
+                 {
+                    
+                 }
+
+                 template <typename InputIt>
+                   void insert(InputIt first, InputIt last)
+                   {
+                      while (first != last)
+                      {
+                        insert(*first);
+                        ++first;
+                      }
+                   }
+
+                  void destroy_node(tree_node_ptr node)
+                  {
+                    pair_alloc_.destroy(&node->data);
+                    node_alloc_.deallocate(node, 1);
+                  }
+
+                 void erase(iterator pos)
+                 {
+                   tree_node_ptr node = pos.base();
+
+                   // If the node has no children
+                    if (!node->left && !node->right)
+                    {
+                      if (node == node->parent->left)
+                      {
+                        node->parent->left = NULL;
+                      }
+                      else
+                      {
+                        node->parent->right = NULL;
+                      }
+                      destroy_node(node);
+                    }
+                    // If the node to delete only has a right child
+                    else if (!node->left && node->right)
+                    {
+                      if (node == node->parent->left)
+                      {
+                        node->parent->left = node->right;
+                      }
+                      else
+                      {
+                        node->parent->right = node->right;
+                      }
+                      destroy_node(node);
+                    }
+                    // If the node to delete only has a left child
+                    else if (node->left && !node->right)
+                    {
+                      if (node == node->parent->left)
+                      {
+                        node->parent->left = node->left;
+                      }
+                      else
+                      {
+                        node->parent->right = node->left;
+                      }
+                      destroy_node(node);
+                    }
+                    // If the node to delete has 2 children
+                    else
+                    {
+                      tree_node_ptr next_node = get_next_node(node);
+
+                      destroy_node(node);
+                      node = construct_node(next_node->data);
+                      erase(++pos);
+                    }
+                 }
+
+                  void erase(iterator first, iterator last)
+                  {
+                    
+                  }
+
+                  template <typename Key>
+                  size_type erase(const Key& key)
+                  {
+                    
+                  }
 
                  iterator begin()
                  {
@@ -132,8 +247,8 @@ namespace ft {
 
                    while (it != end())
                    {
-                    ++it;
-                    ++counter;
+                     ++it;
+                     ++counter;
                    }
                    return counter;
                  }
@@ -243,21 +358,22 @@ namespace ft {
                  }
 
                  // Returns the parent node of the new (non-existant) node with value
-                 tree_node_ptr find_parent_pos(const value_type& value, tree_node_ptr node)
+                 // bool is true when we can add node; bool is false when value.first already exists
+                 pair<tree_node_ptr, bool> find_parent_pos(const value_type& value, tree_node_ptr node)
                  {
                    if (value.first == node->data.first)
-                     return end_node_;
+                     return pair<tree_node_ptr, bool>(end_node_, false);
                    if (comp_(value.first, node->data.first) == true)
                    {
                      if (node->left == NULL)
-                       return node;
+                       return pair<tree_node_ptr, bool>(node, true);
                      else
                        return find_parent_pos(value, node->left);
                    }
                    else
                    {
                      if (node->right == NULL)
-                       return node;
+                       return pair<tree_node_ptr, bool>(node, true);
                      else
                        return find_parent_pos(value, node->right);
                    }

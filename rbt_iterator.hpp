@@ -111,7 +111,7 @@ namespace ft {
           return !(*this == other);
         }
 
-        const tree_node_ptr base() const { return current_; }
+        tree_node_ptr base() const { return current_; }
 
     };
 
