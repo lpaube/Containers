@@ -95,22 +95,69 @@ namespace ft {
           if (node_constructed->parent->is_black == true)
           {
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
-          } else if (node_constructed->parent->is_black == false)
-          {
-            if (!uncle || uncle->is_black == true)
-            {
+          } else if (node_constructed->parent->is_black == false) {
+            if (!uncle || uncle->is_black == true) {
               // Rotation and recoloring
-            }
-            else if (uncle->is_black == false)
-            {
+            } else if (uncle->is_black == false) {
               // Recoloring
-              node_constructed->parent->is_black = true;
-              uncle->is_black = true;
+              change_color(node_constructed->parent);
+              change_color(uncle);
               if (node_constructed->parent->parent != root_node_)
                 node_constructed->parent->parent->is_black = true;
             }
           }
+        }
 
+        int left_rotation(tree_node_ptr node_x)
+        {
+          if (node_x->right == NULL)
+            return 0;
+          tree_node_ptr node_y = node_x->right;
+          // Move node_y to root of subtree
+          if (node_x->parent->left == node_x)
+            node_x->parent->left = node_y;
+          else if (node_x->parent->right == node_x)
+            node_x->parent->right = node_y;
+          node_y->parent = node_x->parent;
+
+          // Previous left child of node_y becomes right child of x
+          node_x->right = node_y->left;
+
+          // node_x becomes left child of node_y
+          node_y->left = node_x;
+          node_x->parent = node_y;
+
+          return 1;
+        }
+
+        int right_rotation(tree_node_ptr node_x)
+        {
+          if (node_x->left == NULL)
+            return 0;
+          tree_node_ptr node_y = node_x->left;
+          // Move node_y to root of subtree
+          if (node_x->parent->left == node_x)
+            node_x->parent->left = node_y;
+          else if (node_x->parent->right == node_x)
+            node_x->parent->right = node_y;
+          node_y->parent = node_x->parent;
+
+          // Previous left child of node_y becomes right child of x
+          node_x->left = node_y->right;
+
+          // node_x becomes left child of node_y
+          node_y->right = node_x;
+          node_x->parent = node_y;
+
+          return 1;
+        }
+
+        void change_color(tree_node_ptr node)
+        {
+          if (node->is_black == true)
+            node->is_black = false;
+          else
+            node->is_black = true;
         }
 
         tree_node_ptr get_uncle(const tree_node_ptr node) const
