@@ -9,6 +9,6 @@ namespace ft {
         rbt_node* left;
         rbt_node* right;
         value_type data;
-        bool  is_red;
+        bool  is_black;
     };
 }
