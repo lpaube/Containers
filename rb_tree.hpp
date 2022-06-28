@@ -61,6 +61,7 @@ namespace ft {
           // #1 - If tree is empty, create new root black
           if (root_node_ == NULL) {
             root_node_ = construct_node(value, end_node_);
+            root_node_->is_black = true;
             end_node_->left = root_node_;
             node_constructed = root_node_;
             can_construct = true;
@@ -89,21 +90,76 @@ namespace ft {
           }
 
           // #2 - If tree is not empty, make new node red
-          node_constructed->is_black = false;
-          tree_node_ptr uncle = get_uncle(node_constructed);
 
           if (node_constructed->parent->is_black == true)
           {
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
-          } else if (node_constructed->parent->is_black == false) {
-            if (!uncle || uncle->is_black == true) {
-              // Rotation and recoloring
-            } else if (uncle->is_black == false) {
-              // Recoloring
-              change_color(node_constructed->parent);
-              change_color(uncle);
-              if (node_constructed->parent->parent != root_node_)
-                node_constructed->parent->parent->is_black = true;
+          }
+          rb_insertion_check(node_constructed);
+          return pair<iterator, bool>(iterator(node_constructed), can_construct);
+        }
+
+        void rb_insertion_check(tree_node_ptr node)
+        {
+          std::cerr << "Checking insertion_check" << std::endl;
+          while (node->parent->is_black == false)
+          {
+            tree_node_ptr uncle = get_uncle(node);
+            // If parent is a left child
+            if (node->parent == node->parent->parent->left)
+            {
+              // CASE #1
+              // If color of uncle is red
+              if (uncle && uncle->is_black == false)
+              {
+                node->parent->is_black = true;
+                uncle->is_black = true;
+                node->parent->parent->is_black = false;
+              }
+              // If color of uncle is black
+              else
+              {
+                // CASE #2
+                // If subtree form a triangle
+                if (node == node->parent->right)
+                {
+                  node = node->parent;
+                  left_rotation(node);
+                }
+                // CASE #3
+                // If subtree form a line
+                node->parent->is_black = true;
+                node->parent->parent->is_black = false;
+                right_rotation(node->parent->parent);
+              }
+            }
+            // If parent is a right child
+            else
+            {
+              // CASE #1
+              // If color of uncle is red
+              if (uncle && uncle->is_black == false)
+              {
+                node->parent->is_black = true;
+                uncle->is_black = true;
+                node->parent->parent->is_black = false;
+              }
+              // If color of uncle is black
+              else
+              {
+                // CASE #2
+                // If subtree form a triangle
+                if (node == node->parent->left)
+                {
+                  node = node->parent;
+                  right_rotation(node);
+                }
+                // CASE #3
+                // If subtree form a line
+                node->parent->is_black = true;
+                node->parent->parent->is_black = false;
+                left_rotation(node->parent->parent);
+              }
             }
           }
         }
@@ -154,10 +210,13 @@ namespace ft {
 
         void change_color(tree_node_ptr node)
         {
-          if (node->is_black == true)
-            node->is_black = false;
-          else
-            node->is_black = true;
+          if (node)
+          {
+            if (node->is_black == true)
+              node->is_black = false;
+            else
+              node->is_black = true;
+          }
         }
 
         tree_node_ptr get_uncle(const tree_node_ptr node) const
@@ -338,7 +397,7 @@ namespace ft {
           new_node->parent = NULL;
           new_node->left = NULL;
           new_node->right = NULL;
-          new_node->is_black = true;
+          new_node->is_black = false;
           pair_alloc_.construct(&new_node->data, new_value);
           return new_node;
         }
@@ -349,7 +408,7 @@ namespace ft {
           new_node->parent = parent;
           new_node->left = NULL;
           new_node->right = NULL;
-          new_node->is_black = true;
+          new_node->is_black = false;
           pair_alloc_.construct(&new_node->data, new_value);
           return new_node;
         }
