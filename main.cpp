@@ -37,6 +37,7 @@ int main(void)
   std::cout << "===== End of printing test_map =====" << std::endl;
 
 
+  /*
   std::cout << "===== Printing begin() iterator ++ =====" << std::endl;
   ft::map<int, std::string>::iterator it = map_test.begin();
   std::cout << "ite begin: " << it->first << std::endl;
@@ -65,17 +66,23 @@ int main(void)
     << std::endl;
   std::cout << std::endl;
 
+  */
   std::cout << "max_size(): " << map_test.max_size() << std::endl;
   std::cout << "size(): " << map_test.size() << std::endl;
+  std::cout << std::endl;
 
+  // Copy constructor
   ft::map<int, std::string> map_test2(map_test.begin(), map_test.end());
+
   std::cout << "===This is map_test2===" << std::endl;
   map_test2.print_map();
   std::cout << "===== End of printing test_map2 =====" << std::endl;
 
+  /*
   map_test2.erase(++(map_test2.begin()));
 
   std::cout << "===This is map_test2 after erase===" << std::endl;
   map_test2.print_map();
   std::cout << "===== End of printing test_map2 =====" << std::endl;
+  */
 }

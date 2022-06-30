@@ -58,6 +58,8 @@ namespace ft {
           tree_node_ptr node_constructed;
           bool can_construct;
 
+          std::cout << "Insert: value_first: " << value.first << std::endl;
+
           // #1 - If tree is empty, create new root black
           if (root_node_ == NULL) {
             root_node_ = construct_node(value, end_node_);
@@ -335,6 +337,15 @@ namespace ft {
         }
 
         size_type max_size() const { return node_alloc_.max_size(); }
+
+        void print_levels(tree_node_ptr node)
+        {
+          if (node == NULL)
+            return;
+          std::cout << "key: " << node->data.first << std::endl;
+          print_levels(node->left);
+          print_levels(node->right);
+        }
 
         void print_tree() { inorder(root_node_, &rb_tree::print_node); }
 
