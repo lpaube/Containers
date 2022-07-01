@@ -5,6 +5,7 @@
 #include "rbt_node.hpp"
 #include "utils.hpp"
 #include <iostream>
+#include <queue>
 
 namespace ft {
   template <typename value_type, typename Compare, typename Allocator>
@@ -58,10 +59,10 @@ namespace ft {
           tree_node_ptr node_constructed;
           bool can_construct;
 
-          std::cout << "Insert: value_first: " << value.first << std::endl;
 
           // #1 - If tree is empty, create new root black
           if (root_node_ == NULL) {
+            //std::cout << "Insert: value_first: " << value.first << " | this is root" << std::endl;
             root_node_ = construct_node(value, end_node_);
             root_node_->is_black = true;
             end_node_->left = root_node_;
@@ -70,6 +71,7 @@ namespace ft {
             return pair<iterator, bool>(node_constructed, can_construct);
           }
 
+          //std::cout << "Insert: value_first: " << value.first << " | root is_black: " << root_node_->is_black << std::endl;
 
           // If key already exists, parent_node is existing node and bool is false
           pair<tree_node_ptr, bool> parent_node = find_parent_pos(value, root_node_);
@@ -101,9 +103,12 @@ namespace ft {
           return pair<iterator, bool>(iterator(node_constructed), can_construct);
         }
 
+
         void rb_insertion_check(tree_node_ptr node)
         {
-          std::cerr << "Checking insertion_check" << std::endl;
+          if (node == root_node_)
+            node->is_black = true;
+
           while (node->parent->is_black == false)
           {
             tree_node_ptr uncle = get_uncle(node);
@@ -133,6 +138,7 @@ namespace ft {
                 node->parent->is_black = true;
                 node->parent->parent->is_black = false;
                 right_rotation(node->parent->parent);
+                root_node_->is_black = true;
               }
             }
             // If parent is a right child
@@ -145,6 +151,7 @@ namespace ft {
                 node->parent->is_black = true;
                 uncle->is_black = true;
                 node->parent->parent->is_black = false;
+                rb_insertion_check(node->parent->parent);
               }
               // If color of uncle is black
               else
@@ -159,11 +166,14 @@ namespace ft {
                 // CASE #3
                 // If subtree form a line
                 node->parent->is_black = true;
+                // TODO: We might need to call recolorization here with parent->parent
                 node->parent->parent->is_black = false;
                 left_rotation(node->parent->parent);
+                root_node_->is_black = true;
               }
             }
           }
+          //std::cerr << "Checking insertion_check" << " | root is_black: " << root_node_->is_black << std::endl;
         }
 
         int left_rotation(tree_node_ptr node_x)
@@ -185,6 +195,7 @@ namespace ft {
           node_y->left = node_x;
           node_x->parent = node_y;
 
+          root_node_ = end_node_->left;
           return 1;
         }
 
@@ -207,6 +218,7 @@ namespace ft {
           node_y->right = node_x;
           node_x->parent = node_y;
 
+          root_node_ = end_node_->left;
           return 1;
         }
 
@@ -338,16 +350,50 @@ namespace ft {
 
         size_type max_size() const { return node_alloc_.max_size(); }
 
-        void print_levels(tree_node_ptr node)
+        void print_levels()
         {
-          if (node == NULL)
-            return;
-          std::cout << "key: " << node->data.first << std::endl;
-          print_levels(node->left);
-          print_levels(node->right);
+          std::cout << "=====PRINTING LEVELS=====" << std::endl;
+          print_levels(root_node_);
+          std::cout << "=====END OF PRINTING LEVELS=====" << std::endl;
+          std::cout << std::endl;
         }
 
-        void print_tree() { inorder(root_node_, &rb_tree::print_node); }
+        void print_levels(tree_node_ptr node)
+        {
+          if (node == NULL) {
+            std::cout << "print_levels: tree is empty" << std::endl;
+            return;
+          }
+
+          std::queue<tree_node_ptr> qu;
+          qu.push(node);
+          qu.push(NULL);
+          while (true)
+          {
+            tree_node_ptr curr = qu.front();
+            qu.pop();
+            if (curr != NULL) {
+              std::cout << "(" 
+                        << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
+                        << " | Key: " << curr->data.first
+                        << " | " << ((curr->is_black) ? "BLACK" : "RED")
+                        << ") ";
+              if (curr->left != NULL) {
+                qu.push(curr->left);
+              }
+              if (curr->right != NULL) {
+                qu.push(curr->right);
+              }
+            }
+            else
+            {
+              std::cout << std::endl;
+              if (qu.empty()) break;
+              qu.push(NULL);
+            }
+          }
+        }
+
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
@@ -444,9 +490,17 @@ namespace ft {
           }
         }
 
-        static void print_node(const tree_node_ptr node) {
+        void print_tree() { 
+          std::cout << "===== PRINTING TREE =====" << std::endl;
+          inorder(root_node_, &rb_tree::print_node);
+          std::cout << "===== END OF PRINTING TREE =====" << std::endl;
+        }
+
+        void print_node(const tree_node_ptr node) {
           std::cout << "Key: " << node->data.first
-            << " | Value: " << node->data.second << std::endl;
+            << " | Value: " << node->data.second
+            << " | Parent: " << ((node == root_node_) ? 9999999 : node->parent->data.first)
+            << std::endl;
         }
 
         void inorder(tree_node_ptr node, void (*f)(tree_node_ptr)) {
