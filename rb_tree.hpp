@@ -6,6 +6,8 @@
 #include "utils.hpp"
 #include <iostream>
 #include <queue>
+#include <string>
+#include <iomanip>
 
 namespace ft {
   template <typename value_type, typename Compare, typename Allocator>
@@ -79,6 +81,9 @@ namespace ft {
           if (parent_node.second == false) {
             node_constructed = parent_node.first;
             can_construct = false;
+            // PRINTING STUFF
+            std::cout << "NODE: " << node_constructed->data.first << std::endl;
+            print_levels();
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
 
@@ -97,9 +102,15 @@ namespace ft {
 
           if (node_constructed->parent->is_black == true)
           {
+            // PRINTING STUFF
+            std::cout << "NODE: " << node_constructed->data.first << std::endl;
+            print_levels();
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
           rb_insertion_check(node_constructed);
+          // PRINTING STUFF
+          std::cout << "NODE: " << node_constructed->data.first << std::endl;
+          print_levels();
           return pair<iterator, bool>(iterator(node_constructed), can_construct);
         }
 
@@ -122,6 +133,10 @@ namespace ft {
                 node->parent->is_black = true;
                 uncle->is_black = true;
                 node->parent->parent->is_black = false;
+                std::cout << "AFTER COLORATION: " << std::endl;
+                print_levels();
+                rb_insertion_check(node->parent->parent);
+                return;
               }
               // If color of uncle is black
               else
@@ -152,6 +167,7 @@ namespace ft {
                 uncle->is_black = true;
                 node->parent->parent->is_black = false;
                 rb_insertion_check(node->parent->parent);
+                return;
               }
               // If color of uncle is black
               else
@@ -185,7 +201,9 @@ namespace ft {
           if (node_x->parent->left == node_x)
             node_x->parent->left = node_y;
           else if (node_x->parent->right == node_x)
+          {
             node_x->parent->right = node_y;
+          }
           node_y->parent = node_x->parent;
 
           // Previous left child of node_y becomes right child of x
@@ -243,6 +261,12 @@ namespace ft {
             return parent->parent->left;
           else
             return parent->parent->right;
+        }
+
+        void print_tree() const { 
+          std::cout << "===== PRINTING TREE =====" << std::endl;
+          print_tree(root_node_);
+          std::cout << "===== END OF PRINTING TREE =====" << std::endl;
         }
 
         iterator insert(iterator hint, const value_type &value) {}
@@ -360,6 +384,9 @@ namespace ft {
 
         void print_levels(tree_node_ptr node)
         {
+          std::stringstream node_value_ss;
+          std::stringstream node_parent_ss;
+
           if (node == NULL) {
             std::cout << "print_levels: tree is empty" << std::endl;
             return;
@@ -368,16 +395,38 @@ namespace ft {
           std::queue<tree_node_ptr> qu;
           qu.push(node);
           qu.push(NULL);
+          int level = 1;
+          std::cout << std::setw(2) << level << " - ";
           while (true)
           {
             tree_node_ptr curr = qu.front();
             qu.pop();
             if (curr != NULL) {
-              std::cout << "(" 
-                        << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
-                        << " | Key: " << curr->data.first
-                        << " | " << ((curr->is_black) ? "BLACK" : "RED")
-                        << ") ";
+              std::cout << "("
+                        << "\33[32m";
+                        node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
+                        << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
+                        << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
+                        std::cout << std::setw(23) << node_value_ss.str()
+                        << "\33[0m|"
+                        << "Par: \33[34m";
+                        node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
+                        << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
+                        << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
+                        std::cout << std::setw(9) << node_parent_ss.str()
+                        << "\33[0m|\33[35m"
+                        << (curr->is_black ? "BLA" : "RED")
+                        << "\33[0m"
+                        << ")"
+                        << " ";
+                        node_value_ss.str(std::string());
+                        node_parent_ss.str(std::string());
+                /*
+                << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
+                << " | Key: " << curr->data.first
+                << " | " << ((curr->is_black) ? "BLACK" : "RED")
+                << ") ";
+                */
               if (curr->left != NULL) {
                 qu.push(curr->left);
               }
@@ -388,7 +437,10 @@ namespace ft {
             else
             {
               std::cout << std::endl;
-              if (qu.empty()) break;
+              if (qu.empty())
+                break;
+              ++level;
+              std::cout << std::setw(2) << level << " - ";
               qu.push(NULL);
             }
           }
@@ -490,13 +542,16 @@ namespace ft {
           }
         }
 
-        void print_tree() { 
-          std::cout << "===== PRINTING TREE =====" << std::endl;
-          inorder(root_node_, &rb_tree::print_node);
-          std::cout << "===== END OF PRINTING TREE =====" << std::endl;
+        void print_tree(const tree_node_ptr node) const
+        {
+          if (node == NULL)
+            return;
+          print_tree(node->left);
+          print_node(node);
+          print_tree(node->right);
         }
 
-        void print_node(const tree_node_ptr node) {
+        void print_node(const tree_node_ptr node) const {
           std::cout << "Key: " << node->data.first
             << " | Value: " << node->data.second
             << " | Parent: " << ((node == root_node_) ? 9999999 : node->parent->data.first)
