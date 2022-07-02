@@ -41,17 +41,6 @@ int main(void)
   map_test.insert(ft::pair<int, std::string>(1000, "thousand"));
   map_test.insert(ft::pair<int, std::string>(999, "nine-nine-nine"));
   
-
   std::cout << "======PRINTING LEVELS MAP 1======" << std::endl;
   map_test.print_levels();
-  map_test.print_map();
-
-  /*
-  // Copy constructor
-  ft::map<int, std::string> map_test2(map_test.begin(), map_test.end());
-
-  std::cout << "===This is map_test2===" << std::endl;
-  map_test2.print_map();
-  std::cout << "===== End of printing test_map2 =====" << std::endl;
-  */
 }

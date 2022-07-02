@@ -208,6 +208,8 @@ namespace ft {
 
           // Previous left child of node_y becomes right child of x
           node_x->right = node_y->left;
+          if (node_x->right)
+            node_x->right->parent = node_x;
 
           // node_x becomes left child of node_y
           node_y->left = node_x;
@@ -231,6 +233,8 @@ namespace ft {
 
           // Previous left child of node_y becomes right child of x
           node_x->left = node_y->right;
+          if (node_x->left)
+            node_x->left->parent = node_x;
 
           // node_x becomes left child of node_y
           node_y->right = node_x;
