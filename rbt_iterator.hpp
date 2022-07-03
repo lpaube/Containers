@@ -39,7 +39,9 @@ namespace ft {
           return current_->data;
         }
 
-        pointer operator->() const { return &current_->data; }
+        pointer operator->() const {
+          return &current_->data;
+        }
 
         rbt_iterator& operator=(const rbt_iterator& other)
         {
@@ -150,7 +152,9 @@ namespace ft {
           return current_->data;
         }
 
-        pointer operator->() const { return &current_->data; }
+        pointer operator->() const {
+          return &current_->data;
+        }
 
         rbt_const_iterator& operator=(const rbt_const_iterator& other)
         {

@@ -44,6 +44,10 @@ namespace ft
                  // ======================= Member classes =====================
                  class value_compare : std::binary_function<value_type, value_type, bool>
                {
+
+                 friend class map;
+
+                 public:
                  typedef bool        result_type;
                  typedef value_type  first_argument_type;
                  typedef value_type  second_argument_type;
@@ -58,7 +62,7 @@ namespace ft
                  public:
                  bool operator()(const value_type& lhs, const value_type& rhs) const
                  {
-                   return comp(lhs.first, rhs.first);
+                   return comp_(lhs.first, rhs.first);
                  }
                };
 
@@ -82,7 +86,7 @@ namespace ft
                  tree_ = rb_tree(first, last, comp, alloc);
                }
 
-                 map(const map& other)
+                 map(const map& other) : tree_(other.tree_)
                  {
                  }
 
@@ -94,6 +98,8 @@ namespace ft
                  // Map assignment operator overload
                  map& operator=(const map& other)
                  {
+                   tree_ = other.tree_;
+                   return *this;
                  }
 
                  // Map allocator getter
@@ -110,10 +116,12 @@ namespace ft
 
                  const T& at(const Key& key) const
                  {
+                   return tree_.at(key);
                  }
 
                  T& operator[](const Key& key)
                  {
+                   return tree_.template operator[]<T, Key>(key);
                  }
 
                  // Iterators
@@ -134,6 +142,7 @@ namespace ft
 
                  const_iterator end() const
                  {
+                   return tree_.end();
                  }
 
                  reverse_iterator rbegin()
@@ -186,12 +195,12 @@ namespace ft
                  template <typename InputIt>
                    void insert(InputIt first, InputIt last)
                    {
-                      tree_.insert(first, last);
+                     tree_.insert(first, last);
                    }
 
                  void erase(iterator pos)
                  {
-                    tree_.erase(pos);
+                   tree_.erase(pos);
                  }
 
                  void erase(iterator first, iterator last)
@@ -221,33 +230,37 @@ namespace ft
 
                  const_iterator find(const Key& key) const
                  {
+                   return tree_.find(key);
                  }
 
                  pair<iterator, iterator> equal_range(const Key& key)
                  {
-                   tree_.equal_range(key);
+                   return tree_.equal_range(key);
                  }
 
                  pair<const_iterator, const_iterator> equal_range(const Key& key) const
                  {
+                   return tree_.equal_range(key);
                  }
 
                  iterator lower_bound(const Key& key)
                  {
-                   tree_.lower_bound(key);
+                   return tree_.lower_bound(key);
                  }
 
                  const_iterator lower_bound(const Key& key) const
                  {
+                   return tree_.lower_bound(key);
                  }
 
                  iterator upper_bound(const Key& key)
                  {
-                   tree_.upper_bound(key);
+                   return tree_.upper_bound(key);
                  }
 
                  const_iterator upper_bound(const Key& key) const
                  {
+                   return tree_.upper_bound(key);
                  }
 
                  // Observers
@@ -271,7 +284,7 @@ namespace ft
 
                  void print_levels()
                  {
-                  tree_.print_levels();
+                   tree_.print_levels();
                  }
              };
 

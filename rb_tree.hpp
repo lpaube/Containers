@@ -52,15 +52,35 @@ namespace ft {
         template <typename InputIt>
           rb_tree(InputIt first, InputIt last, const Compare &comp = Compare(),
               const pair_allocator &alloc = pair_allocator())
-          : root_node_(NULL), end_node_(construct_node()), pair_alloc_(alloc),
-          node_alloc_(node_allocator()), comp_(comp) {
-            insert(first, last);
+          : root_node_(NULL)
+            , end_node_(construct_node())
+            , pair_alloc_(alloc)
+            , node_alloc_(node_allocator())
+            , comp_(comp) {
+              insert(first, last);
+            }
+
+        rb_tree(const rb_tree& other)
+          :root_node_(NULL)
+           , end_node_(construct_node())
+           , pair_alloc_(other.pair_alloc_)
+           , node_alloc_(other.node_alloc_)
+           , comp_(other.comp_)
+        {
+          insert(other.begin(), other.end());
+        }
+
+        rb_tree& operator=(const rb_tree& other)
+        {
+          if (this == &other) {
+            
           }
+        }
 
         pair<iterator, bool> insert(const value_type &value) {
+
           tree_node_ptr node_constructed;
           bool can_construct;
-
 
           // #1 - If tree is empty, create new root black
           if (root_node_ == NULL) {
@@ -304,7 +324,7 @@ namespace ft {
 
           if (node == root_node_)
             return;
-            // Case #3: If node is black and sibbling is black:
+          // Case #3: If node is black and sibbling is black:
           else if (sibbling && sibbling->is_black)
           {
             // Case #3.1: If sibbling (black) has black (or NULL) children
@@ -350,7 +370,7 @@ namespace ft {
             }
           }
 
-            // Case #4: If node is black and sibbling is red:
+          // Case #4: If node is black and sibbling is red:
           else if (sibbling && !sibbling->is_black)
           {
             // Case #4.1: If sibbling (red) has black (or NULL) children
@@ -441,15 +461,21 @@ namespace ft {
 
         template <typename Key> size_type erase(const Key &key) {}
 
-        iterator begin() { return iterator(get_first_node(root_node_)); }
+        iterator begin() {
+          return iterator(get_first_node(root_node_));
+        }
 
         const_iterator begin() const {
           return const_iterator(get_first_node(root_node_));
         }
 
-        iterator end() { return iterator(end_node_); }
+        iterator end() { 
+          return iterator(end_node_);
+        }
 
-        const_iterator end() const { return const_iterator(end_node_); }
+        const_iterator end() const {
+          return const_iterator(end_node_);
+        }
 
         template <typename Key>
           iterator find(const Key &key) {
@@ -462,9 +488,30 @@ namespace ft {
             return end();
           }
 
+        template <typename T, typename Key>
+          T& operator[](const Key& key)
+          {
+            try {
+              return at<Key, T>(key);
+            }
+            catch (std::out_of_range e) {
+              return insert(make_pair(key, T())).first->second;
+            }
+          }
+
+
         template <typename Key, typename Value>
           Value &at(const Key &key) {
             iterator it = find(key);
+
+            if (it == end())
+              throw std::out_of_range("Error: at: cannot find element");
+            return it->second;
+          }
+
+        template <typename Key, typename Value>
+          Value &at(const Key &key) const {
+            const_iterator it = find(key);
 
             if (it == end())
               throw std::out_of_range("Error: at: cannot find element");
@@ -480,7 +527,7 @@ namespace ft {
         template <typename Key>
           pair<const_iterator, const_iterator> equal_range(const Key& key) const
           {
-
+            return pair<const_iterator, const_iterator>(lower_bound(key), upper_bound(key));
           }
 
         // Returns the element that is equal or greater than key
@@ -492,6 +539,7 @@ namespace ft {
             {
               if (!comp_(it->first, key))
                 return it;
+              ++it;
             }
             return end();
           }
@@ -499,7 +547,14 @@ namespace ft {
         template <typename Key>
           const_iterator lower_bound(const Key& key) const
           {
-
+            const_iterator it = begin();
+            while (it != end())
+            {
+              if (!comp_(it->first, key))
+                return it;
+              ++it;
+            }
+            return end();
           }
 
         template <typename Key>
@@ -510,6 +565,7 @@ namespace ft {
             {
               if (comp_(key, it->first))
                 return it;
+              ++it;
             }
             return end();
           }
@@ -517,7 +573,14 @@ namespace ft {
         template <typename Key>
           const_iterator upper_bound(const Key& key) const
           {
-
+            const_iterator it = begin();
+            while (it != end())
+            {
+              if (comp_(key, it->first))
+                return it;
+              ++it;
+            }
+            return end();
           }
 
         bool empty() const {
@@ -648,13 +711,17 @@ namespace ft {
         }
 
         tree_node_ptr get_first_node(tree_node_ptr node) const {
-          if (node == NULL || node->left == NULL)
+          if (!node)
+            return end_node_;
+          if (node->left == NULL)
             return node;
           return get_first_node(node->left);
         }
 
         tree_node_ptr get_last_node(tree_node_ptr node) const {
-          if (node == NULL || node->right == NULL)
+          if (!node)
+            return end_node_;
+          if (node->right == NULL)
             return node;
           return get_last_node(node->right);
         }
