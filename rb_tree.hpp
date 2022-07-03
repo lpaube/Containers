@@ -342,7 +342,7 @@ namespace ft {
 
               node->parent->is_black = sibbling->is_black;
               sibbling->is_black = tmp_color;
-              far_sib_child->is_black = false;
+              far_sib_child->is_black = true;
               if (node == node->parent->left)
                 rotate_left(node->parent);
               else if (node == node->parent->right)
@@ -384,6 +384,8 @@ namespace ft {
         }
 
         void erase(iterator pos) {
+          if (pos == end())
+            return;
           tree_node_ptr node = pos.base();
 
           // If the node has no children
