@@ -31,6 +31,8 @@ namespace ft {
 
       public:
 
+        rbt_iterator() : current_(NULL), comp_(Compare()) {}
+
         rbt_iterator(const tree_node_ptr node) : current_(node), comp_(Compare()) { }
 
         reference operator*() const {
@@ -137,6 +139,8 @@ namespace ft {
         Compare comp_;
 
       public:
+
+        rbt_const_iterator() : current_(NULL), comp_(Compare()) {}
 
         rbt_const_iterator(const tree_node_ptr node) : current_(node), comp_(Compare()) { }
 

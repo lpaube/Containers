@@ -223,16 +223,18 @@ namespace ft
                  {
                  }
 
-                 std::pair<iterator, iterator> equal_range(const Key& key)
+                 pair<iterator, iterator> equal_range(const Key& key)
                  {
+                   tree_.equal_range(key);
                  }
 
-                 std::pair<const_iterator, const_iterator> equal_range(const Key& key) const
+                 pair<const_iterator, const_iterator> equal_range(const Key& key) const
                  {
                  }
 
                  iterator lower_bound(const Key& key)
                  {
+                   tree_.lower_bound(key);
                  }
 
                  const_iterator lower_bound(const Key& key) const
@@ -241,6 +243,7 @@ namespace ft
 
                  iterator upper_bound(const Key& key)
                  {
+                   tree_.upper_bound(key);
                  }
 
                  const_iterator upper_bound(const Key& key) const

@@ -451,23 +451,74 @@ namespace ft {
 
         const_iterator end() const { return const_iterator(end_node_); }
 
-        template <typename Key> iterator find(const Key &key) {
-          iterator tmp_it = begin();
-          while (tmp_it != end()) {
-            if (tmp_it->first == key)
-              return tmp_it;
-            ++tmp_it;
+        template <typename Key>
+          iterator find(const Key &key) {
+            iterator tmp_it = begin();
+            while (tmp_it != end()) {
+              if (tmp_it->first == key)
+                return tmp_it;
+              ++tmp_it;
+            }
+            return end();
           }
-          return end();
-        }
 
-        template <typename Key, typename Value> Value &at(const Key &key) {
-          iterator it = find(key);
+        template <typename Key, typename Value>
+          Value &at(const Key &key) {
+            iterator it = find(key);
 
-          if (it == end())
-            throw std::out_of_range("Error: at: cannot find element");
-          return it->second;
-        }
+            if (it == end())
+              throw std::out_of_range("Error: at: cannot find element");
+            return it->second;
+          }
+
+        template <typename Key>
+          pair<iterator, iterator> equal_range(const Key& key)
+          {
+            return pair<iterator, iterator>(lower_bound(key), upper_bound(key));
+          }
+
+        template <typename Key>
+          pair<const_iterator, const_iterator> equal_range(const Key& key) const
+          {
+
+          }
+
+        // Returns the element that is equal or greater than key
+        template <typename Key>
+          iterator lower_bound(const Key& key)
+          {
+            iterator it = begin();
+            while (it != end())
+            {
+              if (!comp_(it->first, key))
+                return it;
+            }
+            return end();
+          }
+
+        template <typename Key>
+          const_iterator lower_bound(const Key& key) const
+          {
+
+          }
+
+        template <typename Key>
+          iterator upper_bound(const Key& key)
+          {
+            iterator it = begin();
+            while (it != end())
+            {
+              if (comp_(key, it->first))
+                return it;
+            }
+            return end();
+          }
+
+        template <typename Key>
+          const_iterator upper_bound(const Key& key) const
+          {
+
+          }
 
         bool empty() const {
           if (end_node_->left == NULL && end_node_->right == NULL)
