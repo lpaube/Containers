@@ -81,9 +81,6 @@ namespace ft {
           if (parent_node.second == false) {
             node_constructed = parent_node.first;
             can_construct = false;
-            // PRINTING STUFF
-            std::cout << "NODE: " << node_constructed->data.first << std::endl;
-            print_levels();
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
 
@@ -102,20 +99,14 @@ namespace ft {
 
           if (node_constructed->parent->is_black == true)
           {
-            // PRINTING STUFF
-            std::cout << "NODE: " << node_constructed->data.first << std::endl;
-            print_levels();
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
-          rb_insertion_check(node_constructed);
-          // PRINTING STUFF
-          std::cout << "NODE: " << node_constructed->data.first << std::endl;
-          print_levels();
+          check_rb_insertion(node_constructed);
           return pair<iterator, bool>(iterator(node_constructed), can_construct);
         }
 
 
-        void rb_insertion_check(tree_node_ptr node)
+        void check_rb_insertion(tree_node_ptr node)
         {
           if (node == root_node_)
             node->is_black = true;
@@ -133,9 +124,7 @@ namespace ft {
                 node->parent->is_black = true;
                 uncle->is_black = true;
                 node->parent->parent->is_black = false;
-                std::cout << "AFTER COLORATION: " << std::endl;
-                print_levels();
-                rb_insertion_check(node->parent->parent);
+                check_rb_insertion(node->parent->parent);
                 return;
               }
               // If color of uncle is black
@@ -146,13 +135,13 @@ namespace ft {
                 if (node == node->parent->right)
                 {
                   node = node->parent;
-                  left_rotation(node);
+                  rotate_left(node);
                 }
                 // CASE #3
                 // If subtree form a line
                 node->parent->is_black = true;
                 node->parent->parent->is_black = false;
-                right_rotation(node->parent->parent);
+                rotate_right(node->parent->parent);
                 root_node_->is_black = true;
               }
             }
@@ -166,7 +155,7 @@ namespace ft {
                 node->parent->is_black = true;
                 uncle->is_black = true;
                 node->parent->parent->is_black = false;
-                rb_insertion_check(node->parent->parent);
+                check_rb_insertion(node->parent->parent);
                 return;
               }
               // If color of uncle is black
@@ -177,14 +166,14 @@ namespace ft {
                 if (node == node->parent->left)
                 {
                   node = node->parent;
-                  right_rotation(node);
+                  rotate_right(node);
                 }
                 // CASE #3
                 // If subtree form a line
                 node->parent->is_black = true;
                 // TODO: We might need to call recolorization here with parent->parent
                 node->parent->parent->is_black = false;
-                left_rotation(node->parent->parent);
+                rotate_left(node->parent->parent);
                 root_node_->is_black = true;
               }
             }
@@ -192,7 +181,7 @@ namespace ft {
           //std::cerr << "Checking insertion_check" << " | root is_black: " << root_node_->is_black << std::endl;
         }
 
-        int left_rotation(tree_node_ptr node_x)
+        int rotate_left(tree_node_ptr node_x)
         {
           if (node_x->right == NULL)
             return 0;
@@ -219,7 +208,7 @@ namespace ft {
           return 1;
         }
 
-        int right_rotation(tree_node_ptr node_x)
+        int rotate_right(tree_node_ptr node_x)
         {
           if (node_x->left == NULL)
             return 0;
@@ -255,6 +244,14 @@ namespace ft {
           }
         }
 
+        tree_node_ptr get_sibbling(const tree_node_ptr node) const
+        {
+          if (node == node->parent->left)
+            return node->parent->right;
+          else
+            return node->parent->left;
+        }
+
         tree_node_ptr get_uncle(const tree_node_ptr node) const
         {
           tree_node_ptr parent = node->parent;
@@ -287,11 +284,111 @@ namespace ft {
           node_alloc_.deallocate(node, 1);
         }
 
+        void check_double_black(tree_node_ptr node)
+        {
+          tree_node_ptr sibbling = get_sibbling(node);
+          tree_node_ptr far_sib_child;
+          tree_node_ptr near_sib_child;
+
+          // Setting far and near sibbling children
+          if (sibbling && node == node->parent->left)
+          {
+            far_sib_child = sibbling->right;
+            near_sib_child = sibbling->left;
+          }
+          else if (sibbling && node == node->parent->right)
+          {
+            far_sib_child = sibbling->left;
+            near_sib_child = sibbling->right;
+          }
+
+          if (node == root_node_)
+            return;
+            // Case #3: If node is black and sibbling is black:
+          else if (sibbling && sibbling->is_black)
+          {
+            // Case #3.1: If sibbling (black) has black (or NULL) children
+            if ((!sibbling->left || sibbling->left->is_black)
+                && (!sibbling->right || sibbling->right->is_black))
+            {
+              sibbling->is_black = false;
+              if (!node->parent->is_black)
+              {
+                node->parent->is_black = true;
+              }
+              else if (node->parent->is_black)
+              {
+                check_double_black(node->parent);
+              }
+            }
+            // Case #5: If sibbling (black) has near child red, and far child black
+            else if (near_sib_child 
+                && !near_sib_child->is_black
+                && (!far_sib_child || far_sib_child->is_black))
+            {
+              sibbling->is_black = false;
+              near_sib_child->is_black = true;
+              if (node == node->parent->left)
+                rotate_right(sibbling);
+              else if (node == node->parent->right)
+                rotate_left(sibbling);
+              check_double_black(node);
+            }
+            // Case #6: Sibbling is black, far child is red
+            else if ((!near_sib_child || near_sib_child->is_black)
+                && (far_sib_child && !far_sib_child->is_black))
+            {
+              bool tmp_color = node->parent->is_black;
+
+              node->parent->is_black = sibbling->is_black;
+              sibbling->is_black = tmp_color;
+              far_sib_child->is_black = false;
+              if (node == node->parent->left)
+                rotate_left(node->parent);
+              else if (node == node->parent->right)
+                rotate_right(node->parent);
+            }
+          }
+
+            // Case #4: If node is black and sibbling is red:
+          else if (sibbling && !sibbling->is_black)
+          {
+            // Case #4.1: If sibbling (red) has black (or NULL) children
+            if ((!sibbling->left || sibbling->left->is_black)
+                && (!sibbling->right || sibbling->right->is_black))
+            {
+              node->parent->is_black = false;
+              sibbling->is_black = true;
+              if (node == node->parent->left)
+                rotate_left(node->parent);
+              else if (node == node->parent->right)
+                rotate_right(node->parent);
+              check_double_black(node);
+            }
+          }
+
+        }
+
+        void check_deletion(tree_node_ptr node)
+        {
+          // Case #1: If node is red, delete
+          if (node->is_black == false)
+            return;
+
+          // Case #2: If node is black and is root: delete
+          if (node == root_node_)
+            return;
+
+          // Case #3: If node is black (double black):
+          check_double_black(node);
+        }
+
         void erase(iterator pos) {
           tree_node_ptr node = pos.base();
 
           // If the node has no children
           if (!node->left && !node->right) {
+            check_deletion(node);
             if (node == node->parent->left) {
               node->parent->left = NULL;
             } else {
@@ -299,31 +396,42 @@ namespace ft {
             }
             destroy_node(node);
           }
+          /*
           // If the node to delete only has a right child
           else if (!node->left && node->right) {
-            if (node == node->parent->left) {
-              node->parent->left = node->right;
-            } else {
-              node->parent->right = node->right;
-            }
-            destroy_node(node);
+          if (node == node->parent->left) {
+          node->parent->left = node->right;
+          } else {
+          node->parent->right = node->right;
+          }
+          node->right->parent = node->parent;
+          destroy_node(node);
           }
           // If the node to delete only has a left child
           else if (node->left && !node->right) {
-            if (node == node->parent->left) {
-              node->parent->left = node->left;
-            } else {
-              node->parent->right = node->left;
-            }
-            destroy_node(node);
+          if (node == node->parent->left) {
+          node->parent->left = node->left;
+          } else {
+          node->parent->right = node->left;
           }
+          node->left->parent = node->parent;
+          destroy_node(node);
+          }
+          */
           // If the node to delete has 2 children
           else {
             tree_node_ptr next_node = get_next_node(node);
+            tree_node_ptr prev_node = get_prev_node(node);
 
-            destroy_node(node);
-            node = construct_node(next_node->data);
-            erase(++pos);
+            if (!next_node) {
+              pair_alloc_.destroy(&node->data);
+              pair_alloc_.construct(&node->data, prev_node->data);
+              erase(--pos);
+            } else {
+              pair_alloc_.destroy(&node->data);
+              pair_alloc_.construct(&node->data, next_node->data);
+              erase(++pos);
+            }
           }
         }
 
@@ -407,30 +515,30 @@ namespace ft {
             qu.pop();
             if (curr != NULL) {
               std::cout << "("
-                        << "\33[32m";
-                        node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
-                        << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
-                        << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
-                        std::cout << std::setw(23) << node_value_ss.str()
-                        << "\33[0m|"
-                        << "Par: \33[34m";
-                        node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
-                        << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
-                        << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
-                        std::cout << std::setw(9) << node_parent_ss.str()
-                        << "\33[0m|\33[35m"
-                        << (curr->is_black ? "BLA" : "RED")
-                        << "\33[0m"
-                        << ")"
-                        << " ";
-                        node_value_ss.str(std::string());
-                        node_parent_ss.str(std::string());
-                /*
-                << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
-                << " | Key: " << curr->data.first
-                << " | " << ((curr->is_black) ? "BLACK" : "RED")
-                << ") ";
-                */
+                << "\33[32m";
+              node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
+                << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
+                << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
+              std::cout << std::setw(23) << node_value_ss.str()
+                << "\33[0m|"
+                << "Par: \33[34m";
+              node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
+                << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
+                << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
+              std::cout << std::setw(9) << node_parent_ss.str()
+                << "\33[0m|\33[35m"
+                << (curr->is_black ? "BLA" : "RED")
+                << "\33[0m"
+                << ")"
+                << " ";
+              node_value_ss.str(std::string());
+              node_parent_ss.str(std::string());
+              /*
+                 << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
+                 << " | Key: " << curr->data.first
+                 << " | " << ((curr->is_black) ? "BLACK" : "RED")
+                 << ") ";
+                 */
               if (curr->left != NULL) {
                 qu.push(curr->left);
               }
@@ -464,6 +572,8 @@ namespace ft {
               node = node->parent;
             }
             node = node->parent;
+            if (node == end_node_)
+              return NULL;
             return node;
           }
         }
@@ -474,13 +584,13 @@ namespace ft {
             while (node->right != NULL) {
               node = node->right;
             }
-            return *this;
+            return node;
           } else {
             while (node->parent != NULL && node->parent->left == node) {
               node = node->parent;
             }
             node = node->parent;
-            return *this;
+            return node;
           }
         }
 
@@ -562,12 +672,14 @@ namespace ft {
             << std::endl;
         }
 
-        void inorder(tree_node_ptr node, void (*f)(tree_node_ptr)) {
-          if (node == NULL)
-            return;
-          inorder(node->left, f);
-          f(node);
-          inorder(node->right, f);
-        }
+        /*
+           void inorder(tree_node_ptr node, void (*f)(tree_node_ptr)) {
+           if (node == NULL)
+           return;
+           inorder(node->left, f);
+           f(node);
+           inorder(node->right, f);
+           }
+           */
     };
 } // namespace ft

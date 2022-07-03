@@ -28,19 +28,45 @@
 int main(void)
 {
   ft::map<int, std::string> map_test;
-  map_test.insert(ft::pair<int, std::string>(1, "this is one"));
-  map_test.insert(ft::pair<int, std::string>(4, "wowow"));
-  map_test.insert(ft::pair<int, std::string>(6, "this is sicks (6)"));
-  map_test.insert(ft::pair<int, std::string>(8, "this is eight"));
-  map_test.insert(ft::pair<int, std::string>(41, "forty-one"));
-  map_test.insert(ft::pair<int, std::string>(-2, "minus 2"));
-  map_test.insert(ft::pair<int, std::string>(10, "ten"));
-  map_test.insert(ft::pair<int, std::string>(32, "thirty-two"));
-  map_test.insert(ft::pair<int, std::string>(42, "forty-two"));
-  map_test.insert(ft::pair<int, std::string>(2, "two"));
-  map_test.insert(ft::pair<int, std::string>(1000, "thousand"));
-  map_test.insert(ft::pair<int, std::string>(999, "nine-nine-nine"));
+  map_test.insert(ft::pair<int, std::string>(15, "this is one"));
+  map_test.insert(ft::pair<int, std::string>(30, "wowow"));
+  map_test.insert(ft::pair<int, std::string>(35, "this is sicks (6)"));
+  map_test.insert(ft::pair<int, std::string>(50, "this is eight"));
+  map_test.insert(ft::pair<int, std::string>(65, "forty-one"));
+  map_test.insert(ft::pair<int, std::string>(55, "minus 2"));
+  map_test.insert(ft::pair<int, std::string>(70, "ten"));
+  map_test.insert(ft::pair<int, std::string>(68, "thirty-two"));
+  map_test.insert(ft::pair<int, std::string>(80, "forty-two"));
+  map_test.insert(ft::pair<int, std::string>(90, "two"));
   
   std::cout << "======PRINTING LEVELS MAP 1======" << std::endl;
   map_test.print_levels();
+
+  map_test.erase(map_test.find(55));
+  std::cout << "ERASE 55" << std::endl;
+  map_test.print_levels();
+
+  map_test.erase(map_test.find(30));
+  std::cout << "ERASE 30" << std::endl;
+  map_test.print_levels();
+
+  map_test.erase(map_test.find(90));
+  std::cout << "ERASE 90" << std::endl;
+  map_test.print_levels();
+
+  map_test.erase(map_test.find(80));
+  std::cout << "ERASE 80" << std::endl;
+  map_test.print_levels();
+
+  /*
+  map_test.erase(map_test.find(50));
+  std::cout << "ERASE 50" << std::endl;
+  map_test.print_levels();
+  map_test.erase(map_test.find(35));
+  std::cout << "ERASE 35" << std::endl;
+  map_test.print_levels();
+  map_test.erase(map_test.find(15));
+  std::cout << "ERASE 15" << std::endl;
+  map_test.print_levels();
+  */
 }
