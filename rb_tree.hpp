@@ -8,6 +8,7 @@
 #include <queue>
 #include <string>
 #include <iomanip>
+#include <sstream>
 
 namespace ft {
   template <typename value_type, typename Compare, typename Allocator>
@@ -46,26 +47,29 @@ namespace ft {
         // tree constructor
         rb_tree(const Compare &comp = Compare(),
             const pair_allocator &alloc = pair_allocator())
-          : root_node_(NULL), end_node_(construct_node()), pair_alloc_(alloc),
-          node_alloc_(node_allocator()), comp_(comp) {}
+          : end_node_(construct_node())
+            , root_node_(NULL)
+            , node_alloc_(node_allocator())
+            , pair_alloc_(alloc)
+            , comp_(comp) {}
 
         template <typename InputIt>
           rb_tree(InputIt first, InputIt last, const Compare &comp = Compare(),
               const pair_allocator &alloc = pair_allocator())
-          : root_node_(NULL)
-            , end_node_(construct_node())
-            , pair_alloc_(alloc)
+          : end_node_(construct_node())
+            , root_node_(NULL)
             , node_alloc_(node_allocator())
+            , pair_alloc_(alloc)
             , comp_(comp) {
               insert(first, last);
             }
 
         rb_tree(const rb_tree& other)
-          :root_node_(NULL)
-           , end_node_(construct_node())
-           , pair_alloc_(other.pair_alloc_)
-           , node_alloc_(other.node_alloc_)
-           , comp_(other.comp_)
+          : end_node_(construct_node())
+            ,root_node_(NULL)
+            , node_alloc_(other.node_alloc_)
+            , pair_alloc_(other.pair_alloc_)
+            , comp_(other.comp_)
       {
         insert(other.begin(), other.end());
       }
@@ -293,7 +297,33 @@ namespace ft {
           std::cout << "===== END OF PRINTING TREE =====" << std::endl;
         }
 
-        iterator insert(iterator hint, const value_type &value) {}
+        iterator insert(iterator hint, const value_type &value) {
+          tree_node_ptr hint_node = hint.base();
+
+          // Printing debug info
+          std::cout << "HINT KEY: " << hint->first << " | VALUE KEY: "
+            << value.first << std::endl;
+          print_levels();
+
+          if (comp_(hint->first, value.first)
+              && comp_(value.first, get_next_node(hint_node)->data.first))
+          {
+            if (!hint_node->right)
+            {
+              hint_node->right = construct_node(value, hint_node);
+              return iterator(hint_node->right);
+            }
+            else
+            {
+              hint_node->right->left = construct_node(value, hint_node->right);
+              return iterator(hint_node->right->left);
+            }
+          }
+          else
+          {
+            return insert(value).first;
+          }
+        }
 
         template <typename InputIt> void insert(InputIt first, InputIt last) {
           while (first != last) {
@@ -457,26 +487,25 @@ namespace ft {
         }
 
         template <typename Key>
-        void erase(iterator first, iterator last) {
+          void erase(iterator first, iterator last) {
 
-          Key last_key;
+            Key last_key;
 
-          if (last != end())
-            last_key = last->first;
-
-          while (first != last)
-          {
-            std::cerr << "KEY: " << first->first << std::endl;
-            print_levels();
-            first = erase(first);
             if (last != end())
-              last = find(last_key);
+              last_key = last->first;
+
+            while (first != last)
+            {
+              std::cerr << "KEY: " << first->first << std::endl;
+              first = erase(first);
+              if (last != end())
+                last = find(last_key);
+            }
           }
-        }
 
         template <typename Key> size_type erase(const Key &key) {
           iterator it = find(key);
-          if (!it)
+          if (it == end())
             return 0;
           erase(it);
           return 1;
@@ -489,6 +518,14 @@ namespace ft {
           std::swap(node_alloc_, other.node_alloc_);
           std::swap(pair_alloc_, other.pair_alloc_);
           std::swap(comp_, other.comp_);
+        }
+
+        template <typename Key>
+        size_type count(const Key& key) const
+        {
+          if (find(key) != end())
+            return 1;
+          return 0;
         }
 
         iterator begin() {
@@ -510,6 +547,17 @@ namespace ft {
         template <typename Key>
           iterator find(const Key &key) {
             iterator tmp_it = begin();
+            while (tmp_it != end()) {
+              if (tmp_it->first == key)
+                return tmp_it;
+              ++tmp_it;
+            }
+            return end();
+          }
+
+        template <typename Key>
+          const_iterator find(const Key &key) const {
+            const_iterator tmp_it = begin();
             while (tmp_it != end()) {
               if (tmp_it->first == key)
                 return tmp_it;
@@ -697,7 +745,6 @@ namespace ft {
             }
           }
         }
-
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
