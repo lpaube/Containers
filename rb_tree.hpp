@@ -303,8 +303,14 @@ namespace ft {
           // Printing debug info
           std::cout << "HINT KEY: " << hint->first << " | VALUE KEY: "
             << value.first << std::endl;
-          print_levels();
 
+          if (hint == end_node_)
+            return insert(value).first;
+          if (root_node_ == NULL)
+          {
+            root_node_ = construct_node(value, end_node_);
+            return iterator(root_node_);
+          }
           if (comp_(hint->first, value.first)
               && comp_(value.first, get_next_node(hint_node)->data.first))
           {

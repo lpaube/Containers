@@ -295,8 +295,8 @@ namespace ft
     bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
         const ft::map<Key,T,Compare,Alloc>& rhs )
     {
-      typename ft::map<Key, T, Compare, Alloc>::iterator lhs_it = lhs.begin();
-      typename ft::map<Key, T, Compare, Alloc>::iterator rhs_it = rhs.begin();
+      typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin();
+      typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin();
 
       if (lhs.size() != rhs.size())
         return 0;
