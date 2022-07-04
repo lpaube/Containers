@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -205,17 +206,17 @@ namespace ft
 
                  void erase(iterator first, iterator last)
                  {
-                   tree_.erase(first, last);
+                   tree_.template erase<Key>(first, last);
                  }
 
                  size_type erase(const Key& key)
                  {
-                   tree_.erase(key);
+                   return tree_.erase(key);
                  }
 
                  void swap(map& other)
                  {
-
+                    tree_.swap(other.tree_);
                  }
 
                  // Lookup

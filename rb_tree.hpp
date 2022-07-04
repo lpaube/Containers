@@ -66,15 +66,16 @@ namespace ft {
            , pair_alloc_(other.pair_alloc_)
            , node_alloc_(other.node_alloc_)
            , comp_(other.comp_)
-        {
-          insert(other.begin(), other.end());
-        }
+      {
+        insert(other.begin(), other.end());
+      }
 
         rb_tree& operator=(const rb_tree& other)
         {
-          if (this == &other) {
-            
-          }
+          rb_tree tmp(other);
+          swap(tmp);
+
+          return *this;
         }
 
         pair<iterator, bool> insert(const value_type &value) {
@@ -266,7 +267,9 @@ namespace ft {
 
         tree_node_ptr get_sibbling(const tree_node_ptr node) const
         {
-          if (node == node->parent->left)
+          if (node == end_node_ || node == root_node_)
+            return NULL;
+          else if (node == node->parent->left)
             return node->parent->right;
           else
             return node->parent->left;
@@ -300,6 +303,8 @@ namespace ft {
         }
 
         void destroy_node(tree_node_ptr node) {
+          if (node == root_node_)
+            root_node_ = NULL;
           pair_alloc_.destroy(&node->data);
           node_alloc_.deallocate(node, 1);
         }
@@ -307,8 +312,16 @@ namespace ft {
         void check_double_black(tree_node_ptr node)
         {
           tree_node_ptr sibbling = get_sibbling(node);
-          tree_node_ptr far_sib_child;
-          tree_node_ptr near_sib_child;
+          tree_node_ptr far_sib_child = NULL;
+          tree_node_ptr near_sib_child = NULL;
+
+          // Case #1: If node is red, delete
+          if (node->is_black == false)
+            return;
+
+          // Case #2: If node is black and is root: delete
+          if (node == root_node_)
+            return;
 
           // Setting far and near sibbling children
           if (sibbling && node == node->parent->left)
@@ -321,9 +334,6 @@ namespace ft {
             far_sib_child = sibbling->left;
             near_sib_child = sibbling->right;
           }
-
-          if (node == root_node_)
-            return;
           // Case #3: If node is black and sibbling is black:
           else if (sibbling && sibbling->is_black)
           {
@@ -386,61 +396,48 @@ namespace ft {
               check_double_black(node);
             }
           }
-
         }
 
-        void check_deletion(tree_node_ptr node)
-        {
-          // Case #1: If node is red, delete
-          if (node->is_black == false)
-            return;
+        /*
+           void check_deletion(tree_node_ptr node)
+           {
+        // Case #1: If node is red, delete
+        if (node->is_black == false)
+        return;
 
-          // Case #2: If node is black and is root: delete
-          if (node == root_node_)
-            return;
+        // Case #2: If node is black and is root: delete
+        if (node == root_node_)
+        return;
 
-          // Case #3: If node is black (double black):
-          check_double_black(node);
+        // Case #3: If node is black (double black):
+        check_double_black(node);
         }
+        */
 
-        void erase(iterator pos) {
+        iterator erase(iterator pos) {
           if (pos == end())
-            return;
+            return pos;
+
           tree_node_ptr node = pos.base();
 
           // If the node has no children
           if (!node->left && !node->right) {
-            check_deletion(node);
+            check_double_black(node);
+
+            iterator next_it = iterator(get_next_node(node));
+
             if (node == node->parent->left) {
               node->parent->left = NULL;
             } else {
               node->parent->right = NULL;
             }
+
             destroy_node(node);
+            return next_it;
           }
-          /*
-          // If the node to delete only has a right child
-          else if (!node->left && node->right) {
-          if (node == node->parent->left) {
-          node->parent->left = node->right;
-          } else {
-          node->parent->right = node->right;
-          }
-          node->right->parent = node->parent;
-          destroy_node(node);
-          }
-          // If the node to delete only has a left child
-          else if (node->left && !node->right) {
-          if (node == node->parent->left) {
-          node->parent->left = node->left;
-          } else {
-          node->parent->right = node->left;
-          }
-          node->left->parent = node->parent;
-          destroy_node(node);
-          }
-          */
-          // If the node to delete has 2 children
+
+          // If the node to delete has at least a child,
+          // replace current node with child and call erase again
           else {
             tree_node_ptr next_node = get_next_node(node);
             tree_node_ptr prev_node = get_prev_node(node);
@@ -449,17 +446,50 @@ namespace ft {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, prev_node->data);
               erase(--pos);
+              return end();
             } else {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, next_node->data);
               erase(++pos);
+              return iterator(node);
             }
           }
         }
 
-        void erase(iterator first, iterator last) {}
+        template <typename Key>
+        void erase(iterator first, iterator last) {
 
-        template <typename Key> size_type erase(const Key &key) {}
+          Key last_key;
+
+          if (last != end())
+            last_key = last->first;
+
+          while (first != last)
+          {
+            std::cerr << "KEY: " << first->first << std::endl;
+            print_levels();
+            first = erase(first);
+            if (last != end())
+              last = find(last_key);
+          }
+        }
+
+        template <typename Key> size_type erase(const Key &key) {
+          iterator it = find(key);
+          if (!it)
+            return 0;
+          erase(it);
+          return 1;
+        }
+
+        void swap(rb_tree& other)
+        {
+          std::swap(end_node_, other.end_node_);
+          std::swap(root_node_, other.root_node_);
+          std::swap(node_alloc_, other.node_alloc_);
+          std::swap(pair_alloc_, other.pair_alloc_);
+          std::swap(comp_, other.comp_);
+        }
 
         iterator begin() {
           return iterator(get_first_node(root_node_));
@@ -495,7 +525,7 @@ namespace ft {
               return at<Key, T>(key);
             }
             catch (std::out_of_range e) {
-              return insert(make_pair(key, T())).first->second;
+              return insert(ft::make_pair(key, T())).first->second;
             }
           }
 
@@ -649,12 +679,6 @@ namespace ft {
                 << " ";
               node_value_ss.str(std::string());
               node_parent_ss.str(std::string());
-              /*
-                 << "Parent: " << ((curr == root_node_) ? 999999999 : curr->parent->data.first)
-                 << " | Key: " << curr->data.first
-                 << " | " << ((curr->is_black) ? "BLACK" : "RED")
-                 << ") ";
-                 */
               if (curr->left != NULL) {
                 qu.push(curr->left);
               }
@@ -689,7 +713,7 @@ namespace ft {
             }
             node = node->parent;
             if (node == end_node_)
-              return NULL;
+              return end_node_;
             return node;
           }
         }
