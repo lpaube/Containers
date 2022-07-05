@@ -148,18 +148,22 @@ namespace ft
 
                  reverse_iterator rbegin()
                  {
+                   return reverse_iterator(end());
                  }
 
                  const_reverse_iterator rbegin() const
                  {
+                   return const_reverse_iterator(end());
                  }
 
                  reverse_iterator rend()
                  {
+                   return reverse_iterator(begin());
                  }
 
                  const_reverse_iterator rend() const
                  {
+                   return const_reverse_iterator(begin());
                  }
 
                  // Capacity
@@ -284,10 +288,12 @@ namespace ft
                    tree_.print_tree();
                  }
 
+                 /*
                  void print_levels()
                  {
                    tree_.print_levels();
                  }
+                 */
              };
 
   // ======================= Non-member functions =====================

@@ -686,6 +686,7 @@ namespace ft {
 
         size_type max_size() const { return node_alloc_.max_size(); }
 
+        /*
         void print_levels()
         {
           std::cout << "=====PRINTING LEVELS=====" << std::endl;
@@ -751,6 +752,7 @@ namespace ft {
             }
           }
         }
+        */
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
