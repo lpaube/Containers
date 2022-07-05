@@ -89,13 +89,13 @@ namespace ft {
 
           // #1 - If tree is empty, create new root black
           if (root_node_ == NULL) {
-            //std::cout << "Insert: value_first: " << value.first << " | this is root" << std::endl;
             root_node_ = construct_node(value, end_node_);
             root_node_->is_black = true;
             end_node_->left = root_node_;
             node_constructed = root_node_;
             can_construct = true;
-            return pair<iterator, bool>(node_constructed, can_construct);
+            //std::cout << "MY PRINT NODE_CONSTRUCTED: DATA: " << node_constructed->data.first << node_constructed->data.second << std::endl;
+            return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
 
           //std::cout << "Insert: value_first: " << value.first << " | root is_black: " << root_node_->is_black << std::endl;
@@ -301,9 +301,6 @@ namespace ft {
           tree_node_ptr hint_node = hint.base();
 
           // Printing debug info
-          std::cout << "HINT KEY: " << hint->first << " | VALUE KEY: "
-            << value.first << std::endl;
-
           if (hint == end_node_)
             return insert(value).first;
           if (root_node_ == NULL)
@@ -339,8 +336,14 @@ namespace ft {
         }
 
         void destroy_node(tree_node_ptr node) {
+          if (node == node->parent->left) {
+            node->parent->left = NULL;
+          } else {
+            node->parent->right = NULL;
+          }
           if (node == root_node_)
             root_node_ = NULL;
+
           pair_alloc_.destroy(&node->data);
           node_alloc_.deallocate(node, 1);
         }
@@ -462,12 +465,6 @@ namespace ft {
 
             iterator next_it = iterator(get_next_node(node));
 
-            if (node == node->parent->left) {
-              node->parent->left = NULL;
-            } else {
-              node->parent->right = NULL;
-            }
-
             destroy_node(node);
             return next_it;
           }
@@ -502,7 +499,6 @@ namespace ft {
 
             while (first != last)
             {
-              std::cerr << "KEY: " << first->first << std::endl;
               first = erase(first);
               if (last != end())
                 last = find(last_key);
@@ -527,12 +523,12 @@ namespace ft {
         }
 
         template <typename Key>
-        size_type count(const Key& key) const
-        {
-          if (find(key) != end())
-            return 1;
-          return 0;
-        }
+          size_type count(const Key& key) const
+          {
+            if (find(key) != end())
+              return 1;
+            return 0;
+          }
 
         iterator begin() {
           return iterator(get_first_node(root_node_));
@@ -684,9 +680,16 @@ namespace ft {
           return counter;
         }
 
-        size_type max_size() const { return node_alloc_.max_size(); }
+        size_type max_size() const {
+          return node_alloc_.max_size();
+        }
 
-        /*
+        template <typename Key>
+        void clear()
+        {
+          erase<Key>(begin(), end());
+        }
+
         void print_levels()
         {
           std::cout << "=====PRINTING LEVELS=====" << std::endl;
@@ -752,7 +755,6 @@ namespace ft {
             }
           }
         }
-        */
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
@@ -837,11 +839,12 @@ namespace ft {
 
         // Returns the parent node of the new (non-existant) node with value
         // bool is true when we can add node; bool is false when value.first already
-        // exists
+        // exists.
+        // If node already exists, returns the existing node
         pair<tree_node_ptr, bool> find_parent_pos(const value_type &value,
             tree_node_ptr node) {
           if (value.first == node->data.first)
-            return pair<tree_node_ptr, bool>(end_node_, false);
+            return pair<tree_node_ptr, bool>(node, false);
           if (comp_(value.first, node->data.first) == true) {
             if (node->left == NULL)
               return pair<tree_node_ptr, bool>(node, true);

@@ -185,6 +185,7 @@ namespace ft
                  // Modifiers
                  void clear()
                  {
+                   tree_.template clear<Key>();
                  }
 
                  pair<iterator, bool> insert(const value_type& value)
@@ -288,12 +289,10 @@ namespace ft
                    tree_.print_tree();
                  }
 
-                 /*
                  void print_levels()
                  {
                    tree_.print_levels();
                  }
-                 */
              };
 
   // ======================= Non-member functions =====================

@@ -128,8 +128,8 @@ namespace ft {
         typedef std::bidirectional_iterator_tag iterator_category;
         typedef T value_type;
         typedef std::ptrdiff_t difference_type;
-        typedef T* pointer;
-        typedef T& reference;
+        typedef const T* pointer;
+        typedef const T& reference;
         typedef rbt_iterator<T, Compare> rbt_iterator;
 
       private:
