@@ -23,50 +23,63 @@
 #include "rb_tree.hpp"
 #include "map.hpp"
 #include "utils.hpp"
-#include "containers_test/srcs/map/common.hpp"
+//#include "containers_test/srcs/map/common.hpp"
 #include <list>
 #include <iostream>
 #include <string>
+#include <map>
+#include <iterator>
 
-#include "map_tests.hpp"
-#include "map_prelude.hpp"
+//#include "map_tests.hpp"
+//#include "map_prelude.hpp"
+//
+#define MY_NAMESPACE ft
+
 
 int main(void)
 {
+  MY_NAMESPACE::map<int, std::string> mp1;
 
-  ft::map<int, std::string> mp1;
-  ft::map<int, std::string>::size_type size;
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(1, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(2, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(3, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(4, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(5, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(6, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(7, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(8, "one"));
+  /*
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(9, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(10, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(11, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(12, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(13, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(14, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(15, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(16, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(17, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(18, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(19, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(20, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(21, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(22, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(23, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(24, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(25, "one"));
+  mp1.insert(MY_NAMESPACE::pair<int, std::string>(26, "one"));
 
-  mp1.erase(mp1.begin(), mp1.end());
-
-  mp1.insert(ft::make_pair(23, "23n"));
-  mp1.insert(ft::make_pair(25, "asdasdfsdfsafdsf"));
-  mp1.insert(ft::make_pair(1, "asdssdfdfdffffff"));
-  mp1.insert(ft::make_pair(2, "dsfdffffdfdfdsdfdffa"));
-  mp1.insert(ft::make_pair(3, "sssdfs"));
-  mp1.insert(ft::make_pair(75, "dfse"));
-  mp1.insert(ft::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
-  mp1.insert(ft::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
-  mp1.insert(ft::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
-  mp1.insert(ft::make_pair(0, "98y4rtuohwidsjusdossefsse"));
-
-  mp1.erase(64);
-  mp1.erase(0);
-  mp1.erase(75);
-  mp1.erase(1);
-  mp1.erase(2);
-  mp1.erase(3);
-  mp1.erase(23);
-  mp1.erase(23);
-  mp1.erase(30);
-
-  std::cerr << "Size before: " << mp1.size() << std::endl;
+  */
   mp1.print_levels();
-  // This one below
-  mp1.erase(-22);
-  std::cerr << "Size After: " << mp1.size() << std::endl;
-  mp1.print_levels();
+  mp1.print_map();
 
-  mp1.erase(-23);
-  mp1.erase(-23);
+
+  MY_NAMESPACE::map<int, std::string>::iterator it = mp1.begin();
+  std::advance(it, 1);
+
+  std::cerr << "===ERASING===" << std::endl;
+  mp1.erase(it, mp1.end());
+
+  std::cerr << "===SIZE: " << mp1.size() << std::endl;
+  mp1.print_levels();
+  mp1.print_map();
 }
