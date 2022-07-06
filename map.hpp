@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <iostream>
@@ -112,17 +111,17 @@ namespace ft
                  // Element access
                  T& at(const Key& key)
                  {
-                   return tree_.at(key);
+                   return tree_.template at<Key, T>(key);
                  }
 
                  const T& at(const Key& key) const
                  {
-                   return tree_.at(key);
+                   return tree_.template at<Key, T>(key);
                  }
 
                  T& operator[](const Key& key)
                  {
-                   return tree_.template operator[]<T, Key>(key);
+                   return tree_.template operator[]<Key, T>(key);
                  }
 
                  // Iterators
@@ -185,7 +184,7 @@ namespace ft
                  // Modifiers
                  void clear()
                  {
-                   tree_.template clear<Key>();
+                   tree_.clear();
                  }
 
                  pair<iterator, bool> insert(const value_type& value)
@@ -297,8 +296,8 @@ namespace ft
 
   // ======================= Non-member functions =====================
   template<typename Key, typename T, typename Compare, typename Alloc>
-    bool operator==( const ft::map<Key,T,Compare,Alloc>& lhs,
-        const ft::map<Key,T,Compare,Alloc>& rhs )
+    bool operator==(const ft::map<Key,T,Compare,Alloc>& lhs
+                   ,const ft::map<Key,T,Compare,Alloc>& rhs)
     {
       typename ft::map<Key, T, Compare, Alloc>::const_iterator lhs_it = lhs.begin();
       typename ft::map<Key, T, Compare, Alloc>::const_iterator rhs_it = rhs.begin();

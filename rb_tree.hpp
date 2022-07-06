@@ -74,6 +74,30 @@ namespace ft {
         insert(other.begin(), other.end());
       }
 
+        ~rb_tree()
+        {
+          destroy_tree(end_node_);
+          node_alloc_.deallocate(end_node_, 1);
+        }
+
+        void destroy_tree(tree_node_ptr node)
+        {
+          if (node != NULL)
+          {
+            destroy_tree(node->left);
+            destroy_tree(node->right);
+            if (node != end_node_)
+            {
+              pair_alloc_.destroy(&node->data);
+              node_alloc_.deallocate(node, 1);
+            }
+            else if (node == end_node_)
+              end_node_->left = NULL;
+            if (node == root_node_)
+              root_node_ = NULL;
+          }
+        }
+        
         rb_tree& operator=(const rb_tree& other)
         {
           rb_tree tmp(other);
@@ -300,8 +324,7 @@ namespace ft {
         iterator insert(iterator hint, const value_type &value) {
           tree_node_ptr hint_node = hint.base();
 
-          // Printing debug info
-          if (hint == end_node_)
+          if (hint == end())
             return insert(value).first;
           if (root_node_ == NULL)
           {
@@ -437,22 +460,6 @@ namespace ft {
           }
         }
 
-        /*
-           void check_deletion(tree_node_ptr node)
-           {
-        // Case #1: If node is red, delete
-        if (node->is_black == false)
-        return;
-
-        // Case #2: If node is black and is root: delete
-        if (node == root_node_)
-        return;
-
-        // Case #3: If node is black (double black):
-        check_double_black(node);
-        }
-        */
-
         iterator erase(iterator pos) {
           if (pos == end())
             return pos;
@@ -475,7 +482,7 @@ namespace ft {
             tree_node_ptr next_node = get_next_node(node);
             tree_node_ptr prev_node = get_prev_node(node);
 
-            if (!next_node) {
+            if (next_node == end_node_ || next_node->data.first == node->data.first) {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, prev_node->data);
               erase(--pos);
@@ -568,7 +575,7 @@ namespace ft {
             return end();
           }
 
-        template <typename T, typename Key>
+        template <typename Key, typename T>
           T& operator[](const Key& key)
           {
             try {
@@ -590,7 +597,7 @@ namespace ft {
           }
 
         template <typename Key, typename Value>
-          Value &at(const Key &key) const {
+          const Value &at(const Key &key) const {
             const_iterator it = find(key);
 
             if (it == end())
@@ -684,10 +691,9 @@ namespace ft {
           return node_alloc_.max_size();
         }
 
-        template <typename Key>
         void clear()
         {
-          erase<Key>(begin(), end());
+          destroy_tree(end_node_);
         }
 
         void print_levels()

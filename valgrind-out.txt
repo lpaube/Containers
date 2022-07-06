@@ -1,0 +1,201 @@
+==58026== Memcheck, a memory error detector
+==58026== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==58026== Using Valgrind-3.19.0.GIT-lbmacos-6ff08b6e31-20220212 and LibVEX; rerun with -h for copyright info
+==58026== Command: ./ft_containers
+==58026== Parent PID: 43751
+==58026== 
+--58026-- 
+--58026-- Valgrind options:
+--58026--    --leak-check=full
+--58026--    --show-leak-kinds=all
+--58026--    --track-origins=yes
+--58026--    --verbose
+--58026--    --log-file=valgrind-out.txt
+--58026-- Output from sysctl({CTL_KERN,KERN_VERSION}):
+--58026--   Darwin Kernel Version 19.6.0: Thu Oct 29 22:56:45 PDT 2020; root:xnu-6153.141.2.2~1/RELEASE_X86_64
+--58026-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand
+--58026-- Page sizes: currently 4096, max supported 4096
+--58026-- Valgrind library directory: /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind
+--58026-- ./ft_containers (rx at 0x100000000, rw at 0x100004000)
+--58026--    reading syms   from primary file (29 562)
+--58026--    dSYM= ./ft_containers.dSYM/Contents/Resources/DWARF/ft_containers
+--58026--    reading dwarf3 from dsyms file
+--58026-- /usr/lib/dyld (rx at 0x100018000, rw at 0x1000aa000)
+--58026--    reading syms   from primary file (5 2729)
+--58026-- Scheduler: using generic scheduler lock implementation.
+--58026-- Reading suppressions file: /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp
+==58026== embedded gdbserver: reading from /var/folders/k2/bq_5mpmn6z1g78m61g6p9gvr0000gn/T//vgdb-pipe-from-vgdb-to-58026-by-laube-on-???
+==58026== embedded gdbserver: writing to   /var/folders/k2/bq_5mpmn6z1g78m61g6p9gvr0000gn/T//vgdb-pipe-to-vgdb-from-58026-by-laube-on-???
+==58026== embedded gdbserver: shared mem   /var/folders/k2/bq_5mpmn6z1g78m61g6p9gvr0000gn/T//vgdb-pipe-shared-mem-vgdb-58026-by-laube-on-???
+==58026== 
+==58026== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==58026== don't want to do, unless you know exactly what you're doing,
+==58026== or are doing some strange experiment):
+==58026==   /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/../../bin/vgdb --pid=58026 ...command...
+==58026== 
+==58026== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==58026==   /path/to/gdb ./ft_containers
+==58026== and then give GDB the following command
+==58026==   target remote | /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/../../bin/vgdb --pid=58026
+==58026== --pid is optional if only one valgrind process is running
+==58026== 
+--58026-- REDIR: 0x10006a1c0 (dyld:strcmp) redirected to 0x25805831e (???)
+--58026-- REDIR: 0x100064494 (dyld:arc4random) redirected to 0x2580583bc (???)
+--58026-- REDIR: 0x1000695a0 (dyld:strlen) redirected to 0x2580582ed (???)
+--58026-- REDIR: 0x10006a4c0 (dyld:strcpy) redirected to 0x25805833a (???)
+--58026-- REDIR: 0x10006763a (dyld:strcat) redirected to 0x2580582fe (???)
+--58026-- REDIR: 0x10006939a (dyld:strlcat) redirected to 0x258058357 (???)
+--58026-- /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x10011d000, rw at 0x100121000)
+--58026--    reading syms   from primary file (3 53)
+--58026--    dSYM= /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--58026-- /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x100129000, rw at 0x100131000)
+--58026--    reading syms   from primary file (75 62)
+--58026--    dSYM= /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--58026-- /usr/lib/libc++.1.dylib (rx at 0x100139000, rw at 0x10018c000)
+--58026--    reading syms   from primary file (2088 1160)
+--58026-- /usr/lib/libSystem.B.dylib (rx at 0x1001e4000, rw at 0x1001e6000)
+--58026--    reading syms   from primary file (29 8)
+--58026-- /usr/lib/libc++abi.dylib (rx at 0x1001ee000, rw at 0x100204000)
+--58026--    reading syms   from primary file (366 704)
+--58026-- /usr/lib/system/libcache.dylib (rx at 0x100222000, rw at 0x100228000)
+--58026--    reading syms   from primary file (32 29)
+--58026-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x10022f000, rw at 0x10023b000)
+--58026--    reading syms   from primary file (241 173)
+--58026-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x10024b000, rw at 0x100253000)
+--58026--    reading syms   from primary file (505 8)
+--58026-- /usr/lib/system/libcopyfile.dylib (rx at 0x100263000, rw at 0x10026d000)
+--58026--    reading syms   from primary file (11 38)
+--58026-- /usr/lib/system/libcorecrypto.dylib (rx at 0x100275000, rw at 0x100308000)
+--58026--    reading syms   from primary file (586 846)
+--58026-- /usr/lib/system/libdispatch.dylib (rx at 0x100328000, rw at 0x100369000)
+--58026--    reading syms   from primary file (328 1607)
+--58026-- /usr/lib/system/libdyld.dylib (rx at 0x1003a6000, rw at 0x1003dd000)
+--58026--    reading syms   from primary file (119 1467)
+--58026-- /usr/lib/system/libkeymgr.dylib (rx at 0x100406000, rw at 0x100407000)
+--58026--    reading syms   from primary file (11 2)
+--58026-- /usr/lib/system/libmacho.dylib (rx at 0x100416000, rw at 0x10041c000)
+--58026--    reading syms   from primary file (105 2)
+--58026-- /usr/lib/system/libquarantine.dylib (rx at 0x100424000, rw at 0x100427000)
+--58026--    reading syms   from primary file (88 12)
+--58026-- /usr/lib/system/libremovefile.dylib (rx at 0x10042f000, rw at 0x100431000)
+--58026--    reading syms   from primary file (12 8)
+--58026-- /usr/lib/system/libsystem_asl.dylib (rx at 0x100438000, rw at 0x100450000)
+--58026--    reading syms   from primary file (219 234)
+--58026-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x100460000, rw at 0x100461000)
+--58026--    reading syms   from primary file (21 8)
+--58026-- /usr/lib/system/libsystem_c.dylib (rx at 0x100468000, rw at 0x1004f0000)
+--58026--    reading syms   from primary file (1346 892)
+--58026-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x100520000, rw at 0x100524000)
+--58026--    reading syms   from primary file (36 68)
+--58026-- /usr/lib/system/libsystem_coreservices.dylib (rx at 0x10052d000, rw at 0x100531000)
+--58026--    reading syms   from primary file (14 47)
+--58026-- /usr/lib/system/libsystem_darwin.dylib (rx at 0x100539000, rw at 0x100542000)
+--58026--    reading syms   from primary file (63 562)
+--58026-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x100551000, rw at 0x100559000)
+--58026--    reading syms   from primary file (40 26)
+--58026-- /usr/lib/system/libsystem_featureflags.dylib (rx at 0x100561000, rw at 0x100563000)
+--58026--    reading syms   from primary file (1 12)
+--58026-- /usr/lib/system/libsystem_info.dylib (rx at 0x10056a000, rw at 0x1005b8000)
+--58026--    reading syms   from primary file (427 714)
+--58026-- /usr/lib/system/libsystem_m.dylib (rx at 0x1005d0000, rw at 0x100618000)
+--58026--    reading syms   from primary file (811 1)
+--58026-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x100629000, rw at 0x100651000)
+--58026--    reading syms   from primary file (98 470)
+--58026-- /usr/lib/system/libsystem_networkextension.dylib (rx at 0x100661000, rw at 0x10066f000)
+--58026--    reading syms   from primary file (118 242)
+--58026-- /usr/lib/system/libsystem_notify.dylib (rx at 0x10067f000, rw at 0x100689000)
+--58026--    reading syms   from primary file (23 1)
+--58026-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x100691000, rw at 0x100696000)
+--58026--    reading syms   from primary file (112 23)
+--58026-- /usr/lib/system/libsystem_secinit.dylib (rx at 0x10069f000, rw at 0x1006a2000)
+--58026--    reading syms   from primary file (5 20)
+--58026-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x1006a9000, rw at 0x1006d6000)
+--58026--    reading syms   from primary file (1361 230)
+--58026-- /usr/lib/system/libsystem_platform.dylib (rx at 0x1006f5000, rw at 0x1006fe000)
+--58026--    reading syms   from primary file (168 103)
+--58026-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x100708000, rw at 0x100713000)
+--58026--    reading syms   from primary file (189 143)
+--58026-- /usr/lib/system/libsystem_symptoms.dylib (rx at 0x100720000, rw at 0x100728000)
+--58026--    reading syms   from primary file (10 86)
+--58026-- /usr/lib/system/libsystem_trace.dylib (rx at 0x100730000, rw at 0x100747000)
+--58026--    reading syms   from primary file (131 274)
+--58026-- /usr/lib/system/libunwind.dylib (rx at 0x100758000, rw at 0x10075e000)
+--58026--    reading syms   from primary file (102 52)
+--58026-- /usr/lib/system/libxpc.dylib (rx at 0x100767000, rw at 0x10079d000)
+--58026--    reading syms   from primary file (627 1467)
+--58026-- /usr/lib/libobjc.A.dylib (rx at 0x1007cb000, rw at 0x1007ff000)
+--58026--    reading syms   from primary file (382 771)
+--58026-- REDIR: 0x1006f63a0 (libsystem_platform.dylib:_platform_memcmp) redirected to 0x10012d8b5 (_platform_memcmp)
+--58026-- REDIR: 0x1006f5c00 (libsystem_platform.dylib:_platform_strncmp) redirected to 0x10012d249 (_platform_strncmp)
+--58026-- REDIR: 0x1006f5800 (libsystem_platform.dylib:_platform_strcmp) redirected to 0x10012d2c3 (_platform_strcmp)
+--58026-- REDIR: 0x100629ce0 (libsystem_malloc.dylib:malloc) redirected to 0x10012b4d0 (malloc)
+--58026-- REDIR: 0x10062bec1 (libsystem_malloc.dylib:calloc) redirected to 0x10012bae6 (calloc)
+--58026-- REDIR: 0x10062bd67 (libsystem_malloc.dylib:realloc) redirected to 0x10012be64 (realloc)
+--58026-- REDIR: 0x10062c087 (libsystem_malloc.dylib:malloc_default_zone) redirected to 0x10012c819 (malloc_default_zone)
+--58026-- REDIR: 0x100629d12 (libsystem_malloc.dylib:malloc_zone_malloc) redirected to 0x10012b738 (malloc_zone_malloc)
+--58026-- REDIR: 0x10062bef6 (libsystem_malloc.dylib:malloc_zone_calloc) redirected to 0x10012bcd2 (malloc_zone_calloc)
+--58026-- REDIR: 0x10062c08f (libsystem_malloc.dylib:malloc_zone_from_ptr) redirected to 0x10012c85a (malloc_zone_from_ptr)
+--58026-- REDIR: 0x10062a9b1 (libsystem_malloc.dylib:free) redirected to 0x10012b8ac (free)
+--58026-- REDIR: 0x1006f6300 (libsystem_platform.dylib:_platform_strchr$VARIANT$Haswell) redirected to 0x10012cacd (_platform_strchr$VARIANT$Haswell)
+==58026== 
+==58026== HEAP SUMMARY:
+==58026==     in use at exit: 14,116 bytes in 165 blocks
+==58026==   total heap usage: 179 allocs, 14 frees, 18,860 bytes allocated
+==58026== 
+==58026== Searching for pointers to 165 not-freed blocks
+==58026== Checked 9,209,808 bytes
+==58026== 
+==58026== 64 bytes in 1 blocks are definitely lost in loss record 20 of 40
+==58026==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58026==    by 0x1001FFDE9: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==58026==    by 0x1000028B8: std::__1::__libcpp_allocate(unsigned long, unsigned long) (new:253)
+==58026==    by 0x100002812: std::__1::allocator<ft::rbt_node<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::allocate(unsigned long, void const*) (memory:1869)
+==58026==    by 0x100002757: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::construct_node() (rb_tree.hpp:810)
+==58026==    by 0x100002703: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (rb_tree.hpp:50)
+==58026==    by 0x100002644: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (rb_tree.hpp:54)
+==58026==    by 0x1000025B3: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:71)
+==58026==    by 0x100001A64: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:75)
+==58026==    by 0x1000018F5: main (main.cpp:37)
+==58026== 
+==58026== 64 bytes in 1 blocks are definitely lost in loss record 21 of 40
+==58026==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58026==    by 0x1001FFDE9: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==58026==    by 0x1000028B8: std::__1::__libcpp_allocate(unsigned long, unsigned long) (new:253)
+==58026==    by 0x100002812: std::__1::allocator<ft::rbt_node<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::allocate(unsigned long, void const*) (memory:1869)
+==58026==    by 0x100002757: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::construct_node() (rb_tree.hpp:810)
+==58026==    by 0x100002703: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (rb_tree.hpp:50)
+==58026==    by 0x100002644: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (rb_tree.hpp:54)
+==58026==    by 0x1000025C4: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:76)
+==58026==    by 0x100001A64: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:75)
+==58026==    by 0x1000018F5: main (main.cpp:37)
+==58026== 
+==58026== 64 bytes in 1 blocks are definitely lost in loss record 22 of 40
+==58026==    at 0x10012B545: malloc (in /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==58026==    by 0x1001FFDE9: operator new(unsigned long) (in /usr/lib/libc++abi.dylib)
+==58026==    by 0x1000028B8: std::__1::__libcpp_allocate(unsigned long, unsigned long) (new:253)
+==58026==    by 0x100002812: std::__1::allocator<ft::rbt_node<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::allocate(unsigned long, void const*) (memory:1869)
+==58026==    by 0x100002757: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::construct_node() (rb_tree.hpp:810)
+==58026==    by 0x100002A4F: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > const&) (rb_tree.hpp:68)
+==58026==    by 0x10000296C: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::rb_tree(ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > const&) (rb_tree.hpp:73)
+==58026==    by 0x10000267B: ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::operator=(ft::rb_tree<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > > const&) (rb_tree.hpp:95)
+==58026==    by 0x1000025D6: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:76)
+==58026==    by 0x100001A64: ft::map<int, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >, std::__1::less<int>, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > >::map(std::__1::less<int> const&, std::__1::allocator<ft::pair<int const, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > > > const&) (map.hpp:75)
+==58026==    by 0x1000018F5: main (main.cpp:37)
+==58026== 
+==58026== LEAK SUMMARY:
+==58026==    definitely lost: 192 bytes in 3 blocks
+==58026==    indirectly lost: 0 bytes in 0 blocks
+==58026==      possibly lost: 0 bytes in 0 blocks
+==58026==    still reachable: 0 bytes in 0 blocks
+==58026==         suppressed: 13,924 bytes in 162 blocks
+==58026== 
+==58026== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 5 from 5)
+--58026-- 
+--58026-- used_suppression:      3 OSX1015:dyld-4 /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:751 suppressed: 4,152 bytes in 3 blocks
+--58026-- used_suppression:      1 OSX1015:Leak02-objc /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:812 suppressed: 2,048 bytes in 1 blocks
+--58026-- used_suppression:     17 OSX1015:dyld-7 /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:781 suppressed: 2,560 bytes in 74 blocks
+--58026-- used_suppression:     15 OSX1015:dyld-8 /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:791 suppressed: 4,900 bytes in 81 blocks
+--58026-- used_suppression:      1 OSX1015:dyld-5 /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:761 suppressed: 264 bytes in 3 blocks
+--58026-- used_suppression:      1 OSX1015:dyld-2 /usr/local/Cellar/valgrind/HEAD-6ff08b6/libexec/valgrind/default.supp:733
+==58026== 
+==58026== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 5 from 5)

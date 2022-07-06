@@ -110,7 +110,17 @@ namespace ft {
           return current_ == other.base();
         }
 
+        bool operator==(const rbt_const_iterator& other)
+        {
+          return current_ == other.base();
+        }
+
         bool operator!=(const rbt_iterator& other)
+        {
+          return !(*this == other);
+        }
+
+        bool operator!=(const rbt_const_iterator& other)
         {
           return !(*this == other);
         }
@@ -225,7 +235,17 @@ namespace ft {
           return current_ == other.base();
         }
 
+        bool operator==(const rbt_iterator& other)
+        {
+          return current_ == other.base();
+        }
+
         bool operator!=(const rbt_const_iterator& other)
+        {
+          return !(*this == other);
+        }
+
+        bool operator!=(const rbt_iterator& other)
         {
           return !(*this == other);
         }

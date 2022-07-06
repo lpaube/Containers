@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sstream>
-#include <iterator>
 /*
 #include <array>
 #include <vector>
@@ -19,56 +17,56 @@
 #include <iostream>
 #include <list>
 */
+#include <sstream>
 #include "vector.hpp"
 #include "stack.hpp"
 #include "rb_tree.hpp"
 #include "map.hpp"
 #include "utils.hpp"
-
 #include "containers_test/srcs/map/common.hpp"
 #include <list>
+#include <iostream>
+#include <string>
 
-#define T1 float
-#define T2 foo<int>
-typedef _pair<const T1, T2> T3;
+#include "map_tests.hpp"
+#include "map_prelude.hpp"
 
-int		main(void)
+int main(void)
 {
-	std::list<T3> lst;
-	unsigned int lst_size = 5;
-	for (unsigned int i = 0; i < lst_size; ++i)
-		lst.push_back(T3(2.5 + i, i + 1));
 
-	TESTED_NAMESPACE::map<T1, T2> mp(lst.begin(), lst.end());
-	TESTED_NAMESPACE::map<T1, T2>::iterator it(mp.begin());
-	TESTED_NAMESPACE::map<T1, T2>::const_iterator ite(mp.begin());
-	printSize(mp);
+  ft::map<int, std::string> mp1;
+  ft::map<int, std::string>::size_type size;
 
-	printPair(++ite);
-	printPair(ite++);
-	printPair(ite++);
-	printPair(++ite);
+  mp1.erase(mp1.begin(), mp1.end());
 
-	it->second.m();
-	ite->second.m();
+  mp1.insert(ft::make_pair(23, "23n"));
+  mp1.insert(ft::make_pair(25, "asdasdfsdfsafdsf"));
+  mp1.insert(ft::make_pair(1, "asdssdfdfdffffff"));
+  mp1.insert(ft::make_pair(2, "dsfdffffdfdfdsdfdffa"));
+  mp1.insert(ft::make_pair(3, "sssdfs"));
+  mp1.insert(ft::make_pair(75, "dfse"));
+  mp1.insert(ft::make_pair(30, "sefsadfasdfasdfsadfasdfsf"));
+  mp1.insert(ft::make_pair(-22, "dfhkihgbnfbcx5reterjhd"));
+  mp1.insert(ft::make_pair(-23, "sdffgdfgrefet34thfgheewt"));
+  mp1.insert(ft::make_pair(0, "98y4rtuohwidsjusdossefsse"));
 
-	printPair(++it);
-	printPair(it++);
-	printPair(it++);
-	printPair(++it);
+  mp1.erase(64);
+  mp1.erase(0);
+  mp1.erase(75);
+  mp1.erase(1);
+  mp1.erase(2);
+  mp1.erase(3);
+  mp1.erase(23);
+  mp1.erase(23);
+  mp1.erase(30);
 
-	printPair(--ite);
-	printPair(ite--);
-	printPair(--ite);
-	printPair(ite--);
+  std::cerr << "Size before: " << mp1.size() << std::endl;
+  mp1.print_levels();
+  // This one below
+  mp1.erase(-22);
+  std::cerr << "Size After: " << mp1.size() << std::endl;
+  mp1.print_levels();
 
-	(*it).second.m();
-	(*ite).second.m();
-
-	printPair(--it);
-	printPair(it--);
-	printPair(it--);
-	printPair(--it);
-
-	return (0);
+  mp1.erase(-23);
+  mp1.erase(-23);
 }

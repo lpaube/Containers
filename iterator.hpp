@@ -125,8 +125,8 @@ namespace ft {
   // Non-member overloads
   // Forward iterator non-member overloads
   template <typename IteratorL, typename IteratorR, typename Container>
-    bool operator==(const normal_iterator<IteratorL, Container>& lhs,
-        const normal_iterator<IteratorR, Container>& rhs) {
+    bool operator==(const normal_iterator<IteratorL, Container>& lhs
+                   ,const normal_iterator<IteratorR, Container>& rhs) {
       return lhs.base() == rhs.base();
     }
 
