@@ -397,7 +397,7 @@ namespace ft {
             near_sib_child = sibbling->right;
           }
           // Case #3: If node is black and sibbling is black:
-          else if (sibbling && sibbling->is_black)
+          if (sibbling && sibbling->is_black)
           {
             // Case #3.1: If sibbling (black) has black (or NULL) children
             if ((!sibbling->left || sibbling->left->is_black)
@@ -472,10 +472,10 @@ namespace ft {
           if (!node->left && !node->right) {
             check_double_black(node);
 
-            iterator next_it = iterator(get_next_node(node));
+            tree_node_ptr next_node = get_next_node(node);
 
             destroy_node(node);
-            return next_it;
+            return iterator(next_node);
           }
 
           // If the node to delete has at least a child,
@@ -488,7 +488,7 @@ namespace ft {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, prev_node->data);
               erase(--pos);
-              return iterator(node);
+              return end();
             } else {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, next_node->data);
@@ -698,7 +698,6 @@ namespace ft {
           destroy_tree(end_node_);
         }
 
-        /*
         void print_levels()
         {
           std::cout << "=====PRINTING LEVELS=====" << std::endl;
@@ -764,7 +763,6 @@ namespace ft {
             }
           }
         }
-        */
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
