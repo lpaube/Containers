@@ -46,8 +46,10 @@ namespace ft {
         pointer m_end_of_storage;
         allocator_type m_alloc;
 
-        void m_create_storage(size_t count) {
+        void m_create_storage(size_type count) {
           // ADD ERROR IF COUNT IS NEGATIVE
+          if (count <= 0)
+            return;
           m_start = m_alloc.allocate(count);
           m_finish = m_start;
           m_end_of_storage = m_start + count;
@@ -61,20 +63,22 @@ namespace ft {
            }
            */
 
-        iterator m_construct_storage(const T& value) {
-          for (int i = 0; m_start + i != m_end_of_storage; i++) {
+        iterator m_construct_storage(const T& value, size_type count) {
+          size_type i = 0;
+          for (; i < count; ++i) {
             m_alloc.construct(m_start + i, value);
           }
-          m_finish = m_end_of_storage;
+          m_finish = m_start + i;
           return m_finish;
         }
 
-        pointer m_construct_storage(pointer dst, iterator ite1, iterator ite2)
+        template <class InputIt>
+        pointer m_construct_storage(pointer dst, InputIt it, InputIt ite)
         {
           int i = 0;
-          for (; ite1 + i != ite2; ++i)
+          for (; it + i != ite; ++i)
           {
-            *(dst + i) = *(ite1 + i);
+            m_alloc.construct(dst + i, *(it + i));
           }
           return dst + i;
         }
@@ -93,6 +97,8 @@ namespace ft {
          */
         void grow_capacity(size_type new_cap)
         {
+          if (new_cap > max_size())
+            throw std::length_error("Can't reserve vector size: bigger than max_size()");
           if (new_cap == 0)
             new_cap = 1;
           while (m_end_of_storage - m_start < static_cast<long>(new_cap))
@@ -104,40 +110,43 @@ namespace ft {
       public:
         // MEMBER FUNCTIONS
         // Constructors
-        vector() : m_start(), m_finish(), m_end_of_storage(), m_alloc() {}
+        vector() : m_start(), m_finish(m_start), m_end_of_storage(m_start), m_alloc() {
+        }
 
         explicit vector(const Allocator& alloc)
-          : m_start(), m_finish(), m_end_of_storage(), m_alloc(alloc) {}
+          : m_start(), m_finish(m_start), m_end_of_storage(m_start), m_alloc(alloc) {}
 
         explicit vector(size_type count, const T& value = T(),
             const Allocator& alloc = Allocator())
-          : m_alloc(alloc) {
-            m_create_storage(count);
-            m_construct_storage(value);
+          : m_start()
+            , m_finish(m_start)
+            , m_end_of_storage(m_start)
+            , m_alloc(alloc) {
+            //m_create_storage(count);
+            grow_capacity(count);
+            m_construct_storage(value, count);
           }
 
         template <typename InputIt>
           vector(typename enable_if<!(is_integral<InputIt>::value),
               InputIt>::type first,
               InputIt last, const Allocator& alloc = Allocator())
-          : m_alloc(alloc) {
-            m_create_storage(1);
-            typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
-            insert_dispatch(begin(), first, last, Iter_category());
+          : m_start()
+            , m_finish(m_start)
+            , m_end_of_storage(m_start)
+            , m_alloc(alloc) {
+            //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+            insert(begin(), first, last);
+            //insert_dispatch(begin(), first, last, Iter_category());
           }
 
         vector(const vector& other) {
-          m_create_storage(other.end() - other.begin());
-          for (size_type i = 0; other.begin() + i != other.end(); ++i) {
-            *(m_start + i) = *(other.begin() + i);
-          }
-          m_finish = m_end_of_storage;
-          m_alloc = other.get_allocator();
+          m_create_storage(other.capacity());
+          insert(m_start, other.begin(), other.end());
         }
         // Destructors
         ~vector() {
-          clear();
-          m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+          clear_complete();
           m_start = NULL;
           m_finish = NULL;
           m_end_of_storage = NULL;
@@ -145,25 +154,28 @@ namespace ft {
 
         // Other member functions
         vector& operator=(const vector& other) {
-          m_alloc.deallocate(m_start, m_end_of_storage - m_start);
-          m_create_storage(other.end() - other.begin());
+          clear_complete();
+          m_create_storage(other.capacity());
+          insert(m_start, other.begin(), other.end());
+          /*
           for (size_type i = 0; other.begin() + i != other.end(); ++i) {
-            *(m_start + i) = *(other.begin() + i);
+            m_alloc.construct(m_start + i, *(other.begin() + i));
           }
-          m_finish = m_end_of_storage;
+            */
           return *this;
         }
 
         void assign(size_type count, const T& value) {
-          m_alloc.deallocate(m_start, m_end_of_storage - m_start);
-          m_create_storage(count);
-          m_construct_storage(value);
+          clear();
+          if (count <= 0)
+            return;
+          grow_capacity(count);
+          m_construct_storage(value, count);
         }
 
         template <class InputIt>
-          void assign(typename enable_if<!is_integral<InputIt>::value,
-              InputIt>::type first,
-              InputIt last) {
+          void assign(InputIt first, typename enable_if<!is_integral<InputIt>::value,
+              InputIt>::type last) {
             int i = 0;
             InputIt tmp = first;
 
@@ -172,11 +184,12 @@ namespace ft {
               i++;
               tmp++;
             }
-            m_alloc.deallocate(m_start, m_end_of_storage - m_start);
-            m_create_storage(i);
-            for (size_type i = 0; first != last; ++first, ++i)
-              *(m_start + i) = *(first);
-            m_finish = m_end_of_storage;
+            clear_complete();
+            if (i > 0)
+            {
+              m_create_storage(i);
+              insert(m_start, first, last);
+            }
           }
 
         allocator_type get_allocator() const { return (this->m_alloc); }
@@ -224,7 +237,13 @@ namespace ft {
           return m_start;
         }
 
-        reference operator[](size_type pos) { return *(this->m_start + pos); }
+        reference operator[](size_type pos) {
+          return *(this->m_start + pos);
+        }
+
+        const_reference operator[](size_type pos) const {
+          return *(this->m_start + pos);
+        }
 
         iterator begin() { return iterator(this->m_start); }
 
@@ -270,36 +289,53 @@ namespace ft {
         }
 
         void reserve(size_type new_cap) {
-          if (new_cap == 0)
-            new_cap = 1;
-          if (new_cap <= capacity())
-            return;
-          if (new_cap > max_size())
-            throw std::length_error("Can't reserve vector size: bigger than max_size()");
 
           pointer new_m_start;
           pointer new_m_finish;
 
+          if (new_cap > max_size())
+            throw std::length_error("Can't reserve vector size: bigger than max_size()");
+          if (new_cap == 0)
+            new_cap = 1;
+          if (new_cap <= capacity())
+            return;
+
           new_m_start = m_alloc.allocate(new_cap);
           new_m_finish = m_construct_storage(new_m_start, m_start, m_finish);
           //destroy_storage(m_start, m_finish);
-          m_alloc.deallocate(m_start, capacity());
+          //m_alloc.deallocate(m_start, capacity());
+          clear_complete();
           m_start = new_m_start;
           m_finish = new_m_finish;
           m_end_of_storage = m_start + new_cap;
         }
 
+        // Dectucts all nodes without deallocating any
         void clear()
         {
-          destroy_storage(m_start, m_finish);
+          if (!empty())
+            destroy_storage(m_start, m_finish);
           m_finish = m_start;
+        }
+
+        // Destructs and deallocate all nodes
+        void clear_complete()
+        {
+          clear();
+          if (capacity() != 0)
+          {
+            m_alloc.deallocate(m_start, m_end_of_storage - m_start);
+            m_start = pointer();
+            m_finish = m_start;
+            m_end_of_storage = m_start;
+          }
         }
 
         template <typename InputIt>
           void insert_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
           {
             difference_type offset = pos - begin();
-            vector<value_type> tmp(begin(), end());
+            vector<value_type, allocator_type> tmp(begin(), end());
             iterator ite = tmp.begin();
 
             clear();
@@ -323,7 +359,8 @@ namespace ft {
             for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
               *ite = *(ite - count);
             for (; first != last; ++first, ++offset)
-              *(begin() + offset) = *first;
+              m_alloc.construct((begin() + offset).base(), *first);
+              //*(begin() + offset) = *first;
             m_finish += count;
           }
 
@@ -349,18 +386,6 @@ namespace ft {
           *(begin() + offset) = value;
           m_finish++;
           return begin() + offset;
-          /*
-             if (!pos.base())
-             {
-           *begin() = value;
-           return begin();
-           }
-           else
-           {
-           *pos = value;
-           return pos;
-           }
-           */
         }
 
         template <typename InputIt>
@@ -372,10 +397,15 @@ namespace ft {
 
         iterator erase(iterator pos)
         {
-          destroy_storage(pos, pos);
-          for (iterator ite = pos; ite != end(); ++ite)
+          if (pos == end())
+            return pos;
+
+          for (iterator it = pos; it != end(); ++it)
           {
-            *ite = *(ite + 1);
+            m_alloc.destroy(it.base());
+            if (it == end() - 1)
+              continue;
+            m_alloc.construct(it.base(), *(it + 1));
           }
           m_finish--;
           return pos;
@@ -383,19 +413,20 @@ namespace ft {
 
         iterator erase(iterator first, iterator last)
         {
-          destroy_storage(first, last);
-          for (iterator ite = first; ite != end(); ++ite)
+          //destroy_storage(first, last);
+          iterator ret_it = last;
+
+          for (iterator it = first; it != last; ++it)
           {
-            *ite = *(ite + (last - first));
+            ret_it = erase(first);
           }
-          m_finish -= (last - first);
-          return first;
+          return ret_it;
         }
 
         void push_back(const T& value)
         {
           grow_capacity(size() + 1);
-          *m_finish = value;
+          m_alloc.construct(m_finish, value);
           m_finish++;
         }
 
@@ -433,7 +464,7 @@ namespace ft {
   template <typename T, typename Alloc>
     bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc>& rhs)
     {
-      return (ft::equal(lhs.begin(), lhs.end(), rhs.begin()) && lhs.size() == rhs.size());
+      return lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin());
     }
 
   template <typename T, typename Alloc>
