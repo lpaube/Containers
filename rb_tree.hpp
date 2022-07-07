@@ -461,6 +461,8 @@ namespace ft {
         }
 
         iterator erase(iterator pos) {
+          //std::cerr << "Node to erase: " << pos->first << std::endl;
+          //print_levels();
           if (pos == end())
             return pos;
 
@@ -486,7 +488,7 @@ namespace ft {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, prev_node->data);
               erase(--pos);
-              return end();
+              return iterator(node);
             } else {
               pair_alloc_.destroy(&node->data);
               pair_alloc_.construct(&node->data, next_node->data);
@@ -696,6 +698,7 @@ namespace ft {
           destroy_tree(end_node_);
         }
 
+        /*
         void print_levels()
         {
           std::cout << "=====PRINTING LEVELS=====" << std::endl;
@@ -761,6 +764,7 @@ namespace ft {
             }
           }
         }
+        */
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {

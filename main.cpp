@@ -69,7 +69,7 @@ int main(void)
   mp1.insert(MY_NAMESPACE::pair<int, std::string>(26, "one"));
 
   */
-  mp1.print_levels();
+  //mp1.print_levels();
   mp1.print_map();
 
 
@@ -80,6 +80,6 @@ int main(void)
   mp1.erase(it, mp1.end());
 
   std::cerr << "===SIZE: " << mp1.size() << std::endl;
-  mp1.print_levels();
+  //mp1.print_levels();
   mp1.print_map();
 }

@@ -288,10 +288,12 @@ namespace ft
                    tree_.print_tree();
                  }
 
+                 /*
                  void print_levels()
                  {
                    tree_.print_levels();
                  }
+                 */
              };
 
   // ======================= Non-member functions =====================

@@ -1,7 +1,7 @@
 
 CFILES = main.cpp
-#C_VERSION = -std=c++98
-C_VERSION = -std=c++11
+C_VERSION = -std=c++98
+#C_VERSION = -std=c++11
 
 INCL1 = ft_containers-terminator/tests/tests/map
 INCL2 = ft_containers-terminator/tests/tests
