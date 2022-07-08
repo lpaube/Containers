@@ -17,11 +17,12 @@ namespace ft {
        * Member types
        */
       public:
-        typedef typename Allocator::template rebind<rbt_node<value_type> >::other
-          node_allocator;
         typedef rbt_node<value_type> tree_node;
         typedef tree_node *tree_node_ptr;
         typedef Allocator pair_allocator;
+        typedef typename pair_allocator::difference_type pair_difference_type;
+        typedef typename Allocator::template rebind<rbt_node<value_type> >::other node_allocator;
+        typedef typename node_allocator::difference_type node_difference_type;
         typedef rbt_iterator<value_type, Compare> iterator;
         typedef rbt_const_iterator<value_type, Compare> const_iterator;
         typedef typename ft::reverse_iterator<iterator> reverse_iterator;
@@ -690,7 +691,8 @@ namespace ft {
         }
 
         size_type max_size() const {
-          return node_alloc_.max_size();
+          return std::min(node_alloc_.max_size()
+              , static_cast<size_type>(std::numeric_limits<node_difference_type>::max()));
         }
 
         void clear()

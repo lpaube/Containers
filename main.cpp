@@ -38,7 +38,6 @@
 
 int main(void)
 {
-  NAMESPACE::vector<std::string> v1;
-
-  v1.assign(0, "");
+  ft::stack<int> v1;
+  ft::stack<int> v2;
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include "vector.hpp"
 
 namespace ft {
@@ -23,10 +22,14 @@ namespace ft {
          * Stack constructors:
          * Constructs the stack.
          */
-        explicit stack(const Container& cont = Container()) : c(cont) {}
+        explicit stack(const Container& cont = Container())
+          : c(cont)
+        {
+        }
 
-        stack(const stack& other) {
-          c(other);
+        stack(const stack& other)
+          : c(other.c)
+        {
         }
 
         /*
@@ -93,10 +96,10 @@ namespace ft {
         }
 
         template <typename T1, typename C1>
-          friend bool operator==(const stack<T1, C1>& x, const stack<T1, C1>& y);
+          friend bool operator==(const stack<T1, C1>& lhs, const stack<T1, C1>& rhs);
 
         template <typename T1, typename C1>
-          friend bool operator<(const stack<T1, C1>& x, const stack<T1, C1>& y);
+          friend bool operator<(const stack<T1, C1>& lhs, const stack<T1, C1>& rhs);
     };
 
   /*

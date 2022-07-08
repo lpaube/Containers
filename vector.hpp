@@ -12,12 +12,10 @@
 
 #pragma once
 
-#include <cstddef>
 #include <iostream>
-#include <iterator>
 #include <limits>
 #include <memory>
-#include <algorithm>
+
 #include "iterator.hpp"
 #include "utils.hpp"
 
@@ -29,6 +27,7 @@ namespace ft {
         // Member Types
         typedef T                                      value_type;
         typedef Allocator                              allocator_type;
+        typedef typename allocator_type::difference_type  diff_type;
         typedef std::size_t                            size_type;
         typedef std::ptrdiff_t                         difference_type;
         typedef value_type&                            reference;
@@ -98,7 +97,9 @@ namespace ft {
         void grow_capacity(size_type new_cap)
         {
           if (new_cap > max_size())
+          {
             throw std::length_error("Can't reserve vector size: bigger than max_size()");
+          }
           if (new_cap == 0)
             new_cap = 1;
           while (m_end_of_storage - m_start < static_cast<long>(new_cap))
@@ -114,11 +115,11 @@ namespace ft {
         }
 
         explicit vector(const Allocator& alloc)
-          : m_start(), m_finish(m_start), m_end_of_storage(m_start), m_alloc(alloc) {}
+          : m_start(NULL), m_finish(m_start), m_end_of_storage(m_start), m_alloc(alloc) {}
 
         explicit vector(size_type count, const T& value = T(),
             const Allocator& alloc = Allocator())
-          : m_start()
+          : m_start(NULL)
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
@@ -131,16 +132,20 @@ namespace ft {
           vector(typename enable_if<!(is_integral<InputIt>::value),
               InputIt>::type first,
               InputIt last, const Allocator& alloc = Allocator())
-          : m_start()
+          : m_start(NULL)
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
             //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
             insert(begin(), first, last);
-            //insert_dispatch(begin(), first, last, Iter_category());
           }
 
-        vector(const vector& other) {
+        vector(const vector& other)
+        : m_start(NULL)
+          , m_finish(m_start)
+          , m_end_of_storage(m_start)
+          , m_alloc(Allocator())
+        {
           m_create_storage(other.capacity());
           insert(m_start, other.begin(), other.end());
         }
@@ -279,10 +284,12 @@ namespace ft {
 
         size_type size() const {
           return std::distance(begin(), end());
+          //return static_cast<size_type>(m_finish - m_start);
         }
 
         size_type max_size() const {
-          return (get_allocator().max_size());
+          return std::min(m_alloc.max_size()
+              , static_cast<size_type>(std::numeric_limits<diff_type>::max()));
         }
         size_type capacity() const {
           return m_end_of_storage - m_start;
@@ -294,7 +301,9 @@ namespace ft {
           pointer new_m_finish;
 
           if (new_cap > max_size())
+          {
             throw std::length_error("Can't reserve vector size: bigger than max_size()");
+          }
           if (new_cap == 0)
             new_cap = 1;
           if (new_cap <= capacity())
@@ -352,28 +361,40 @@ namespace ft {
           {
             difference_type offset = pos - begin();
             difference_type count = 0;
+            iterator pos_new;
 
             for (InputIt tmp = first; tmp != last; ++tmp)
               ++count;
-            grow_capacity(count + size());
-            for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
-              *ite = *(ite - count);
-            for (; first != last; ++first, ++offset)
-              m_alloc.construct((begin() + offset).base(), *first);
-              //*(begin() + offset) = *first;
-            m_finish += count;
+
+            if (size() + count > max_size())
+            {
+              throw std::length_error("Can't reserve vector size: bigger than max_size()");
+            }
+
+            for (difference_type i = 0; i < count; ++first, ++i, ++offset)
+            {
+              pos_new = begin();
+              for (difference_type j = 0; j < offset; ++j)
+                ++pos_new;
+              insert(pos_new, *first);
+            }
           }
 
         void insert(iterator pos, size_type count, const T& value)
         {
-          difference_type offset = pos - begin();
+          if (size() + count > max_size())
+          {
+            throw std::length_error("Can't reserve vector size: bigger than max_size()");
+          }
 
-          grow_capacity(size() + count);
-          for (iterator ite = end() + count - 1; ite != begin() + offset + count - 1; --ite)
-            *ite = *(ite - count);
+          difference_type offset = pos - begin();
+          iterator pos_new = begin() + offset;
+
           for (size_type i = 0; i < count; ++i)
-            *(begin() + offset + i) = value;
-          m_finish += count;
+          {
+            pos_new = begin() + offset + i;
+            insert(pos_new, value);
+          }
         }
 
         iterator insert(iterator pos, const T& value)
@@ -381,9 +402,16 @@ namespace ft {
           difference_type offset = pos - begin();
 
           grow_capacity(size() + 1);
-          for (iterator ite = end(); ite != begin() && ite != begin() + offset; --ite)
-            *ite = *(ite - 1);
-          *(begin() + offset) = value;
+          for (iterator it = end(); it != begin() && it != begin() + offset; --it)
+          {
+            if (it != end() && size() != 0)
+              m_alloc.destroy(it.base());
+            m_alloc.construct(it.base(), *(it - 1));
+          }
+
+          if (begin() + offset != end() && size() != 0)
+            m_alloc.destroy((begin() + offset).base());
+          m_alloc.construct((begin() + offset).base(), value);
           m_finish++;
           return begin() + offset;
         }
@@ -440,9 +468,10 @@ namespace ft {
           if (count > size())
           {
             grow_capacity(count);
-            for (iterator ite = end(); static_cast<size_type>(ite - begin()) <= count; ++ite)
+            for (iterator ite = end(); static_cast<size_type>(ite - begin()) < count; ++ite)
             {
-              *ite = value;
+              //*ite = value;
+              m_alloc.construct(ite.base(), value);
             }
             m_finish = begin().base() + count;
           }
