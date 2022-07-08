@@ -311,8 +311,6 @@ namespace ft {
 
           new_m_start = m_alloc.allocate(new_cap);
           new_m_finish = m_construct_storage(new_m_start, m_start, m_finish);
-          //destroy_storage(m_start, m_finish);
-          //m_alloc.deallocate(m_start, capacity());
           clear_complete();
           m_start = new_m_start;
           m_finish = new_m_finish;
@@ -399,6 +397,22 @@ namespace ft {
 
         iterator insert(iterator pos, const T& value)
         {
+
+          difference_type offset = pos - begin();
+
+          grow_capacity(size() + 1);
+          m_alloc.construct(end().base(), *(end() - 1));
+          for (iterator it = end(); it != begin() && it != begin() + offset; --it)
+          {
+            *it = *(it - 1);
+          }
+
+          *(begin() + offset) = value;
+          m_finish++;
+          return begin() + offset;
+
+
+          /*
           difference_type offset = pos - begin();
 
           grow_capacity(size() + 1);
@@ -414,6 +428,7 @@ namespace ft {
           m_alloc.construct((begin() + offset).base(), value);
           m_finish++;
           return begin() + offset;
+          */
         }
 
         template <typename InputIt>
