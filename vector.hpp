@@ -406,24 +406,8 @@ namespace ft {
             pointer first_copy = pos.base();
             pointer last_copy = end().base();
             pointer d_last_copy = (begin() + end_len).base();
-            //pointer d_first_copy = (pos + count).base();
-
-            /*
-            iterator first_copy = pos;
-            iterator last_copy = end();
-            iterator d_first_copy = pos + count;
-            */
 
             std::copy_backward(first_copy, last_copy, d_last_copy);
-
-            /*
-            for (; first_copy != last_copy; ++first_copy, ++d_first_copy)
-            {
-              std::cerr << "Here1 first_copy: " << *first_copy
-                << "d_first_copy: " << *d_first_copy << std::endl;
-              *d_first_copy = *first_copy;
-            }
-            */
 
             for (; first != last; ++first, ++pos)
             {
@@ -434,19 +418,35 @@ namespace ft {
 
         void insert(iterator pos, size_type count, const T& value)
         {
+          if (count <= 0)
+            return;
+          size_type offset = pos - begin();
+
           if (size() + count > max_size())
           {
             throw std::length_error("Can't reserve vector size: bigger than max_size()");
           }
 
-          //difference_type offset = pos - begin();
-          //iterator pos_new = begin() + offset;
+          grow_capacity(size() + count);
 
           for (size_type i = 0; i < count; ++i)
+            m_alloc.construct(m_finish + i, value_type());
+
+          pos = begin() + offset;
+
+          size_type end_len = size() + count;
+
+          pointer first_copy = pos.base();
+          pointer last_copy = end().base();
+          pointer d_last_copy = (begin() + end_len).base();
+
+          std::copy_backward(first_copy, last_copy, d_last_copy);
+
+          for (size_type i = 0; i < count; ++i, ++pos)
           {
-            //pos_new = begin() + offset + i;
-            pos = insert(pos, value);
+            *pos = value;
           }
+          m_finish += count;
         }
 
         iterator insert(iterator pos, const T& value)
