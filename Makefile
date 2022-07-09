@@ -2,7 +2,7 @@ NAME = ft_containers
 
 SRCS = main.cpp
 CC = clang++
-VERSION = -std=c++11
+VERSION = -std=c++98
 CFLAGS = -g $(VERSION)
 
 $(NAME) : $(SCRS)

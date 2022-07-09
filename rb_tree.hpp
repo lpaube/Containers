@@ -1,14 +1,19 @@
 #pragma once
 
-#include "iterator.hpp"
-#include "rbt_iterator.hpp"
-#include "rbt_node.hpp"
-#include "utils.hpp"
 #include <iostream>
 #include <queue>
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <limits>
+
+#include "iterator.hpp"
+#include "rbt_iterator.hpp"
+#include "rbt_node.hpp"
+#include "utils.hpp"
+
+//#include "Timer.hpp"
+
 
 namespace ft {
   template <typename value_type, typename Compare, typename Allocator>
@@ -40,6 +45,7 @@ namespace ft {
         node_allocator node_alloc_;
         pair_allocator pair_alloc_;
         Compare comp_;
+        size_type size_;
 
         /*
          * Member functions
@@ -52,7 +58,9 @@ namespace ft {
             , root_node_(NULL)
             , node_alloc_(node_allocator())
             , pair_alloc_(alloc)
-            , comp_(comp) {}
+            , comp_(comp)
+            , size_(0)
+      {}
 
         template <typename InputIt>
           rb_tree(InputIt first, InputIt last, const Compare &comp = Compare(),
@@ -61,9 +69,11 @@ namespace ft {
             , root_node_(NULL)
             , node_alloc_(node_allocator())
             , pair_alloc_(alloc)
-            , comp_(comp) {
-              insert(first, last);
-            }
+            , comp_(comp)
+            , size_(0)
+      {
+        insert(first, last);
+      }
 
         rb_tree(const rb_tree& other)
           : end_node_(construct_node())
@@ -71,6 +81,7 @@ namespace ft {
             , node_alloc_(other.node_alloc_)
             , pair_alloc_(other.pair_alloc_)
             , comp_(other.comp_)
+            , size_(0)
       {
         insert(other.begin(), other.end());
       }
@@ -97,8 +108,9 @@ namespace ft {
             if (node == root_node_)
               root_node_ = NULL;
           }
+          size_ = 0;
         }
-        
+
         rb_tree& operator=(const rb_tree& other)
         {
           rb_tree tmp(other);
@@ -370,6 +382,7 @@ namespace ft {
 
           pair_alloc_.destroy(&node->data);
           node_alloc_.deallocate(node, 1);
+          size_--;
         }
 
         void check_double_black(tree_node_ptr node)
@@ -530,6 +543,7 @@ namespace ft {
           std::swap(node_alloc_, other.node_alloc_);
           std::swap(pair_alloc_, other.pair_alloc_);
           std::swap(comp_, other.comp_);
+          std::swap(size_, other.size_);
         }
 
         template <typename Key>
@@ -558,22 +572,34 @@ namespace ft {
 
         template <typename Key>
           iterator find(const Key &key) {
-            iterator tmp_it = begin();
-            while (tmp_it != end()) {
-              if (tmp_it->first == key)
-                return tmp_it;
-              ++tmp_it;
+
+            tree_node_ptr node = root_node_;
+
+            while (node != NULL)
+            {
+              if (comp_(key, node->data.first))
+                node = node->left;
+              else if (comp_(node->data.first, key))
+                node = node->right;
+              else
+                return iterator(node);
             }
             return end();
           }
 
         template <typename Key>
           const_iterator find(const Key &key) const {
-            const_iterator tmp_it = begin();
-            while (tmp_it != end()) {
-              if (tmp_it->first == key)
-                return tmp_it;
-              ++tmp_it;
+
+            tree_node_ptr node = root_node_;
+
+            while (node != NULL)
+            {
+              if (comp_(key, node->data.first))
+                node = node->left;
+              else if (comp_(node->data.first, key))
+                node = node->right;
+              else
+                return const_iterator(node);
             }
             return end();
           }
@@ -624,53 +650,81 @@ namespace ft {
         template <typename Key>
           iterator lower_bound(const Key& key)
           {
-            iterator it = begin();
-            while (it != end())
+            tree_node_ptr curr_node = root_node_;
+            tree_node_ptr lower_node = end_node_;
+
+            while (curr_node != NULL && curr_node != end_node_)
             {
-              if (!comp_(it->first, key))
-                return it;
-              ++it;
+              if (curr_node->data.first == key)
+                return iterator(curr_node);
+              if (comp_(key, curr_node->data.first))
+              {
+                lower_node = curr_node;
+                curr_node = curr_node->left;
+              }
+              else
+                curr_node = curr_node->right;
             }
-            return end();
+            return iterator(lower_node);
           }
 
         template <typename Key>
           const_iterator lower_bound(const Key& key) const
           {
-            const_iterator it = begin();
-            while (it != end())
+            tree_node_ptr curr_node = root_node_;
+            tree_node_ptr lower_node = end_node_;
+
+            while (curr_node != NULL && curr_node != end_node_)
             {
-              if (!comp_(it->first, key))
-                return it;
-              ++it;
+              if (curr_node->data.first == key)
+                return const_iterator(curr_node);
+              if (comp_(key, curr_node->data.first))
+              {
+                lower_node = curr_node;
+                curr_node = curr_node->left;
+              }
+              else
+                curr_node = curr_node->right;
             }
-            return end();
+            return const_iterator(lower_node);
           }
 
         template <typename Key>
           iterator upper_bound(const Key& key)
           {
-            iterator it = begin();
-            while (it != end())
+            tree_node_ptr curr_node = root_node_;
+            tree_node_ptr upper_node = end_node_;
+
+            while (curr_node != NULL && curr_node != end_node_)
             {
-              if (comp_(key, it->first))
-                return it;
-              ++it;
+              if (comp_(key, curr_node->data.first))
+              {
+                upper_node = curr_node;
+                curr_node = curr_node->left;
+              }
+              else
+                curr_node = curr_node->right;
             }
-            return end();
+            return iterator(upper_node);
           }
 
         template <typename Key>
           const_iterator upper_bound(const Key& key) const
           {
-            const_iterator it = begin();
-            while (it != end())
+            tree_node_ptr curr_node = root_node_;
+            tree_node_ptr upper_node = end_node_;
+
+            while (curr_node != NULL && curr_node != end_node_)
             {
-              if (comp_(key, it->first))
-                return it;
-              ++it;
+              if (comp_(key, curr_node->data.first))
+              {
+                upper_node = curr_node;
+                curr_node = curr_node->left;
+              }
+              else
+                curr_node = curr_node->right;
             }
-            return end();
+            return const_iterator(upper_node);
           }
 
         bool empty() const {
@@ -680,14 +734,7 @@ namespace ft {
         }
 
         size_type size() const {
-          size_type counter = 0;
-          const_iterator it = begin();
-
-          while (it != end()) {
-            ++it;
-            ++counter;
-          }
-          return counter;
+          return size_;
         }
 
         size_type max_size() const {
@@ -700,71 +747,73 @@ namespace ft {
           destroy_tree(end_node_);
         }
 
-        void print_levels()
-        {
-          std::cout << "=====PRINTING LEVELS=====" << std::endl;
-          print_levels(root_node_);
-          std::cout << "=====END OF PRINTING LEVELS=====" << std::endl;
-          std::cout << std::endl;
-        }
+        /*
+           void print_levels()
+           {
+           std::cout << "=====PRINTING LEVELS=====" << std::endl;
+           print_levels(root_node_);
+           std::cout << "=====END OF PRINTING LEVELS=====" << std::endl;
+           std::cout << std::endl;
+           }
 
-        void print_levels(tree_node_ptr node)
-        {
-          std::stringstream node_value_ss;
-          std::stringstream node_parent_ss;
+           void print_levels(tree_node_ptr node)
+           {
+           std::stringstream node_value_ss;
+           std::stringstream node_parent_ss;
 
-          if (node == NULL) {
-            std::cout << "print_levels: tree is empty" << std::endl;
-            return;
-          }
+           if (node == NULL) {
+           std::cout << "print_levels: tree is empty" << std::endl;
+           return;
+           }
 
-          std::queue<tree_node_ptr> qu;
-          qu.push(node);
-          qu.push(NULL);
-          int level = 1;
-          std::cout << std::setw(2) << level << " - ";
-          while (true)
-          {
-            tree_node_ptr curr = qu.front();
-            qu.pop();
-            if (curr != NULL) {
-              std::cout << "("
-                << "\33[32m";
-              node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
-                << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
-                << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
-              std::cout << std::setw(23) << node_value_ss.str()
-                << "\33[0m|"
-                << "Par: \33[34m";
-              node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
-                << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
-                << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
-              std::cout << std::setw(9) << node_parent_ss.str()
-                << "\33[0m|\33[35m"
-                << (curr->is_black ? "BLA" : "RED")
-                << "\33[0m"
-                << ")"
-                << " ";
-              node_value_ss.str(std::string());
-              node_parent_ss.str(std::string());
-              if (curr->left != NULL) {
-                qu.push(curr->left);
-              }
-              if (curr->right != NULL) {
-                qu.push(curr->right);
-              }
-            }
-            else
-            {
-              std::cout << std::endl;
-              if (qu.empty())
-                break;
-              ++level;
-              std::cout << std::setw(2) << level << " - ";
-              qu.push(NULL);
-            }
-          }
-        }
+           std::queue<tree_node_ptr> qu;
+           qu.push(node);
+           qu.push(NULL);
+           int level = 1;
+           std::cout << std::setw(2) << level << " - ";
+           while (true)
+           {
+           tree_node_ptr curr = qu.front();
+           qu.pop();
+           if (curr != NULL) {
+           std::cout << "("
+           << "\33[32m";
+           node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
+           << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
+           << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
+           std::cout << std::setw(23) << node_value_ss.str()
+           << "\33[0m|"
+           << "Par: \33[34m";
+           node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
+           << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
+           << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
+           std::cout << std::setw(9) << node_parent_ss.str()
+           << "\33[0m|\33[35m"
+           << (curr->is_black ? "BLA" : "RED")
+           << "\33[0m"
+           << ")"
+           << " ";
+           node_value_ss.str(std::string());
+           node_parent_ss.str(std::string());
+           if (curr->left != NULL) {
+           qu.push(curr->left);
+           }
+           if (curr->right != NULL) {
+           qu.push(curr->right);
+           }
+           }
+           else
+           {
+           std::cout << std::endl;
+           if (qu.empty())
+           break;
+           ++level;
+           std::cout << std::setw(2) << level << " - ";
+           qu.push(NULL);
+           }
+           }
+           }
+           */
 
       private:
         tree_node_ptr get_next_node(tree_node_ptr node) {
@@ -823,6 +872,7 @@ namespace ft {
           new_node->left = NULL;
           new_node->right = NULL;
           new_node->is_black = true;
+          size_++;
           return new_node;
         }
 
@@ -833,6 +883,7 @@ namespace ft {
           new_node->right = NULL;
           new_node->is_black = false;
           pair_alloc_.construct(&new_node->data, new_value);
+          size_++;
           return new_node;
         }
 
@@ -844,6 +895,7 @@ namespace ft {
           new_node->right = NULL;
           new_node->is_black = false;
           pair_alloc_.construct(&new_node->data, new_value);
+          size_++;
           return new_node;
         }
 

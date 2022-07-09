@@ -15,7 +15,7 @@
 #include "rb_tree.hpp"
 #include "map.hpp"
 #include "utils.hpp"
-#include "Timer.hpp"
+//#include "Timer.hpp"
 
 #include <sstream>
 #include <list>
@@ -513,6 +513,7 @@ void generate_map_int(NAMESPACE::map<int, int>& map1)
   map1.insert(NAMESPACE::pair<int, int>(479, 4709));
   map1.insert(NAMESPACE::pair<int, int>(489, 4809));
   map1.insert(NAMESPACE::pair<int, int>(499, 4909));
+  map1.erase(429);
 }
 
 template <typename Key, typename Value>
@@ -532,9 +533,9 @@ int main(void)
 
  generate_map_int(m1);
 
- Timer t1("upper_bound");
  map_upper_bound(m1);
- t1.Stop();
+
+ std::cerr << "this is size" << m1.size() << std::endl;
 
  return 0;
 }
