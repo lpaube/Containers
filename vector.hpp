@@ -15,9 +15,11 @@
 #include <iostream>
 #include <limits>
 #include <memory>
+#include <iterator>
 
 #include "iterator.hpp"
 #include "utils.hpp"
+//#include "Timer.hpp"
 
 namespace ft {
 
@@ -72,15 +74,15 @@ namespace ft {
         }
 
         template <class InputIt>
-        pointer m_construct_storage(pointer dst, InputIt it, InputIt ite)
-        {
-          int i = 0;
-          for (; it + i != ite; ++i)
+          pointer m_construct_storage(pointer dst, InputIt it, InputIt ite)
           {
-            m_alloc.construct(dst + i, *(it + i));
+            int i = 0;
+            for (; it + i != ite; ++i)
+            {
+              m_alloc.construct(dst + i, *(it + i));
+            }
+            return dst + i;
           }
-          return dst + i;
-        }
 
         void destroy_storage(iterator ite1, iterator ite2)
         {
@@ -123,10 +125,10 @@ namespace ft {
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
-            //m_create_storage(count);
-            grow_capacity(count);
-            m_construct_storage(value, count);
-          }
+              //m_create_storage(count);
+              grow_capacity(count);
+              m_construct_storage(value, count);
+            }
 
         template <typename InputIt>
           vector(typename enable_if<!(is_integral<InputIt>::value),
@@ -136,19 +138,19 @@ namespace ft {
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
-            //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
-            insert(begin(), first, last);
-          }
+              //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+              insert(begin(), first, last);
+            }
 
         vector(const vector& other)
-        : m_start(NULL)
-          , m_finish(m_start)
-          , m_end_of_storage(m_start)
-          , m_alloc(Allocator())
-        {
-          m_create_storage(other.capacity());
-          insert(m_start, other.begin(), other.end());
-        }
+          : m_start(NULL)
+            , m_finish(m_start)
+            , m_end_of_storage(m_start)
+            , m_alloc(Allocator())
+      {
+        m_create_storage(other.capacity());
+        insert(m_start, other.begin(), other.end());
+      }
         // Destructors
         ~vector() {
           clear_complete();
@@ -162,11 +164,6 @@ namespace ft {
           clear_complete();
           m_create_storage(other.capacity());
           insert(m_start, other.begin(), other.end());
-          /*
-          for (size_type i = 0; other.begin() + i != other.end(); ++i) {
-            m_alloc.construct(m_start + i, *(other.begin() + i));
-          }
-            */
           return *this;
         }
 
@@ -181,21 +178,47 @@ namespace ft {
         template <class InputIt>
           void assign(InputIt first, typename enable_if<!is_integral<InputIt>::value,
               InputIt>::type last) {
+
+            vector<value_type> tmp(first, last);
+            clear_complete();
+
+            insert(m_start, tmp.begin(), tmp.end());
+            /*
             int i = 0;
             InputIt tmp = first;
-
             while (tmp != last)
             {
               i++;
               tmp++;
             }
-            clear_complete();
-            if (i > 0)
-            {
-              m_create_storage(i);
-              insert(m_start, first, last);
-            }
+            */
+            //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+            //assign_dispatch(m_start, first, last, Iter_category());
+
+            //m_create_storage(i);
           }
+
+        /*
+        template <typename InputIt>
+          void assign_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
+          {
+            clear_complete();
+            insert(m_start, first, last);
+          }
+
+        template <typename InputIt>
+          void assign_dispatch(iterator pos, InputIt first, InputIt last, std::forward_iterator_tag)
+          {
+            size_type i = 0;
+            InputIt tmp = first;
+            while (tmp != last)
+            {
+              i++;
+              tmp++;
+            }
+            insert(m_start, first, last);
+          }
+          */
 
         allocator_type get_allocator() const { return (this->m_alloc); }
 
@@ -343,39 +366,70 @@ namespace ft {
           {
             difference_type offset = pos - begin();
             vector<value_type, allocator_type> tmp(begin(), end());
-            iterator ite = tmp.begin();
+            iterator it = tmp.begin();
 
             clear();
-            for (difference_type i = 0; i < offset; ++i, ++ite)
-              push_back(*ite);
+            for (difference_type i = 0; i < offset; ++i, ++it)
+            {
+              push_back(*it);
+            }
             for (; first != last; ++first)
+            {
               push_back(*first);
-            for (; ite != tmp.end(); ++ite)
-              push_back(*ite);
+            }
+            for (; it != tmp.end(); ++it)
+            {
+              push_back(*it);
+            }
           }
 
-        template <typename InputIt>
+        template<typename InputIt>
           void insert_dispatch(iterator pos, InputIt first, InputIt last, std::forward_iterator_tag)
           {
-            difference_type offset = pos - begin();
-            difference_type count = 0;
-            iterator pos_new;
+            size_type offset = pos - begin();
+            size_type count = 0;
 
-            for (InputIt tmp = first; tmp != last; ++tmp)
-              ++count;
+            count = std::distance(first, last);
 
             if (size() + count > max_size())
-            {
               throw std::length_error("Can't reserve vector size: bigger than max_size()");
-            }
 
-            for (difference_type i = 0; i < count; ++first, ++i, ++offset)
+            size_type end_len = size() + count;
+
+            grow_capacity(size() + count);
+            for (size_type i = 0; i < count; ++i)
             {
-              pos_new = begin();
-              for (difference_type j = 0; j < offset; ++j)
-                ++pos_new;
-              insert(pos_new, *first);
+              m_alloc.construct(m_finish + i, value_type());
             }
+            pos = begin() + offset;
+
+            pointer first_copy = pos.base();
+            pointer last_copy = end().base();
+            pointer d_last_copy = (begin() + end_len).base();
+            //pointer d_first_copy = (pos + count).base();
+
+            /*
+            iterator first_copy = pos;
+            iterator last_copy = end();
+            iterator d_first_copy = pos + count;
+            */
+
+            std::copy_backward(first_copy, last_copy, d_last_copy);
+
+            /*
+            for (; first_copy != last_copy; ++first_copy, ++d_first_copy)
+            {
+              std::cerr << "Here1 first_copy: " << *first_copy
+                << "d_first_copy: " << *d_first_copy << std::endl;
+              *d_first_copy = *first_copy;
+            }
+            */
+
+            for (; first != last; ++first, ++pos)
+            {
+              *pos = *first;
+            }
+            m_finish += count;
           }
 
         void insert(iterator pos, size_type count, const T& value)
@@ -385,54 +439,46 @@ namespace ft {
             throw std::length_error("Can't reserve vector size: bigger than max_size()");
           }
 
-          difference_type offset = pos - begin();
-          iterator pos_new = begin() + offset;
+          //difference_type offset = pos - begin();
+          //iterator pos_new = begin() + offset;
 
           for (size_type i = 0; i < count; ++i)
           {
-            pos_new = begin() + offset + i;
-            insert(pos_new, value);
+            //pos_new = begin() + offset + i;
+            pos = insert(pos, value);
           }
         }
 
         iterator insert(iterator pos, const T& value)
         {
 
+          //std::cout << "===STARTING INSERT CALL ===" << std::endl;
           difference_type offset = pos - begin();
 
           grow_capacity(size() + 1);
-          m_alloc.construct(end().base(), *(end() - 1));
-          for (iterator it = end(); it != begin() && it != begin() + offset; --it)
-          {
-            *it = *(it - 1);
-          }
-
-          *(begin() + offset) = value;
-          m_finish++;
-          return begin() + offset;
 
 
+          m_alloc.construct(end().base(), T());
+
+          pointer last = m_finish;
+          pointer first = m_start + offset;
+          pointer d_last = last + 1;
+
+          std::copy_backward(first, last, d_last);
           /*
-          difference_type offset = pos - begin();
-
-          grow_capacity(size() + 1);
-          for (iterator it = end(); it != begin() && it != begin() + offset; --it)
-          {
-            if (it != end() && size() != 0)
-              m_alloc.destroy(it.base());
-            m_alloc.construct(it.base(), *(it - 1));
+          while (first != last) {
+            *(--d_last) = *(--last);
           }
-
-          if (begin() + offset != end() && size() != 0)
-            m_alloc.destroy((begin() + offset).base());
-          m_alloc.construct((begin() + offset).base(), value);
+          */
+          *(m_start + offset) = value;
           m_finish++;
           return begin() + offset;
-          */
         }
 
         template <typename InputIt>
-          void insert(iterator pos, typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first, InputIt last)
+          void insert(iterator pos
+              , typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first
+              , InputIt last)
           {
             typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
             insert_dispatch(pos, first, last, Iter_category());
@@ -443,20 +489,38 @@ namespace ft {
           if (pos == end())
             return pos;
 
-          for (iterator it = pos; it != end(); ++it)
-          {
-            m_alloc.destroy(it.base());
-            if (it == end() - 1)
-              continue;
-            m_alloc.construct(it.base(), *(it + 1));
-          }
-          m_finish--;
+          pointer first_copy = (pos + 1).base();
+          pointer last_copy = m_finish;
+          pointer d_first_copy = pos.base();
+
+          std::copy(first_copy, last_copy, d_first_copy);
+
+          m_alloc.destroy(m_finish - 1);
+          --m_finish;
           return pos;
         }
 
         iterator erase(iterator first, iterator last)
         {
-          //destroy_storage(first, last);
+          size_type count = std::distance(first, last);
+          size_type new_size = size() - count;
+          size_type ret_num = last - begin() - count;
+
+          pointer first_copy = last.base();
+          pointer last_copy = m_finish;
+          pointer d_first_copy = first.base();
+
+          std::copy(first_copy, last_copy, d_first_copy);
+
+          for (pointer destroy_pointer = m_start + new_size; destroy_pointer != m_finish; ++destroy_pointer)
+          {
+            m_alloc.destroy(destroy_pointer);
+          }
+
+          m_finish -= count;
+
+          return (begin() + ret_num);
+          /*
           iterator ret_it = last;
 
           for (iterator it = first; it != last; ++it)
@@ -464,13 +528,20 @@ namespace ft {
             ret_it = erase(first);
           }
           return ret_it;
+          */
         }
 
         void push_back(const T& value)
         {
           grow_capacity(size() + 1);
+          if (m_start == NULL)
+          {
+            m_alloc.construct(m_start, value);
+            m_finish = m_start + 1;
+          } else {
           m_alloc.construct(m_finish, value);
           m_finish++;
+          }
         }
 
         void pop_back()
@@ -485,7 +556,7 @@ namespace ft {
             grow_capacity(count);
             for (iterator ite = end(); static_cast<size_type>(ite - begin()) < count; ++ite)
             {
-              //*ite = value;
+              // *ite = value;
               m_alloc.construct(ite.base(), value);
             }
             m_finish = begin().base() + count;
