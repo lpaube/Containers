@@ -266,6 +266,17 @@ void vec_rev_iterator(NAMESPACE::vector<T>& vreal)
   std::cout << std::endl;
 }
 
+template <typename T>
+void vec_comparison(NAMESPACE::vector<T>& vreal, NAMESPACE::vector<T>& vref)
+{
+  std::cout << "gt: " << (vreal > vref) << std::endl;
+  std::cout << "lt: " << (vreal < vref) << std::endl;
+  std::cout << "gteq: " << (vreal >= vref) << std::endl;
+  std::cout << "lteq: " << (vreal <= vref) << std::endl;
+  std::cout << "eq: " << (vreal == vref) << std::endl;
+  std::cout << "neq: " << (vreal != vref) << std::endl;
+}
+
 void test_vector()
 {
   NAMESPACE::vector<int> v1;
@@ -340,4 +351,7 @@ void test_vector()
   v2.swap(v1);
   print_vector(v2);
   std::cout << std::endl;
+
+  std::cout << "=== Testing comparisons (vec_comparison) ===" << std::endl;
+  vec_comparison(v2, v1);
 }

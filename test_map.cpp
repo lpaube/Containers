@@ -68,6 +68,92 @@ void map_iterators(NAMESPACE::map<Key, Value>& mreal)
   std::cout << std::endl;
 }
 
+template <typename Key, typename Value>
+void map_find(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "find *it: " << (mreal.find(2))->second;
+  std::cout << " | find *it: " << (mreal.find(10))->second;
+  std::cout << " | find *it: " << (mreal.find(40))->second;
+  std::cout << " | find end(): " << (mreal.find(9992) == mreal.end());
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_at(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "at: " << mreal.at(2);
+  std::cout << " | at: " << mreal.at(10);
+  std::cout << " | at: " << mreal.at(40);
+  std::cout << " | at: " << mreal.at(9993);
+}
+
+template <typename Key, typename Value>
+void map_clear_size(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "size: " << mreal.size() << std::endl;
+  mreal.clear();
+
+  print_map(mreal);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_count(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "count: " << mreal.count(20);
+  std::cout << " | count: " << mreal.count(2);
+  std::cout << " | count: " << mreal.count(9980);
+  std::cout << " | count: " << mreal.count(0);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_empty(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "empty: " << mreal.empty() << std::endl;
+  mreal.clear();
+  std::cout << "empty: " << mreal.empty();
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_erase_pos(NAMESPACE::map<Key, Value>& mreal)
+{
+  mreal.erase(mreal.begin());
+  mreal.erase(--(mreal.end()));
+  mreal.erase(++(++(++(mreal.begin()))));
+
+  print_map(mreal);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_erase_range(NAMESPACE::map<Key, Value>& mreal)
+{
+  mreal.erase(mreal.begin(), (++(++(mreal.begin()))));
+  mreal.erase(mreal.begin(), (++(++(mreal.begin()))));
+  mreal.erase((--(--(--(mreal.end())))), (--(mreal.end())));
+
+  print_map(mreal);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_erase_key(NAMESPACE::map<Key, Value>& mreal)
+{
+  mreal.erase(2);
+  mreal.erase(50);
+  mreal.erase(150);
+
+  print_map(mreal);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_upper_lower_bound(NAMESPACE::map<Key, Value>& mreal)
+{
+  
+}
 
 void test_map()
 {
@@ -90,4 +176,48 @@ void test_map()
 
   std::cout << "=== Testing map range insert (map_range_insert) ===" << std::endl;
   map_range_insert(m2, m1);
+  
+  std::cout << "=== Testing map find (map_find) ===" << std::endl;
+  map_find(m2);
+
+  std::cout << "=== Testing map at (map_at) ===" << std::endl;
+  try {
+    map_at(m2);
+  }
+  catch (std::exception e) {
+    std::cout << "There was an exception thrown" << std::endl;
+  }
+
+  std::cout << "=== Testing map clear and size (map_clear_size) ===" << std::endl;
+  map_clear_size(m2);
+
+  std::cout << "=== Testing map count (map_count) ===" << std::endl;
+  m2 = m3;
+  map_count(m2);
+
+  std::cout << "=== Testing map empty (map_empty) ===" << std::endl;
+  map_empty(m2);
+
+  std::cout << "=== Testing map erase pos (map_erase_pos) ===" << std::endl;
+  m2 = m3;
+  map_erase_pos(m2);
+
+  std::cout << "=== Testing map erase pos (map_erase_pos) ===" << std::endl;
+  map_erase_range(m2);
+
+  std::cout << "=== Testing map erase key (map_erase_key) ===" << std::endl;
+  m2 = m3;
+  map_erase_key(m2);
+
+  std::cout << "=== Testing map upper and lower bound (map_upper_lower_bound) ===" << std::endl;
+
+
+  /*
+   * TODO:
+   *  upper and lower bound
+   *  equal range
+   *  riterator
+   *  swap
+   *  comparisons (<, >, !=...)
+   */
 }
