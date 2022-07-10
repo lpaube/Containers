@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <map>
+//#include <map>
 #include "iterator.hpp"
 #include "rb_tree.hpp"
 #include "rbt_iterator.hpp"
@@ -67,6 +67,8 @@ namespace ft
                };
 
                  // ======================= Member functions =====================
+
+               public:
 
                  explicit map(const Compare& comp = Compare(),
                      const Allocator& alloc = Allocator())
@@ -280,9 +282,8 @@ namespace ft
                    return value_compare(Compare());
                  }
 
-                 /*
-                  * Custom member functions (to remove when submitting)
-                  */
+               private:
+                  // FUNCTIONS FOR PRINTING AND DEBUGGING PURPOSES
                  void print_map()
                  {
                    tree_.print_tree();

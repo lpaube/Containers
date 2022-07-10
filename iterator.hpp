@@ -58,6 +58,7 @@ namespace ft {
         typedef typename traits_type::reference reference;
         typedef typename traits_type::pointer pointer;
 
+      public:
         normal_iterator() : current_(Iterator_type()) {}
 
         normal_iterator(const Iterator_type& i) : current_(i) {}
@@ -189,9 +190,8 @@ namespace ft {
     public:
       Iterator_type current;
 
-      typedef iterator_traits<Iterator_type> traits_type;
-
     public:
+      typedef iterator_traits<Iterator_type> traits_type;
       typedef Iterator_type                           Iter;
       typedef typename traits_type::iterator_category iterator_category;
       typedef typename traits_type::value_type        value_type;
@@ -199,6 +199,7 @@ namespace ft {
       typedef typename traits_type::pointer           pointer;
       typedef typename traits_type::reference         reference;
 
+    public:
       // MEMBER FUNCTIONS
       reverse_iterator() : current() {}
 

@@ -1,6 +1,6 @@
 NAME = ft_containers
 
-SRCS = main.cpp
+SRCS = main.cpp test_vector.cpp
 CC = clang++
 VERSION = -std=c++98
 CFLAGS = -g $(VERSION)

@@ -19,7 +19,6 @@
 
 #include "iterator.hpp"
 #include "utils.hpp"
-//#include "Timer.hpp"
 
 namespace ft {
 
@@ -47,69 +46,6 @@ namespace ft {
         pointer m_end_of_storage;
         allocator_type m_alloc;
 
-        void m_create_storage(size_type count) {
-          // ADD ERROR IF COUNT IS NEGATIVE
-          if (count <= 0)
-            return;
-          m_start = m_alloc.allocate(count);
-          m_finish = m_start;
-          m_end_of_storage = m_start + count;
-        }
-
-        /*
-           template <typename InputIterator>
-           void create_storage_dispatch(InputIterator first, InputIterator last, std::input_iterator_tag)
-           {
-           for (int i = 0; 
-           }
-           */
-
-        iterator m_construct_storage(const T& value, size_type count) {
-          size_type i = 0;
-          for (; i < count; ++i) {
-            m_alloc.construct(m_start + i, value);
-          }
-          m_finish = m_start + i;
-          return m_finish;
-        }
-
-        template <class InputIt>
-          pointer m_construct_storage(pointer dst, InputIt it, InputIt ite)
-          {
-            int i = 0;
-            for (; it + i != ite; ++i)
-            {
-              m_alloc.construct(dst + i, *(it + i));
-            }
-            return dst + i;
-          }
-
-        void destroy_storage(iterator ite1, iterator ite2)
-        {
-          for (; ite1 != ite2; ++ite1)
-          {
-            m_alloc.destroy(ite1.base());
-          }
-        }
-
-        /*
-         * Allocates twice the current storage until total storage is greater
-         * than new_cap. new_cap represents the total storage elements needed
-         */
-        void grow_capacity(size_type new_cap)
-        {
-          if (new_cap > max_size())
-          {
-            throw std::length_error("Can't reserve vector size: bigger than max_size()");
-          }
-          if (new_cap == 0)
-            new_cap = 1;
-          while (m_end_of_storage - m_start < static_cast<long>(new_cap))
-          {
-            reserve((m_end_of_storage - m_start) * 2);
-          }
-        }
-
       public:
         // MEMBER FUNCTIONS
         // Constructors
@@ -125,7 +61,6 @@ namespace ft {
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
-              //m_create_storage(count);
               grow_capacity(count);
               m_construct_storage(value, count);
             }
@@ -138,7 +73,6 @@ namespace ft {
             , m_finish(m_start)
             , m_end_of_storage(m_start)
             , m_alloc(alloc) {
-              //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
               insert(begin(), first, last);
             }
 
@@ -183,42 +117,7 @@ namespace ft {
             clear_complete();
 
             insert(m_start, tmp.begin(), tmp.end());
-            /*
-            int i = 0;
-            InputIt tmp = first;
-            while (tmp != last)
-            {
-              i++;
-              tmp++;
-            }
-            */
-            //typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
-            //assign_dispatch(m_start, first, last, Iter_category());
-
-            //m_create_storage(i);
           }
-
-        /*
-        template <typename InputIt>
-          void assign_dispatch(iterator pos, InputIt first, InputIt last, std::input_iterator_tag)
-          {
-            clear_complete();
-            insert(m_start, first, last);
-          }
-
-        template <typename InputIt>
-          void assign_dispatch(iterator pos, InputIt first, InputIt last, std::forward_iterator_tag)
-          {
-            size_type i = 0;
-            InputIt tmp = first;
-            while (tmp != last)
-            {
-              i++;
-              tmp++;
-            }
-            insert(m_start, first, last);
-          }
-          */
 
         allocator_type get_allocator() const { return (this->m_alloc); }
 
@@ -307,7 +206,6 @@ namespace ft {
 
         size_type size() const {
           return std::distance(begin(), end());
-          //return static_cast<size_type>(m_finish - m_start);
         }
 
         size_type max_size() const {
@@ -346,6 +244,189 @@ namespace ft {
           if (!empty())
             destroy_storage(m_start, m_finish);
           m_finish = m_start;
+        }
+
+
+        void insert(iterator pos, size_type count, const T& value)
+        {
+          if (count <= 0)
+            return;
+          size_type offset = pos - begin();
+
+          if (size() + count > max_size())
+          {
+            throw std::length_error("Can't reserve vector size: bigger than max_size()");
+          }
+
+          grow_capacity(size() + count);
+
+          for (size_type i = 0; i < count; ++i)
+            m_alloc.construct(m_finish + i, value_type());
+
+          pos = begin() + offset;
+
+          size_type end_len = size() + count;
+
+          pointer first_copy = pos.base();
+          pointer last_copy = end().base();
+          pointer d_last_copy = (begin() + end_len).base();
+
+          std::copy_backward(first_copy, last_copy, d_last_copy);
+
+          for (size_type i = 0; i < count; ++i, ++pos)
+          {
+            *pos = value;
+          }
+          m_finish += count;
+        }
+
+        iterator insert(iterator pos, const T& value)
+        {
+
+          difference_type offset = pos - begin();
+
+          grow_capacity(size() + 1);
+
+
+          m_alloc.construct(end().base(), T());
+
+          pointer last = m_finish;
+          pointer first = m_start + offset;
+          pointer d_last = last + 1;
+
+          std::copy_backward(first, last, d_last);
+
+          *(m_start + offset) = value;
+          m_finish++;
+          return begin() + offset;
+        }
+
+        template <typename InputIt>
+          void insert(iterator pos
+              , typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first
+              , InputIt last)
+          {
+            typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
+            insert_dispatch(pos, first, last, Iter_category());
+          }
+
+        iterator erase(iterator pos)
+        {
+          if (pos == end())
+            return pos;
+
+          pointer first_copy = (pos + 1).base();
+          pointer last_copy = m_finish;
+          pointer d_first_copy = pos.base();
+
+          std::copy(first_copy, last_copy, d_first_copy);
+
+          m_alloc.destroy(m_finish - 1);
+          --m_finish;
+          return pos;
+        }
+
+        iterator erase(iterator first, iterator last)
+        {
+          size_type count = std::distance(first, last);
+          size_type new_size = size() - count;
+          size_type ret_num = last - begin() - count;
+
+          pointer first_copy = last.base();
+          pointer last_copy = m_finish;
+          pointer d_first_copy = first.base();
+
+          std::copy(first_copy, last_copy, d_first_copy);
+
+          for (pointer destroy_pointer = m_start + new_size; destroy_pointer != m_finish; ++destroy_pointer)
+          {
+            m_alloc.destroy(destroy_pointer);
+          }
+
+          m_finish -= count;
+
+          return (begin() + ret_num);
+        }
+
+        void push_back(const T& value)
+        {
+          grow_capacity(size() + 1);
+          if (m_start == NULL)
+          {
+            m_alloc.construct(m_start, value);
+            m_finish = m_start + 1;
+          } else {
+          m_alloc.construct(m_finish, value);
+          m_finish++;
+          }
+        }
+
+        void pop_back()
+        {
+          erase(end() - 1);
+        }
+
+        void resize(size_type count, T value = T())
+        {
+          if (count > size())
+          {
+            grow_capacity(count);
+            for (iterator ite = end(); static_cast<size_type>(ite - begin()) < count; ++ite)
+            {
+              m_alloc.construct(ite.base(), value);
+            }
+            m_finish = begin().base() + count;
+          }
+          else if (count < size())
+          {
+            destroy_storage(begin() + count, end());
+            m_finish = begin().base() + count;
+          }
+        }
+
+        void swap(vector& other)
+        {
+          std::swap(m_start, other.m_start);
+          std::swap(m_finish, other.m_finish);
+          std::swap(m_end_of_storage, other.m_end_of_storage);
+        }
+
+      private:
+
+        void m_create_storage(size_type count) {
+          if (count <= 0)
+            return;
+          m_start = m_alloc.allocate(count);
+          m_finish = m_start;
+          m_end_of_storage = m_start + count;
+        }
+
+        iterator m_construct_storage(const T& value, size_type count) {
+          size_type i = 0;
+          for (; i < count; ++i) {
+            m_alloc.construct(m_start + i, value);
+          }
+          m_finish = m_start + i;
+          return m_finish;
+        }
+
+        template <class InputIt>
+          pointer m_construct_storage(pointer dst, InputIt it, InputIt ite)
+          {
+            int i = 0;
+            for (; it + i != ite; ++i)
+            {
+              m_alloc.construct(dst + i, *(it + i));
+            }
+            return dst + i;
+          }
+
+        void destroy_storage(iterator ite1, iterator ite2)
+        {
+          for (; ite1 != ite2; ++ite1)
+          {
+            m_alloc.destroy(ite1.base());
+          }
         }
 
         // Destructs and deallocate all nodes
@@ -416,163 +497,22 @@ namespace ft {
             m_finish += count;
           }
 
-        void insert(iterator pos, size_type count, const T& value)
+        /*
+         * Allocates twice the current storage until total storage is greater
+         * than new_cap. new_cap represents the total storage elements needed
+         */
+        void grow_capacity(size_type new_cap)
         {
-          if (count <= 0)
-            return;
-          size_type offset = pos - begin();
-
-          if (size() + count > max_size())
+          if (new_cap > max_size())
           {
             throw std::length_error("Can't reserve vector size: bigger than max_size()");
           }
-
-          grow_capacity(size() + count);
-
-          for (size_type i = 0; i < count; ++i)
-            m_alloc.construct(m_finish + i, value_type());
-
-          pos = begin() + offset;
-
-          size_type end_len = size() + count;
-
-          pointer first_copy = pos.base();
-          pointer last_copy = end().base();
-          pointer d_last_copy = (begin() + end_len).base();
-
-          std::copy_backward(first_copy, last_copy, d_last_copy);
-
-          for (size_type i = 0; i < count; ++i, ++pos)
+          if (new_cap == 0)
+            new_cap = 1;
+          while (m_end_of_storage - m_start < static_cast<long>(new_cap))
           {
-            *pos = value;
+            reserve((m_end_of_storage - m_start) * 2);
           }
-          m_finish += count;
-        }
-
-        iterator insert(iterator pos, const T& value)
-        {
-
-          //std::cout << "===STARTING INSERT CALL ===" << std::endl;
-          difference_type offset = pos - begin();
-
-          grow_capacity(size() + 1);
-
-
-          m_alloc.construct(end().base(), T());
-
-          pointer last = m_finish;
-          pointer first = m_start + offset;
-          pointer d_last = last + 1;
-
-          std::copy_backward(first, last, d_last);
-          /*
-          while (first != last) {
-            *(--d_last) = *(--last);
-          }
-          */
-          *(m_start + offset) = value;
-          m_finish++;
-          return begin() + offset;
-        }
-
-        template <typename InputIt>
-          void insert(iterator pos
-              , typename enable_if<!(is_integral<InputIt>::value), InputIt>::type first
-              , InputIt last)
-          {
-            typedef typename iterator_traits<InputIt>::iterator_category Iter_category;
-            insert_dispatch(pos, first, last, Iter_category());
-          }
-
-        iterator erase(iterator pos)
-        {
-          if (pos == end())
-            return pos;
-
-          pointer first_copy = (pos + 1).base();
-          pointer last_copy = m_finish;
-          pointer d_first_copy = pos.base();
-
-          std::copy(first_copy, last_copy, d_first_copy);
-
-          m_alloc.destroy(m_finish - 1);
-          --m_finish;
-          return pos;
-        }
-
-        iterator erase(iterator first, iterator last)
-        {
-          size_type count = std::distance(first, last);
-          size_type new_size = size() - count;
-          size_type ret_num = last - begin() - count;
-
-          pointer first_copy = last.base();
-          pointer last_copy = m_finish;
-          pointer d_first_copy = first.base();
-
-          std::copy(first_copy, last_copy, d_first_copy);
-
-          for (pointer destroy_pointer = m_start + new_size; destroy_pointer != m_finish; ++destroy_pointer)
-          {
-            m_alloc.destroy(destroy_pointer);
-          }
-
-          m_finish -= count;
-
-          return (begin() + ret_num);
-          /*
-          iterator ret_it = last;
-
-          for (iterator it = first; it != last; ++it)
-          {
-            ret_it = erase(first);
-          }
-          return ret_it;
-          */
-        }
-
-        void push_back(const T& value)
-        {
-          grow_capacity(size() + 1);
-          if (m_start == NULL)
-          {
-            m_alloc.construct(m_start, value);
-            m_finish = m_start + 1;
-          } else {
-          m_alloc.construct(m_finish, value);
-          m_finish++;
-          }
-        }
-
-        void pop_back()
-        {
-          erase(end() - 1);
-        }
-
-        void resize(size_type count, T value = T())
-        {
-          if (count > size())
-          {
-            grow_capacity(count);
-            for (iterator ite = end(); static_cast<size_type>(ite - begin()) < count; ++ite)
-            {
-              // *ite = value;
-              m_alloc.construct(ite.base(), value);
-            }
-            m_finish = begin().base() + count;
-          }
-          else if (count < size())
-          {
-            destroy_storage(begin() + count, end());
-            m_finish = begin().base() + count;
-          }
-        }
-
-        void swap(vector& other)
-        {
-          std::swap(m_start, other.m_start);
-          std::swap(m_finish, other.m_finish);
-          std::swap(m_end_of_storage, other.m_end_of_storage);
         }
     };
 
@@ -617,93 +557,4 @@ namespace ft {
     {
       lhs.swap(rhs);
     }
-
 }
-// SOURCE CODE:
-// https://code.woboq.org/gcc/libstdc++-v3/include/bits/stl_vector.h.html
-// DOCUMENTATION:
-// https://en.cppreference.com/w/cpp/container/vector
-//  LIST
-//  *
-//  * MEMBER FUNCTIONS
-//  *   CONSTRUCTORS
-//  *     - [x] 1.  vector();
-//  *     - [x] 2.  explicit vector( const Allocator& alloc );
-//  *     - [x] 3.  explicit vector( size_type count, const T& value = T(),
-//  const Allocator& alloc = Allocator());
-//  *     - [x] 5.  template< class InputIt >
-//  *         vector( InputIt first, InputIt last, const Allocator& alloc =
-//  Allocator() );
-//  *     - [x] 6.  vector( const vector& other );
-//  *
-//  *   DESTRUCTORS
-//  *     - [x] 1.  ~vector();
-//  *
-//  *   OTHER MEMBER FUNCTIONS
-//  *     - [x] 1.  vector& operator=( const vector& other );
-//  *     - [x] 1.  void assign( size_type count, const T& value );
-//  *     - [x] 2.  template< class InputIt > void assign( InputIt first,
-//  InputIt last );
-//  *     - [x] 1.  allocator_type get_allocator() const;
-//  *
-//  *   ELEMENT ACCESS
-//  *     - [x] 1.  reference at( size_type pos );
-//  *     - [x] 2.  const_reference at( size_type pos ) const;
-//  *     - [x] 1.  reference front();
-//  *     - [x] 2.  const_reference front() const;
-//  *     - [x] 1.  reference back();
-//  *     - [x] 2.  const_reference back() const;
-//  *     - [x] 1.  T* data();
-//  *     - [x] 2.  const T* data() const;
-//  *
-//  *   ITERATORS
-//  *     - [x] 1.  iterator begin();
-//  *     - [x] 2.  const_iterator begin() const;
-//  *     - [x] 1.  iterator end();
-//  *     - [x] 2.  const_iterator end() const;
-//  *     - [x] 1.  reverse_iterator rbegin();
-//  *     - [x] 2.  const_reverse_iterator rbegin() const;
-//  *     - [x] 1.  reverse_iterator rend();
-//  *     - [x] 2.  const_reverse_iterator rend() const;
-//  *
-//  *   CAPACITY
-//  *     - [x] 1.  bool empty() const;
-//  *     - [x] 1.  size_type size() const;
-//  *     - [x] 1.  size_type max_size() const;
-//  *     - [x] 1.  void reserve( size_type new_cap );
-//  *     - [x] 1.  size_type capacity() const;
-//  *
-//  *   MODIFIERS
-//  *     - [x] 1.  void clear();
-//  *     - [x] 1.  iterator insert( iterator pos, const T& value );
-//  *     - [x] 3.  void insert( iterator pos, size_type count, const T& value);
-//  *     - [x] 4.  template< class InputIt >
-//  *                   void insert( iterator pos, InputIt first, InputIt last );
-//  *     - [x] 1.  iterator erase( iterator pos );
-//  *     - [x] 2.  iterator erase( iterator first, iterator last );
-//  *     - [x] 1.  void push_back( const T& value );
-//  *     - [x] 1.  void pop_back();
-//  *     - [x] 2.  void resize( size_type count, T value = T() );
-//  *     - [x] 1.  void swap( vector& other );
-//  *
-//  * NON-MEMBER FUNCTIONS
-//  *   - [x] 1.  template< class T, class Alloc >
-//  *       bool operator==( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 2.  template< class T, class Alloc >
-//  *       bool operator!=( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 3.  template< class T, class Alloc >
-//  *       bool operator<( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 4.  template< class T, class Alloc >
-//  *       bool operator<=( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 5.  template< class T, class Alloc >
-//  *       bool operator>( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 6.  template< class T, class Alloc >
-//  *       bool operator>=( const std::vector<T,Alloc>& lhs, const
-//  std::vector<T,Alloc>& rhs );
-//  *   - [x] 1.  template< class T, class Alloc >
-//  *       void swap( std::vector<T,Alloc>& lhs, std::vector<T,Alloc>& rhs );

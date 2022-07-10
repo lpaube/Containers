@@ -51,7 +51,8 @@ namespace ft {
          * Member functions
          */
       public:
-        // tree constructor
+
+        // tree constructors
         rb_tree(const Compare &comp = Compare(),
             const pair_allocator &alloc = pair_allocator())
           : end_node_(construct_node())
@@ -92,24 +93,6 @@ namespace ft {
           node_alloc_.deallocate(end_node_, 1);
         }
 
-        void destroy_tree(tree_node_ptr node)
-        {
-          if (node != NULL)
-          {
-            destroy_tree(node->left);
-            destroy_tree(node->right);
-            if (node != end_node_)
-            {
-              pair_alloc_.destroy(&node->data);
-              node_alloc_.deallocate(node, 1);
-            }
-            else if (node == end_node_)
-              end_node_->left = NULL;
-            if (node == root_node_)
-              root_node_ = NULL;
-          }
-          size_ = 0;
-        }
 
         rb_tree& operator=(const rb_tree& other)
         {
@@ -131,11 +114,9 @@ namespace ft {
             end_node_->left = root_node_;
             node_constructed = root_node_;
             can_construct = true;
-            //std::cout << "MY PRINT NODE_CONSTRUCTED: DATA: " << node_constructed->data.first << node_constructed->data.second << std::endl;
             return pair<iterator, bool>(iterator(node_constructed), can_construct);
           }
 
-          //std::cout << "Insert: value_first: " << value.first << " | root is_black: " << root_node_->is_black << std::endl;
 
           // If key already exists, parent_node is existing node and bool is false
           pair<tree_node_ptr, bool> parent_node = find_parent_pos(value, root_node_);
@@ -165,173 +146,6 @@ namespace ft {
           }
           check_rb_insertion(node_constructed);
           return pair<iterator, bool>(iterator(node_constructed), can_construct);
-        }
-
-
-        void check_rb_insertion(tree_node_ptr node)
-        {
-          if (node == root_node_)
-            node->is_black = true;
-
-          while (node->parent->is_black == false)
-          {
-            tree_node_ptr uncle = get_uncle(node);
-            // If parent is a left child
-            if (node->parent == node->parent->parent->left)
-            {
-              // CASE #1
-              // If color of uncle is red
-              if (uncle && uncle->is_black == false)
-              {
-                node->parent->is_black = true;
-                uncle->is_black = true;
-                node->parent->parent->is_black = false;
-                check_rb_insertion(node->parent->parent);
-                return;
-              }
-              // If color of uncle is black
-              else
-              {
-                // CASE #2
-                // If subtree form a triangle
-                if (node == node->parent->right)
-                {
-                  node = node->parent;
-                  rotate_left(node);
-                }
-                // CASE #3
-                // If subtree form a line
-                node->parent->is_black = true;
-                node->parent->parent->is_black = false;
-                rotate_right(node->parent->parent);
-                root_node_->is_black = true;
-              }
-            }
-            // If parent is a right child
-            else
-            {
-              // CASE #1
-              // If color of uncle is red
-              if (uncle && uncle->is_black == false)
-              {
-                node->parent->is_black = true;
-                uncle->is_black = true;
-                node->parent->parent->is_black = false;
-                check_rb_insertion(node->parent->parent);
-                return;
-              }
-              // If color of uncle is black
-              else
-              {
-                // CASE #2
-                // If subtree form a triangle
-                if (node == node->parent->left)
-                {
-                  node = node->parent;
-                  rotate_right(node);
-                }
-                // CASE #3
-                // If subtree form a line
-                node->parent->is_black = true;
-                // TODO: We might need to call recolorization here with parent->parent
-                node->parent->parent->is_black = false;
-                rotate_left(node->parent->parent);
-                root_node_->is_black = true;
-              }
-            }
-          }
-          //std::cerr << "Checking insertion_check" << " | root is_black: " << root_node_->is_black << std::endl;
-        }
-
-        int rotate_left(tree_node_ptr node_x)
-        {
-          if (node_x->right == NULL)
-            return 0;
-          tree_node_ptr node_y = node_x->right;
-          // Move node_y to root of subtree
-          if (node_x->parent->left == node_x)
-            node_x->parent->left = node_y;
-          else if (node_x->parent->right == node_x)
-          {
-            node_x->parent->right = node_y;
-          }
-          node_y->parent = node_x->parent;
-
-          // Previous left child of node_y becomes right child of x
-          node_x->right = node_y->left;
-          if (node_x->right)
-            node_x->right->parent = node_x;
-
-          // node_x becomes left child of node_y
-          node_y->left = node_x;
-          node_x->parent = node_y;
-
-          root_node_ = end_node_->left;
-          return 1;
-        }
-
-        int rotate_right(tree_node_ptr node_x)
-        {
-          if (node_x->left == NULL)
-            return 0;
-          tree_node_ptr node_y = node_x->left;
-          // Move node_y to root of subtree
-          if (node_x->parent->left == node_x)
-            node_x->parent->left = node_y;
-          else if (node_x->parent->right == node_x)
-            node_x->parent->right = node_y;
-          node_y->parent = node_x->parent;
-
-          // Previous left child of node_y becomes right child of x
-          node_x->left = node_y->right;
-          if (node_x->left)
-            node_x->left->parent = node_x;
-
-          // node_x becomes left child of node_y
-          node_y->right = node_x;
-          node_x->parent = node_y;
-
-          root_node_ = end_node_->left;
-          return 1;
-        }
-
-        void change_color(tree_node_ptr node)
-        {
-          if (node)
-          {
-            if (node->is_black == true)
-              node->is_black = false;
-            else
-              node->is_black = true;
-          }
-        }
-
-        tree_node_ptr get_sibbling(const tree_node_ptr node) const
-        {
-          if (node == end_node_ || node == root_node_)
-            return NULL;
-          else if (node == node->parent->left)
-            return node->parent->right;
-          else
-            return node->parent->left;
-        }
-
-        tree_node_ptr get_uncle(const tree_node_ptr node) const
-        {
-          tree_node_ptr parent = node->parent;
-
-          if (parent == root_node_)
-            return NULL;
-          if (parent == parent->parent->right)
-            return parent->parent->left;
-          else
-            return parent->parent->right;
-        }
-
-        void print_tree() const { 
-          std::cout << "===== PRINTING TREE =====" << std::endl;
-          print_tree(root_node_);
-          std::cout << "===== END OF PRINTING TREE =====" << std::endl;
         }
 
         iterator insert(iterator hint, const value_type &value) {
@@ -371,112 +185,7 @@ namespace ft {
           }
         }
 
-        void destroy_node(tree_node_ptr node) {
-          if (node == node->parent->left) {
-            node->parent->left = NULL;
-          } else {
-            node->parent->right = NULL;
-          }
-          if (node == root_node_)
-            root_node_ = NULL;
-
-          pair_alloc_.destroy(&node->data);
-          node_alloc_.deallocate(node, 1);
-          size_--;
-        }
-
-        void check_double_black(tree_node_ptr node)
-        {
-          tree_node_ptr sibbling = get_sibbling(node);
-          tree_node_ptr far_sib_child = NULL;
-          tree_node_ptr near_sib_child = NULL;
-
-          // Case #1: If node is red, delete
-          if (node->is_black == false)
-            return;
-
-          // Case #2: If node is black and is root: delete
-          if (node == root_node_)
-            return;
-
-          // Setting far and near sibbling children
-          if (sibbling && node == node->parent->left)
-          {
-            far_sib_child = sibbling->right;
-            near_sib_child = sibbling->left;
-          }
-          else if (sibbling && node == node->parent->right)
-          {
-            far_sib_child = sibbling->left;
-            near_sib_child = sibbling->right;
-          }
-          // Case #3: If node is black and sibbling is black:
-          if (sibbling && sibbling->is_black)
-          {
-            // Case #3.1: If sibbling (black) has black (or NULL) children
-            if ((!sibbling->left || sibbling->left->is_black)
-                && (!sibbling->right || sibbling->right->is_black))
-            {
-              sibbling->is_black = false;
-              if (!node->parent->is_black)
-              {
-                node->parent->is_black = true;
-              }
-              else if (node->parent->is_black)
-              {
-                check_double_black(node->parent);
-              }
-            }
-            // Case #5: If sibbling (black) has near child red, and far child black
-            else if (near_sib_child 
-                && !near_sib_child->is_black
-                && (!far_sib_child || far_sib_child->is_black))
-            {
-              sibbling->is_black = false;
-              near_sib_child->is_black = true;
-              if (node == node->parent->left)
-                rotate_right(sibbling);
-              else if (node == node->parent->right)
-                rotate_left(sibbling);
-              check_double_black(node);
-            }
-            // Case #6: Sibbling is black, far child is red
-            else if ((!near_sib_child || near_sib_child->is_black)
-                && (far_sib_child && !far_sib_child->is_black))
-            {
-              bool tmp_color = node->parent->is_black;
-
-              node->parent->is_black = sibbling->is_black;
-              sibbling->is_black = tmp_color;
-              far_sib_child->is_black = true;
-              if (node == node->parent->left)
-                rotate_left(node->parent);
-              else if (node == node->parent->right)
-                rotate_right(node->parent);
-            }
-          }
-
-          // Case #4: If node is black and sibbling is red:
-          else if (sibbling && !sibbling->is_black)
-          {
-            // Case #4.1: If sibbling (red) has black (or NULL) children
-            if ((!sibbling->left || sibbling->left->is_black)
-                && (!sibbling->right || sibbling->right->is_black))
-            {
-              node->parent->is_black = false;
-              sibbling->is_black = true;
-              if (node == node->parent->left)
-                rotate_left(node->parent);
-              else if (node == node->parent->right)
-                rotate_right(node->parent);
-              check_double_black(node);
-            }
-          }
-        }
-
         iterator erase(iterator pos) {
-          //std::cerr << "Node to erase: " << pos->first << std::endl;
-          //print_levels();
           if (pos == end())
             return pos;
 
@@ -747,75 +456,289 @@ namespace ft {
           destroy_tree(end_node_);
         }
 
-        /*
-           void print_levels()
-           {
-           std::cout << "=====PRINTING LEVELS=====" << std::endl;
-           print_levels(root_node_);
-           std::cout << "=====END OF PRINTING LEVELS=====" << std::endl;
-           std::cout << std::endl;
-           }
-
-           void print_levels(tree_node_ptr node)
-           {
-           std::stringstream node_value_ss;
-           std::stringstream node_parent_ss;
-
-           if (node == NULL) {
-           std::cout << "print_levels: tree is empty" << std::endl;
-           return;
-           }
-
-           std::queue<tree_node_ptr> qu;
-           qu.push(node);
-           qu.push(NULL);
-           int level = 1;
-           std::cout << std::setw(2) << level << " - ";
-           while (true)
-           {
-           tree_node_ptr curr = qu.front();
-           qu.pop();
-           if (curr != NULL) {
-           std::cout << "("
-           << "\33[32m";
-           node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
-           << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
-           << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
-           std::cout << std::setw(23) << node_value_ss.str()
-           << "\33[0m|"
-           << "Par: \33[34m";
-           node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
-           << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
-           << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
-           std::cout << std::setw(9) << node_parent_ss.str()
-           << "\33[0m|\33[35m"
-           << (curr->is_black ? "BLA" : "RED")
-           << "\33[0m"
-           << ")"
-           << " ";
-           node_value_ss.str(std::string());
-           node_parent_ss.str(std::string());
-           if (curr->left != NULL) {
-           qu.push(curr->left);
-           }
-           if (curr->right != NULL) {
-           qu.push(curr->right);
-           }
-           }
-           else
-           {
-           std::cout << std::endl;
-           if (qu.empty())
-           break;
-           ++level;
-           std::cout << std::setw(2) << level << " - ";
-           qu.push(NULL);
-           }
-           }
-           }
-           */
-
       private:
+        void destroy_tree(tree_node_ptr node)
+        {
+          if (node != NULL)
+          {
+            destroy_tree(node->left);
+            destroy_tree(node->right);
+            if (node != end_node_)
+            {
+              pair_alloc_.destroy(&node->data);
+              node_alloc_.deallocate(node, 1);
+            }
+            else if (node == end_node_)
+              end_node_->left = NULL;
+            if (node == root_node_)
+              root_node_ = NULL;
+          }
+          size_ = 0;
+        }
+
+        void check_rb_insertion(tree_node_ptr node)
+        {
+          if (node == root_node_)
+            node->is_black = true;
+
+          while (node->parent->is_black == false)
+          {
+            tree_node_ptr uncle = get_uncle(node);
+            // If parent is a left child
+            if (node->parent == node->parent->parent->left)
+            {
+              // CASE #1
+              // If color of uncle is red
+              if (uncle && uncle->is_black == false)
+              {
+                node->parent->is_black = true;
+                uncle->is_black = true;
+                node->parent->parent->is_black = false;
+                check_rb_insertion(node->parent->parent);
+                return;
+              }
+              // If color of uncle is black
+              else
+              {
+                // CASE #2
+                // If subtree form a triangle
+                if (node == node->parent->right)
+                {
+                  node = node->parent;
+                  rotate_left(node);
+                }
+                // CASE #3
+                // If subtree form a line
+                node->parent->is_black = true;
+                node->parent->parent->is_black = false;
+                rotate_right(node->parent->parent);
+                root_node_->is_black = true;
+              }
+            }
+            // If parent is a right child
+            else
+            {
+              // CASE #1
+              // If color of uncle is red
+              if (uncle && uncle->is_black == false)
+              {
+                node->parent->is_black = true;
+                uncle->is_black = true;
+                node->parent->parent->is_black = false;
+                check_rb_insertion(node->parent->parent);
+                return;
+              }
+              // If color of uncle is black
+              else
+              {
+                // CASE #2
+                // If subtree form a triangle
+                if (node == node->parent->left)
+                {
+                  node = node->parent;
+                  rotate_right(node);
+                }
+                // CASE #3
+                // If subtree form a line
+                node->parent->is_black = true;
+                // TODO: We might need to call recolorization here with parent->parent
+                node->parent->parent->is_black = false;
+                rotate_left(node->parent->parent);
+                root_node_->is_black = true;
+              }
+            }
+          }
+        }
+
+        int rotate_left(tree_node_ptr node_x)
+        {
+          if (node_x->right == NULL)
+            return 0;
+          tree_node_ptr node_y = node_x->right;
+          // Move node_y to root of subtree
+          if (node_x->parent->left == node_x)
+            node_x->parent->left = node_y;
+          else if (node_x->parent->right == node_x)
+          {
+            node_x->parent->right = node_y;
+          }
+          node_y->parent = node_x->parent;
+
+          // Previous left child of node_y becomes right child of x
+          node_x->right = node_y->left;
+          if (node_x->right)
+            node_x->right->parent = node_x;
+
+          // node_x becomes left child of node_y
+          node_y->left = node_x;
+          node_x->parent = node_y;
+
+          root_node_ = end_node_->left;
+          return 1;
+        }
+
+        int rotate_right(tree_node_ptr node_x)
+        {
+          if (node_x->left == NULL)
+            return 0;
+          tree_node_ptr node_y = node_x->left;
+          // Move node_y to root of subtree
+          if (node_x->parent->left == node_x)
+            node_x->parent->left = node_y;
+          else if (node_x->parent->right == node_x)
+            node_x->parent->right = node_y;
+          node_y->parent = node_x->parent;
+
+          // Previous left child of node_y becomes right child of x
+          node_x->left = node_y->right;
+          if (node_x->left)
+            node_x->left->parent = node_x;
+
+          // node_x becomes left child of node_y
+          node_y->right = node_x;
+          node_x->parent = node_y;
+
+          root_node_ = end_node_->left;
+          return 1;
+        }
+
+        void change_color(tree_node_ptr node)
+        {
+          if (node)
+          {
+            if (node->is_black == true)
+              node->is_black = false;
+            else
+              node->is_black = true;
+          }
+        }
+
+        tree_node_ptr get_sibbling(const tree_node_ptr node) const
+        {
+          if (node == end_node_ || node == root_node_)
+            return NULL;
+          else if (node == node->parent->left)
+            return node->parent->right;
+          else
+            return node->parent->left;
+        }
+
+        tree_node_ptr get_uncle(const tree_node_ptr node) const
+        {
+          tree_node_ptr parent = node->parent;
+
+          if (parent == root_node_)
+            return NULL;
+          if (parent == parent->parent->right)
+            return parent->parent->left;
+          else
+            return parent->parent->right;
+        }
+
+
+        void destroy_node(tree_node_ptr node) {
+          if (node == node->parent->left) {
+            node->parent->left = NULL;
+          } else {
+            node->parent->right = NULL;
+          }
+          if (node == root_node_)
+            root_node_ = NULL;
+
+          pair_alloc_.destroy(&node->data);
+          node_alloc_.deallocate(node, 1);
+          size_--;
+        }
+
+        void check_double_black(tree_node_ptr node)
+        {
+          tree_node_ptr sibbling = get_sibbling(node);
+          tree_node_ptr far_sib_child = NULL;
+          tree_node_ptr near_sib_child = NULL;
+
+          // Case #1: If node is red, delete
+          if (node->is_black == false)
+            return;
+
+          // Case #2: If node is black and is root: delete
+          if (node == root_node_)
+            return;
+
+          // Setting far and near sibbling children
+          if (sibbling && node == node->parent->left)
+          {
+            far_sib_child = sibbling->right;
+            near_sib_child = sibbling->left;
+          }
+          else if (sibbling && node == node->parent->right)
+          {
+            far_sib_child = sibbling->left;
+            near_sib_child = sibbling->right;
+          }
+          // Case #3: If node is black and sibbling is black:
+          if (sibbling && sibbling->is_black)
+          {
+            // Case #3.1: If sibbling (black) has black (or NULL) children
+            if ((!sibbling->left || sibbling->left->is_black)
+                && (!sibbling->right || sibbling->right->is_black))
+            {
+              sibbling->is_black = false;
+              if (!node->parent->is_black)
+              {
+                node->parent->is_black = true;
+              }
+              else if (node->parent->is_black)
+              {
+                check_double_black(node->parent);
+              }
+            }
+            // Case #5: If sibbling (black) has near child red, and far child black
+            else if (near_sib_child 
+                && !near_sib_child->is_black
+                && (!far_sib_child || far_sib_child->is_black))
+            {
+              sibbling->is_black = false;
+              near_sib_child->is_black = true;
+              if (node == node->parent->left)
+                rotate_right(sibbling);
+              else if (node == node->parent->right)
+                rotate_left(sibbling);
+              check_double_black(node);
+            }
+            // Case #6: Sibbling is black, far child is red
+            else if ((!near_sib_child || near_sib_child->is_black)
+                && (far_sib_child && !far_sib_child->is_black))
+            {
+              bool tmp_color = node->parent->is_black;
+
+              node->parent->is_black = sibbling->is_black;
+              sibbling->is_black = tmp_color;
+              far_sib_child->is_black = true;
+              if (node == node->parent->left)
+                rotate_left(node->parent);
+              else if (node == node->parent->right)
+                rotate_right(node->parent);
+            }
+          }
+
+          // Case #4: If node is black and sibbling is red:
+          else if (sibbling && !sibbling->is_black)
+          {
+            // Case #4.1: If sibbling (red) has black (or NULL) children
+            if ((!sibbling->left || sibbling->left->is_black)
+                && (!sibbling->right || sibbling->right->is_black))
+            {
+              node->parent->is_black = false;
+              sibbling->is_black = true;
+              if (node == node->parent->left)
+                rotate_left(node->parent);
+              else if (node == node->parent->right)
+                rotate_right(node->parent);
+              check_double_black(node);
+            }
+          }
+        }
+
         tree_node_ptr get_next_node(tree_node_ptr node) {
           if (node->right != NULL) {
             node = node->right;
@@ -920,6 +843,13 @@ namespace ft {
           }
         }
 
+        // FUNCTIONS FOR PRINTING AND DEBUGGING PURPOSES
+        void print_tree() const { 
+          std::cout << "===== PRINTING TREE =====" << std::endl;
+          print_tree(root_node_);
+          std::cout << "===== END OF PRINTING TREE =====" << std::endl;
+        }
+
         void print_tree(const tree_node_ptr node) const
         {
           if (node == NULL)
@@ -936,13 +866,72 @@ namespace ft {
             << std::endl;
         }
 
-        /*
-           void inorder(tree_node_ptr node, void (*f)(tree_node_ptr)) {
-           if (node == NULL)
+        /* USES C++11
+
+           void print_levels()
+           {
+           std::cout << "=====PRINTING LEVELS=====" << std::endl;
+           print_levels(root_node_);
+           std::cout << "=====END OF PRINTING LEVELS=====" << std::endl;
+           std::cout << std::endl;
+           }
+
+           void print_levels(tree_node_ptr node)
+           {
+           std::stringstream node_value_ss;
+           std::stringstream node_parent_ss;
+
+           if (node == NULL) {
+           std::cout << "print_levels: tree is empty" << std::endl;
            return;
-           inorder(node->left, f);
-           f(node);
-           inorder(node->right, f);
+           }
+
+           std::queue<tree_node_ptr> qu;
+           qu.push(node);
+           qu.push(NULL);
+           int level = 1;
+           std::cout << std::setw(2) << level << " - ";
+           while (true)
+           {
+           tree_node_ptr curr = qu.front();
+           qu.pop();
+           if (curr != NULL) {
+           std::cout << "("
+           << "\33[32m";
+           node_value_ss << (curr->left ? std::to_string(curr->left->data.first) + "<=" : "")
+           << "\33[36m" << std::to_string(curr->data.first) << "\33[32m"
+           << (curr->right ? "=>" + std::to_string(curr->right->data.first) : "");
+           std::cout << std::setw(23) << node_value_ss.str()
+           << "\33[0m|"
+           << "Par: \33[34m";
+           node_parent_ss << ((curr == curr->parent->left) ? std::to_string(curr->data.first) + "<=" : "")
+           << ((curr != root_node_) ? std::to_string(curr->parent->data.first) : "endn")
+           << ((curr == curr->parent->right) ? "=>" + std::to_string(curr->data.first) : "");
+           std::cout << std::setw(9) << node_parent_ss.str()
+           << "\33[0m|\33[35m"
+           << (curr->is_black ? "BLA" : "RED")
+           << "\33[0m"
+           << ")"
+           << " ";
+           node_value_ss.str(std::string());
+           node_parent_ss.str(std::string());
+           if (curr->left != NULL) {
+           qu.push(curr->left);
+           }
+           if (curr->right != NULL) {
+           qu.push(curr->right);
+           }
+           }
+           else
+           {
+           std::cout << std::endl;
+           if (qu.empty())
+           break;
+           ++level;
+           std::cout << std::setw(2) << level << " - ";
+           qu.push(NULL);
+           }
+           }
            }
            */
     };
