@@ -1,6 +1,7 @@
-#include "test_vector.hpp"
+#include "tests.hpp"
 
 int main()
 {
-  test_vector();
+  //test_vector();
+  test_map();
 }
