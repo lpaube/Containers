@@ -1,7 +1,9 @@
 #include "map.hpp"
 #include <map>
 
+#ifndef NAMESPACE
 #define NAMESPACE std
+#endif
 
 // PRINTING THE MAP
   template <typename Key, typename Value>
@@ -152,7 +154,74 @@ void map_erase_key(NAMESPACE::map<Key, Value>& mreal)
 template <typename Key, typename Value>
 void map_upper_lower_bound(NAMESPACE::map<Key, Value>& mreal)
 {
+  typename NAMESPACE::map<Key, Value>::iterator it;
+
+  it = mreal.lower_bound(20);
+  std::cout << "lower_bound: " << it->first;
+  it = mreal.upper_bound(20);
+  std::cout << " | upper_bound: " << it->first << std::endl;
+  it = mreal.lower_bound(5);
+  std::cout << "lower_bound: " << it->first;
+  it = mreal.upper_bound(5);
+  std::cout << " | upper_bound: " << it->first << std::endl;
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_equal_range(NAMESPACE::map<Key, Value>& mreal)
+{
+  typedef typename NAMESPACE::map<Key, Value>::iterator it_type;
+  NAMESPACE::pair<it_type, it_type> it_pair;
+
+  it_pair = mreal.equal_range(20);
+  for (; it_pair.first != it_pair.second; ++it_pair.first)
+    std::cout << " | " << it_pair.first->first;
   
+  it_pair = mreal.equal_range(5);
+  for (; it_pair.first != it_pair.second; ++it_pair.first)
+    std::cout << " | " << it_pair.first->first;
+  std::cout << std::endl;
+
+  it_pair = mreal.equal_range(0);
+  for (; it_pair.first != it_pair.second; ++it_pair.first)
+    std::cout << " | " << it_pair.first->first;
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_reverse_it(NAMESPACE::map<Key, Value>& mreal)
+{
+  std::cout << "*rit: " << (mreal.rbegin())->first;
+  std::cout << " | *rit: " << (++(++(++(mreal.rbegin()))))->first;
+  std::cout << " | *rit: " << (--(--(--(--(--(mreal.rend()))))))->first;
+  std::cout << " | *rit: " << (--(mreal.rend()))->first;
+}
+
+template <typename Key, typename Value>
+void map_swap(NAMESPACE::map<Key, Value>& mreal, NAMESPACE::map<Key, Value>& mref)
+{
+  mref.erase(mref.begin());
+  mreal.swap(mref);
+
+  print_map(mreal);
+  std::cout << std::endl;
+
+  mref.erase(mref.begin());
+  mreal.swap(mref);
+
+  print_map(mreal);
+  std::cout << std::endl;
+}
+
+template <typename Key, typename Value>
+void map_comparison(NAMESPACE::map<Key, Value>& mreal, NAMESPACE::map<Key, Value>& mref)
+{
+  std::cout << "gt: " << (mreal > mref) << std::endl;
+  std::cout << "lt: " << (mreal < mref) << std::endl;
+  std::cout << "gteq: " << (mreal >= mref) << std::endl;
+  std::cout << "lteq: " << (mreal <= mref) << std::endl;
+  std::cout << "eq: " << (mreal == mref) << std::endl;
+  std::cout << "neq: " << (mreal != mref) << std::endl;
 }
 
 void test_map()
@@ -210,14 +279,21 @@ void test_map()
   map_erase_key(m2);
 
   std::cout << "=== Testing map upper and lower bound (map_upper_lower_bound) ===" << std::endl;
+  m2 = m3;
+  map_upper_lower_bound(m2);
 
+  std::cout << "=== Testing map equal range (map_equal_range) ===" << std::endl;
+  map_equal_range(m2);
 
-  /*
-   * TODO:
-   *  upper and lower bound
-   *  equal range
-   *  riterator
-   *  swap
-   *  comparisons (<, >, !=...)
-   */
+  std::cout << "=== Testing map reverse iterator (map_reverse_it) ===" << std::endl;
+  map_reverse_it(m2);
+
+  std::cout << "=== Testing map swap (map_swap) ===" << std::endl;
+  map_swap(m2, m1);
+
+  std::cout << "=== Testing map comparisons (map_comparison) ===" << std::endl;
+  m2 = m3;
+  map_comparison(m2, m1);
+
+  std::cout << std::endl;
 }

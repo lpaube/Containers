@@ -1,7 +1,9 @@
 #include "vector.hpp"
 #include <vector>
 
+#ifndef NAMESPACE
 #define NAMESPACE std
+#endif
 
 // PRINTING THE VECTOR
 template <typename T>
@@ -354,4 +356,6 @@ void test_vector()
 
   std::cout << "=== Testing comparisons (vec_comparison) ===" << std::endl;
   vec_comparison(v2, v1);
+
+  std::cout << std::endl;
 }
