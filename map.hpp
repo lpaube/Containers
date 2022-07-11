@@ -1,10 +1,9 @@
 #pragma once
 
 #include <iostream>
-//#include <map>
 #include "iterator.hpp"
-#include "rb_tree.hpp"
-#include "rbt_iterator.hpp"
+#include "tree/rb_tree.hpp"
+#include "tree/rbt_iterator.hpp"
 #include "utils.hpp"
 
 namespace ft

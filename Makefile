@@ -15,7 +15,8 @@ FT_OBJS_PATH = tests/obj/ft
 STD_OBJS_PATH = tests/obj/std
 OUTPUT_PATH = tests/log
 
-SRCS_FILES = main.cpp test_vector.cpp test_stack.cpp test_map.cpp
+SRCS_FILES = main.cpp test_vector.cpp test_stack.cpp test_map.cpp \
+						 benchmark_vector.cpp benchmark_map.cpp benchmark_stack.cpp
 OBJS_FILES = $(SRCS_FILES:.cpp=.o)
 
 FT_OBJS = $(addprefix $(FT_OBJS_PATH)/, $(OBJS_FILES))

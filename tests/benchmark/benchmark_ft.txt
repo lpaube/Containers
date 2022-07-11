@@ -1,0 +1,1 @@
+TIMER Time of execution | sec: 5 | ms: 5000

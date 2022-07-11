@@ -1,53 +1,49 @@
 #pragma once
 
-#include <chrono>
+#include <ctime>
 #include <string>
 #include <iostream>
+#include <fstream>
 
-class Timer
+class timer
 {
   public:
-    Timer()
-      : timer_name("Unnamed timer")
+    timer(std::fstream& file)
+      : start_timepoint_(time_t())
+        , file_(file)
     {
-      Start();
+      start();
     }
 
-    Timer(std::string timer_name)
-      : timer_name(timer_name)
+    ~timer()
     {
-      Start();
+      if (active_)
+      stop();
     }
 
-    ~Timer()
+    void stop()
     {
-      if (active)
-      Stop();
-    }
+      time_t end_timepoint_;
 
-    void Stop()
-    {
-      auto endTimepoint = std::chrono::high_resolution_clock::now();
+      time(&end_timepoint_);
 
-      auto start = std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimepoint).time_since_epoch().count();
-      auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endTimepoint).time_since_epoch().count();
+      double difference = difftime(end_timepoint_, start_timepoint_);
 
-      auto duration = end - start;
-      double ms = duration * 0.001;
-      active = false;
-      std::cout << "TIMER " << timer_name << " | usec: " << duration
+      double ms = difference * 1000;
+      active_ = false;
+      file_ << "TIMER " << "Time of execution" << " | sec: " << difference
         << " | ms: " << ms
         << std::endl;
     }
     
-    void Start()
+    void start()
     {
-      m_StartTimepoint = std::chrono::high_resolution_clock::now();
-      active = true;
+      time(&start_timepoint_);
+      active_ = true;
     }
 
   private:
-    std::chrono::time_point< std::chrono::high_resolution_clock> m_StartTimepoint;
-    std::string timer_name;
-    bool active;
+    time_t start_timepoint_;
+    bool active_;
+    std::fstream& file_;
 };
