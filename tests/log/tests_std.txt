@@ -1,0 +1,242 @@
+=== Testing basic insert (vec_insert_basic_int) ===
+Insert 1: *It = 0 | *It = 1 | *It = 2 | *It = 3 | *It = 4 | *It = 5 | *It = 6 | *It = 7 | *It = 8 | *It = 9 | 
+Insert 2: *It = 10 | *It = 20 | *It = 30 | *It = 40 | *It = 50 | *It = 60 | *It = 70 | *It = 80 | *It = 90 | 
+Insert 3: *It = 100 | *It = 200 | *It = 300 | *It = 400 | *It = 500 | *It = 600 | *It = 700 | *It = 800 | *It = 900 | 
+
+=== PRINTING VECTOR ===
+Size: 28
+Elem 0: 9 | Elem 1: 8 | Elem 2: 7 | Elem 3: 6 | Elem 4: 5 | Elem 5: 900 | Elem 6: 800 | Elem 7: 700 | Elem 8: 600 | Elem 9: 500 | Elem 10: 400 | Elem 11: 300 | Elem 12: 200 | Elem 13: 100 | Elem 14: 4 | Elem 15: 3 | Elem 16: 2 | Elem 17: 1 | Elem 18: 0 | Elem 19: 10 | Elem 20: 20 | Elem 21: 30 | Elem 22: 40 | Elem 23: 50 | Elem 24: 60 | Elem 25: 70 | Elem 26: 80 | Elem 27: 90 | 
+
+=== Testing insert size (vec_insert_size) ===
+=== PRINTING VECTOR ===
+Size: 18
+Elem 0: 5 | Elem 1: 5 | Elem 2: 5 | Elem 3: 5 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 2 | Elem 14: 2 | Elem 15: 2 | Elem 16: 2 | Elem 17: 2 | 
+
+=== Testing insert range (vec_insert_range) ===
+=== PRINTING VECTOR ===
+Size: 30
+Elem 0: 9 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 7 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 500 | 
+
+=== Testing copy constructor ===
+=== PRINTING VECTOR ===
+Size: 30
+Elem 0: 9 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 7 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 500 | 
+
+=== Testing clear ===
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== Testing assign size (vec_assign_size_int) ===
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== PRINTING VECTOR ===
+Size: 3
+Elem 0: 1337 | Elem 1: 1337 | Elem 2: 1337 | 
+
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== PRINTING VECTOR ===
+Size: 1000
+Elem 0: 1337 | Elem 1: 1337 | Elem 2: 1337 | Elem 3: 1337 | Elem 4: 1337 | Elem 5: 1337 | Elem 6: 1337 | Elem 7: 1337 | Elem 8: 1337 | Elem 9: 1337 | Elem 10: 1337 | Elem 11: 1337 | Elem 12: 1337 | Elem 13: 1337 | Elem 14: 1337 | Elem 15: 1337 | Elem 16: 1337 | Elem 17: 1337 | Elem 18: 1337 | Elem 19: 1337 | Elem 20: 1337 | Elem 21: 1337 | Elem 22: 1337 | Elem 23: 1337 | Elem 24: 1337 | Elem 25: 1337 | Elem 26: 1337 | Elem 27: 1337 | Elem 28: 1337 | Elem 29: 1337 | Elem 30: 1337 | Elem 31: 1337 | Elem 32: 1337 | Elem 33: 1337 | Elem 34: 1337 | Elem 35: 1337 | Elem 36: 1337 | Elem 37: 1337 | Elem 38: 1337 | Elem 39: 1337 | Elem 40: 1337 | Elem 41: 1337 | Elem 42: 1337 | Elem 43: 1337 | Elem 44: 1337 | Elem 45: 1337 | Elem 46: 1337 | Elem 47: 1337 | Elem 48: 1337 | Elem 49: 1337 | Elem 50: 1337 | Elem 51: 1337 | Elem 52: 1337 | Elem 53: 1337 | Elem 54: 1337 | Elem 55: 1337 | Elem 56: 1337 | Elem 57: 1337 | Elem 58: 1337 | Elem 59: 1337 | Elem 60: 1337 | Elem 61: 1337 | Elem 62: 1337 | Elem 63: 1337 | Elem 64: 1337 | Elem 65: 1337 | Elem 66: 1337 | Elem 67: 1337 | Elem 68: 1337 | Elem 69: 1337 | Elem 70: 1337 | Elem 71: 1337 | Elem 72: 1337 | Elem 73: 1337 | Elem 74: 1337 | Elem 75: 1337 | Elem 76: 1337 | Elem 77: 1337 | Elem 78: 1337 | Elem 79: 1337 | Elem 80: 1337 | Elem 81: 1337 | Elem 82: 1337 | Elem 83: 1337 | Elem 84: 1337 | Elem 85: 1337 | Elem 86: 1337 | Elem 87: 1337 | Elem 88: 1337 | Elem 89: 1337 | Elem 90: 1337 | Elem 91: 1337 | Elem 92: 1337 | Elem 93: 1337 | Elem 94: 1337 | Elem 95: 1337 | Elem 96: 1337 | Elem 97: 1337 | Elem 98: 1337 | Elem 99: 1337 | Elem 100: 1337 | Elem 101: 1337 | Elem 102: 1337 | Elem 103: 1337 | Elem 104: 1337 | Elem 105: 1337 | Elem 106: 1337 | Elem 107: 1337 | Elem 108: 1337 | Elem 109: 1337 | Elem 110: 1337 | Elem 111: 1337 | Elem 112: 1337 | Elem 113: 1337 | Elem 114: 1337 | Elem 115: 1337 | Elem 116: 1337 | Elem 117: 1337 | Elem 118: 1337 | Elem 119: 1337 | Elem 120: 1337 | Elem 121: 1337 | Elem 122: 1337 | Elem 123: 1337 | Elem 124: 1337 | Elem 125: 1337 | Elem 126: 1337 | Elem 127: 1337 | Elem 128: 1337 | Elem 129: 1337 | Elem 130: 1337 | Elem 131: 1337 | Elem 132: 1337 | Elem 133: 1337 | Elem 134: 1337 | Elem 135: 1337 | Elem 136: 1337 | Elem 137: 1337 | Elem 138: 1337 | Elem 139: 1337 | Elem 140: 1337 | Elem 141: 1337 | Elem 142: 1337 | Elem 143: 1337 | Elem 144: 1337 | Elem 145: 1337 | Elem 146: 1337 | Elem 147: 1337 | Elem 148: 1337 | Elem 149: 1337 | Elem 150: 1337 | Elem 151: 1337 | Elem 152: 1337 | Elem 153: 1337 | Elem 154: 1337 | Elem 155: 1337 | Elem 156: 1337 | Elem 157: 1337 | Elem 158: 1337 | Elem 159: 1337 | Elem 160: 1337 | Elem 161: 1337 | Elem 162: 1337 | Elem 163: 1337 | Elem 164: 1337 | Elem 165: 1337 | Elem 166: 1337 | Elem 167: 1337 | Elem 168: 1337 | Elem 169: 1337 | Elem 170: 1337 | Elem 171: 1337 | Elem 172: 1337 | Elem 173: 1337 | Elem 174: 1337 | Elem 175: 1337 | Elem 176: 1337 | Elem 177: 1337 | Elem 178: 1337 | Elem 179: 1337 | Elem 180: 1337 | Elem 181: 1337 | Elem 182: 1337 | Elem 183: 1337 | Elem 184: 1337 | Elem 185: 1337 | Elem 186: 1337 | Elem 187: 1337 | Elem 188: 1337 | Elem 189: 1337 | Elem 190: 1337 | Elem 191: 1337 | Elem 192: 1337 | Elem 193: 1337 | Elem 194: 1337 | Elem 195: 1337 | Elem 196: 1337 | Elem 197: 1337 | Elem 198: 1337 | Elem 199: 1337 | Elem 200: 1337 | Elem 201: 1337 | Elem 202: 1337 | Elem 203: 1337 | Elem 204: 1337 | Elem 205: 1337 | Elem 206: 1337 | Elem 207: 1337 | Elem 208: 1337 | Elem 209: 1337 | Elem 210: 1337 | Elem 211: 1337 | Elem 212: 1337 | Elem 213: 1337 | Elem 214: 1337 | Elem 215: 1337 | Elem 216: 1337 | Elem 217: 1337 | Elem 218: 1337 | Elem 219: 1337 | Elem 220: 1337 | Elem 221: 1337 | Elem 222: 1337 | Elem 223: 1337 | Elem 224: 1337 | Elem 225: 1337 | Elem 226: 1337 | Elem 227: 1337 | Elem 228: 1337 | Elem 229: 1337 | Elem 230: 1337 | Elem 231: 1337 | Elem 232: 1337 | Elem 233: 1337 | Elem 234: 1337 | Elem 235: 1337 | Elem 236: 1337 | Elem 237: 1337 | Elem 238: 1337 | Elem 239: 1337 | Elem 240: 1337 | Elem 241: 1337 | Elem 242: 1337 | Elem 243: 1337 | Elem 244: 1337 | Elem 245: 1337 | Elem 246: 1337 | Elem 247: 1337 | Elem 248: 1337 | Elem 249: 1337 | Elem 250: 1337 | Elem 251: 1337 | Elem 252: 1337 | Elem 253: 1337 | Elem 254: 1337 | Elem 255: 1337 | Elem 256: 1337 | Elem 257: 1337 | Elem 258: 1337 | Elem 259: 1337 | Elem 260: 1337 | Elem 261: 1337 | Elem 262: 1337 | Elem 263: 1337 | Elem 264: 1337 | Elem 265: 1337 | Elem 266: 1337 | Elem 267: 1337 | Elem 268: 1337 | Elem 269: 1337 | Elem 270: 1337 | Elem 271: 1337 | Elem 272: 1337 | Elem 273: 1337 | Elem 274: 1337 | Elem 275: 1337 | Elem 276: 1337 | Elem 277: 1337 | Elem 278: 1337 | Elem 279: 1337 | Elem 280: 1337 | Elem 281: 1337 | Elem 282: 1337 | Elem 283: 1337 | Elem 284: 1337 | Elem 285: 1337 | Elem 286: 1337 | Elem 287: 1337 | Elem 288: 1337 | Elem 289: 1337 | Elem 290: 1337 | Elem 291: 1337 | Elem 292: 1337 | Elem 293: 1337 | Elem 294: 1337 | Elem 295: 1337 | Elem 296: 1337 | Elem 297: 1337 | Elem 298: 1337 | Elem 299: 1337 | Elem 300: 1337 | Elem 301: 1337 | Elem 302: 1337 | Elem 303: 1337 | Elem 304: 1337 | Elem 305: 1337 | Elem 306: 1337 | Elem 307: 1337 | Elem 308: 1337 | Elem 309: 1337 | Elem 310: 1337 | Elem 311: 1337 | Elem 312: 1337 | Elem 313: 1337 | Elem 314: 1337 | Elem 315: 1337 | Elem 316: 1337 | Elem 317: 1337 | Elem 318: 1337 | Elem 319: 1337 | Elem 320: 1337 | Elem 321: 1337 | Elem 322: 1337 | Elem 323: 1337 | Elem 324: 1337 | Elem 325: 1337 | Elem 326: 1337 | Elem 327: 1337 | Elem 328: 1337 | Elem 329: 1337 | Elem 330: 1337 | Elem 331: 1337 | Elem 332: 1337 | Elem 333: 1337 | Elem 334: 1337 | Elem 335: 1337 | Elem 336: 1337 | Elem 337: 1337 | Elem 338: 1337 | Elem 339: 1337 | Elem 340: 1337 | Elem 341: 1337 | Elem 342: 1337 | Elem 343: 1337 | Elem 344: 1337 | Elem 345: 1337 | Elem 346: 1337 | Elem 347: 1337 | Elem 348: 1337 | Elem 349: 1337 | Elem 350: 1337 | Elem 351: 1337 | Elem 352: 1337 | Elem 353: 1337 | Elem 354: 1337 | Elem 355: 1337 | Elem 356: 1337 | Elem 357: 1337 | Elem 358: 1337 | Elem 359: 1337 | Elem 360: 1337 | Elem 361: 1337 | Elem 362: 1337 | Elem 363: 1337 | Elem 364: 1337 | Elem 365: 1337 | Elem 366: 1337 | Elem 367: 1337 | Elem 368: 1337 | Elem 369: 1337 | Elem 370: 1337 | Elem 371: 1337 | Elem 372: 1337 | Elem 373: 1337 | Elem 374: 1337 | Elem 375: 1337 | Elem 376: 1337 | Elem 377: 1337 | Elem 378: 1337 | Elem 379: 1337 | Elem 380: 1337 | Elem 381: 1337 | Elem 382: 1337 | Elem 383: 1337 | Elem 384: 1337 | Elem 385: 1337 | Elem 386: 1337 | Elem 387: 1337 | Elem 388: 1337 | Elem 389: 1337 | Elem 390: 1337 | Elem 391: 1337 | Elem 392: 1337 | Elem 393: 1337 | Elem 394: 1337 | Elem 395: 1337 | Elem 396: 1337 | Elem 397: 1337 | Elem 398: 1337 | Elem 399: 1337 | Elem 400: 1337 | Elem 401: 1337 | Elem 402: 1337 | Elem 403: 1337 | Elem 404: 1337 | Elem 405: 1337 | Elem 406: 1337 | Elem 407: 1337 | Elem 408: 1337 | Elem 409: 1337 | Elem 410: 1337 | Elem 411: 1337 | Elem 412: 1337 | Elem 413: 1337 | Elem 414: 1337 | Elem 415: 1337 | Elem 416: 1337 | Elem 417: 1337 | Elem 418: 1337 | Elem 419: 1337 | Elem 420: 1337 | Elem 421: 1337 | Elem 422: 1337 | Elem 423: 1337 | Elem 424: 1337 | Elem 425: 1337 | Elem 426: 1337 | Elem 427: 1337 | Elem 428: 1337 | Elem 429: 1337 | Elem 430: 1337 | Elem 431: 1337 | Elem 432: 1337 | Elem 433: 1337 | Elem 434: 1337 | Elem 435: 1337 | Elem 436: 1337 | Elem 437: 1337 | Elem 438: 1337 | Elem 439: 1337 | Elem 440: 1337 | Elem 441: 1337 | Elem 442: 1337 | Elem 443: 1337 | Elem 444: 1337 | Elem 445: 1337 | Elem 446: 1337 | Elem 447: 1337 | Elem 448: 1337 | Elem 449: 1337 | Elem 450: 1337 | Elem 451: 1337 | Elem 452: 1337 | Elem 453: 1337 | Elem 454: 1337 | Elem 455: 1337 | Elem 456: 1337 | Elem 457: 1337 | Elem 458: 1337 | Elem 459: 1337 | Elem 460: 1337 | Elem 461: 1337 | Elem 462: 1337 | Elem 463: 1337 | Elem 464: 1337 | Elem 465: 1337 | Elem 466: 1337 | Elem 467: 1337 | Elem 468: 1337 | Elem 469: 1337 | Elem 470: 1337 | Elem 471: 1337 | Elem 472: 1337 | Elem 473: 1337 | Elem 474: 1337 | Elem 475: 1337 | Elem 476: 1337 | Elem 477: 1337 | Elem 478: 1337 | Elem 479: 1337 | Elem 480: 1337 | Elem 481: 1337 | Elem 482: 1337 | Elem 483: 1337 | Elem 484: 1337 | Elem 485: 1337 | Elem 486: 1337 | Elem 487: 1337 | Elem 488: 1337 | Elem 489: 1337 | Elem 490: 1337 | Elem 491: 1337 | Elem 492: 1337 | Elem 493: 1337 | Elem 494: 1337 | Elem 495: 1337 | Elem 496: 1337 | Elem 497: 1337 | Elem 498: 1337 | Elem 499: 1337 | Elem 500: 1337 | Elem 501: 1337 | Elem 502: 1337 | Elem 503: 1337 | Elem 504: 1337 | Elem 505: 1337 | Elem 506: 1337 | Elem 507: 1337 | Elem 508: 1337 | Elem 509: 1337 | Elem 510: 1337 | Elem 511: 1337 | Elem 512: 1337 | Elem 513: 1337 | Elem 514: 1337 | Elem 515: 1337 | Elem 516: 1337 | Elem 517: 1337 | Elem 518: 1337 | Elem 519: 1337 | Elem 520: 1337 | Elem 521: 1337 | Elem 522: 1337 | Elem 523: 1337 | Elem 524: 1337 | Elem 525: 1337 | Elem 526: 1337 | Elem 527: 1337 | Elem 528: 1337 | Elem 529: 1337 | Elem 530: 1337 | Elem 531: 1337 | Elem 532: 1337 | Elem 533: 1337 | Elem 534: 1337 | Elem 535: 1337 | Elem 536: 1337 | Elem 537: 1337 | Elem 538: 1337 | Elem 539: 1337 | Elem 540: 1337 | Elem 541: 1337 | Elem 542: 1337 | Elem 543: 1337 | Elem 544: 1337 | Elem 545: 1337 | Elem 546: 1337 | Elem 547: 1337 | Elem 548: 1337 | Elem 549: 1337 | Elem 550: 1337 | Elem 551: 1337 | Elem 552: 1337 | Elem 553: 1337 | Elem 554: 1337 | Elem 555: 1337 | Elem 556: 1337 | Elem 557: 1337 | Elem 558: 1337 | Elem 559: 1337 | Elem 560: 1337 | Elem 561: 1337 | Elem 562: 1337 | Elem 563: 1337 | Elem 564: 1337 | Elem 565: 1337 | Elem 566: 1337 | Elem 567: 1337 | Elem 568: 1337 | Elem 569: 1337 | Elem 570: 1337 | Elem 571: 1337 | Elem 572: 1337 | Elem 573: 1337 | Elem 574: 1337 | Elem 575: 1337 | Elem 576: 1337 | Elem 577: 1337 | Elem 578: 1337 | Elem 579: 1337 | Elem 580: 1337 | Elem 581: 1337 | Elem 582: 1337 | Elem 583: 1337 | Elem 584: 1337 | Elem 585: 1337 | Elem 586: 1337 | Elem 587: 1337 | Elem 588: 1337 | Elem 589: 1337 | Elem 590: 1337 | Elem 591: 1337 | Elem 592: 1337 | Elem 593: 1337 | Elem 594: 1337 | Elem 595: 1337 | Elem 596: 1337 | Elem 597: 1337 | Elem 598: 1337 | Elem 599: 1337 | Elem 600: 1337 | Elem 601: 1337 | Elem 602: 1337 | Elem 603: 1337 | Elem 604: 1337 | Elem 605: 1337 | Elem 606: 1337 | Elem 607: 1337 | Elem 608: 1337 | Elem 609: 1337 | Elem 610: 1337 | Elem 611: 1337 | Elem 612: 1337 | Elem 613: 1337 | Elem 614: 1337 | Elem 615: 1337 | Elem 616: 1337 | Elem 617: 1337 | Elem 618: 1337 | Elem 619: 1337 | Elem 620: 1337 | Elem 621: 1337 | Elem 622: 1337 | Elem 623: 1337 | Elem 624: 1337 | Elem 625: 1337 | Elem 626: 1337 | Elem 627: 1337 | Elem 628: 1337 | Elem 629: 1337 | Elem 630: 1337 | Elem 631: 1337 | Elem 632: 1337 | Elem 633: 1337 | Elem 634: 1337 | Elem 635: 1337 | Elem 636: 1337 | Elem 637: 1337 | Elem 638: 1337 | Elem 639: 1337 | Elem 640: 1337 | Elem 641: 1337 | Elem 642: 1337 | Elem 643: 1337 | Elem 644: 1337 | Elem 645: 1337 | Elem 646: 1337 | Elem 647: 1337 | Elem 648: 1337 | Elem 649: 1337 | Elem 650: 1337 | Elem 651: 1337 | Elem 652: 1337 | Elem 653: 1337 | Elem 654: 1337 | Elem 655: 1337 | Elem 656: 1337 | Elem 657: 1337 | Elem 658: 1337 | Elem 659: 1337 | Elem 660: 1337 | Elem 661: 1337 | Elem 662: 1337 | Elem 663: 1337 | Elem 664: 1337 | Elem 665: 1337 | Elem 666: 1337 | Elem 667: 1337 | Elem 668: 1337 | Elem 669: 1337 | Elem 670: 1337 | Elem 671: 1337 | Elem 672: 1337 | Elem 673: 1337 | Elem 674: 1337 | Elem 675: 1337 | Elem 676: 1337 | Elem 677: 1337 | Elem 678: 1337 | Elem 679: 1337 | Elem 680: 1337 | Elem 681: 1337 | Elem 682: 1337 | Elem 683: 1337 | Elem 684: 1337 | Elem 685: 1337 | Elem 686: 1337 | Elem 687: 1337 | Elem 688: 1337 | Elem 689: 1337 | Elem 690: 1337 | Elem 691: 1337 | Elem 692: 1337 | Elem 693: 1337 | Elem 694: 1337 | Elem 695: 1337 | Elem 696: 1337 | Elem 697: 1337 | Elem 698: 1337 | Elem 699: 1337 | Elem 700: 1337 | Elem 701: 1337 | Elem 702: 1337 | Elem 703: 1337 | Elem 704: 1337 | Elem 705: 1337 | Elem 706: 1337 | Elem 707: 1337 | Elem 708: 1337 | Elem 709: 1337 | Elem 710: 1337 | Elem 711: 1337 | Elem 712: 1337 | Elem 713: 1337 | Elem 714: 1337 | Elem 715: 1337 | Elem 716: 1337 | Elem 717: 1337 | Elem 718: 1337 | Elem 719: 1337 | Elem 720: 1337 | Elem 721: 1337 | Elem 722: 1337 | Elem 723: 1337 | Elem 724: 1337 | Elem 725: 1337 | Elem 726: 1337 | Elem 727: 1337 | Elem 728: 1337 | Elem 729: 1337 | Elem 730: 1337 | Elem 731: 1337 | Elem 732: 1337 | Elem 733: 1337 | Elem 734: 1337 | Elem 735: 1337 | Elem 736: 1337 | Elem 737: 1337 | Elem 738: 1337 | Elem 739: 1337 | Elem 740: 1337 | Elem 741: 1337 | Elem 742: 1337 | Elem 743: 1337 | Elem 744: 1337 | Elem 745: 1337 | Elem 746: 1337 | Elem 747: 1337 | Elem 748: 1337 | Elem 749: 1337 | Elem 750: 1337 | Elem 751: 1337 | Elem 752: 1337 | Elem 753: 1337 | Elem 754: 1337 | Elem 755: 1337 | Elem 756: 1337 | Elem 757: 1337 | Elem 758: 1337 | Elem 759: 1337 | Elem 760: 1337 | Elem 761: 1337 | Elem 762: 1337 | Elem 763: 1337 | Elem 764: 1337 | Elem 765: 1337 | Elem 766: 1337 | Elem 767: 1337 | Elem 768: 1337 | Elem 769: 1337 | Elem 770: 1337 | Elem 771: 1337 | Elem 772: 1337 | Elem 773: 1337 | Elem 774: 1337 | Elem 775: 1337 | Elem 776: 1337 | Elem 777: 1337 | Elem 778: 1337 | Elem 779: 1337 | Elem 780: 1337 | Elem 781: 1337 | Elem 782: 1337 | Elem 783: 1337 | Elem 784: 1337 | Elem 785: 1337 | Elem 786: 1337 | Elem 787: 1337 | Elem 788: 1337 | Elem 789: 1337 | Elem 790: 1337 | Elem 791: 1337 | Elem 792: 1337 | Elem 793: 1337 | Elem 794: 1337 | Elem 795: 1337 | Elem 796: 1337 | Elem 797: 1337 | Elem 798: 1337 | Elem 799: 1337 | Elem 800: 1337 | Elem 801: 1337 | Elem 802: 1337 | Elem 803: 1337 | Elem 804: 1337 | Elem 805: 1337 | Elem 806: 1337 | Elem 807: 1337 | Elem 808: 1337 | Elem 809: 1337 | Elem 810: 1337 | Elem 811: 1337 | Elem 812: 1337 | Elem 813: 1337 | Elem 814: 1337 | Elem 815: 1337 | Elem 816: 1337 | Elem 817: 1337 | Elem 818: 1337 | Elem 819: 1337 | Elem 820: 1337 | Elem 821: 1337 | Elem 822: 1337 | Elem 823: 1337 | Elem 824: 1337 | Elem 825: 1337 | Elem 826: 1337 | Elem 827: 1337 | Elem 828: 1337 | Elem 829: 1337 | Elem 830: 1337 | Elem 831: 1337 | Elem 832: 1337 | Elem 833: 1337 | Elem 834: 1337 | Elem 835: 1337 | Elem 836: 1337 | Elem 837: 1337 | Elem 838: 1337 | Elem 839: 1337 | Elem 840: 1337 | Elem 841: 1337 | Elem 842: 1337 | Elem 843: 1337 | Elem 844: 1337 | Elem 845: 1337 | Elem 846: 1337 | Elem 847: 1337 | Elem 848: 1337 | Elem 849: 1337 | Elem 850: 1337 | Elem 851: 1337 | Elem 852: 1337 | Elem 853: 1337 | Elem 854: 1337 | Elem 855: 1337 | Elem 856: 1337 | Elem 857: 1337 | Elem 858: 1337 | Elem 859: 1337 | Elem 860: 1337 | Elem 861: 1337 | Elem 862: 1337 | Elem 863: 1337 | Elem 864: 1337 | Elem 865: 1337 | Elem 866: 1337 | Elem 867: 1337 | Elem 868: 1337 | Elem 869: 1337 | Elem 870: 1337 | Elem 871: 1337 | Elem 872: 1337 | Elem 873: 1337 | Elem 874: 1337 | Elem 875: 1337 | Elem 876: 1337 | Elem 877: 1337 | Elem 878: 1337 | Elem 879: 1337 | Elem 880: 1337 | Elem 881: 1337 | Elem 882: 1337 | Elem 883: 1337 | Elem 884: 1337 | Elem 885: 1337 | Elem 886: 1337 | Elem 887: 1337 | Elem 888: 1337 | Elem 889: 1337 | Elem 890: 1337 | Elem 891: 1337 | Elem 892: 1337 | Elem 893: 1337 | Elem 894: 1337 | Elem 895: 1337 | Elem 896: 1337 | Elem 897: 1337 | Elem 898: 1337 | Elem 899: 1337 | Elem 900: 1337 | Elem 901: 1337 | Elem 902: 1337 | Elem 903: 1337 | Elem 904: 1337 | Elem 905: 1337 | Elem 906: 1337 | Elem 907: 1337 | Elem 908: 1337 | Elem 909: 1337 | Elem 910: 1337 | Elem 911: 1337 | Elem 912: 1337 | Elem 913: 1337 | Elem 914: 1337 | Elem 915: 1337 | Elem 916: 1337 | Elem 917: 1337 | Elem 918: 1337 | Elem 919: 1337 | Elem 920: 1337 | Elem 921: 1337 | Elem 922: 1337 | Elem 923: 1337 | Elem 924: 1337 | Elem 925: 1337 | Elem 926: 1337 | Elem 927: 1337 | Elem 928: 1337 | Elem 929: 1337 | Elem 930: 1337 | Elem 931: 1337 | Elem 932: 1337 | Elem 933: 1337 | Elem 934: 1337 | Elem 935: 1337 | Elem 936: 1337 | Elem 937: 1337 | Elem 938: 1337 | Elem 939: 1337 | Elem 940: 1337 | Elem 941: 1337 | Elem 942: 1337 | Elem 943: 1337 | Elem 944: 1337 | Elem 945: 1337 | Elem 946: 1337 | Elem 947: 1337 | Elem 948: 1337 | Elem 949: 1337 | Elem 950: 1337 | Elem 951: 1337 | Elem 952: 1337 | Elem 953: 1337 | Elem 954: 1337 | Elem 955: 1337 | Elem 956: 1337 | Elem 957: 1337 | Elem 958: 1337 | Elem 959: 1337 | Elem 960: 1337 | Elem 961: 1337 | Elem 962: 1337 | Elem 963: 1337 | Elem 964: 1337 | Elem 965: 1337 | Elem 966: 1337 | Elem 967: 1337 | Elem 968: 1337 | Elem 969: 1337 | Elem 970: 1337 | Elem 971: 1337 | Elem 972: 1337 | Elem 973: 1337 | Elem 974: 1337 | Elem 975: 1337 | Elem 976: 1337 | Elem 977: 1337 | Elem 978: 1337 | Elem 979: 1337 | Elem 980: 1337 | Elem 981: 1337 | Elem 982: 1337 | Elem 983: 1337 | Elem 984: 1337 | Elem 985: 1337 | Elem 986: 1337 | Elem 987: 1337 | Elem 988: 1337 | Elem 989: 1337 | Elem 990: 1337 | Elem 991: 1337 | Elem 992: 1337 | Elem 993: 1337 | Elem 994: 1337 | Elem 995: 1337 | Elem 996: 1337 | Elem 997: 1337 | Elem 998: 1337 | Elem 999: 1337 | 
+
+=== PRINTING VECTOR ===
+Size: 100
+Elem 0: 31337 | Elem 1: 31337 | Elem 2: 31337 | Elem 3: 31337 | Elem 4: 31337 | Elem 5: 31337 | Elem 6: 31337 | Elem 7: 31337 | Elem 8: 31337 | Elem 9: 31337 | Elem 10: 31337 | Elem 11: 31337 | Elem 12: 31337 | Elem 13: 31337 | Elem 14: 31337 | Elem 15: 31337 | Elem 16: 31337 | Elem 17: 31337 | Elem 18: 31337 | Elem 19: 31337 | Elem 20: 31337 | Elem 21: 31337 | Elem 22: 31337 | Elem 23: 31337 | Elem 24: 31337 | Elem 25: 31337 | Elem 26: 31337 | Elem 27: 31337 | Elem 28: 31337 | Elem 29: 31337 | Elem 30: 31337 | Elem 31: 31337 | Elem 32: 31337 | Elem 33: 31337 | Elem 34: 31337 | Elem 35: 31337 | Elem 36: 31337 | Elem 37: 31337 | Elem 38: 31337 | Elem 39: 31337 | Elem 40: 31337 | Elem 41: 31337 | Elem 42: 31337 | Elem 43: 31337 | Elem 44: 31337 | Elem 45: 31337 | Elem 46: 31337 | Elem 47: 31337 | Elem 48: 31337 | Elem 49: 31337 | Elem 50: 31337 | Elem 51: 31337 | Elem 52: 31337 | Elem 53: 31337 | Elem 54: 31337 | Elem 55: 31337 | Elem 56: 31337 | Elem 57: 31337 | Elem 58: 31337 | Elem 59: 31337 | Elem 60: 31337 | Elem 61: 31337 | Elem 62: 31337 | Elem 63: 31337 | Elem 64: 31337 | Elem 65: 31337 | Elem 66: 31337 | Elem 67: 31337 | Elem 68: 31337 | Elem 69: 31337 | Elem 70: 31337 | Elem 71: 31337 | Elem 72: 31337 | Elem 73: 31337 | Elem 74: 31337 | Elem 75: 31337 | Elem 76: 31337 | Elem 77: 31337 | Elem 78: 31337 | Elem 79: 31337 | Elem 80: 31337 | Elem 81: 31337 | Elem 82: 31337 | Elem 83: 31337 | Elem 84: 31337 | Elem 85: 31337 | Elem 86: 31337 | Elem 87: 31337 | Elem 88: 31337 | Elem 89: 31337 | Elem 90: 31337 | Elem 91: 31337 | Elem 92: 31337 | Elem 93: 31337 | Elem 94: 31337 | Elem 95: 31337 | Elem 96: 31337 | Elem 97: 31337 | Elem 98: 31337 | Elem 99: 31337 | 
+
+=== Testing assign range (vec_assign_range_int) ===
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== PRINTING VECTOR ===
+Size: 2
+Elem 0: 9 | Elem 1: 8 | 
+
+=== PRINTING VECTOR ===
+Size: 10
+Elem 0: 900 | Elem 1: 800 | Elem 2: 700 | Elem 3: 600 | Elem 4: 500 | Elem 5: 400 | Elem 6: 300 | Elem 7: 200 | Elem 8: 100 | Elem 9: 4 | 
+
+=== Testing erase position (vec_erase_pos) ===
+Erase 1 it*: 8 | Erase 2 it*: 5 | Erase 3 it*: 500 | Erase 4 it*: 600=== PRINTING VECTOR ===
+Size: 26
+Elem 0: 8 | Elem 1: 9 | Elem 2: 5 | Elem 3: 5 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 2 | Elem 16: 2 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 7 | Elem 21: 6 | Elem 22: 5 | Elem 23: 900 | Elem 24: 800 | Elem 25: 600 | 
+
+=== Testing erase range (vec_erase_range) ===
+Erase 1 it*: 8 | Erase 2 it*: 5 | Erase 3 it*: 800 | Erase 4 it*: 6=== PRINTING VECTOR ===
+Size: 22
+Elem 0: 8 | Elem 1: 9 | Elem 2: 5 | Elem 3: 5 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 2 | Elem 15: 2 | Elem 16: 2 | Elem 17: 2 | Elem 18: 2 | Elem 19: 7 | Elem 20: 6 | Elem 21: 900 | 
+
+=== Testing push_back (vec_push_back) ===
+=== PRINTING VECTOR ===
+Size: 28
+Elem 0: 8 | Elem 1: 9 | Elem 2: 5 | Elem 3: 5 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 2 | Elem 15: 2 | Elem 16: 2 | Elem 17: 2 | Elem 18: 2 | Elem 19: 7 | Elem 20: 6 | Elem 21: 900 | Elem 22: 2 | Elem 23: 2 | Elem 24: 2 | Elem 25: 2 | Elem 26: 2 | Elem 27: 2 | 
+
+=== PRINTING VECTOR ===
+Size: 1
+Elem 0: 2 | 
+
+=== Testing pop_back (vec_pop_back) ===
+=== PRINTING VECTOR ===
+Size: 7
+Elem 0: 900 | Elem 1: 800 | Elem 2: 700 | Elem 3: 600 | Elem 4: 500 | Elem 5: 400 | Elem 6: 300 | 
+
+=== Testing at (vec_at) ===
+at res: 5
+=== PRINTING VECTOR ===
+Size: 30
+Elem 0: 33 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 5 | Elem 5: 10 | Elem 6: 33 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 33 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 500 | 
+
+=== Testing front and back (vec_front_back) ===
+Back: 500
+Back: 999
+Front: 33
+Front: 999
+=== PRINTING VECTOR ===
+Size: 30
+Elem 0: 999 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 5 | Elem 5: 10 | Elem 6: 33 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 33 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 999 | 
+
+=== Testing empty (vec_empty) ===
+Empty: 0
+Empty: 1
+=== PRINTING VECTOR ===
+Size: 0
+
+
+=== Testing max_size ===
+Max size: 4611686018427387903
+
+=== Testing reserve (vec_reserve) ===
+Capacity: 0
+Capacity: 1
+Capacity: 100
+Capacity: 10000
+Size: 0
+=== Testing resize (vec_resize) ===
+Size: 30
+=== PRINTING VECTOR ===
+Size: 150
+Elem 0: 9 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 5 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 7 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 500 | Elem 30: 0 | Elem 31: 0 | Elem 32: 0 | Elem 33: 0 | Elem 34: 0 | Elem 35: 0 | Elem 36: 0 | Elem 37: 0 | Elem 38: 0 | Elem 39: 0 | Elem 40: 0 | Elem 41: 0 | Elem 42: 0 | Elem 43: 0 | Elem 44: 0 | Elem 45: 0 | Elem 46: 0 | Elem 47: 0 | Elem 48: 0 | Elem 49: 0 | Elem 50: 0 | Elem 51: 0 | Elem 52: 0 | Elem 53: 0 | Elem 54: 0 | Elem 55: 0 | Elem 56: 0 | Elem 57: 0 | Elem 58: 0 | Elem 59: 0 | Elem 60: 0 | Elem 61: 0 | Elem 62: 0 | Elem 63: 0 | Elem 64: 0 | Elem 65: 0 | Elem 66: 0 | Elem 67: 0 | Elem 68: 0 | Elem 69: 0 | Elem 70: 0 | Elem 71: 0 | Elem 72: 0 | Elem 73: 0 | Elem 74: 0 | Elem 75: 0 | Elem 76: 0 | Elem 77: 0 | Elem 78: 0 | Elem 79: 0 | Elem 80: 0 | Elem 81: 0 | Elem 82: 0 | Elem 83: 0 | Elem 84: 0 | Elem 85: 0 | Elem 86: 0 | Elem 87: 0 | Elem 88: 0 | Elem 89: 0 | Elem 90: 0 | Elem 91: 0 | Elem 92: 0 | Elem 93: 0 | Elem 94: 0 | Elem 95: 0 | Elem 96: 0 | Elem 97: 0 | Elem 98: 0 | Elem 99: 0 | Elem 100: 0 | Elem 101: 0 | Elem 102: 0 | Elem 103: 0 | Elem 104: 0 | Elem 105: 0 | Elem 106: 0 | Elem 107: 0 | Elem 108: 0 | Elem 109: 0 | Elem 110: 0 | Elem 111: 0 | Elem 112: 0 | Elem 113: 0 | Elem 114: 0 | Elem 115: 0 | Elem 116: 0 | Elem 117: 0 | Elem 118: 0 | Elem 119: 0 | Elem 120: 0 | Elem 121: 0 | Elem 122: 0 | Elem 123: 0 | Elem 124: 0 | Elem 125: 0 | Elem 126: 0 | Elem 127: 0 | Elem 128: 0 | Elem 129: 0 | Elem 130: 0 | Elem 131: 0 | Elem 132: 0 | Elem 133: 0 | Elem 134: 0 | Elem 135: 0 | Elem 136: 0 | Elem 137: 0 | Elem 138: 0 | Elem 139: 0 | Elem 140: 0 | Elem 141: 0 | Elem 142: 0 | Elem 143: 0 | Elem 144: 0 | Elem 145: 0 | Elem 146: 0 | Elem 147: 0 | Elem 148: 0 | Elem 149: 0 | 
+
+=== PRINTING VECTOR ===
+Size: 2
+Elem 0: 9 | Elem 1: 8 | 
+
+=== Testing reverse iterators (vec_rev_iterator) ===
+*rit: 500 | *rit: 503 | *rit: -5 | *rit: -1=== PRINTING VECTOR ===
+Size: 30
+Elem 0: 9 | Elem 1: 8 | Elem 2: 9 | Elem 3: 8 | Elem 4: 3 | Elem 5: 5 | Elem 6: 5 | Elem 7: 5 | Elem 8: 5 | Elem 9: 5 | Elem 10: 5 | Elem 11: 5 | Elem 12: 5 | Elem 13: 5 | Elem 14: 5 | Elem 15: 5 | Elem 16: 5 | Elem 17: 2 | Elem 18: 2 | Elem 19: 2 | Elem 20: 2 | Elem 21: 2 | Elem 22: 7 | Elem 23: 6 | Elem 24: 5 | Elem 25: 900 | Elem 26: 800 | Elem 27: 700 | Elem 28: 600 | Elem 29: 500 | 
+
+=== Testing swap ===
+=== PRINTING VECTOR ===
+Size: 1
+Elem 0: 2 | 
+
+=== Testing comparisons (vec_comparison) ===
+gt: 0
+lt: 1
+gteq: 0
+lteq: 1
+eq: 0
+neq: 1
+
+=== Testing stack push (stack_push) ===
+GOOD: push did not crash
+=== Testing stack copy constructor ===
+GOOD: copy constructor did not crash
+=== Testing stack pop ===
+GOOD: pop did not crash
+=== Testing stack comparisons (stack_comparison) ===
+gt: 1
+lt: 0
+gteq: 1
+lteq: 0
+eq: 0
+neq: 1
+
+=== Testing map basic insert (map_insert) ===
+ret->first: 0ret->first: 2ret->first: 4ret->first: 6ret->first: 8ret->first: 10ret->first: 12ret->first: 14ret->first: 16ret->first: 18ret->first: 20ret->first: 22ret->first: 24ret->first: 26ret->first: 28ret->first: 30ret->first: 32ret->first: 34ret->first: 36ret->first: 38ret->first: 40ret->first: 42ret->first: 44ret->first: 46ret->first: 48
+ret->second: 0
+=== PRINTING MAP === size: 25
+ | Key: 0 ,Value: 0 | Key: 2 ,Value: 4 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map assignment operator ===
+=== PRINTING MAP === size: 25
+ | Key: 0 ,Value: 0 | Key: 2 ,Value: 4 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map iterators (map_iterators) ===
+it->first: 0
+it->first: 2
+it->second: 96
+
+=== Testing map hint insert (map_hint_insert) ===
+it->first: 3it->first: 14=== PRINTING MAP === size: 26
+ | Key: 0 ,Value: 0 | Key: 2 ,Value: 4 | Key: 3 ,Value: 3 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map range insert (map_range_insert) ===
+=== PRINTING MAP === size: 0
+
+
+=== PRINTING MAP === size: 3
+ | Key: 0 ,Value: 0 | Key: 2 ,Value: 4 | Key: 3 ,Value: 3
+
+=== PRINTING MAP === size: 26
+ | Key: 0 ,Value: 0 | Key: 2 ,Value: 4 | Key: 3 ,Value: 3 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map find (map_find) ===
+find *it: 4 | find *it: 20 | find *it: 80 | find end(): 1
+=== Testing map at (map_at) ===
+at: 4 | at: 20 | at: 80 | at: There was an exception thrown
+=== Testing map clear and size (map_clear_size) ===
+size: 26
+=== PRINTING MAP === size: 0
+
+
+=== Testing map count (map_count) ===
+count: 1 | count: 1 | count: 0 | count: 1
+=== Testing map empty (map_empty) ===
+empty: 0
+empty: 1
+=== Testing map erase pos (map_erase_pos) ===
+=== PRINTING MAP === size: 22
+ | Key: 2 ,Value: 4 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92
+
+=== Testing map erase pos (map_erase_pos) ===
+=== PRINTING MAP === size: 16
+ | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 46 ,Value: 92
+
+=== Testing map erase key (map_erase_key) ===
+=== PRINTING MAP === size: 24
+ | Key: 0 ,Value: 0 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map upper and lower bound (map_upper_lower_bound) ===
+lower_bound: 20 | upper_bound: 22
+lower_bound: 6 | upper_bound: 6
+
+=== Testing map equal range (map_equal_range) ===
+ | 20
+ | 0
+=== Testing map reverse iterator (map_reverse_it) ===
+*rit: 48 | *rit: 42 | *rit: 8 | *rit: 0=== Testing map swap (map_swap) ===
+=== PRINTING MAP === size: 25
+ | Key: 2 ,Value: 4 | Key: 3 ,Value: 3 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== PRINTING MAP === size: 24
+ | Key: 2 ,Value: 4 | Key: 4 ,Value: 8 | Key: 6 ,Value: 12 | Key: 8 ,Value: 16 | Key: 10 ,Value: 20 | Key: 12 ,Value: 24 | Key: 14 ,Value: 28 | Key: 16 ,Value: 32 | Key: 18 ,Value: 36 | Key: 20 ,Value: 40 | Key: 22 ,Value: 44 | Key: 24 ,Value: 48 | Key: 26 ,Value: 52 | Key: 28 ,Value: 56 | Key: 30 ,Value: 60 | Key: 32 ,Value: 64 | Key: 34 ,Value: 68 | Key: 36 ,Value: 72 | Key: 38 ,Value: 76 | Key: 40 ,Value: 80 | Key: 42 ,Value: 84 | Key: 44 ,Value: 88 | Key: 46 ,Value: 92 | Key: 48 ,Value: 96
+
+=== Testing map comparisons (map_comparison) ===
+gt: 0
+lt: 1
+gteq: 0
+lteq: 1
+eq: 0
+neq: 1
+
