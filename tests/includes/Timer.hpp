@@ -1,49 +1,48 @@
 #pragma once
 
-#include <ctime>
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <time.h>
 
 class timer
 {
   public:
-    timer(std::fstream& file)
-      : start_timepoint_(time_t())
-        , file_(file)
-    {
-      start();
-    }
+    timer(std::string name, std::fstream& file)
+      : file_(file)
+        , name_(name)
+  {
+    start();
+  }
 
     ~timer()
     {
       if (active_)
-      stop();
+        stop();
     }
 
     void stop()
     {
-      time_t end_timepoint_;
+      clock_t end = clock();
 
-      time(&end_timepoint_);
+      diff_ms = (int)((double)(end - start_) / CLOCKS_PER_SEC * 1000);
 
-      double difference = difftime(end_timepoint_, start_timepoint_);
-
-      double ms = difference * 1000;
       active_ = false;
-      file_ << "TIMER " << "Time of execution" << " | sec: " << difference
-        << " | ms: " << ms
+      file_ << "Timer: ---" << name_ << "---" << std::endl
+        << "ms: " << diff_ms << std::endl
         << std::endl;
     }
-    
+
     void start()
     {
-      time(&start_timepoint_);
+      start_ = clock();
       active_ = true;
     }
 
   private:
-    time_t start_timepoint_;
+    clock_t start_;
     bool active_;
     std::fstream& file_;
+    int diff_ms;
+    std::string name_;
 };

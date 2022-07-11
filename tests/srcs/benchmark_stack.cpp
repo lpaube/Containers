@@ -4,6 +4,7 @@
 
 #include "stack.hpp"
 #include "vector.hpp"
+#include "timer.hpp"
 
 #ifndef NAMESPACE_NUM
 #define NAMESPACE_NUM 1
@@ -16,47 +17,33 @@
 #endif
 
 template <typename T>
-void stack_push(std::fstream& test_file, NAMESPACE::stack<T, NAMESPACE::vector<T> >& sreal)
+void stack_push(NAMESPACE::stack<T, NAMESPACE::vector<T> >& sreal)
 {
-  (void)test_file;
-  for (int i = 0; i < 100; i += 2)
+  for (int i = 0; i < 500000; ++i)
   {
     sreal.push(i);
   }
 }
 
 template <typename T>
-void stack_comparison(std::fstream& test_file, NAMESPACE::stack<T, NAMESPACE::vector<T> >& sreal
-    , NAMESPACE::stack<T, NAMESPACE::vector<T> >& sref)
+void stack_pop(NAMESPACE::stack<T, NAMESPACE::vector<T> >& sreal)
 {
-  test_file << "gt: " << (sreal > sref) << std::endl;
-  test_file << "lt: " << (sreal < sref) << std::endl;
-  test_file << "gteq: " << (sreal >= sref) << std::endl;
-  test_file << "lteq: " << (sreal <= sref) << std::endl;
-  test_file << "eq: " << (sreal == sref) << std::endl;
-  test_file << "neq: " << (sreal != sref) << std::endl;
+  while (sreal.size())
+  {
+    sreal.pop();
+  }
 }
 
-void test_stack(std::fstream& test_file)
+void benchmark_stack(std::fstream& benchmark_file)
 {
   NAMESPACE::stack<int, NAMESPACE::vector<int> > s1;
 
-  test_file << "=== Testing stack push (stack_push) ===" << std::endl;
-  stack_push(test_file, s1);
-  test_file << "GOOD: push did not crash" << std::endl;
+  timer t1("push", benchmark_file);
+  stack_push(s1);
+  t1.stop();
 
-  test_file << "=== Testing stack copy constructor ===" << std::endl;
-  NAMESPACE::stack<int, NAMESPACE::vector<int> > s2 = s1;
-  test_file << "GOOD: copy constructor did not crash" << std::endl;
+  timer t2("pop", benchmark_file);
+  stack_pop(s1);
+  t2.stop();
 
-  test_file << "=== Testing stack pop ===" << std::endl;
-  s2.pop();
-  s2.pop();
-  s2.pop();
-  test_file << "GOOD: pop did not crash" << std::endl;
-
-  test_file << "=== Testing stack comparisons (stack_comparison) ===" << std::endl;
-  stack_comparison(test_file, s1, s2);
-
-  test_file << std::endl;
 }

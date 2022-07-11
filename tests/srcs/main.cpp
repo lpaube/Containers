@@ -1,4 +1,5 @@
 #include <fstream>
+#include <time.h>
 
 #include "timer.hpp"
 
@@ -25,9 +26,12 @@ int main()
   test_stack(test_file);
   test_map(test_file);
 
-  timer t1(benchmark_file);
-  benchmark_vector();
-  benchmark_stack();
-  benchmark_map();
-  t1.stop();
+  benchmark_file << "=== VECTOR ===" << std::endl;
+  benchmark_vector(benchmark_file);
+
+  benchmark_file << "=== STACK ===" << std::endl;
+  benchmark_stack(benchmark_file);
+
+  benchmark_file << "=== MAP ===" << std::endl;
+  benchmark_map(benchmark_file);
 }

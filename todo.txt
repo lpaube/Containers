@@ -1,7 +1,0 @@
-1. [x] Create a file named tests_ft.txt and tests_std.txt.
-2. [x]Pipe cout to the file tests_NAMESPACE as created above.
-3. [ ] Create a Makefile that compiles both binaries
-
-0. [ ]Implement a version c++98 of Timer
-1. [ ]Create a file named benchmark_ft.txt and benchmark_std.txt.
-2. [ ]Pipe cout of Timer to the file tests_NAMESPACE as created above.

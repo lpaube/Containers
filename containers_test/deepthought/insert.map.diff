@@ -1,0 +1,12 @@
+11c11
+< insert return: key: 42 | value: lol
+---
+> insert return: key: 0 | value: 
+79a80
+> HINT KEY: 21 | VALUE KEY: 55
+93a95
+> HINT KEY: 0 | VALUE KEY: 1337
+101a104
+> HINT KEY: 0 | VALUE KEY: 1000
+110a114
+> HINT KEY: 0 | VALUE KEY: 1500
