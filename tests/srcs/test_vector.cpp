@@ -268,10 +268,10 @@ void vec_resize(std::fstream& test_file, NAMESPACE::vector<T>& vreal)
 template <typename T>
 void vec_rev_iterator(std::fstream& test_file, NAMESPACE::vector<T>& vreal)
 {
-  test_file << "*rit: " << (*vreal.rbegin());
-  test_file << " | *rit: " << (*vreal.rbegin() + 3);
-  test_file << " | *rit: " << (*vreal.rend() - 5);
-  test_file << " | *rit: " << (*vreal.rend() - 1);
+  test_file << "*rit: " << *(vreal.rbegin());
+  test_file << " | *rit: " << *(vreal.rbegin() + 3);
+  test_file << " | *rit: " << *(vreal.rend() - 5);
+  test_file << " | *rit: " << *(vreal.rend() - 1);
   *(vreal.rend() - 5) = 3;
 
   print_vector(test_file, vreal);

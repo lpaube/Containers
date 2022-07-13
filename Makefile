@@ -14,6 +14,7 @@ OBJS_PATH = tests/obj
 FT_OBJS_PATH = tests/obj/ft
 STD_OBJS_PATH = tests/obj/std
 OUTPUT_PATH = tests/log
+BENCHMARK_PATH = tests/benchmark
 
 SRCS_FILES = main.cpp test_vector.cpp test_stack.cpp test_map.cpp \
 						 benchmark_vector.cpp benchmark_map.cpp benchmark_stack.cpp
@@ -47,7 +48,13 @@ $(FT_OBJS_PATH):
 $(STD_OBJS_PATH):
 	mkdir -p tests/obj/std
 
-tests: $(FT_NAME) $(STD_NAME)
+$(OUTPUT_PATH):
+	mkdir -p tests/log
+
+$(BENCHMARK_PATH):
+	mkdir -p tests/benchmark
+
+tests: $(FT_NAME) $(STD_NAME) $(OUTPUT_PATH) $(BENCHMARK_PATH)
 	@bash run_tests.sh
 
 clean:

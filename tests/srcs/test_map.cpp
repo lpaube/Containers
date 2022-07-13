@@ -73,7 +73,7 @@ template <typename Key, typename Value>
 void map_iterators(std::fstream& test_file, NAMESPACE::map<Key, Value>& mreal)
 {
   test_file << "it->first: " << (mreal.begin())->first << std::endl;
-  test_file << "it->first: " << ((++(mreal.begin()))->first) << std::endl;
+  test_file << "it->first: " << (++(mreal.begin()))->first << std::endl;
   test_file << "it->second: " << (--(mreal.end()))->second << std::endl;
   test_file << std::endl;
 }

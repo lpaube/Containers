@@ -1,0 +1,66 @@
+=== VECTOR ===
+Timer: ---insert_basic---
+ms: 1612
+
+Timer: ---insert_size---
+ms: 12
+
+Timer: ---insert_range---
+ms: 26
+
+Timer: ---assign_size---
+ms: 6
+
+Timer: ---assign_range---
+ms: 28
+
+Timer: ---erase_pos---
+ms: 328
+
+Timer: ---erase_range---
+ms: 1
+
+Timer: ---push_back---
+ms: 3
+
+Timer: ---pop_back---
+ms: 50
+
+Timer: ---at---
+ms: 0
+
+Timer: ---resize---
+ms: 2
+
+=== STACK ===
+Timer: ---push---
+ms: 24
+
+Timer: ---pop---
+ms: 29
+
+=== MAP ===
+Timer: ---insert_basic---
+ms: 78
+
+Timer: ---insert_hint---
+ms: 95
+
+Timer: ---insert_range---
+ms: 81
+
+Timer: ---find---
+ms: 10
+
+Timer: ---at---
+ms: 0
+
+Timer: ---erase_pos---
+ms: 48
+
+Timer: ---erase_range---
+ms: 39
+
+Timer: ---erase_key---
+ms: 12
+
